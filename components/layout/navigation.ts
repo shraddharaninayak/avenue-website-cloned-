@@ -28,6 +28,6 @@ export const overlayLinks: NavLink[] = [
 
 export const enquireHref = "/contact";
 
-/** Shared so the header bar and the overlay's top bar line up exactly. */
+/** Header bar metrics. */
 export const barLayout =
   "flex h-[72px] items-center justify-between px-6 md:px-10 lg:h-[88px] lg:px-14";

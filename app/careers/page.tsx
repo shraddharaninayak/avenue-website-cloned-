@@ -1,32 +1,33 @@
 import React from "react";
 import { Briefcase, CheckCircle, Mail, MapPin } from "lucide-react";
+import { company } from "@/data/avenue";
 
 const positions = [
   {
     title: "Senior Project Engineer (Civil)",
     dept: "Engineering & Construction",
-    location: "Civil Lines, Nagpur",
+    location: "Nashik",
     type: "Full Time",
     experience: "7+ Years",
   },
   {
     title: "Luxury Residential Sales Advisor",
     dept: "Sales & Client Advisory",
-    location: "Nagpur, India",
+    location: "Nashik",
     type: "Full Time",
     experience: "4+ Years",
   },
   {
     title: "Chief Architectural Draftsman / 3D Visualizer",
     dept: "Design & Planning",
-    location: "Corporate Office, Nagpur",
+    location: "Corporate Office, Nashik",
     type: "Full Time",
     experience: "5+ Years",
   },
   {
     title: "Site Quality & Safety Supervisor",
     dept: "Project Execution",
-    location: "West 19 Site, Nagpur",
+    location: "Project Site, Nashik",
     type: "Full Time",
     experience: "3+ Years",
   },
@@ -118,7 +119,7 @@ export default function CareersPage() {
               </div>
 
               <a
-                href={`mailto:careers@kinfra.in?subject=Application for ${encodeURIComponent(
+                href={`${company.emailHref}?subject=Application for ${encodeURIComponent(
                   job.title
                 )}`}
                 className="inline-flex items-center justify-center px-8 py-3.5 bg-brand-gold text-black font-grotesk text-xs uppercase tracking-[0.2em] font-semibold hover:bg-white transition-colors"
@@ -140,10 +141,10 @@ export default function CareersPage() {
           </p>
           <div className="pt-2">
             <a
-              href="mailto:careers@kinfra.in"
+              href={company.emailHref}
               className="inline-block text-brand-gold hover:underline font-grotesk text-xs uppercase tracking-[0.2em] font-semibold"
             >
-              Send your CV to careers@kinfra.in →
+              Send your CV to {company.email} →
             </a>
           </div>
         </div>

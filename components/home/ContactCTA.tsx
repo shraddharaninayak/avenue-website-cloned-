@@ -1,6 +1,7 @@
 import React from "react";
 import Link from "next/link";
 import { ArrowRight, Phone } from "lucide-react";
+import { company } from "@/data/avenue";
 
 export default function ContactCTA() {
   return (
@@ -10,10 +11,11 @@ export default function ContactCTA() {
           Begin Your Journey
         </div>
         <h2 className="text-4xl sm:text-6xl font-grotesk font-normal uppercase leading-[1.05] tracking-tight">
-          Experience Landmark Living in Nagpur
+          Experience Landmark Living in Nashik
         </h2>
         <p className="font-hanken text-white/70 max-w-xl mx-auto text-base md:text-lg leading-relaxed">
-          Whether you seek an extraordinary home in Civil Lines or Grade-A commercial headquarters on West High Court Road, our advisors are here to guide you.
+          Whether you are looking for a home at Urbania, Aura or Bliss, or
+          commercial office space at Flora, our advisors are here to guide you.
         </p>
         <div className="pt-4 flex flex-wrap items-center justify-center gap-4">
           <Link
@@ -24,11 +26,11 @@ export default function ContactCTA() {
             <ArrowRight className="w-4 h-4" />
           </Link>
           <a
-            href="tel:+917888012200"
+            href={company.phoneHref}
             className="inline-flex items-center gap-3 border border-white/20 px-9 py-4 font-grotesk text-xs uppercase tracking-[0.2em] font-semibold text-white hover:border-brand-gold hover:text-brand-gold transition-colors duration-300"
           >
             <Phone className="w-4 h-4" />
-            <span>+91 78880 12200</span>
+            <span>{company.phone}</span>
           </a>
         </div>
       </div>

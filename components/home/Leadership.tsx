@@ -1,73 +1,136 @@
-import React from "react";
-import Image from "next/image";
+"use client";
 
-const leaders = [
-  {
-    name: "Shravan Kukreja",
-    role: "Managing Director",
-    image: "/team/shravan-2026.webp",
-    quote: "Our mission has always been clear: to build spaces that not only redefine cityscapes, but stand as generational benchmarks of design and structural integrity.",
-  },
-  {
-    name: "Vicky Kukreja",
-    role: "Director",
-    image: "/team/vicky-2026.webp",
-    quote: "Every project is a commitment to uncompromising craftsmanship. We obsess over the finest architectural details to elevate the way people live and work.",
-  },
-];
+import { useEffect, useRef, useState } from "react";
+import { directors, directorsHeading } from "@/data/avenue";
+
+/**
+ * The directors of The Avenue.
+ *
+ * No portraits exist in the repository for these three, so each card renders a
+ * composed monogram plate instead of a broken image. Drop a file into
+ * public/team and set `image` below — the layout is identical either way,
+ * because the plate and the photograph occupy the same 3:4 frame.
+ */
+
+const initials = (name: string) =>
+  name
+    .replace(/^Mr\.?\s+/i, "")
+    .split(/\s+/)
+    .map((part) => part[0])
+    .join("")
+    .slice(0, 2)
+    .toUpperCase();
 
 export default function Leadership() {
+  const sectionRef = useRef<HTMLElement>(null);
+  const [visible, setVisible] = useState(false);
+
+  useEffect(() => {
+    const section = sectionRef.current;
+    if (!section) return;
+    const io = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setVisible(true);
+          io.disconnect();
+        }
+      },
+      { threshold: 0.15 },
+    );
+    io.observe(section);
+    return () => io.disconnect();
+  }, []);
+
   return (
     <section
+      ref={sectionRef}
       id="leadership"
-      className="scroll-mt-24 bg-[#0c0a09] py-32 px-6 md:px-12 lg:px-20 text-white"
+      className="scroll-mt-24 border-t border-white/10 bg-[#0c0a09] px-6 py-24 text-white md:px-10 md:py-32 lg:px-12"
     >
-      <div className="max-w-7xl mx-auto">
-        <div className="flex flex-col md:flex-row md:items-end justify-between mb-20 gap-8">
-          <div>
-            <div className="text-[11px] font-grotesk uppercase tracking-[0.3em] text-brand-gold font-semibold mb-3">
+      <div className="mx-auto max-w-[1450px]">
+        {/* HEADING */}
+        <div
+          style={{
+            opacity: visible ? 1 : 0,
+            transform: visible ? "translateY(0)" : "translateY(24px)",
+            transition: "opacity 0.9s ease, transform 1s cubic-bezier(0.22,1,0.36,1)",
+          }}
+        >
+          <div className="mb-8 flex items-center gap-4">
+            <span className="h-px w-10 bg-white/30" />
+            <span className="text-[10px] uppercase tracking-[0.28em] text-white/45">
               Leadership
-            </div>
-            <h2 className="text-4xl sm:text-5xl font-grotesk font-normal uppercase leading-[1.05] tracking-tight">
-              Vision That Leads Growth
-            </h2>
+            </span>
           </div>
-          <p className="font-hanken text-white/60 max-w-md text-sm md:text-base leading-relaxed">
-            Guided by forward-looking leadership and deep architectural discipline, shaping landmark developments that withstand the test of time.
-          </p>
+
+          <h2 className="max-w-[760px] font-serif text-[clamp(30px,3.6vw,52px)] font-light leading-[1.04] tracking-[-0.04em]">
+            {directorsHeading}
+          </h2>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-12 lg:gap-16">
-          {leaders.map((leader, i) => (
-            <div
-              key={i}
-              className="bg-[#14110c] border border-white/10 p-8 md:p-10 flex flex-col justify-between group hover:border-brand-gold/40 transition-colors duration-500"
+        {/* DIRECTORS */}
+        <div className="mt-16 grid grid-cols-1 gap-x-10 gap-y-14 sm:grid-cols-2 md:mt-20 lg:grid-cols-3 lg:gap-x-14">
+          {directors.map((director, i) => (
+            <article
+              key={director.name}
+              style={{
+                opacity: visible ? 1 : 0,
+                transform: visible ? "translateY(0)" : "translateY(36px)",
+                transition: `opacity 1s ease ${0.15 + i * 0.13}s, transform 1.1s cubic-bezier(0.22,1,0.36,1) ${
+                  0.15 + i * 0.13
+                }s`,
+              }}
             >
-              <div className="relative aspect-[4/5] w-full mb-8 overflow-hidden bg-black/40">
-                <Image
-                  src={leader.image}
-                  alt={leader.name}
-                  fill
-                  className="object-cover object-top transition-transform duration-700 group-hover:scale-105"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-[#14110c] via-transparent to-transparent opacity-60" />
+              {/* PORTRAIT FRAME */}
+              <div className="group relative aspect-[4/5] max-h-[420px] w-full overflow-hidden bg-[#14110c]">
+                {director.image ? (
+                  // eslint-disable-next-line @next/next/no-img-element
+                  <img
+                    src={director.image}
+                    alt={director.name}
+                    className="absolute inset-0 h-full w-full object-cover transition-transform duration-[1200ms] ease-out group-hover:scale-[1.04]"
+                  />
+                ) : (
+                  <div className="absolute inset-0 flex items-center justify-center">
+                    {/* Monogram plate, standing in until a portrait is supplied. */}
+                    <div
+                      className="absolute inset-0 opacity-[0.35]"
+                      style={{
+                        backgroundImage:
+                          "repeating-linear-gradient(135deg, rgba(255,255,255,0.045) 0px, rgba(255,255,255,0.045) 1px, transparent 1px, transparent 9px)",
+                      }}
+                    />
+                    <span className="relative font-serif text-[52px] font-light tracking-[-0.04em] text-white/20">
+                      {initials(director.name)}
+                    </span>
+                    <span className="absolute bottom-5 left-0 right-0 text-center text-[9px] uppercase tracking-[0.24em] text-white/20">
+                      Portrait to follow
+                    </span>
+                  </div>
+                )}
+
+                <div className="pointer-events-none absolute inset-0 border border-white/10" />
               </div>
 
-              <div>
-                <blockquote className="font-cormorant italic text-lg md:text-xl text-white/90 leading-relaxed mb-6 border-l-2 border-brand-gold pl-4">
-                  "{leader.quote}"
-                </blockquote>
+              {/* DETAILS */}
+              <div className="mt-6 flex items-start gap-5">
+                <span className="mt-2 text-[10px] tracking-[0.2em] text-brand-gold">
+                  {String(i + 1).padStart(2, "0")}
+                </span>
 
-                <div className="pt-4 border-t border-white/10">
-                  <h3 className="font-grotesk text-xl uppercase tracking-tight text-white font-normal">
-                    {leader.name}
+                <div>
+                  <h3 className="font-serif text-[24px] font-light leading-[1.15] tracking-[-0.025em] md:text-[27px]">
+                    {director.name}
                   </h3>
-                  <div className="font-grotesk text-xs uppercase tracking-[0.2em] text-brand-gold mt-1 font-semibold">
-                    {leader.role}
-                  </div>
+                  <p className="mt-2 text-[11px] uppercase tracking-[0.22em] text-white/45">
+                    {director.qualification}
+                  </p>
+                  <p className="mt-4 max-w-[280px] text-[14px] leading-[1.65] text-white/50">
+                    {director.role}
+                  </p>
                 </div>
               </div>
-            </div>
+            </article>
           ))}
         </div>
       </div>

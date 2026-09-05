@@ -2,6 +2,7 @@
 
 import React, { useState } from "react";
 import { Mail, Phone, MapPin, Clock, CheckCircle } from "lucide-react";
+import { company, projects } from "@/data/avenue";
 
 export default function ContactPage() {
   const [submitted, setSubmitted] = useState(false);
@@ -9,7 +10,7 @@ export default function ContactPage() {
     name: "",
     phone: "",
     email: "",
-    project: "The One (Civil Lines)",
+    project: projects[0].name,
     message: "",
   });
 
@@ -51,7 +52,7 @@ export default function ContactPage() {
                       Office Address
                     </div>
                     <p className="leading-relaxed">
-                      Kukreja House, Museum Road, Civil Lines, Nagpur, Maharashtra 440026
+                      {company.address}
                     </p>
                   </div>
                 </div>
@@ -63,10 +64,10 @@ export default function ContactPage() {
                       Direct Inquiries
                     </div>
                     <a
-                      href="tel:+917888012200"
+                      href={company.phoneHref}
                       className="text-brand-gold hover:text-white transition-colors"
                     >
-                      +91 78880 12200
+                      {company.phone}
                     </a>
                   </div>
                 </div>
@@ -78,10 +79,10 @@ export default function ContactPage() {
                       Email
                     </div>
                     <a
-                      href="mailto:info@kinfra.in"
+                      href={company.emailHref}
                       className="hover:text-white transition-colors"
                     >
-                      info@kinfra.in
+                      {company.email}
                     </a>
                   </div>
                 </div>
@@ -186,11 +187,11 @@ export default function ContactPage() {
                         }
                         className="w-full bg-[#17140f] border border-white/15 px-4 py-3.5 text-sm text-white focus:border-brand-gold focus:outline-none transition-colors"
                       >
-                        <option value="The One (Civil Lines)">The One (Civil Lines)</option>
-                        <option value="West 19 (Commercial)">West 19 (Commercial)</option>
-                        <option value="Paris City (Residences)">Paris City (Residences)</option>
-                        <option value="Infinity East (Wardha Road)">Infinity East</option>
-                        <option value="Kukreja Business Park">Kukreja Business Park</option>
+                        {projects.map((project) => (
+                          <option key={project.slug} value={project.name}>
+                            {project.name} ({project.configuration})
+                          </option>
+                        ))}
                         <option value="General Inquiry">General Inquiry</option>
                       </select>
                     </div>

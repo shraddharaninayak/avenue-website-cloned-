@@ -23,8 +23,46 @@ yarn-debug.log*
 yarn-error.log*
 
 # local env files
+.env
 .env*.local
+
+# vercel
+.vercel
 
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# ---------------------------------------------------------------------------
+# Legacy static mirror of the old site.
+#
+# These live at the project root and are byte-for-byte duplicates of what is
+# already in public/, plus the scraped HTML of the previous site. Next.js only
+# ever serves from public/, so none of this reaches the deployed app — it just
+# doubled the size of the repository. Kept on disk, excluded from the deploy.
+# ---------------------------------------------------------------------------
+/_next/
+/*.html
+/*.html.before-*
+/seq/
+/map-seq/
+/about/
+/awards/
+/team/
+/maps/
+/dda/
+/embasy/
+/embasy-2/
+/infinity/
+/infinity-east/
+/kbp/
+/paris-city/
+/the-one/
+/west-19/
+/hero-mobile-2026.webp
+/hero-poster.webp
+/hero.webm
+/favicon.ico
+/image-list.txt
+/serve.py
+/capture-site.mjs

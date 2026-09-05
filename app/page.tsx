@@ -4,10 +4,10 @@ import HeroCanvas from "@/components/home/HeroCanvas";
 import AvenueIntro from "@/components/home/AvenueIntro";
 import AvenueAbout from "@/components/home/AvenueAbout";
 import AvenuePillars from "@/components/home/AvenuePillars";
-import ProjectShowcase from "@/components/home/ProjectShowcase";
-import StatsSection from "@/components/home/StatsSection";
+import OurProjects from "@/components/home/OurProjects";
+import ExploreDevelopments from "@/components/home/ExploreDevelopments";
 import Leadership from "@/components/home/Leadership";
-import Awards from "@/components/home/Awards";
+import Testimonials from "@/components/home/Testimonials";
 import ContactCTA from "@/components/home/ContactCTA";
 
 export default function HomePage() {
@@ -22,19 +22,20 @@ export default function HomePage() {
       {/* About Avenue */}
       <AvenueAbout />
 
+      {/* Places We've Shaped — one image resolving into four developments */}
       <AvenuePillars />
 
-      {/* Portfolio / Featured Developments */}
-      <ProjectShowcase />
+      {/* Our Projects — the portfolio as editorial spreads */}
+      <OurProjects />
 
-      {/* Legacy & Milestones */}
-      <StatsSection />
+      {/* Explore our developments — list bound to an interactive plan */}
+      <ExploreDevelopments />
 
-      {/* Leadership Spotlight */}
+      {/* Meet the directors of The Avenue */}
       <Leadership />
 
-      {/* Industry Awards */}
-      <Awards />
+      {/* What clients say — seamless testimonial marquee */}
+      <Testimonials />
 
       {/* Contact & Private Tour CTA */}
       <ContactCTA />
