@@ -60,7 +60,10 @@ const projects = [
 
 export default function ProjectShowcase() {
   return (
-    <section className="bg-[#110e0a] py-32 px-6 md:px-12 lg:px-20 text-white">
+    <section
+      id="projects"
+      className="scroll-mt-24 bg-[#110e0a] py-32 px-6 md:px-12 lg:px-20 text-white"
+    >
       <div className="max-w-7xl mx-auto">
         {/* Section Header */}
         <div className="flex flex-col md:flex-row md:items-end justify-between mb-20 gap-8">

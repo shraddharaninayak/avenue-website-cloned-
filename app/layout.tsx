@@ -18,12 +18,9 @@ const hanken = localFont({
 });
 
 export const metadata: Metadata = {
-  title: "Avenue | Kukreja Infrastructures | Premium Real Estate Developments in Nagpur",
+  title: " The Avenue Builders And Developers",
   description:
     "Leading real estate developers in Central India with a 15 year legacy of creating premium residential, commercial spaces and innovative townships in Nagpur.",
-  icons: {
-    icon: "/favicon.ico",
-  },
 };
 
 export default function RootLayout({

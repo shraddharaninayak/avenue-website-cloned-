@@ -10,14 +10,13 @@ export default function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-12 pb-16 border-b border-white/10">
           {/* Brand Col */}
           <div className="lg:col-span-2 space-y-6">
-            <div className="relative h-12 w-44">
-              <Image
-                src="/logo-white.png"
-                alt="Avenue Infrastructures"
-                fill
-                className="object-contain"
-              />
-            </div>
+            <Image
+              src="/logo-avenue.webp"
+              alt="The Avenue Builders & Developers"
+              width={270}
+              height={112}
+              className="h-14 w-auto"
+            />
             <p className="font-hanken text-sm text-white/60 max-w-sm leading-relaxed">
               Transforming urban landscapes with signature luxury residences, premium commercial hubs, and forward-thinking master-planned communities.
             </p>
@@ -158,7 +157,7 @@ export default function Footer() {
         {/* Bottom copyright */}
         <div className="pt-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-[11px] font-grotesk uppercase tracking-[0.15em] text-white/40">
           <div>
-            © {new Date().getFullYear()} Kukreja Infrastructures. All rights reserved.
+            © {new Date().getFullYear()} The Avenue Builders &amp; Developers. All rights reserved.
           </div>
           <div className="flex items-center gap-6">
             <Link href="/contact" className="hover:text-white transition-colors">

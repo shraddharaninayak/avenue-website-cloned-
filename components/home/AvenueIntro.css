@@ -1,0 +1,18 @@
+.avenue-video-mask {
+  -webkit-mask-image: url("/avenue-mask.svg");
+  mask-image: url("/avenue-mask.svg");
+
+  -webkit-mask-repeat: no-repeat;
+  mask-repeat: no-repeat;
+
+  -webkit-mask-position: center;
+  mask-position: center;
+
+  -webkit-mask-size: 100% 100%;
+  mask-size: 100% 100%;
+
+  -webkit-mask-mode: luminance;
+  mask-mode: luminance;
+
+  will-change: transform, opacity;
+}

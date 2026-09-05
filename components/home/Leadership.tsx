@@ -18,7 +18,10 @@ const leaders = [
 
 export default function Leadership() {
   return (
-    <section className="bg-[#0c0a09] py-32 px-6 md:px-12 lg:px-20 text-white">
+    <section
+      id="leadership"
+      className="scroll-mt-24 bg-[#0c0a09] py-32 px-6 md:px-12 lg:px-20 text-white"
+    >
       <div className="max-w-7xl mx-auto">
         <div className="flex flex-col md:flex-row md:items-end justify-between mb-20 gap-8">
           <div>
