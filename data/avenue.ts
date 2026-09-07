@@ -296,15 +296,43 @@ export type Milestone = {
 };
 
 /**
- * Empty on purpose.
+ * The company journey, transcribed from tabd.in.
  *
- * The homepage carries a strip of five milestone images, but the official site
- * publishes no year, title or description alongside them, and /about-us gives
- * nothing beyond the 2007 establishment date. Rather than invent a company
- * timeline, the shape is defined and the list left empty — fill it in and any
- * consumer picks it up.
+ * The official site presents these under two headings — "The Journey Of Avenue
+ * Developers" and "Company Milestones" — as a strip of project identity marks.
+ *
+ * IT PUBLISHES NO YEARS AND NO PER-MILESTONE DESCRIPTIONS, so `year` and
+ * `description` are null on every entry rather than being guessed. The order
+ * below is the order the marks appear in on the page, which is the only
+ * defensible sequence available: without dates there is nothing to sort by.
+ *
+ * `image` is each project's own wordmark, captured from the official site.
+ * They are artwork on white, not photographs — the journey page plates them on
+ * a light card for that reason.
+ *
+ * Two names differ from their file names, which carry typos at source:
+ * "granduare300x300.png" renders the mark GRANDEUR, and "urbenia300X300.png"
+ * renders URBANIA. The names below follow the artwork, not the filename.
  */
-export const milestones: Milestone[] = [];
+export const milestoneHeadings = {
+  eyebrow: "The Journey Of Avenue Developers",
+  title: "Company Milestones",
+  statement:
+    "The Avenue Group has become synonymous with quality, timely executions, customer satisfaction, giving before-time delivery of units, and most importantly unique innovations.",
+} as const;
+
+export const milestones: Milestone[] = [
+  { year: null, title: "The Avenue Grandeur", description: null, image: "/journey/granduare.png" },
+  { year: null, title: "The Avenue NX", description: null, image: "/journey/nx.png" },
+  { year: null, title: "The Avenue", description: null, image: "/journey/theavenue.png" },
+  { year: null, title: "The Avenue Casa", description: null, image: "/journey/casa.png" },
+  { year: null, title: "The Avenue Milestone", description: null, image: "/journey/milestone.png" },
+  { year: null, title: "The Avenue Urbania", description: null, image: "/journey/urbania.png" },
+  { year: null, title: "The Avenue One", description: null, image: "/journey/one.png" },
+  { year: null, title: "The Avenue Flora", description: null, image: "/journey/flora.png" },
+  { year: null, title: "The Avenue Bliss", description: null, image: "/journey/bliss.png" },
+  { year: null, title: "The Avenue Aura", description: null, image: "/journey/aura.png" },
+];
 
 /* -------------------------------------------------------------------------- */
 /*  TESTIMONIALS                                                              */

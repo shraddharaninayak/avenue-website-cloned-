@@ -32,9 +32,12 @@ const SHOT = {
   /** Clouds thin out and The Avenue resolves through them across this span. */
   revealFrom: 0.3,
   revealTo: 0.44,
-  /** Cross-fade from the building into the balcony walk. */
+  /** Cross-fade from the building into the balcony. */
   arriveFrom: 0.8,
   arriveTo: 0.87,
+  /** The lobby takes over from the balcony across this span. */
+  lobbyFrom: 0.9,
+  lobbyTo: 0.95,
   /** Virtual camera over the Avenue still. */
   zoomFrom: 1.02,
   zoomTo: 1.7,
@@ -44,6 +47,8 @@ const SHOT = {
 } as const;
 
 const AVENUE_SRC = "/hero-mobile-2026.webp";
+const BALCONY_SRC = "/hero-balcony.jpg";
+const LOBBY_SRC = "/hero-lobby.jpg";
 
 const clamp01 = (v: number) => (v < 0 ? 0 : v > 1 ? 1 : v);
 const lerp = (a: number, b: number, t: number) => a + (b - a) * t;
@@ -70,8 +75,8 @@ const overlays = [
     headline: "A Home is a place to\n start your story.",
   },
   {
-    from: 0.78,
-    to: 0.96,
+    from: 0.76,
+    to: 1.0,
     headline: "WELCOME\nHOME.",
     cta: true,
   },
@@ -82,6 +87,8 @@ export default function HeroCanvas() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const imagesRef = useRef<(HTMLImageElement | undefined)[]>([]);
   const avenueRef = useRef<HTMLImageElement | null>(null);
+  const balconyRef = useRef<HTMLImageElement | null>(null);
+  const lobbyRef = useRef<HTMLImageElement | null>(null);
   const progressRef = useRef(0);
   const [scrollProgress, setScrollProgress] = useState(0);
   const [loadedCount, setLoadedCount] = useState(0);
@@ -193,29 +200,43 @@ export default function HeroCanvas() {
       gradeAvenue(ctx, avenueAlpha);
     }
 
-    // --- 5. ARRIVAL: walk the balcony, then settle into the living room.
+    // --- 5. ARRIVAL: the balcony, then the lobby.
+    //
+    // Both are stills rather than frame ranges. They stack — the lobby fades in
+    // over the balcony — so there is never a frame with nothing on it, and the
+    // handover to the next section happens on the lobby.
     if (p >= SHOT.arriveFrom) {
-      const arrival = frameAt(
-        p < SHOT.walkUntil
-          ? lerp(
-              SHOT.walkFirst,
-              SHOT.walkLast,
-              span(SHOT.arriveFrom, SHOT.walkUntil, p),
-            )
-          : lerp(
-              SHOT.interiorFirst,
-              SHOT.interiorLast,
-              span(SHOT.walkUntil, 1, p),
-            ),
-      );
-      if (arrival) {
+      const ready = (img: HTMLImageElement | null) =>
+        !!img && img.complete && img.naturalWidth > 0;
+
+      /* A portrait phone covering a 16:9 still shows only about a quarter of
+       * its width, so what that quarter lands on has to be chosen. Centred, it
+       * lands on empty middle ground. The balcony is framed on its chairs, the
+       * lobby on the MILESTONE wall. Landscape sees the whole width anyway, so
+       * it keeps the centred framing it already had. */
+      const portrait = H > W;
+
+      const balcony = balconyRef.current;
+      if (ready(balcony)) {
         drawCover(
           ctx,
-          arrival,
+          balcony as HTMLImageElement,
           1,
-          0.5,
+          portrait ? 0.6 : 0.5,
           0.5,
           span(SHOT.arriveFrom, SHOT.arriveTo, p),
+        );
+      }
+
+      const lobby = lobbyRef.current;
+      if (p >= SHOT.lobbyFrom && ready(lobby)) {
+        drawCover(
+          ctx,
+          lobby as HTMLImageElement,
+          1,
+          portrait ? 0.78 : 0.5,
+          0.5,
+          span(SHOT.lobbyFrom, SHOT.lobbyTo, p),
         );
       }
     }
@@ -263,6 +284,17 @@ export default function HeroCanvas() {
       images[i - 1] = img;
     }
     imagesRef.current = images;
+
+    for (const [ref, src] of [
+      [balconyRef, BALCONY_SRC],
+      [lobbyRef, LOBBY_SRC],
+    ] as const) {
+      const img = new Image();
+      img.src = src;
+      img.onload = () =>
+        requestAnimationFrame(() => renderScene(progressRef.current));
+      ref.current = img;
+    }
 
     const avenue = new Image();
     avenue.src = AVENUE_SRC;
@@ -333,10 +365,33 @@ export default function HeroCanvas() {
         {/* Dynamic Overlays */}
         <div className="absolute inset-0 pointer-events-none flex items-end justify-start px-6 pb-10 md:px-12 md:pb-14 lg:px-16 lg:pb-16">
           {overlays.map((item, idx) => {
-            const midpoint = (item.from + item.to) / 2;
-            const halfSpan = (item.to - item.from) / 2;
-            const dist = Math.abs(scrollProgress - midpoint);
-            const opacity = Math.max(0, 1 - dist / halfSpan);
+            /* Enter, HOLD, exit — every step a function of scroll position,
+             * never of elapsed time.
+             *
+             * This used to be a triangle: opacity peaked at the window's
+             * midpoint and fell away on both sides, so a line was only ever
+             * near full for an instant and never actually reached 1 —
+             * measured at 0.94 at its best. That is what read as the text
+             * flashing on and straight back off.
+             *
+             * A trapezoid gives each line a plateau. Inside the hold band the
+             * opacity is exactly 1 and stays there for as long as the reader
+             * stays there, because nothing advances on its own: stop
+             * scrolling and the text stays put. */
+            const windowSpan = item.to - item.from;
+            const fade = windowSpan * 0.22;
+            const holdFrom = item.from + fade;
+            const holdTo = item.to - fade;
+            const p = scrollProgress;
+
+            const opacity =
+              p <= item.from || p >= item.to
+                ? 0
+                : p < holdFrom
+                  ? (p - item.from) / fade
+                  : p > holdTo
+                    ? (item.to - p) / fade
+                    : 1;
 
             if (opacity <= 0.01) return null;
 
@@ -356,7 +411,7 @@ export default function HeroCanvas() {
                 {item.cta && (
                   <div className="mt-8 flex flex-wrap items-center gap-4 pointer-events-auto">
                     <Link
-                      href="/the-one"
+                      href="/milestones"
                       className="inline-flex items-center gap-3 bg-white px-8 py-4 font-grotesk text-xs font-semibold uppercase tracking-[0.2em] text-black hover:bg-brand-gold transition-colors duration-300 shadow-xl"
                     >
                       <span>Explore Flagship</span>
