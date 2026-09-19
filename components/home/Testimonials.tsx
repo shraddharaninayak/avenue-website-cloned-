@@ -1,5 +1,6 @@
 "use client";
 
+import { useEffect, useRef, useState } from "react";
 import { testimonials } from "@/data/avenue";
 
 /**
@@ -12,20 +13,51 @@ import { testimonials } from "@/data/avenue";
  *
  * The clip lives on an inner wrapper with overflow-hidden, so the track can be
  * wider than the viewport without ever giving the page a horizontal scrollbar.
+ *
+ * It follows Leadership on the homepage, so it enters the same way Leadership
+ * does — a gentle rise and fade as it comes into view — and the drift is slow
+ * enough to read as calm rather than as motion for its own sake.
  */
 export default function Testimonials() {
+  const sectionRef = useRef<HTMLElement>(null);
+  const [visible, setVisible] = useState(false);
+
+  useEffect(() => {
+    const section = sectionRef.current;
+    if (!section) return;
+    const io = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setVisible(true);
+          io.disconnect();
+        }
+      },
+      { threshold: 0.15 },
+    );
+    io.observe(section);
+    return () => io.disconnect();
+  }, []);
+
   if (testimonials.length === 0) return null;
 
   // Two copies for the seamless wrap.
   const track = [...testimonials, ...testimonials];
-  const seconds = Math.max(28, testimonials.length * 11);
+  const seconds = Math.max(40, testimonials.length * 15);
+
+  // Hidden states apply only when motion is allowed, so reduced-motion
+  // visitors see the section as it is, straight away.
+  const reveal = (delay: string) =>
+    `transition-[opacity,transform] duration-1000 ease-[cubic-bezier(0.22,1,0.36,1)] ${delay} motion-reduce:transition-none ${
+      visible ? "opacity-100 translate-y-0" : "motion-safe:opacity-0 motion-safe:translate-y-6"
+    }`;
 
   return (
     <section
+      ref={sectionRef}
       id="testimonials"
-      className="scroll-mt-24 overflow-hidden border-t border-white/10 bg-[#0c0a09] py-24 text-white md:py-28"
+      className="scroll-mt-24 overflow-hidden border-t border-white/10 bg-[#0c0a09] py-16 text-white md:py-20"
     >
-      <div className="mx-auto max-w-[1450px] px-6 md:px-10 lg:px-12">
+      <div className={`mx-auto max-w-[1450px] px-6 md:px-10 lg:px-12 ${reveal("")}`}>
         <div className="flex items-center gap-4">
           <span className="h-px w-10 bg-white/30" />
           <span className="text-[10px] uppercase tracking-[0.28em] text-white/45">
@@ -39,7 +71,7 @@ export default function Testimonials() {
       </div>
 
       {/* MARQUEE */}
-      <div className="group relative mt-14 w-full overflow-hidden md:mt-16">
+      <div className={`group relative mt-12 w-full overflow-hidden md:mt-14 ${reveal("delay-150")}`}>
         {/* Edge fades so cards enter and leave rather than being chopped off. */}
         <div className="pointer-events-none absolute inset-y-0 left-0 z-10 w-16 bg-gradient-to-r from-[#0c0a09] to-transparent md:w-32" />
         <div className="pointer-events-none absolute inset-y-0 right-0 z-10 w-16 bg-gradient-to-l from-[#0c0a09] to-transparent md:w-32" />

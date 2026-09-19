@@ -4,6 +4,7 @@ import "./globals.css";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 import CookieBanner from "@/components/ui/CookieBanner";
+import IntroLoader from "@/components/IntroLoader";
 
 const grotesk = localFont({
   src: "../public/fonts/91601dd83defba07-s.p.woff2",
@@ -31,6 +32,8 @@ export default function RootLayout({
   return (
     <html lang="en" className={`${grotesk.variable} ${hanken.variable} antialiased`}>
       <body className="bg-black text-white selection:bg-brand-gold selection:text-black">
+        {/* First in the body, so it is painted before the page beneath it. */}
+        <IntroLoader />
         <Navbar />
         <main>{children}</main>
         <Footer />

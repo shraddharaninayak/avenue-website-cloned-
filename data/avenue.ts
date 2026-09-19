@@ -62,14 +62,13 @@ export const company: Company = {
 };
 
 /**
- * Social profiles. The official footer shows Facebook, Instagram and YouTube
- * but does not expose the account handles, so these point at the platforms
- * until the real profile URLs are supplied.
+ * Social profiles — The Avenue's own accounts, in the order the footer and
+ * menu show them.
  */
 export const socials = [
-  { label: "Facebook", href: "https://www.facebook.com" },
-  { label: "Instagram", href: "https://www.instagram.com" },
-  { label: "YouTube", href: "https://www.youtube.com" },
+  { label: "Instagram", href: "https://www.instagram.com/theavenuebuilders/" },
+  { label: "Facebook", href: "https://www.facebook.com/premium.business.spaces" },
+  { label: "YouTube", href: "https://www.youtube.com/@TheAvenueSignaturesSpaces" },
 ] as const;
 
 /* -------------------------------------------------------------------------- */

@@ -12,17 +12,16 @@ export const headerLinks: NavLink[] = [
 ];
 
 /**
- * Rows of the full-screen overlay menu, numbered 01..06 in this order.
- * Every href points at a route or section that already exists — there is no
- * dedicated "completed projects" page yet, so that row goes to West 19, the
- * delivered landmark closest in meaning.
+ * Links in the side menu, in this order. Every href points at a route or
+ * section that already exists — there is no dedicated "completed projects"
+ * page yet, so that row goes to West 19, the delivered landmark closest in
+ * meaning.
  */
 export const overlayLinks: NavLink[] = [
   { label: "Home", href: "/" },
   { label: "About Us", href: "/our-story" },
   { label: "Projects", href: "/#projects" },
   { label: "Completed Project", href: "/west-19" },
-  { label: "Career", href: "/careers" },
   { label: "Contact Us", href: "/contact" },
 ];
 

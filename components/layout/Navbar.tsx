@@ -1,71 +1,68 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useCallback, useRef, useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import MenuOverlay from "./MenuOverlay";
-import { barLayout, headerLinks } from "./navigation";
 
+/**
+ * The header: the logo, a Contact pill and a two-line menu button. Everything
+ * else lives in the side menu (MenuOverlay).
+ *
+ * The logo is The Avenue's logo in its white form, with the "Reason to
+ * Smile!" line as on the office signage: white lettering and the yellow bar,
+ * redrawn from the brochure vector artwork. No filter is applied to it.
+ */
 export default function Navbar() {
   const [menuOpen, setMenuOpen] = useState(false);
+  const menuButtonRef = useRef<HTMLButtonElement>(null);
+
+  const closeMenu = useCallback(() => {
+    setMenuOpen(false);
+    // Back to where the visitor was.
+    menuButtonRef.current?.focus();
+  }, []);
 
   return (
     <>
-      <header className="fixed inset-x-0 top-0 z-50 border-b border-white/10 bg-transparent">
-        <div className={barLayout}>
-          {/* Brand */}
-          <Link href="/" aria-label="The Avenue Builders & Developers — home">
-            {/* Intrinsic size is the 2x display size (source is 1499x622, same
-                ratio) so the bar keeps its proportions even before CSS lands. */}
+      <header className="fixed inset-x-0 top-0 z-50 bg-transparent">
+        <div className="mx-auto flex h-[80px] w-full items-center justify-between px-6 md:px-10 lg:h-[92px] lg:px-12">
+          <Link href="/" aria-label="The Avenue Builders & Developers — home" className="shrink-0">
             <Image
-              src="/logo-avenue.webp"
-              alt="The Avenue Builders & Developers"
-              width={270}
-              height={112}
+              src="/logo-avenue-white.webp"
+              alt="The Avenue Builders & Developers — Reason to Smile!"
+              width={1400}
+              height={589}
               priority
-              className="h-[52px] w-auto lg:h-[64px]"
+              className="h-[50px] w-auto lg:h-[64px]"
             />
           </Link>
 
-          <div className="flex items-center gap-6 lg:gap-10 xl:gap-14">
-            <nav className="hidden items-center gap-8 lg:flex xl:gap-12">
-              {headerLinks.map((link) => (
-                <Link
-                  key={link.label}
-                  href={link.href}
-                  className="font-grotesk text-[11px] font-medium uppercase tracking-[0.22em] text-white/85 transition-colors duration-300 hover:text-brand-gold"
-                >
-                  {link.label}
-                </Link>
-              ))}
-            </nav>
+          <div className="flex items-center gap-4 lg:gap-7">
+            <Link
+              href="/contact"
+              className="flex h-10 items-center justify-center rounded-full border border-white/80 px-6 font-grotesk text-[11px] font-semibold uppercase tracking-[0.16em] text-white transition-colors duration-300 hover:bg-white hover:text-[#8f7762] focus-visible:bg-white focus-visible:text-[#8f7762] focus-visible:outline-none lg:h-11 lg:px-7"
+            >
+              Contact
+            </Link>
 
-            {/* Square menu button */}
             <button
+              ref={menuButtonRef}
               type="button"
               onClick={() => setMenuOpen(true)}
               aria-label="Open menu"
               aria-expanded={menuOpen}
               aria-controls="avenue-menu"
-              className="flex h-11 w-11 shrink-0 items-center justify-center bg-brand-gold text-black transition-colors duration-300 hover:bg-white lg:h-12 lg:w-12"
+              className="group flex h-11 w-11 shrink-0 flex-col items-end justify-center gap-[7px] bg-transparent lg:w-12"
             >
-              <svg
-                viewBox="0 0 20 20"
-                aria-hidden="true"
-                fill="currentColor"
-                className="h-[15px] w-[15px] lg:h-4 lg:w-4"
-              >
-                <rect x="0" y="0" width="8" height="8" />
-                <rect x="12" y="0" width="8" height="8" />
-                <rect x="0" y="12" width="8" height="8" />
-                <rect x="12" y="12" width="8" height="8" />
-              </svg>
+              <span className="block h-px w-9 bg-white transition-all duration-300 group-hover:w-10 lg:w-10 lg:group-hover:w-11" />
+              <span className="block h-px w-9 bg-white transition-all duration-300 group-hover:w-7 lg:w-10 lg:group-hover:w-8" />
             </button>
           </div>
         </div>
       </header>
 
-      <MenuOverlay open={menuOpen} onClose={() => setMenuOpen(false)} />
+      <MenuOverlay open={menuOpen} onClose={closeMenu} />
     </>
   );
 }
