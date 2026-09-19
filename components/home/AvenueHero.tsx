@@ -65,12 +65,6 @@ const APPROACH = 0.12;
 /** Feathers the band into the wash around it. */
 const BAND_MASK = "linear-gradient(to bottom, transparent 0%, #000 17%, #000 80%, transparent 100%)";
 
-const HEADLINE: { text: string; em?: boolean }[][] = [
-  [{ text: "Introducing you to a life you've " }, { text: "aspired for,", em: true }],
-  [{ text: "and " }, { text: "world-class designs", em: true }, { text: " you've" }],
-  [{ text: "always " }, { text: "yearned for.", em: true }],
-];
-
 export default function AvenueHero() {
   const containerRef = useRef<HTMLDivElement>(null);
   const stageRef = useRef<HTMLDivElement>(null);
@@ -488,29 +482,7 @@ export default function AvenueHero() {
         {/* Kept clear of a phone's browser bars: 100lvh − 100svh is their
             height where they overlay the page, and 0 everywhere else. */}
         <div className="absolute inset-x-0 bottom-0 px-6 pb-[12vh] text-center supports-[height:100svh]:pb-[calc(100lvh-100svh+10vh)] md:px-10 md:pb-[13vh] md:supports-[height:100svh]:pb-[13vh]">
-          <h1 className="mx-auto max-w-[1180px] font-grotesk text-[clamp(22px,3.1vw,48px)] font-normal uppercase leading-[1.08] tracking-[-0.01em] text-white">
-            {HEADLINE.map((line, k) => (
-              <span key={k} className="block overflow-hidden pb-[0.06em]">
-                <span
-                  ref={(el) => {
-                    lineRefs.current[k] = el;
-                  }}
-                  className="block will-change-transform [text-wrap:balance]"
-                  style={{ transform: "translate3d(0, 110%, 0)" }}
-                >
-                  {line.map((part, j) =>
-                    part.em ? (
-                      <em key={j} className="font-serif font-light italic tracking-[-0.02em] text-[#f1d4a6]">
-                        {part.text}
-                      </em>
-                    ) : (
-                      <span key={j}>{part.text}</span>
-                    ),
-                  )}
-                </span>
-              </span>
-            ))}
-          </h1>
+          
 
           <div
             ref={detailRef}
