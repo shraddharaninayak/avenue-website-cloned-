@@ -10,10 +10,11 @@ import { createClouds } from "./hero-clouds";
 /**
  * 01 — Hero. An entrance through the clouds to The Avenue's towers.
  *
- * The page opens in warm, sunlit cloud. Scrolling carries the camera through
- * it: banks swell past and part, the haze thins, and the Milestone towers,
- * face-on at sunset, rise out of a last bank of low cloud as it sinks below
- * the trees. Then the film itself takes over and plays on from that view.
+ * The page opens among towering cumulus, lit gold by a low sun, with shafts
+ * of light streaming through. Scrolling flies the camera slowly into them;
+ * the cloud dissolves into a warm haze, and the Milestone towers appear
+ * through it, face-on at sunset, standing in low cloud that sinks below the
+ * trees. Then the film itself takes over and plays on from that view.
  *
  * The building is The Avenue's own film (public/avenue-intro.mp4.mp4), from
  * its face-on shot of both towers at 14.16s — the first clean frame after the
@@ -22,6 +23,12 @@ import { createClouds } from "./hero-clouds";
  * frame matches it exactly when playback begins. The clouds are drawn in
  * WebGL (./hero-clouds.ts); a CSS haze stands in before they are drawn, and
  * instead of them where WebGL is unavailable.
+ *
+ * On wide screens the film fills the stage. On upright ones (phones, tablets
+ * held upright) filling it would leave one tower, cut, and lose the film's
+ * centred title and captions; there the whole frame is shown as a band across
+ * the upper stage, feathered into a soft, live wash of the film itself, and
+ * it draws in a little as the camera approaches.
  *
  * After the clouds, the brand line rises on a veil as before, and the panel
  * lifts away on rounded corners, uncovering the page beneath.
@@ -33,18 +40,30 @@ const FRONT_VIEW_AT = 14.16;
 const POSTER = "/home-hero/front.webp";
 
 /** Scroll progress (0..1 over the pinned stretch) at which the camera is through the clouds. */
-const CLOUDS_END = 0.46;
+const CLOUDS_END = 0.52;
 /** Cloud progress at which the film starts to play, below which it pauses, and below which it rewinds. */
 const PLAY_AT = 0.84;
 const PAUSE_BELOW = 0.6;
 const REWIND_BELOW = 0.3;
 
-/** Where the sun and the right-hand tower sit in the film's frame (0..1 from the top left). */
+/**
+ * Where things sit in the film's frame (0..1 from the top left): the sun, the
+ * middle of the two towers, and the tree line at their feet.
+ */
 const SUN = { x: 0.948, y: 0.5 };
-const RIGHT_TOWER_X = 0.705;
+const TOWERS = { x: 0.485, y: 0.45 };
+const TREE_LINE_Y = 0.66;
 const FILM_ASPECT = 16 / 9;
-/** Below this share of the film's width on screen, both towers no longer fit. */
+/** Below this share of the film's width on screen, both towers no longer fit: the film is shown as a band. */
 const BOTH_TOWERS_FIT = 0.7;
+/** In the band, the share of the film's width on screen — both towers (14–83% of the frame), with room either side. */
+const BAND_SHARE = 0.8;
+/** The band's centre, as a share of the stage's height: above the brand line. */
+const BAND_CENTRE = 0.36;
+/** How far the band draws in as the camera approaches the towers. */
+const APPROACH = 0.12;
+/** Feathers the band into the wash around it. */
+const BAND_MASK = "linear-gradient(to bottom, transparent 0%, #000 17%, #000 80%, transparent 100%)";
 
 const HEADLINE: { text: string; em?: boolean }[][] = [
   [{ text: "Introducing you to a life you've " }, { text: "aspired for,", em: true }],
@@ -55,6 +74,8 @@ const HEADLINE: { text: string; em?: boolean }[][] = [
 export default function AvenueHero() {
   const containerRef = useRef<HTMLDivElement>(null);
   const stageRef = useRef<HTMLDivElement>(null);
+  const frameRef = useRef<HTMLDivElement>(null);
+  const washRef = useRef<HTMLCanvasElement>(null);
   const posterRef = useRef<HTMLImageElement>(null);
   const videoRef = useRef<HTMLVideoElement>(null);
   const cloudRef = useRef<HTMLCanvasElement>(null);
@@ -67,19 +88,62 @@ export default function AvenueHero() {
   useEffect(() => {
     const container = containerRef.current;
     const stage = stageRef.current;
+    const frame = frameRef.current;
+    const wash = washRef.current;
     const poster = posterRef.current;
     const video = videoRef.current;
     const canvas = cloudRef.current;
     const haze = hazeRef.current;
-    if (!container || !stage || !poster || !video || !canvas || !haze) return;
+    if (!container || !stage || !frame || !wash || !poster || !video || !canvas || !haze) return;
 
     const reduce = prefersReducedMotion();
     let view = { w: 0, h: 0 };
     let sun: [number, number] = [SUN.x, 1 - SUN.y];
+    let focus: [number, number] = [TOWERS.x, 1 - TOWERS.y];
+    let tree = 1 - TREE_LINE_Y;
+    let floor = 0;
+    let band = false;
     let target = 0;
     let current = 0;
     let raf: number | null = null;
     let inView = true;
+
+    // ---- The wash around the band -----------------------------------------
+    // The film drawn tiny and stretched to the stage (blurred in CSS): the top
+    // of its frame above the band, the foot of it below, following every cut.
+    const washCtx = wash.getContext("2d", { alpha: false });
+    wash.width = 32;
+    wash.height = 24;
+    const paintWash = () => {
+      if (!band || !washCtx) return;
+      const showingFilm = video.style.opacity === "1" && video.readyState >= 2;
+      const src = showingFilm ? video : poster;
+      const sw = showingFilm ? video.videoWidth : poster.naturalWidth;
+      const sh = showingFilm ? video.videoHeight : poster.naturalHeight;
+      if (!sw || !sh) return;
+      const { width: W, height: H } = wash;
+      try {
+        washCtx.drawImage(src, 0, 0, sw, sh * 0.3, 0, 0, W, H / 2);
+        washCtx.drawImage(src, 0, sh * 0.75, sw, sh * 0.25, 0, H / 2, W, H / 2);
+      } catch {
+        // Not decodable yet; the next frame paints it.
+      }
+    };
+    let frameCb: number | null = null;
+    const onVideoFrame = () => {
+      frameCb = null;
+      paintWash();
+      followFilm();
+    };
+    // Repaints on each new frame while the film plays in the band.
+    const followFilm = () => {
+      if (frameCb !== null || !band || !inView || video.paused) return;
+      if (typeof video.requestVideoFrameCallback === "function") {
+        frameCb = video.requestVideoFrameCallback(onVideoFrame);
+      }
+    };
+    const onPosterLoad = () => paintWash();
+    poster.addEventListener("load", onPosterLoad);
 
     // ---- The clouds ------------------------------------------------------
     let clouds = null as ReturnType<typeof createClouds>;
@@ -91,11 +155,26 @@ export default function AvenueHero() {
     let cloudRaf: number | null = null;
     let cloudsDrawn = false;
     let skip = false;
+    // The cloud is ray-marched: if a device cannot hold the frame rate, it is
+    // drawn at a lower resolution rather than stutter.
+    let lastFrame = 0;
+    let frameTime = 16;
+    let framesSeen = 0;
     const cloudProgress = (p: number) => clamp01(p / CLOUDS_END);
 
     const cloudFrame = (now: number) => {
       cloudRaf = null;
       if (!clouds || !inView) return;
+      const dt = now - lastFrame;
+      lastFrame = now;
+      if (dt > 0 && dt < 250) {
+        frameTime += (dt - frameTime) * 0.1;
+        if (++framesSeen > 24 && frameTime > 26) {
+          framesSeen = 0;
+          frameTime = 16;
+          clouds.degrade();
+        }
+      }
       const c = cloudProgress(current);
       if (c >= 1) {
         canvas.style.visibility = "hidden";
@@ -105,7 +184,7 @@ export default function AvenueHero() {
       skip = current === target && cloudsDrawn ? !skip : false;
       if (!skip) {
         canvas.style.visibility = "visible";
-        clouds.draw(c, reduce ? 0 : now / 1000, sun, reduce);
+        clouds.draw(c, reduce ? 0 : now / 1000, sun, focus, tree, floor, reduce);
       }
       if (!cloudsDrawn) {
         cloudsDrawn = true;
@@ -137,17 +216,25 @@ export default function AvenueHero() {
     // Shown once it holds a frame; it holds the poster's own frame until it plays.
     const reveal = () => {
       if (video.readyState >= 2) video.style.opacity = "1";
+      paintWash();
+      followFilm();
     };
     const onMeta = () => toFrontView();
     const onEnded = () => {
       toFrontView();
       film(true);
     };
+    // Where frame callbacks are unsupported, the wash follows the film a few
+    // times a second instead — it is a blur, so that is enough.
+    const onTimeUpdate = () => {
+      if (typeof video.requestVideoFrameCallback !== "function") paintWash();
+    };
     video.addEventListener("loadedmetadata", onMeta);
     video.addEventListener("loadeddata", reveal);
     video.addEventListener("seeked", reveal);
     video.addEventListener("playing", reveal);
     video.addEventListener("ended", onEnded);
+    video.addEventListener("timeupdate", onTimeUpdate);
     // It may have loaded before this ran.
     if (video.readyState >= 1) toFrontView();
     reveal();
@@ -195,6 +282,11 @@ export default function AvenueHero() {
 
       if (cueRef.current) cueRef.current.style.opacity = (1 - span(0.01, 0.07, p)).toFixed(3);
 
+      // In the band, the towers draw in as the camera approaches them.
+      frame.style.transform = band
+        ? `scale(${(1 + APPROACH * smoothstep(0.28, 1, p)).toFixed(4)})`
+        : "";
+
       // The panel's lower corners round off as it prepares to lift away.
       const r = (view.w < 768 ? 24 : 44) * smoothstep(0.88, 1, p);
       stage.style.borderBottomLeftRadius = `${r.toFixed(1)}px`;
@@ -219,33 +311,57 @@ export default function AvenueHero() {
       target = total > 0 ? clamp01(-container.getBoundingClientRect().top / total) : 0;
     };
 
-    // Frames the film: centred while both towers fit; on narrower screens, the
-    // right-hand tower with the sun. The sun's place on screen lights the clouds.
+    // Frames the film: filling the stage while both towers fit across it; on
+    // upright screens, whole, as a band. The sun's place on screen lights the
+    // clouds, and the towers' place is where the camera flies.
     const resize = () => {
       const w = stage.clientWidth;
       const h = stage.clientHeight;
       if (!w || !h) return;
       view = { w, h };
-      let x = 0.5;
-      let sunX: number;
-      let sunY: number;
-      if (w / h >= FILM_ASPECT) {
-        const shownH = w / FILM_ASPECT;
-        sunX = SUN.x;
-        sunY = ((h - shownH) / 2 + SUN.y * shownH) / h;
+      band = w / (h * FILM_ASPECT) < BOTH_TOWERS_FIT;
+
+      // The film's frame on screen: left, top, width, height.
+      let fx: number;
+      let fy: number;
+      let fw: number;
+      let fh: number;
+      if (band) {
+        fw = w / BAND_SHARE;
+        fh = fw / FILM_ASPECT;
+        fx = (w - fw) / 2;
+        fy = h * BAND_CENTRE - fh / 2;
+        frame.style.inset = "auto";
+        frame.style.left = `${fx.toFixed(1)}px`;
+        frame.style.top = `${fy.toFixed(1)}px`;
+        frame.style.width = `${fw.toFixed(1)}px`;
+        frame.style.height = `${fh.toFixed(1)}px`;
+        frame.style.transformOrigin = `${TOWERS.x * 100}% ${TOWERS.y * 100}%`;
+        frame.style.setProperty("mask-image", BAND_MASK);
+        frame.style.setProperty("-webkit-mask-image", BAND_MASK);
       } else {
-        const shownW = h * FILM_ASPECT;
-        if (w / shownW < BOTH_TOWERS_FIT) x = clamp01((RIGHT_TOWER_X * shownW - w / 2) / (shownW - w));
-        sunX = ((w - shownW) * x + SUN.x * shownW) / w;
-        sunY = SUN.y;
+        // Covering the stage, centred.
+        fw = Math.max(w, h * FILM_ASPECT);
+        fh = fw / FILM_ASPECT;
+        fx = (w - fw) / 2;
+        fy = (h - fh) / 2;
+        frame.style.cssText = "";
       }
-      const position = `${(x * 100).toFixed(2)}% 50%`;
-      poster.style.objectPosition = position;
-      video.style.objectPosition = position;
-      sun = [sunX, 1 - sunY];
+      wash.style.display = band ? "block" : "none";
+
+      const toScreen = (x: number, y: number): [number, number] => [
+        (fx + x * fw) / w,
+        1 - (fy + y * fh) / h,
+      ];
+      sun = toScreen(SUN.x, SUN.y);
+      focus = toScreen(TOWERS.x, TOWERS.y);
+      tree = toScreen(0, TREE_LINE_Y)[1];
+      floor = toScreen(0, 1)[1];
       clouds?.resize(w, h);
       read();
       ui(current);
+      paintWash();
+      followFilm();
       wakeClouds();
     };
 
@@ -258,6 +374,7 @@ export default function AvenueHero() {
     const io = new IntersectionObserver(([entry]) => {
       inView = entry.isIntersecting;
       film();
+      followFilm();
       wakeClouds();
     });
     io.observe(stage);
@@ -280,6 +397,11 @@ export default function AvenueHero() {
       video.removeEventListener("seeked", reveal);
       video.removeEventListener("playing", reveal);
       video.removeEventListener("ended", onEnded);
+      video.removeEventListener("timeupdate", onTimeUpdate);
+      poster.removeEventListener("load", onPosterLoad);
+      if (frameCb !== null && typeof video.cancelVideoFrameCallback === "function") {
+        video.cancelVideoFrameCallback(frameCb);
+      }
       video.pause();
       if (raf !== null) cancelAnimationFrame(raf);
       if (cloudRaf !== null) cancelAnimationFrame(cloudRaf);
@@ -292,13 +414,23 @@ export default function AvenueHero() {
     <div ref={containerRef} className="relative h-[330vh] bg-[#f3f0eb]">
       <div
         ref={stageRef}
+        data-header="clear"
         className="sticky top-0 h-screen w-full overflow-hidden bg-[#0c0a09] [transform:translateZ(0)]"
       >
+        {/* Upright screens only: a soft wash of the film around its band. */}
+        <canvas
+          ref={washRef}
+          aria-hidden="true"
+          className="pointer-events-none absolute inset-0 h-full w-full scale-[1.35] blur-2xl brightness-[0.85] saturate-[1.15]"
+          style={{ display: "none" }}
+        />
+
         {/* The towers: the film's face-on frame, then the film itself. */}
         <div
+          ref={frameRef}
           role="img"
           aria-label="The Avenue Milestone towers, face-on at sunset, emerging from the clouds — from the Milestone film"
-          className="absolute inset-0"
+          className="absolute inset-0 will-change-transform"
         >
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
@@ -329,7 +461,7 @@ export default function AvenueHero() {
           className="pointer-events-none absolute inset-0 transition-opacity duration-700 ease-out"
           style={{
             background:
-              "radial-gradient(ellipse 55% 60% at 92% 52%, rgba(255,214,160,0.55), rgba(255,214,160,0) 70%), linear-gradient(to bottom, #b3a89f 0%, #d2c3b2 24%, #e2d3c1 55%, #dccbb6 82%, #c7b59f 100%)",
+              "radial-gradient(ellipse 65% 60% at 4% 6%, rgba(255,222,170,0.75), rgba(255,222,170,0) 70%), linear-gradient(to bottom right, #efcfa2 0%, #d9bba6 38%, #b3a5ab 70%, #8d8a9c 100%)",
           }}
         />
         <canvas
@@ -353,15 +485,17 @@ export default function AvenueHero() {
           style={{ opacity: 0 }}
         />
 
-        <div className="absolute inset-x-0 bottom-0 px-6 pb-[12vh] text-center md:px-10 md:pb-[13vh]">
-          <h1 className="mx-auto max-w-[1180px] font-grotesk text-[clamp(24px,3.1vw,48px)] font-normal uppercase leading-[1.08] tracking-[-0.01em] text-white">
+        {/* Kept clear of a phone's browser bars: 100lvh − 100svh is their
+            height where they overlay the page, and 0 everywhere else. */}
+        <div className="absolute inset-x-0 bottom-0 px-6 pb-[12vh] text-center supports-[height:100svh]:pb-[calc(100lvh-100svh+10vh)] md:px-10 md:pb-[13vh] md:supports-[height:100svh]:pb-[13vh]">
+          <h1 className="mx-auto max-w-[1180px] font-grotesk text-[clamp(22px,3.1vw,48px)] font-normal uppercase leading-[1.08] tracking-[-0.01em] text-white">
             {HEADLINE.map((line, k) => (
               <span key={k} className="block overflow-hidden pb-[0.06em]">
                 <span
                   ref={(el) => {
                     lineRefs.current[k] = el;
                   }}
-                  className="block will-change-transform"
+                  className="block will-change-transform [text-wrap:balance]"
                   style={{ transform: "translate3d(0, 110%, 0)" }}
                 >
                   {line.map((part, j) =>
@@ -410,7 +544,7 @@ export default function AvenueHero() {
         <div
           ref={cueRef}
           aria-hidden="true"
-          className="pointer-events-none absolute inset-x-0 bottom-8 flex flex-col items-center gap-2 font-grotesk text-[10px] font-medium uppercase tracking-[0.3em] text-[#5a4a3c] md:bottom-10"
+          className="pointer-events-none absolute inset-x-0 bottom-8 flex flex-col items-center gap-2 font-grotesk text-[10px] font-medium uppercase tracking-[0.3em] text-[#5a4a3c] supports-[height:100svh]:bottom-[calc(100lvh-100svh+2rem)] md:bottom-10 md:supports-[height:100svh]:bottom-10"
         >
           <span>Scroll</span>
           <ChevronDown className="h-4 w-4 animate-bounce text-brand-gold" />

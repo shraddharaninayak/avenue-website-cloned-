@@ -178,10 +178,13 @@ export default function AvenueProjects() {
           </div>
 
           <div className="mt-16 space-y-24 md:mt-20 md:space-y-32">
+            {/* Each frame is sized to its render, so the building is never cut:
+                Urbania's crown spans 13–80% of its width, Flora 10–63%, Bliss
+                20–80%; Aura's elevation is trimmed only at the sky. */}
             {/* 01 — full width */}
             {first ? (
               <article aria-labelledby={`project-${first.slug}`}>
-                <ProjectImage project={first} index={0} layout={{ frame: "aspect-[4/3] md:aspect-[16/7]", image: "object-center" }} />
+                <ProjectImage project={first} index={0} layout={{ frame: "aspect-[16/9] md:aspect-[16/7]", image: "object-[38%_50%]" }} />
                 <div className="mt-8 md:mt-10">
                   <ProjectInfo project={first} index={0} wide />
                 </div>
@@ -193,7 +196,7 @@ export default function AvenueProjects() {
               <div className="grid gap-y-24 md:grid-cols-12 md:gap-x-8 lg:gap-x-12">
                 {second ? (
                   <article className="md:col-span-6" aria-labelledby={`project-${second.slug}`}>
-                    <ProjectImage project={second} index={1} layout={{ frame: "aspect-[6/5]", image: "object-center" }} />
+                    <ProjectImage project={second} index={1} layout={{ frame: "aspect-[3/2]", image: "object-[30%_50%]" }} />
                     <div className="mt-8">
                       <ProjectInfo project={second} index={1} />
                     </div>
@@ -201,7 +204,7 @@ export default function AvenueProjects() {
                 ) : null}
                 {third ? (
                   <article className="md:col-span-5 md:col-start-8 md:mt-40" aria-labelledby={`project-${third.slug}`}>
-                    <ProjectImage project={third} index={2} layout={{ frame: "aspect-[4/5]", image: "object-[50%_40%]" }} />
+                    <ProjectImage project={third} index={2} layout={{ frame: "aspect-[4/5]", image: "object-[50%_62%]" }} />
                     <div className="mt-8">
                       <ProjectInfo project={third} index={2} />
                     </div>
@@ -214,7 +217,7 @@ export default function AvenueProjects() {
             {fourth ? (
               <article className="grid gap-y-8 md:grid-cols-12 md:items-center md:gap-x-8 lg:gap-x-12" aria-labelledby={`project-${fourth.slug}`}>
                 <div className="md:col-span-5 lg:col-span-4 lg:col-start-2">
-                  <ProjectImage project={fourth} index={3} layout={{ frame: "aspect-[4/5]", image: "object-[50%_35%]" }} />
+                  <ProjectImage project={fourth} index={3} layout={{ frame: "aspect-square", image: "object-[50%_40%]" }} />
                 </div>
                 <div className="md:col-span-7 lg:col-span-5 lg:col-start-7">
                   <ProjectInfo project={fourth} index={3} />

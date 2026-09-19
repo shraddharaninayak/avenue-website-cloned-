@@ -48,6 +48,41 @@ const pad = (n: number) => String(n).padStart(2, "0");
 const ratio = (m: Media, min: number, max: number) =>
   Math.min(max, Math.max(min, m.w / m.h));
 
+/** Share of an image still in view once it covers a frame of this shape. */
+const coverage = (m: Media, frameAspect: number) => {
+  const a = m.w / m.h;
+  return Math.min(a / frameAspect, frameAspect / a);
+};
+
+/**
+ * Below this coverage a render is shown whole instead — over a soft wash of
+ * itself — rather than cut to fit: a landscape render in a phone's portrait
+ * hero, say, would otherwise keep barely a quarter of its width.
+ */
+const MIN_COVERAGE = 0.6;
+
+/** Softens the two edges a fitted image meets its wash along. */
+const edgeMask = (direction: "to bottom" | "to right", fade: number) => {
+  const mask = `linear-gradient(${direction}, transparent, #000 ${fade}%, #000 ${100 - fade}%, transparent)`;
+  return { WebkitMaskImage: mask, maskImage: mask };
+};
+
+/** The wash behind a fitted image: the same image, blurred and dimmed. */
+function Wash({ media, position }: { media: Media; position?: string }) {
+  return (
+    // eslint-disable-next-line @next/next/no-img-element
+    <img
+      src={media.src}
+      alt=""
+      aria-hidden="true"
+      loading="lazy"
+      decoding="async"
+      className="absolute inset-0 h-full w-full scale-110 object-cover blur-2xl brightness-[0.55] saturate-[1.1]"
+      style={{ objectPosition: position }}
+    />
+  );
+}
+
 function SectionLabel({
   index,
   label,
@@ -179,26 +214,62 @@ function MaskedImage({
  * ========================================================================== */
 
 function Hero({ project }: { project: Detail }) {
+  const sectionRef = useRef<HTMLElement>(null);
   const imgRef = useRef<HTMLImageElement>(null);
   const [loaded, setLoaded] = useState(false);
+  // The hero's own shape, once measured; until then the image covers it.
+  const [frame, setFrame] = useState<number | null>(null);
   useEffect(() => {
     if (imgRef.current?.complete) setLoaded(true);
+    const section = sectionRef.current;
+    if (!section) return;
+    const measure = () =>
+      setFrame(section.clientWidth / Math.max(section.clientHeight, 1));
+    measure();
+    const ro = new ResizeObserver(measure);
+    ro.observe(section);
+    return () => ro.disconnect();
   }, []);
   const heroFacts = project.facts.slice(0, 3);
+  const hero = project.hero;
+  const position = project.heroPosition ?? "50% 50%";
+  // On an upright screen the title covers the lower half, so the building
+  // must show whole above it: a stricter bar there.
+  const fit =
+    frame !== null && coverage(hero, frame) < (frame < 1 ? 0.8 : MIN_COVERAGE);
+  // Fitted, a wide render spans the width (a touch over, so its sides meet
+  // the edges) in the upper part of the screen; a tall one the full height,
+  // to the right of the title.
+  const wide = frame !== null && hero.w / hero.h > frame;
+  const fitClass = wide
+    ? "left-1/2 top-[38%] w-[112%] -translate-x-1/2 -translate-y-1/2"
+    : "right-[6%] top-0 h-full";
 
   return (
-    <section className="relative h-[100svh] min-h-[640px] overflow-hidden bg-[#0c0a09] text-white">
+    <section
+      ref={sectionRef}
+      data-header="clear"
+      className="relative h-[100svh] min-h-[640px] overflow-hidden bg-[#0c0a09] text-white"
+    >
+      {fit ? <Wash media={hero} position={position} /> : null}
       {/* eslint-disable-next-line @next/next/no-img-element */}
       <img
         ref={imgRef}
-        src={project.hero.src}
-        alt={project.hero.alt}
+        src={hero.src}
+        alt={hero.alt}
         fetchPriority="high"
         onLoad={() => setLoaded(true)}
-        className={`absolute inset-0 h-full w-full object-cover transition-[transform,opacity] duration-[1800ms] ease-[cubic-bezier(0.22,1,0.36,1)] motion-reduce:transition-none ${
-          loaded ? "scale-100 opacity-100" : "scale-[1.06] opacity-0"
-        }`}
-        style={{ objectPosition: project.heroPosition ?? "50% 50%" }}
+        className={`absolute max-w-none transition-[transform,opacity] duration-[1800ms] ease-[cubic-bezier(0.22,1,0.36,1)] motion-reduce:transition-none ${
+          fit ? fitClass : "inset-0 h-full w-full object-cover"
+        } ${loaded ? "scale-100 opacity-100" : "scale-[1.06] opacity-0"}`}
+        style={
+          fit
+            ? {
+                aspectRatio: `${hero.w} / ${hero.h}`,
+                ...edgeMask(wide ? "to bottom" : "to right", wide ? 14 : 10),
+              }
+            : { objectPosition: position }
+        }
       />
       <div
         aria-hidden="true"
@@ -579,7 +650,7 @@ function Amenities({ project, index }: { project: Detail; index: number }) {
                     delay={["", "delay-100", "delay-200", "delay-300"][i % 4]}
                   >
                     <div
-                      className={`relative w-full overflow-hidden bg-[#1f1a14] ${arch ? "aspect-[5/6] rounded-t-[999px]" : "aspect-[4/3]"}`}
+                      className={`relative w-full overflow-hidden bg-[#1f1a14] ${arch ? "aspect-[5/6] rounded-t-[999px]" : "aspect-[16/10]"}`}
                     >
                       {/* eslint-disable-next-line @next/next/no-img-element */}
                       <img
@@ -1219,6 +1290,21 @@ function Enquire({ project, index }: { project: Detail; index: number }) {
  *  MORE FROM THE AVENUE
  * ========================================================================== */
 
+/** The shape of a project card. */
+const CARD = 4 / 5;
+
+/**
+ * A card's image: the hero, unless the gallery holds a view that fills the
+ * card's upright shape far better (Milestone's towers above the trees,
+ * rather than its wide hero cut down to a sliver).
+ */
+const cardImage = (p: Detail) => {
+  const best = [...p.gallery].sort((a, b) => coverage(b, CARD) - coverage(a, CARD))[0];
+  return best && coverage(best, CARD) > coverage(p.hero, CARD) + 0.15
+    ? { media: best, position: "50% 50%" }
+    : { media: p.hero, position: p.heroPosition ?? "50% 50%" };
+};
+
 function MoreProjects({
   related,
   index,
@@ -1239,21 +1325,33 @@ function MoreProjects({
           </h2>
         </Reveal>
         <ul className="mt-14 grid gap-x-6 gap-y-14 sm:grid-cols-2 md:mt-16 lg:grid-cols-4 lg:gap-x-8">
-          {related.map((p, i) => (
+          {related.map((p, i) => {
+            const { media, position } = cardImage(p);
+            const fit = coverage(media, CARD) < MIN_COVERAGE;
+            return (
             <RevealItem
               key={p.slug}
               delay={["", "delay-100", "delay-200", "delay-300"][i % 4]}
             >
               <Link href={projectHref(p.slug)} className="group block">
                 <div className="relative aspect-[4/5] overflow-hidden bg-[#1f1a14]">
+                  {fit ? <Wash media={media} position={position} /> : null}
                   {/* eslint-disable-next-line @next/next/no-img-element */}
                   <img
-                    src={p.hero.src}
-                    alt={p.hero.alt}
+                    src={media.src}
+                    alt={media.alt}
                     loading="lazy"
                     decoding="async"
-                    className="absolute inset-0 h-full w-full object-cover transition-transform duration-[1200ms] ease-out group-hover:scale-[1.05]"
-                    style={{ objectPosition: p.heroPosition ?? "50% 50%" }}
+                    className={`absolute transition-transform duration-[1200ms] ease-out group-hover:scale-[1.05] ${
+                      fit
+                        ? "left-1/2 top-[42%] w-[110%] max-w-none -translate-x-1/2 -translate-y-1/2"
+                        : "inset-0 h-full w-full object-cover"
+                    }`}
+                    style={
+                      fit
+                        ? { aspectRatio: `${media.w} / ${media.h}`, ...edgeMask("to bottom", 12) }
+                        : { objectPosition: position }
+                    }
                   />
                   <div
                     aria-hidden="true"
@@ -1281,7 +1379,8 @@ function MoreProjects({
                 </div>
               </Link>
             </RevealItem>
-          ))}
+            );
+          })}
         </ul>
       </div>
     </section>

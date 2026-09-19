@@ -31,24 +31,38 @@ const finance = directors.find((d) => /financ/i.test(d.role));
 const execution = directors.find((d) => /execution/i.test(d.role));
 const aura = getProject("aura");
 
-type Stage = { title: string; text: string; source: string; image: string; alt: string; caption: string };
+type Stage = {
+  title: string;
+  text: string;
+  source: string;
+  /** A still from The Avenue's own film (public/avenue-intro.mp4.mp4). */
+  image: string;
+  alt: string;
+  caption: string;
+  /** What to keep in view when the frame is wider than the still. */
+  position: string;
+};
 
 const STAGES: Stage[] = [
   {
     title: "Understand",
     text: quote(about, "At The Avenue, we understand the evolving needs of our clients.") ?? "",
     source: "From our story",
-    image: "/home-sections/process-understand.webp",
-    alt: "A couple at a living-room window, looking out over the city",
-    caption: "Milestone · Living room",
+    // Film, 136.7s.
+    image: "/home-sections/process-cafe.webp",
+    alt: "The Milestone café at sunset: a long work table, the counter, and glass walls open to the city",
+    caption: "Milestone · Café",
+    position: "50% 45%",
   },
   {
     title: "Plan",
     text: finance?.role ?? "",
     source: finance ? `${finance.name} · ${finance.qualification}` : "",
-    image: "/home-sections/process-plan.webp",
-    alt: "An amenity deck between two Avenue towers, seen from directly above at night",
-    caption: "Milestone · Amenity deck, from above",
+    // Film, 70.9s.
+    image: "/home-sections/process-podium.webp",
+    alt: "Looking down a Milestone tower to the pool, lawn and pavilions laid out on its podium",
+    caption: "Milestone · The podium, from above",
+    position: "50% 50%",
   },
   {
     title: "Design",
@@ -58,17 +72,21 @@ const STAGES: Stage[] = [
         "A micro-level planned layout designed to meet multinational standards, with flexible floor plates for interior planning and specifications based on global health and safety requirements.",
       ) ?? "",
     source: aura ? `The Avenue ${aura.name}` : "",
-    image: "/home-sections/process-design.webp",
-    alt: "A bedroom with a city view, in warm evening light",
-    caption: "Milestone · Bedroom",
+    // Film, 124.5s.
+    image: "/home-sections/process-yoga-studio.webp",
+    alt: "The Milestone yoga studio: rows of mats before a lotus screen, within glass walls over the city",
+    caption: "Milestone · Yoga studio",
+    position: "50% 42%",
   },
   {
     title: "Deliver",
     text: execution?.role ?? "",
     source: execution ? `${execution.name} · ${execution.qualification}` : "",
-    image: "/home-sections/process-deliver.webp",
-    alt: "A car waiting beneath the curved canopy of an Avenue drop-off",
-    caption: "Milestone · Drop-off",
+    // Film, 113.8s. Weighted up, so the rooftop gardens stay in view.
+    image: "/home-sections/process-towers.webp",
+    alt: "The two Milestone towers with their rooftop gardens, at golden hour",
+    caption: "Milestone · The towers",
+    position: "50% 22%",
   },
 ].filter((stage) => stage.text && stage.source);
 
@@ -229,6 +247,7 @@ function PinnedProcess() {
                       className={`absolute inset-0 h-full w-full object-cover transition-transform duration-[1400ms] ease-[cubic-bezier(0.22,1,0.36,1)] motion-reduce:transition-none ${
                         i === active ? "scale-100" : "scale-[1.05]"
                       }`}
+                      style={{ objectPosition: stage.position }}
                     />
                   </div>
                 ))}
@@ -253,7 +272,14 @@ function StackedStage({ stage, index }: { stage: Stage; index: number }) {
     <li ref={ref} className="border-t border-black/15 py-10 md:py-12">
       <div className={`relative aspect-[16/9] w-full overflow-hidden bg-[#e6e2db] ${revealClass(visible)}`}>
         {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img src={stage.image} alt={stage.alt} loading="lazy" decoding="async" className="absolute inset-0 h-full w-full object-cover" />
+        <img
+          src={stage.image}
+          alt={stage.alt}
+          loading="lazy"
+          decoding="async"
+          className="absolute inset-0 h-full w-full object-cover"
+          style={{ objectPosition: stage.position }}
+        />
       </div>
       <div className={`mt-7 grid grid-cols-[64px_1fr] gap-x-4 md:grid-cols-[96px_1fr] ${revealClass(visible, "delay-150")}`}>
         <span className="font-serif text-[48px] font-light leading-[0.9] tracking-[-0.05em] text-brand-bronze/35 md:text-[64px]">

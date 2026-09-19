@@ -124,13 +124,16 @@ export default function AvenuePortrait() {
                 }`}
               >
                 {/* eslint-disable-next-line @next/next/no-img-element */}
+                {/* The Aura brochure's daylight elevation (p2); its dusk
+                    elevation is Aura's card in Projects. Weighted to the
+                    base, so only sky is trimmed. */}
                 <img
                   ref={imgRef}
-                  src="/avenue-about-main.jpg.webp"
-                  alt={aura ? `The Avenue ${aura.name}` : "An Avenue development"}
+                  src="/projects/aura/exterior-day.webp"
+                  alt={aura ? `The Avenue ${aura.name} in daylight` : "An Avenue development"}
                   loading="lazy"
                   decoding="async"
-                  className="absolute inset-x-0 -top-[7%] h-[114%] w-full max-w-none object-cover will-change-transform"
+                  className="absolute inset-x-0 -top-[7%] h-[114%] w-full max-w-none object-cover object-[50%_65%] will-change-transform"
                 />
               </div>
             </div>

@@ -147,14 +147,15 @@ const milestone: ProjectDetail = {
     ],
     source: "From the Milestone brochure",
   },
+  // One image per view, none repeated elsewhere on the page — the p3 view is
+  // the hero, and the lobby and street frontage are the homepage's Values and
+  // CTA images. Ordered so each lands in a slot its own shape fits (full,
+  // pair, full), so none is cropped to fit.
   gallery: [
-    img(`${M}/exterior-day.webp`, 1584, 1540, "The two Milestone towers in daylight", "The towers"),
     img(`${M}/porte-cochere.webp`, 2400, 1400, "The arched porte-cochère at the Milestone entrance, at dusk", "The porte-cochère"),
-    img(`${M}/towers-night.webp`, 2600, 1137, "The Milestone towers lit at night, seen from above", "The towers at night"),
-    img(`${M}/lobby.webp`, 2400, 1400, "The Milestone entrance lobby with its lettered wall", "The entrance lobby"),
-    img(`${M}/podium-night.webp`, 2400, 812, "Gardens and pools on the podium between the towers, at night", "Between the towers"),
-    img(`${M}/street-frontage.webp`, 2400, 1350, "The Milestone entrance and shopfronts at dusk", "The street frontage"),
+    img(`${M}/front-view.webp`, 1315, 840, "The two Milestone towers side by side, face-on, at dusk", "Side by side"),
     img(`${M}/towers-day.webp`, 1320, 1540, "The Milestone towers above the trees", "Above the trees"),
+    img(`${M}/towers-night.webp`, 2600, 1137, "The Milestone towers lit at night, seen from above, with the podium gardens between them", "The towers at night"),
   ],
   // Brochure p11 (the lists) and p12–14 (the spaces, each with its own line).
   amenities: {
@@ -237,7 +238,7 @@ const milestone: ProjectDetail = {
     pages: 26,
     sizeMb: 10.9,
     edition: "E-Brochure",
-    cover: img(`${M}/brochure-cover.webp`, 900, 525, "A page from the Milestone brochure"),
+    cover: img(`${M}/brochure-cover-page.webp`, 1200, 700, "The cover of the Milestone brochure"),
   },
   // Brochure p26.
   enquiry: PROJECT_PHONE,
@@ -295,8 +296,9 @@ const floraDetail: ProjectDetail = {
   // Brochure cover.
   tagline: "A new era of affordability.",
   subline: "Showrooms & offices.",
-  hero: img(`${F}/hero.webp`, 1785, 1725, "The Avenue Flora — showrooms and offices"),
-  heroPosition: "50% 45%",
+  // The brochure's render (p2), uncropped.
+  hero: img(`${F}/exterior.webp`, 2550, 1725, "The Avenue Flora — showrooms and offices"),
+  heroPosition: "30% 55%",
   facts: [
     { value: "Showrooms", label: "& offices" },
     { value: "Gangapur Naka", label: "In the heart of the city" },
@@ -450,7 +452,7 @@ const auraDetail: ProjectDetail = {
     pages: 19,
     sizeMb: 35.1,
     edition: "Revised July 2025",
-    cover: img(`${A}/brochure-cover.webp`, 900, 1432, "A page from the Aura brochure"),
+    cover: img(`${A}/brochure-cover-page.webp`, 900, 1432, "The cover of the Aura brochure"),
   },
   enquiry: aura.contact ? { phone: aura.contact, phoneHref: `tel:${aura.contact.replace(/\s+/g, "")}` } : PROJECT_PHONE,
 };
@@ -469,8 +471,10 @@ const blissDetail: ProjectDetail = {
   // Brochure cover: "Perfect Happiness..." · "Limited Edition 2 & 3 BHK Homes".
   tagline: "Perfect happiness.",
   subline: "Limited edition 2 & 3 BHK homes.",
-  hero: img(`${B}/hero.webp`, 2600, 1926, "The Avenue Bliss at dusk"),
-  heroPosition: "50% 42%",
+  // The brochure's elevation (p2), uncropped.
+  hero: img(`${B}/elevation.webp`, 2750, 2037, "The Avenue Bliss at dusk"),
+  // Weighted to the top, so the crown and its name stay in frame.
+  heroPosition: "50% 15%",
   facts: [
     { value: "2 & 3 BHK", label: "Limited edition homes" },
     { value: "Rooftop", label: "Living" },
@@ -512,7 +516,7 @@ const blissDetail: ProjectDetail = {
     pages: 8,
     sizeMb: 32,
     edition: "E-Brochure · April 2024",
-    cover: img(`${B}/brochure-cover.webp`, 900, 600, "A page from the Bliss brochure"),
+    cover: img(`${B}/brochure-cover-page.webp`, 1200, 800, "The cover of the Bliss brochure"),
   },
   // Brochure p8: "For more information click: 72 77 99 55 66".
   enquiry: PROJECT_PHONE,

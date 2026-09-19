@@ -117,6 +117,7 @@ export const projects: Project[] = [
     status: "Ongoing",
     description:
       "Fortune Urbania 3 & 4 BHK residences are created for those who never compromise.",
+    // No Urbania brochure was supplied, so the official site's render stays.
     image: "/urbania.jpg",
     amenities: [
       "Infinity swimming pool (adults & kids)",
@@ -152,7 +153,8 @@ export const projects: Project[] = [
     status: "Ongoing",
     description:
       "An iconic commercial destination featuring modern architecture, located in a landmark area, minutes from CBS and College Road.",
-    image: "/flora.jpg",
+    // The Flora brochure's own render (p2), at its full resolution.
+    image: "/projects/flora/exterior.webp",
     amenities: [
       "CCTV security",
       "High-speed branded elevators",
@@ -185,7 +187,9 @@ export const projects: Project[] = [
     status: "Ongoing",
     description:
       "Step into a world of elegance. A micro-level planned layout designed to meet multinational standards, with flexible floor plates for interior planning and specifications based on global health and safety requirements.",
-    image: "/aura.jpg",
+    // The Aura brochure's dusk elevation (p17). Its daylight elevation (p2)
+    // is the homepage Portrait image, so the two never repeat.
+    image: "/projects/aura/hero.webp",
     amenities: [
       "Rooftop infinity pool",
       "Rooftop pantry / barbeque area",
@@ -227,7 +231,9 @@ export const projects: Project[] = [
     status: "Ongoing",
     description:
       "Thoughtfully designed luxurious 2 and 3 BHK apartments, with distinctive specifications and entertainment hubs, lush green corners. Centrally located in the heart of Nashik.",
-    image: "/bliss.jpg",
+    // The Bliss brochure's elevation (p2), at its full resolution — the only
+    // high-resolution view of the building the brochure carries.
+    image: "/projects/bliss/elevation.webp",
     amenities: [
       "Security systems",
       "Power backup",

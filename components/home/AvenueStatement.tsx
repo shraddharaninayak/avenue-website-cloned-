@@ -10,9 +10,10 @@ import { lerp, revealClass, useReveal, useViewportProgress } from "./motion";
  *
  * The line is the opening sentence of the company's published values
  * (company.values), shown only if it is still there word for word. The image
- * is the first shot of The Avenue's own film — a balcony at sunset — which the
- * hero does not use. It continues out of Leadership's dark panel, then lifts
- * away from the cream page on rounded corners, as the hero does.
+ * is a still from The Avenue's own film (156.2s): Milestone's rooftop lawn at
+ * sunset — living beyond the home itself. Its garden and horizon sit in the
+ * upper half, clear of the type. It continues out of Leadership's dark panel,
+ * then lifts away from the cream page on rounded corners, as the hero does.
  */
 
 const STATEMENT = "We deliver beyond residential properties.";
@@ -46,11 +47,11 @@ export default function AvenueStatement() {
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
           ref={imgRef}
-          src="/home-sections/statement-sunset.webp"
-          alt="A balcony at The Avenue Milestone at sunset — from the Milestone film"
+          src="/home-sections/statement-terrace.webp"
+          alt="The rooftop lawn at The Avenue Milestone at sunset, its garden against the hills — from the Milestone film"
           loading="lazy"
           decoding="async"
-          className="absolute inset-x-0 -top-[6%] -z-10 h-[112%] w-full max-w-none object-cover object-[58%_50%] will-change-transform"
+          className="absolute inset-x-0 -top-[6%] -z-10 h-[112%] w-full max-w-none object-cover object-[45%_50%] will-change-transform"
         />
         {/* Rises out of Leadership's panel above, and settles the type below. */}
         <div aria-hidden="true" className="absolute inset-x-0 top-0 -z-10 h-40 bg-gradient-to-b from-[#0c0a09] to-transparent" />
