@@ -39,7 +39,7 @@ export const company: Company = {
   name: "The Avenue Builders & Developers",
   shortName: "The Avenue",
   description:
-    "Welcome to The Avenue - your premier property development and trading company in Nashik.",
+    "Avenue Builders & Developers, established in 2007, is a leading property Development and Construction company in Nashik with more than a decade's combined experience and over 1 Million Sq.Ft delivered till date.",
   established: 2007,
   location: "Nashik",
   tagline:
@@ -67,8 +67,14 @@ export const company: Company = {
  */
 export const socials = [
   { label: "Instagram", href: "https://www.instagram.com/theavenuebuilders/" },
-  { label: "Facebook", href: "https://www.facebook.com/premium.business.spaces" },
-  { label: "YouTube", href: "https://www.youtube.com/@TheAvenueSignaturesSpaces" },
+  {
+    label: "Facebook",
+    href: "https://www.facebook.com/premium.business.spaces",
+  },
+  {
+    label: "YouTube",
+    href: "https://www.youtube.com/@TheAvenueSignaturesSpaces",
+  },
 ] as const;
 
 /* -------------------------------------------------------------------------- */
@@ -156,45 +162,46 @@ export const projects: Project[] = [
     slug: "flora",
     name: "Flora",
     statement: "A new era of affordability.",
-    configuration: "Commercial Office Spaces",
+    configuration: "Showrooms & Offices",
     category: "Commercial",
-    locality: "Gangapur Naka, Nashik",
-    address: null,
-    status: "Ongoing",
+    locality: "Old Gangapur Naka, Gangapur Road, Nashik",
+    address:
+      "Old Gangapur Naka, Behind Vihar Misal, Gangapur Road, Nashik 422013",
+    status: "Possession Soon",
     description:
-      "An iconic commercial destination featuring modern architecture, located in a landmark area, minutes from CBS and College Road.",
+      "An iconic commercial destination featuring modern architecture, located in landmark Old Gangapur Naka, minutes from CBS and College Road.",
     // The Flora brochure's own render (p2), at its full resolution.
     image: "/projects/flora/exterior.webp",
     amenities: [
-      "CCTV security",
       "High-speed branded elevators",
-      "Pantry facilities",
+      "CCTV security surveillance",
       "Solar power backup for lifts and common areas",
+      "Pantry facilities",
       "Branded fittings",
       "Green gym",
       "Yoga deck",
       "Senior citizen seating areas",
     ],
     features: [
-      "Office spaces",
-      "Showroom spaces",
-      "Fitness centre",
-      "Gangapur Naka, in the heart of the city",
+      "Office spaces (555 to 1790 Sq.ft.)",
+      "Showroom spaces (1297 to 3162 Sq.ft.)",
+      "Elite options for Advocates, Doctors, CAs & Professionals",
+      "Old Gangapur Naka, in the heart of the city",
       "Minutes from CBS & College Road",
     ],
-    contact: null,
+    contact: "+91 9699006377",
     plan: { x: 67, y: 24 },
   },
   {
     slug: "aura",
     name: "Aura",
     statement: "Elevate your life.",
-    configuration: "3 & 4 BHK Homes",
+    configuration: "Limited Edition 3 & 4 BHK Homes",
     category: "Residential",
     locality: "Govind Nagar, Nashik",
     address:
-      "Shop No 8, Chandrawel Apartment, Behind Prakash Petrol Pump, Govind Nagar, Nashik",
-    status: "Ongoing",
+      "S. No. 803, Plot No. 25/26, Chowk No. 1, Behind Prakash Petrol Pump, Govind Nagar, Nashik",
+    status: "Ready Possession",
     description:
       "Step into a world of elegance. A micro-level planned layout designed to meet multinational standards, with flexible floor plates for interior planning and specifications based on global health and safety requirements.",
     // The Aura brochure's dusk elevation (p17). Its daylight elevation (p2)
@@ -216,16 +223,15 @@ export const projects: Project[] = [
       "Rooftop green gym",
       "Rooftop reflexology path",
       "Rooftop artificial lawn",
+      "EV Charging Point",
     ],
     features: [
+      "3 BHK 1484 Sq.ft. | 4 BHK 2263 & 2467 Sq.ft.",
+      "45+ curated lifestyle amenities",
       "Close proximity to City Centre as well as other conveniences",
-      "15 minutes drive from Ozar Airport",
       "2 minutes drive from Mahamarg Bus Stand and Mumbai Naka",
-      "Railway station 20 minutes away",
+      "15 minutes drive from Ozar Airport",
       "30 feet main access road",
-      "10 minutes drive from Hotel Taj, Nashik",
-      "Entrance lobby with lounge seating and concierge",
-      "Two-level parking in basement and ground floors",
     ],
     contact: "+91 7277995566",
     plan: { x: 30, y: 55 },
@@ -234,24 +240,34 @@ export const projects: Project[] = [
     slug: "bliss",
     name: "Bliss",
     statement: "Perfect happiness.",
-    configuration: "2 & 3 BHK Homes",
+    configuration: "Limited Edition 2 & 3 BHK Homes, Penthouse & Shops",
     category: "Residential",
     locality: "Govind Nagar, Nashik",
-    address: "Chowk No. 4, Behind Prakash Petrol Pump, Govind Nagar, Nashik",
-    status: "Ongoing",
+    address:
+      "S. No. 788, Chowk No. 4, Behind Prakash Petrol Pump, Govind Nagar, Nashik",
+    status: "Ready Possession",
     description:
       "Thoughtfully designed luxurious 2 and 3 BHK apartments, with distinctive specifications and entertainment hubs, lush green corners. Centrally located in the heart of Nashik.",
     // The Bliss brochure's elevation (p2), at its full resolution — the only
     // high-resolution view of the building the brochure carries.
     image: "/projects/bliss/elevation.webp",
     amenities: [
-      "Security systems",
-      "Power backup",
-      "Play areas",
-      "Rooftop facilities",
+      "Roof Top Green Gym",
+      "Indoor Game Play Area",
+      "Party lawn",
+      "Senior Citizen Sitting",
+      "E Vehicle Charging Point",
+      "Yoga Deck",
+      "Jogging Track",
+      "24x7 Security Systems & Power Backup",
     ],
-    features: ["Luxury you truly deserve", "World-class designs"],
-    contact: null,
+    features: [
+      "2 BHK (1078, 1114, 1184 Sq.ft. | Carpet 670–745 Sq.ft.)",
+      "3 BHK (1396, 1434 Sq.ft.) & 3 BHK Penthouse (1877 Sq.ft.)",
+      "Commercial Shops (250–350 Sq.ft.)",
+      "Centrally located in Govind Nagar, Nashik",
+    ],
+    contact: "+91 7277995566",
     plan: { x: 70, y: 54 },
   },
   {
@@ -259,7 +275,7 @@ export const projects: Project[] = [
     name: "Aaryana",
     // Brochure cover: "Modern Luxury…".
     statement: "Modern luxury.",
-    configuration: "Exclusive 3 BHK Apartments",
+    configuration: "Premium 3 BHK & Penthouse",
     category: "Residential",
     locality: "Karmayogi Nagar, Nashik",
     // Cover, and the site line on the brochure's location map.
@@ -270,24 +286,25 @@ export const projects: Project[] = [
     image: "/projects/aaryana/exterior.webp",
     // Brochure p9, "Features", "Amenities" and "3 Tier Security & Safety".
     amenities: [
-      "Well designed, luxurious entrance lobby and waiting area",
+      "EV Charging Station",
+      "Vastu Compliant Architecture",
+      "CCTV Surveillance 24x7",
+      "Solar Provision",
+      "Designer Entrance Lobby & Waiting Area",
       "High speed branded elevator with auto door and S.S. cabin",
       "Allotted parking with chequered tiles / trimix flooring / paver block",
-      "Post box facility in entrance lobby for each apartment owner",
       "Seismic resistant RCC structure",
       "Municipal water facility",
       "Light arrester provision",
-      "Power back-up for lift & common area",
-      "Security system 24x7, security cabin",
-      "C. C. T. V.",
-      "Video door phone",
+      "Video door phone security",
       "Compound wall with secured gates",
     ],
     features: [
-      "Exclusive 3 BHK apartments",
+      "3 BHK 1947 Sq.ft. & 4 BHK Penthouse 2912 Sq.ft.",
+      "One Floor Two Flat layout for optimal privacy",
       "Six floors of residences, with a common terrace",
       "Nestled conveniently along the Mumbai-Agra Highway",
-      "Close to the city's premier shopping destination",
+      "Near R.D. Circle, close to premier city destinations",
     ],
     // Brochure p11: "For more information : 9373632323, 7277995566".
     contact: "+91 9373632323",
@@ -298,7 +315,7 @@ export const projects: Project[] = [
     name: "Viraj Avenue",
     // Brochure cover: "Discover a World of Opportunities…".
     statement: "Discover a world of opportunities.",
-    configuration: "Office Spaces, Showrooms, Shops, Banquet Hall & Hospital",
+    configuration: "Showrooms, Offices, Shops, Banquet Hall & Hospital",
     category: "Commercial",
     locality: "Panchavati Annex, Nashik",
     address: "Viraj Avenue, Opp. Bali Mandir, Panchavati Annex, Nashik",
@@ -308,19 +325,19 @@ export const projects: Project[] = [
     image: "/projects/viraj-avenue/exterior.webp",
     // Brochure p6, "Amenities".
     amenities: [
-      "Modern Office Spaces",
-      "Spacious Showrooms",
-      "Versatile Shops",
+      "Modern Office Spaces (407–750 Sq.ft.)",
+      "Spacious Showrooms (1600 & 2750 Sq.ft.)",
+      "Versatile Shops with Mezzanine",
       "Elegant Banquet Hall",
       "Advanced Hospital Facilities",
-      "Ample Parking Space",
-      "24/7 Security",
+      "Ample Stack Parking Space",
+      "24/7 Security Surveillance",
     ],
     features: [
-      "Office spaces",
-      "Showroom spaces",
+      "Office spaces (407–750 Sq.ft.)",
+      "Showroom spaces (1600 & 2750 Sq.ft.)",
       "Shops with a mezzanine above each",
-      "Club house and open space",
+      "Banquet Hall & Hospital facilities",
       "Stack parking",
       "On the Mumbai-Agra Highway, opposite Bali Mandir",
     ],
@@ -343,8 +360,7 @@ export type Director = {
   /** Responsibility as described on the official site. */
   role: string;
   /**
-   * Portrait path. Null until a real photograph is supplied — the official
-   * site publishes no director portraits, and none are invented.
+   * Portrait path. Real photograph from the Avenue Profile 2025 presentation.
    */
   image: string | null;
 };
@@ -354,21 +370,21 @@ export const directorsHeading = "Meet the directors of The Avenue.";
 export const directors: Director[] = [
   {
     name: "Mr. Mukund Sabu",
-    qualification: "MBA – Marketing",
-    role: "A founding member, leading sales and execution.",
-    image: null,
+    qualification: "MBA in Marketing",
+    role: "15+ years in Real Estate. Leads Sales & Execution, ensuring high-quality client service and timely on-budget delivery.",
+    image: "/team/mukund-sabu.webp.png",
   },
   {
     name: "Mr. Nayan Bhandari",
-    qualification: "MBA – Finance",
-    role: "Financial planning, budgeting and analysis.",
-    image: null,
+    qualification: "MBA in Finance",
+    role: "17+ years in finance & accounting. Drives financial planning, budgeting, analysis, and strategic growth.",
+    image: "/team/nayan-bhandari.webp.png",
   },
   {
     name: "Mr. Yogesh Bedmutha",
-    qualification: "BE E & TC",
-    role: "Marketing and design.",
-    image: null,
+    qualification: "BE E&TC",
+    role: "20 years of diverse expertise. Heads marketing & design, creating distinctive aesthetics with out-of-the-box strategy.",
+    image: "/team/yogesh-bedmutha.webp.png",
   },
 ];
 
@@ -411,16 +427,66 @@ export const milestoneHeadings = {
 } as const;
 
 export const milestones: Milestone[] = [
-  { year: null, title: "The Avenue Grandeur", description: null, image: "/journey/granduare.png" },
-  { year: null, title: "The Avenue NX", description: null, image: "/journey/nx.png" },
-  { year: null, title: "The Avenue", description: null, image: "/journey/theavenue.png" },
-  { year: null, title: "The Avenue Casa", description: null, image: "/journey/casa.png" },
-  { year: null, title: "The Avenue Milestone", description: null, image: "/journey/milestone.png" },
-  { year: null, title: "The Avenue Urbania", description: null, image: "/journey/urbania.png" },
-  { year: null, title: "The Avenue One", description: null, image: "/journey/one.png" },
-  { year: null, title: "The Avenue Flora", description: null, image: "/journey/flora.png" },
-  { year: null, title: "The Avenue Bliss", description: null, image: "/journey/bliss.png" },
-  { year: null, title: "The Avenue Aura", description: null, image: "/journey/aura.png" },
+  {
+    year: null,
+    title: "The Avenue Grandeur",
+    description: null,
+    image: "/journey/granduare.png",
+  },
+  {
+    year: null,
+    title: "The Avenue NX",
+    description: null,
+    image: "/journey/nx.png",
+  },
+  {
+    year: null,
+    title: "The Avenue",
+    description: null,
+    image: "/journey/theavenue.png",
+  },
+  {
+    year: null,
+    title: "The Avenue Casa",
+    description: null,
+    image: "/journey/casa.png",
+  },
+  {
+    year: null,
+    title: "The Avenue Milestone",
+    description: null,
+    image: "/journey/milestone.png",
+  },
+  {
+    year: null,
+    title: "The Avenue Urbania",
+    description: null,
+    image: "/journey/urbania.png",
+  },
+  {
+    year: null,
+    title: "The Avenue One",
+    description: null,
+    image: "/journey/one.png",
+  },
+  {
+    year: null,
+    title: "The Avenue Flora",
+    description: null,
+    image: "/journey/flora.png",
+  },
+  {
+    year: null,
+    title: "The Avenue Bliss",
+    description: null,
+    image: "/journey/bliss.png",
+  },
+  {
+    year: null,
+    title: "The Avenue Aura",
+    description: null,
+    image: "/journey/aura.png",
+  },
 ];
 
 /* -------------------------------------------------------------------------- */

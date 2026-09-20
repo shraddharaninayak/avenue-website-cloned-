@@ -35,9 +35,9 @@ import { createClouds } from "./hero-clouds";
  * uncovering the page beneath.
  */
 
-const VIDEO_SRC = "/avenue-intro.mp4.mp4";
-/** Seconds into the film: the face-on view of both towers. */
-const FRONT_VIEW_AT = 14.16;
+const VIDEO_SRC = "/avenue-hero-optimized.mp4";
+/** Seconds into the film: the face-on view of both towers (0s on optimized asset). */
+const FRONT_VIEW_AT = 0.0;
 const POSTER = "/home-hero/front.webp";
 
 /** Scroll progress (0..1 over the pinned stretch) at which the camera is through the clouds. */
@@ -111,8 +111,12 @@ export default function AvenueHero() {
     const washCtx = wash.getContext("2d", { alpha: false });
     wash.width = 32;
     wash.height = 24;
+    let lastWash = 0;
     const paintWash = () => {
       if (!band || !washCtx) return;
+      const now = typeof performance !== "undefined" ? performance.now() : Date.now();
+      if (now - lastWash < 60) return; // Throttled to ~16fps to prevent CPU/GPU stalls on mobile
+      lastWash = now;
       const showingFilm = video.style.opacity === "1" && video.readyState >= 2;
       const src = showingFilm ? video : poster;
       const sw = showingFilm ? video.videoWidth : poster.naturalWidth;
@@ -208,7 +212,7 @@ export default function AvenueHero() {
     video.muted = true;
     video.defaultMuted = true;
     const toFrontView = () => {
-      if (Math.abs(video.currentTime - FRONT_VIEW_AT) > 0.05) video.currentTime = FRONT_VIEW_AT;
+      if (video.currentTime > 0.05) video.currentTime = 0;
     };
     // Shown once it holds a frame; it holds the poster's own frame until it plays.
     const reveal = () => {

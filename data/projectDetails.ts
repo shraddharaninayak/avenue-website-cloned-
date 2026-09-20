@@ -384,7 +384,7 @@ const floraDetail: ProjectDetail = {
   name: flora.name,
   fullName: `The Avenue ${flora.name}`,
   category: flora.category,
-  eyebrow: "Old Gangapur Naka, Nashik",
+  eyebrow: "Old Gangapur Naka, Gangapur Road, Nashik",
   // Brochure cover.
   tagline: "A new era of affordability.",
   subline: "Showrooms & offices.",
@@ -392,29 +392,29 @@ const floraDetail: ProjectDetail = {
   hero: img(`${F}/exterior.webp`, 2550, 1725, "The Avenue Flora — showrooms and offices"),
   heroPosition: "30% 55%",
   facts: [
-    { value: "Showrooms", label: "& offices" },
-    { value: "Gangapur Naka", label: "In the heart of the city" },
-    { value: "CBS", label: "& College Road", note: "Minutes away" },
+    { value: "555–1790", label: "Sq.ft. Offices" },
+    { value: "1297–3162", label: "Sq.ft. Showrooms" },
+    { value: "Gangapur Naka", label: "Heart of the city" },
+    { value: "CBS & College Rd", label: "Minutes away" },
   ],
-  // Brochure p2, verbatim. The brochure's text breaks off mid-sentence after
-  // "modern architecture.", so the quotation ends there.
+  // Brochure p2, verbatim.
   story: {
     heading: "Welcome to a world of elegance.",
     paragraphs: [
       "Welcome to a world of elegance, opportunities and dreams that blossom. Here, amidst the vibrant life of Old Gangapur Naka, we invite you to join us on a journey where aspirations find their wings, and business meets prosperity. Experience The Avenue Flora - A New Era of Affordability.",
-      "The Avenue Flora is an iconic commercial destination, setting new standards in luxury lifestyle. The prestigious project is located in the landmark Gangapur Naka, in the heart of the city. It is minutes from the CBS & College Road. The Avenue Flora will be marked by modern architecture.",
+      "The Avenue Flora is an iconic commercial destination, setting new standards in commercial and corporate lifestyle. The prestigious project offers elite options for Advocates, Professionals, Architects, Doctors, Interior Designers, and Chartered Accountants.",
     ],
-    source: "From the Flora brochure",
+    source: "From the Flora brochure and 2025 profile",
   },
   gallery: [],
   amenities: {
-    heading: "Amenities.",
-    source: "From the Flora page",
+    heading: "Amenities & Features.",
+    source: "From the Flora brochure and 2025 profile",
     frame: "rect",
     featured: [],
     groups: [
-      { title: "Spaces", items: flora.features.filter((f) => /space|centre/i.test(f)) },
-      { title: "Amenities", items: flora.amenities },
+      { title: "Commercial Spaces", items: flora.features },
+      { title: "Building Amenities", items: flora.amenities },
     ],
   },
   location: {
@@ -468,9 +468,10 @@ const auraDetail: ProjectDetail = {
   heroPosition: "50% 38%",
   facts: [
     { value: "3 & 4 BHK", label: "Limited edition homes" },
+    { value: "1484–2467", label: "Sq.ft. Area" },
     { value: "45+", label: "Amenities" },
     { value: "Two-level", label: "Parking", note: "Basement and ground floors" },
-    { value: "30 ft", label: "Main access road" },
+    { value: "Ready", label: "Possession" },
   ],
   story: {
     // Brochure p4 heading; the paragraphs are the Aura page and brochure p4.
@@ -562,28 +563,30 @@ const blissDetail: ProjectDetail = {
   eyebrow: bliss.locality ?? "Govind Nagar, Nashik",
   // Brochure cover: "Perfect Happiness..." · "Limited Edition 2 & 3 BHK Homes".
   tagline: "Perfect happiness.",
-  subline: "Limited edition 2 & 3 BHK homes.",
+  subline: "Limited edition 2 & 3 BHK homes, penthouse & shops.",
   // The brochure's elevation (p2), uncropped.
   hero: img(`${B}/elevation.webp`, 2750, 2037, "The Avenue Bliss at dusk"),
   // Weighted to the top, so the crown and its name stay in frame.
   heroPosition: "50% 15%",
   facts: [
-    { value: "2 & 3 BHK", label: "Limited edition homes" },
-    { value: "Rooftop", label: "Living" },
+    { value: "2 & 3 BHK", label: "Homes & penthouse" },
+    { value: "1078–1877", label: "Sq.ft. built-up" },
+    { value: "250–350", label: "Sq.ft. shops" },
+    { value: "Ready", label: "Possession" },
     { value: "Govind Nagar", label: "Centrally located" },
   ],
   story: { heading: "Perfect happiness.", paragraphs: [bliss.description], source: "From the Bliss page" },
   gallery: [],
   amenities: {
-    heading: "Rooftop living.",
+    heading: "Rooftop living & curated amenities.",
     // Brochure p6: "Bliss give you the experience of roof top living".
-    intro: "Bliss gives you the experience of rooftop living.",
-    source: "From the Bliss brochure and page",
+    intro: "Bliss gives you the experience of rooftop living and modern conveniences.",
+    source: "From the Bliss brochure and 2025 profile",
     frame: "rect",
     featured: [{ title: "The rooftop", image: img(`${B}/rooftop.webp`, 1749, 1189, "The Bliss rooftop from above, with its terrace amenities") }],
     groups: [
-      { title: "On the rooftop", items: ["Yoga Deck", "Jogging Track", "Play Area", "Sit Out"] },
-      { title: "Throughout", items: bliss.amenities },
+      { title: "Rooftop & Wellness", items: ["Roof Top Green Gym", "Yoga Deck", "Jogging Track", "Party Lawn", "Senior Citizen Sitting", "Sit Out Area"] },
+      { title: "Facilities & Security", items: ["Indoor Game Play Area", "E Vehicle Charging Point", "Commercial Shops (250–350 Sq.ft.)", "24x7 Security Systems", "Power Backup"] },
     ],
   },
   location: {
@@ -635,14 +638,14 @@ const aaryanaDetail: ProjectDetail = {
   eyebrow: aaryana.locality ?? "Karmayogi Nagar, Nashik",
   // Brochure cover: "Modern Luxury..." · "EXCLUSIVE 3 BHK APARTMENT".
   tagline: aaryana.statement,
-  subline: "Exclusive 3 BHK apartments.",
+  subline: "Premium 3 BHK & 4 BHK Penthouse · One Floor Two Flat.",
   hero: img(`${AA}/exterior.webp`, 1650, 2625, "The Avenue Aaryana at dusk"),
   heroPosition: "50% 45%",
   facts: [
-    { value: "3 BHK", label: "Exclusive apartments" },
-    { value: "6", label: "Floors of residences", note: "with a common terrace" },
-    { value: "3 tier", label: "Security & safety" },
-    { value: "Mumbai-Agra", label: "Highway", note: "Along it, near R.D. Circle" },
+    { value: "3 BHK & Penthouse", label: "Exclusive residences" },
+    { value: "1947 & 2912", label: "Sq.ft. Area" },
+    { value: "1 Floor 2 Flat", label: "Total privacy" },
+    { value: "Mumbai-Agra", label: "Highway", note: "Near R.D. Circle" },
   ],
   // Brochure p3, verbatim.
   story: {
@@ -800,12 +803,13 @@ const virajDetail: ProjectDetail = {
   eyebrow: viraj.locality ?? "Panchavati Annex, Nashik",
   // Brochure cover: "Discover a World of Opportunities...".
   tagline: viraj.statement,
-  subline: "Office spaces · showroom · shops · banquette hall · hospital.",
+  subline: "Showrooms · offices · shops · banquet hall · hospital.",
   hero: img(`${V}/exterior-sunset.webp`, 1292, 1726, "Viraj Avenue at sunset, from the street"),
   heroPosition: "50% 50%",
   facts: [
-    { value: "Shops", label: "Showrooms & offices" },
-    { value: "Banquet hall", label: "& hospital" },
+    { value: "407–750", label: "Sq.ft. Offices" },
+    { value: "1600 & 2750", label: "Sq.ft. Showrooms" },
+    { value: "Banquet & Hospital", label: "Facilities" },
     { value: "Mumbai-Agra", label: "Highway", note: "Opp. Bali Mandir" },
   ],
   // Brochure p2, verbatim.

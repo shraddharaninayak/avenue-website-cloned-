@@ -1,10 +1,10 @@
 import React from "react";
 
 const stats = [
-  { value: "2010", label: "Established", detail: "Rooted in Central India" },
-  { value: "15+", label: "Years of Focus", detail: "Consistent delivery track record" },
-  { value: "20+", label: "Industry Honours", detail: "National & regional accolades" },
-  { value: "1000+", label: "Happy Families", detail: "Thriving residential communities" },
+  { value: "2007", label: "Established", detail: "Leading developer in Nashik" },
+  { value: "1M+", label: "Sq.Ft Delivered", detail: "Residential, commercial & industrial" },
+  { value: "10+", label: "Years Combined", detail: "Decade of industry expertise" },
+  { value: "45+", label: "Curated Amenities", detail: "Elevated lifestyle experiences" },
 ];
 
 export default function StatsSection() {
@@ -16,7 +16,7 @@ export default function StatsSection() {
             Legacy & Milestones
           </div>
           <h2 className="text-3xl sm:text-5xl font-grotesk font-normal uppercase leading-[1.1] tracking-tight">
-            Built on decades of enterprise, and fifteen years of relentless focus.
+            Built on a decade of expertise, and over 1 Million Sq.Ft delivered.
           </h2>
         </div>
 

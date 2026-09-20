@@ -19,12 +19,12 @@ const values = [
   {
     num: "03",
     title: "Enduring Trust",
-    desc: "Ethical transparency, clear governance, and an unblemished record of timely delivery across 15+ years in Central India.",
+    desc: "Ethical transparency, clear governance, and an unblemished record of timely delivery across a decade in Nashik and Maharashtra.",
   },
   {
     num: "04",
     title: "Architectural Vision",
-    desc: "Collaborating with renowned global architects and engineers to create landmarks that forever enrich Nagpur's urban identity.",
+    desc: "Collaborating with renowned architects and engineers to create landmarks that forever enrich Nashik's urban identity.",
   },
 ];
 
@@ -40,7 +40,7 @@ export default function OurStoryPage() {
           Vision That Leads Growth
         </h1>
         <p className="font-hanken text-white/70 max-w-2xl text-lg md:text-xl mt-8 leading-relaxed">
-          Kukreja Infrastructures was founded with a singular ambition: to fulfill the aspirations of moving into homes and workplaces engineered to the highest global standards.
+          The Avenue Builders & Developers was established with a singular ambition: to fulfill the aspirations of moving into homes and workplaces engineered to world-class standards.
         </p>
       </section>
 
@@ -55,7 +55,7 @@ export default function OurStoryPage() {
               Aligning Values with Vision
             </h2>
             <p className="font-hanken text-white/70 text-base md:text-lg leading-relaxed">
-              As a prestigious and time-tested brand, Kukreja Infrastructures goes beyond exceptional square footage to create communities rich in beauty, wellbeing, and fulfillment. It is why we remain the preferred developer across Nagpur.
+              As a prestigious and trusted brand in Nashik, The Avenue goes beyond exceptional square footage to create communities rich in beauty, wellbeing, and fulfillment. It is why we remain a preferred developer in the region.
             </p>
             <blockquote className="border-l-2 border-brand-gold pl-6 font-cormorant italic text-2xl text-white/90 leading-snug">
               "We believe your home is much more than just walls—it is the foundation of your family's future."
@@ -65,7 +65,7 @@ export default function OurStoryPage() {
           <div className="relative aspect-[4/3] w-full overflow-hidden border border-white/10 bg-black">
             <Image
               src="/about/pillars-front.webp"
-              alt="Kukreja Pillars of Excellence"
+              alt="The Avenue Pillars of Excellence"
               fill
               className="object-cover"
             />
