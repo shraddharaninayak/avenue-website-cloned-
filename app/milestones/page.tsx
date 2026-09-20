@@ -60,7 +60,6 @@ export default function MilestonesPage() {
           </Link>
 
           <div className="mt-12 flex items-center gap-4">
-            <span className="h-px w-10 bg-white/30" />
             <span className="text-[10px] uppercase tracking-[0.28em] text-white/45">
               {milestoneHeadings.eyebrow}
             </span>

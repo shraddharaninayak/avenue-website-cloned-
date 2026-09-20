@@ -63,8 +63,6 @@ export default function AvenueStatement() {
         <div className="mx-auto flex h-full max-w-[1450px] flex-col justify-between px-6 pb-12 pt-16 md:px-10 md:pb-16 md:pt-20 lg:px-12">
           <div className="flex items-center justify-between gap-6 text-[10px] uppercase tracking-[0.24em] text-white/55">
             <span className="flex items-center gap-4">
-              <span className="font-grotesk text-[11px] tracking-[0.2em] text-brand-gold">05</span>
-              <span className="h-px w-10 bg-white/30" />
               <span>{company.shortName}</span>
             </span>
             <span className="hidden sm:block">

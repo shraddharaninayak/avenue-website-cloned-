@@ -18,8 +18,10 @@ import { lerp, revealClass, smoothstep, useReveal, useViewportProgress } from ".
  *
  * Composition follows the images rather than a grid: Urbania's render is the
  * widest, so it runs full width; Flora and Aura sit as an offset pair; Bliss
- * closes with its image beside its details. Images open through a mask as
- * they arrive and drift slightly within it; nothing else moves.
+ * has its image beside its details; and any project after those continues in
+ * offset pairs, each frame following the shape of its own render. Images open
+ * through a mask as they arrive and drift slightly within it; nothing else
+ * moves.
  */
 
 const firstSentence = (text: string) => {
@@ -31,12 +33,19 @@ const pad = (n: number) => String(n).padStart(2, "0");
 
 const statuses = Array.from(new Set(projects.map((p) => p.status)));
 
+/**
+ * Projects whose own render stands upright, so the frame it is shown in does
+ * too — the rest are framed wide. Only the projects past the fourth are laid
+ * out from this; the first four have their own hand-set frames below.
+ */
+const UPRIGHT = new Set(["aaryana"]);
+
 type Layout = {
   frame: string;
   image: string;
 };
 
-function ProjectImage({ project, layout, index }: { project: Project; layout: Layout; index: number }) {
+function ProjectImage({ project, layout }: { project: Project; layout: Layout }) {
   // Observed on the unclipped wrapper; the mask is on the element inside it.
   const [ref, visible] = useReveal<HTMLDivElement>(0.12);
   const imgRef = useRef<HTMLImageElement>(null);
@@ -63,15 +72,12 @@ function ProjectImage({ project, layout, index }: { project: Project; layout: La
             className={`absolute inset-x-0 -top-[5%] h-[110%] w-full max-w-none object-cover will-change-transform ${layout.image}`}
           />
         </div>
-        <span className="absolute left-4 top-4 font-grotesk text-[11px] tracking-[0.2em] text-white/85 md:left-5 md:top-5">
-          {pad(index + 1)}
-        </span>
       </div>
     </div>
   );
 }
 
-function ProjectInfo({ project, index, wide = false }: { project: Project; index: number; wide?: boolean }) {
+function ProjectInfo({ project, wide = false }: { project: Project; wide?: boolean }) {
   const [ref, visible] = useReveal<HTMLDivElement>(0.2);
   const facts = [project.configuration, project.locality].filter(Boolean) as string[];
 
@@ -82,8 +88,6 @@ function ProjectInfo({ project, index, wide = false }: { project: Project; index
     >
       <div className={wide ? "lg:col-span-5" : ""}>
         <p className="flex items-center gap-3 text-[10px] uppercase tracking-[0.24em] text-white/45">
-          <span className="text-brand-gold">{pad(index + 1)}</span>
-          <span className="h-px w-6 bg-white/25" />
           {project.category} · {project.status}
         </p>
         <h3 id={`project-${project.slug}`} className="mt-4 font-serif text-[clamp(40px,4.4vw,68px)] font-light leading-[0.96] tracking-[-0.045em]">
@@ -145,6 +149,14 @@ export default function AvenueProjects() {
   });
 
   const [first, second, third, fourth] = projects;
+  // Any project beyond the first four continues the same rhythm: offset pairs,
+  // each frame following the shape of that project's own render.
+  const rest = projects.slice(4);
+  const pairs = rest.reduce<Project[][]>((acc, project, i) => {
+    if (i % 2 === 0) acc.push([project]);
+    else acc[acc.length - 1].push(project);
+    return acc;
+  }, []);
 
   return (
     <section id="projects" aria-labelledby="projects-title" className="scroll-mt-24 bg-[#f3f0eb]">
@@ -158,8 +170,6 @@ export default function AvenueProjects() {
           <div ref={headRef} className={`grid gap-y-6 lg:grid-cols-12 lg:items-end ${revealClass(headIn)}`}>
             <div className="lg:col-span-8">
               <div className="mb-8 flex items-center gap-4 md:mb-10">
-                <span className="font-grotesk text-[11px] tracking-[0.2em] text-brand-gold">07</span>
-                <span className="h-px w-10 bg-white/30" />
                 <span className="text-[10px] uppercase tracking-[0.28em] text-white/50">Projects</span>
               </div>
               <h2
@@ -184,9 +194,9 @@ export default function AvenueProjects() {
             {/* 01 — full width */}
             {first ? (
               <article aria-labelledby={`project-${first.slug}`}>
-                <ProjectImage project={first} index={0} layout={{ frame: "aspect-[16/9] md:aspect-[16/7]", image: "object-[38%_50%]" }} />
+                <ProjectImage project={first} layout={{ frame: "aspect-[16/9] md:aspect-[16/7]", image: "object-[38%_50%]" }} />
                 <div className="mt-8 md:mt-10">
-                  <ProjectInfo project={first} index={0} wide />
+                  <ProjectInfo project={first} wide />
                 </div>
               </article>
             ) : null}
@@ -196,17 +206,17 @@ export default function AvenueProjects() {
               <div className="grid gap-y-24 md:grid-cols-12 md:gap-x-8 lg:gap-x-12">
                 {second ? (
                   <article className="md:col-span-6" aria-labelledby={`project-${second.slug}`}>
-                    <ProjectImage project={second} index={1} layout={{ frame: "aspect-[3/2]", image: "object-[30%_50%]" }} />
+                    <ProjectImage project={second} layout={{ frame: "aspect-[3/2]", image: "object-[30%_50%]" }} />
                     <div className="mt-8">
-                      <ProjectInfo project={second} index={1} />
+                      <ProjectInfo project={second} />
                     </div>
                   </article>
                 ) : null}
                 {third ? (
                   <article className="md:col-span-5 md:col-start-8 md:mt-40" aria-labelledby={`project-${third.slug}`}>
-                    <ProjectImage project={third} index={2} layout={{ frame: "aspect-[4/5]", image: "object-[50%_62%]" }} />
+                    <ProjectImage project={third} layout={{ frame: "aspect-[4/5]", image: "object-[50%_62%]" }} />
                     <div className="mt-8">
-                      <ProjectInfo project={third} index={2} />
+                      <ProjectInfo project={third} />
                     </div>
                   </article>
                 ) : null}
@@ -217,13 +227,40 @@ export default function AvenueProjects() {
             {fourth ? (
               <article className="grid gap-y-8 md:grid-cols-12 md:items-center md:gap-x-8 lg:gap-x-12" aria-labelledby={`project-${fourth.slug}`}>
                 <div className="md:col-span-5 lg:col-span-4 lg:col-start-2">
-                  <ProjectImage project={fourth} index={3} layout={{ frame: "aspect-square", image: "object-[50%_40%]" }} />
+                  <ProjectImage project={fourth} layout={{ frame: "aspect-square", image: "object-[50%_40%]" }} />
                 </div>
                 <div className="md:col-span-7 lg:col-span-5 lg:col-start-7">
-                  <ProjectInfo project={fourth} index={3} />
+                  <ProjectInfo project={fourth} />
                 </div>
               </article>
             ) : null}
+
+            {/* 05 onward — the offset pair again, for as many as there are */}
+            {pairs.map((pair, p) => (
+              <div key={pair[0].slug} className="grid gap-y-24 md:grid-cols-12 md:gap-x-8 lg:gap-x-12">
+                {pair.map((project, i) => {
+                  const upright = UPRIGHT.has(project.slug);
+                  return (
+                    <article
+                      key={project.slug}
+                      className={i === 0 ? "md:col-span-6" : "md:col-span-5 md:col-start-8 md:mt-40"}
+                      aria-labelledby={`project-${project.slug}`}
+                    >
+                      <ProjectImage
+                        project={project}
+                        layout={{
+                          frame: upright ? "aspect-[4/5]" : "aspect-[3/2]",
+                          image: upright ? "object-[50%_45%]" : "object-center",
+                        }}
+                      />
+                      <div className="mt-8">
+                        <ProjectInfo project={project} />
+                      </div>
+                    </article>
+                  );
+                })}
+              </div>
+            ))}
           </div>
         </div>
       </div>

@@ -61,7 +61,6 @@ function ClassicLeadership() {
           }}
         >
           <div className="mb-8 flex items-center gap-4">
-            <span className="h-px w-10 bg-white/30" />
             <span className="text-[10px] uppercase tracking-[0.28em] text-white/45">
               Leadership
             </span>
@@ -181,8 +180,6 @@ function EditorialLeadership() {
           <div ref={headRef} className={`lg:col-span-4 ${revealClass(headIn)}`}>
             <div>
               <div className="mb-8 flex items-center gap-4 md:mb-10">
-                <span className="font-grotesk text-[11px] tracking-[0.2em] text-brand-gold">04</span>
-                <span className="h-px w-10 bg-white/30" />
                 <span className="text-[10px] uppercase tracking-[0.28em] text-white/50">Leadership</span>
               </div>
               <h2

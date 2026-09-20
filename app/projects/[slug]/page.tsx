@@ -5,9 +5,10 @@ import { getProjectDetail, projectDetails } from "@/data/projectDetails";
 
 /**
  * /projects/milestone · /projects/urbania · /projects/flora · /projects/aura ·
- * /projects/bliss — one route and one component for every project; the
- * content comes from data/projectDetails.ts. Pages are built at build time,
- * and any other slug is a 404.
+ * /projects/bliss · /projects/aaryana · /projects/viraj-avenue — one route and
+ * one component for every project; the content comes from
+ * data/projectDetails.ts. Pages are built at build time, and any other slug is
+ * a 404.
  */
 
 type Params = { params: { slug: string } };

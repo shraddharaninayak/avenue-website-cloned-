@@ -4,7 +4,7 @@ import { useEffect, useRef } from "react";
 import Link from "next/link";
 import { ArrowRight, ChevronDown } from "lucide-react";
 import { company } from "@/data/avenue";
-import { clamp01, easeOut, prefersReducedMotion, smoothstep, span } from "./motion";
+import { clamp01, prefersReducedMotion, smoothstep, span } from "./motion";
 import { createClouds } from "./hero-clouds";
 
 /**
@@ -30,8 +30,9 @@ import { createClouds } from "./hero-clouds";
  * the upper stage, feathered into a soft, live wash of the film itself, and
  * it draws in a little as the camera approaches.
  *
- * After the clouds, the brand line rises on a veil as before, and the panel
- * lifts away on rounded corners, uncovering the page beneath.
+ * After the clouds, the invitation — a line about The Avenue, and the two
+ * ways on — rises on a veil, and the panel lifts away on rounded corners,
+ * uncovering the page beneath.
  */
 
 const VIDEO_SRC = "/avenue-intro.mp4.mp4";
@@ -58,8 +59,11 @@ const FILM_ASPECT = 16 / 9;
 const BOTH_TOWERS_FIT = 0.7;
 /** In the band, the share of the film's width on screen — both towers (14–83% of the frame), with room either side. */
 const BAND_SHARE = 0.8;
-/** The band's centre, as a share of the stage's height: above the brand line. */
-const BAND_CENTRE = 0.36;
+/**
+ * The band's centre, as a share of the stage's height: the film and the
+ * invitation below it sit centred on the stage between them.
+ */
+const BAND_CENTRE = 0.42;
 /** How far the band draws in as the camera approaches the towers. */
 const APPROACH = 0.12;
 /** Feathers the band into the wash around it. */
@@ -75,7 +79,6 @@ export default function AvenueHero() {
   const cloudRef = useRef<HTMLCanvasElement>(null);
   const hazeRef = useRef<HTMLDivElement>(null);
   const veilRef = useRef<HTMLDivElement>(null);
-  const lineRefs = useRef<(HTMLSpanElement | null)[]>([]);
   const detailRef = useRef<HTMLDivElement>(null);
   const cueRef = useRef<HTMLDivElement>(null);
 
@@ -260,13 +263,7 @@ export default function AvenueHero() {
       const veil = smoothstep(0.5, 0.76, p);
       if (veilRef.current) veilRef.current.style.opacity = veil.toFixed(3);
 
-      lineRefs.current.forEach((line, k) => {
-        if (!line) return;
-        const rise = easeOut(span(0.56 + k * 0.045, 0.72 + k * 0.045, p));
-        line.style.transform = `translate3d(0, ${((1 - rise) * 110).toFixed(2)}%, 0)`;
-      });
-
-      const detail = span(0.7, 0.82, p);
+      const detail = span(0.62, 0.76, p);
       if (detailRef.current) {
         detailRef.current.style.opacity = detail.toFixed(3);
         detailRef.current.style.transform = `translate3d(0, ${((1 - detail) * 16).toFixed(1)}px, 0)`;
@@ -471,7 +468,7 @@ export default function AvenueHero() {
           className="pointer-events-none absolute inset-x-0 top-0 h-36 bg-gradient-to-b from-black/35 to-transparent"
         />
 
-        {/* The veil the brand line rises into. */}
+        {/* The veil the invitation rises into. */}
         <div
           ref={veilRef}
           aria-hidden="true"
@@ -482,11 +479,12 @@ export default function AvenueHero() {
         {/* Kept clear of a phone's browser bars: 100lvh − 100svh is their
             height where they overlay the page, and 0 everywhere else. */}
         <div className="absolute inset-x-0 bottom-0 px-6 pb-[12vh] text-center supports-[height:100svh]:pb-[calc(100lvh-100svh+10vh)] md:px-10 md:pb-[13vh] md:supports-[height:100svh]:pb-[13vh]">
-          
+          {/* The film carries the brand line; the page keeps a heading of its own. */}
+          <h1 className="sr-only">{company.name}</h1>
 
           <div
             ref={detailRef}
-            className="mx-auto mt-7 max-w-[640px] md:mt-8"
+            className="mx-auto max-w-[640px]"
             style={{ opacity: 0, visibility: "hidden" }}
           >
             <p className="font-hanken text-[14px] leading-[1.7] text-white/80 md:text-[15px]">

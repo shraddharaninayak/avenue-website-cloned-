@@ -78,8 +78,6 @@ export default function AvenueCTA() {
         <div className="mx-auto flex min-h-[clamp(600px,92vh,880px)] max-w-[1450px] flex-col justify-between px-6 pb-16 pt-16 md:px-10 md:pb-20 md:pt-20 lg:px-12">
           <div className="flex items-center justify-between gap-6 text-[10px] uppercase tracking-[0.24em] text-white/60">
             <span className="flex items-center gap-4">
-              <span className="font-grotesk text-[11px] tracking-[0.2em] text-brand-gold">09</span>
-              <span className="h-px w-10 bg-white/30" />
               <span>Begin your journey</span>
             </span>
             <span className="hidden sm:block">The Avenue Milestone · Entrance</span>

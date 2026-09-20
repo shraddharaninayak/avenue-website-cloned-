@@ -18,6 +18,11 @@
  *                    Booklet - (Sept'23)"                              7 pp
  *    · the "Our ongoing project" page those brochures share (Urbania's
  *      configuration and locality)
+ *    · Urbania's own page on the official site, tabd.in/urbania/ — its words,
+ *      renders, unit plans and location map
+ *    · two further brochures supplied by The Avenue:
+ *        Aaryana       "The Avenue - Aaryana Brochure"                11 pp
+ *        Viraj Avenue  "Viraj Avenue Brochure"                         7 pp
  *
  *  Brochure copy is quoted as printed, apart from obvious typos ("Viewing
  *  Desk" → "Viewing Deck"). Images are the brochures' own renders and pages,
@@ -104,6 +109,8 @@ const urbania = req("urbania");
 const flora = req("flora");
 const aura = req("aura");
 const bliss = req("bliss");
+const aaryana = req("aaryana");
+const viraj = req("viraj-avenue");
 
 const PROJECT_PHONE = { phone: "+91 72779 95566", phoneHref: "tel:+917277995566" };
 
@@ -248,8 +255,10 @@ const milestone: ProjectDetail = {
 };
 
 /* -------------------------------------------------------------------------- */
-/*  URBANIA — no brochure supplied; data/avenue.ts only                       */
+/*  URBANIA — from its own page on the official site                          */
 /* -------------------------------------------------------------------------- */
+
+const U = "/projects/urbania";
 
 const urbaniaDetail: ProjectDetail = {
   slug: "urbania",
@@ -260,8 +269,9 @@ const urbaniaDetail: ProjectDetail = {
   // Ultra Spacious Homes — Karmayogi Nagar, Nashik".
   eyebrow: "Karmayogi Nagar, Nashik",
   tagline: urbania.statement,
-  subline: "3 & 4 BHK ultra spacious homes.",
-  hero: img("/projects/urbania/hero.webp", 1600, 700, "The Avenue Urbania at dusk, from above"),
+  // The Urbania page's own banner: "3 & 4 BHK URBAN LIVING".
+  subline: "3 & 4 BHK urban living.",
+  hero: img(`${U}/exterior.webp`, 1600, 1750, "The Avenue Urbania — the towers from the street"),
   heroPosition: "50% 40%",
   facts: [
     { value: urbania.configuration, label: "Residences" },
@@ -270,15 +280,97 @@ const urbaniaDetail: ProjectDetail = {
     { value: "2", label: "Apartments per floor" },
     { value: "10 ft 6 in", label: "Floor height", note: "Approximately" },
   ],
-  story: { heading: urbania.statement, paragraphs: [urbania.description], source: "From the Urbania page" },
-  gallery: [],
+  // The Urbania page, verbatim.
+  story: {
+    heading: urbania.statement,
+    paragraphs: [
+      urbania.description,
+      "You can call it a revolution in high-end living and it's going to take your 'joy of living' quotient to a new height.",
+      "Here is your truly a once in a lifestyle opportunity to own a home that has all the ingredients for a perfect life.",
+    ],
+    source: "From the Urbania page",
+  },
+  gallery: [
+    img(`${U}/entrance.webp`, 1360, 816, "The gated entrance to The Avenue Urbania at sunset", "The entrance"),
+    img(`${U}/podium-garden.webp`, 1600, 1114, "The landscaped garden and pavilion on the Urbania podium", "The garden"),
+    img(`${U}/open-air-theatre.webp`, 1600, 1223, "The open air theatre on the Urbania terrace, in the evening", "The open air theatre"),
+    img(`${U}/infinity-pool.webp`, 1600, 971, "The infinity swimming pool on the Urbania terrace, above the city", "The infinity pool"),
+    img(`${U}/podium-aerial.webp`, 1600, 1108, "The play courts and gardens on the Urbania podium, from above", "The podium, from above"),
+  ],
+  // The Urbania page's four tiers, in its own words.
   amenities: {
-    heading: `${urbania.amenities.length} amenities.`,
+    heading: "Four tiers of celebrity-like lifestyle.",
+    intro: "The delights of rejuvenation, calling to you.",
     source: "From the Urbania page",
     frame: "rect",
-    featured: [],
-    groups: [{ title: "Amenities", items: urbania.amenities }],
+    featured: [
+      { title: "Indoor Gym", image: img(`${U}/gym.webp`, 1600, 974, "The gym at Urbania, looking out over the city") },
+      { title: "Multi Purpose Hall", image: img(`${U}/banquet-hall.webp`, 1472, 906, "The multi purpose hall at Urbania, laid out for a gathering") },
+      { title: "Indoor Game", image: img(`${U}/games-room.webp`, 1478, 753, "The indoor games room at Urbania, with pool and darts") },
+      { title: "Yoga Aerobics Lawn", image: img(`${U}/yoga-lawn.webp`, 1600, 971, "The yoga and aerobics lawn on the Urbania terrace") },
+    ],
+    groups: [
+      {
+        title: "Tier I — Residences (Living)",
+        items: [
+          "3 & 4 BHK sky lifestyle with world-class embellishments",
+          "72 luxurious residences",
+          "Per floor 2 apartment",
+          "2 sky-scaling towers of 20",
+          "Around 10'6\" floor height",
+        ],
+      },
+      {
+        title: "Tier II — Ground (Kids & community living)",
+        items: [
+          "Designer landscaped garden",
+          "Outdoor children park with rubberized flooring",
+          "Senior citizens park with aroma therapy garden",
+          "Grand entrance foyer",
+        ],
+      },
+      {
+        title: "Tier III — Recreational (Social, sports)",
+        items: [
+          "Indoor gym",
+          "Jogging track",
+          "Seating arrangement",
+          "Multi purpose hall",
+          "Indoor game",
+          "Outdoor game",
+        ],
+      },
+      {
+        title: "Tier IV — Terrace (Indulge, relax)",
+        items: [
+          "Spectacular infinity swimming pool for adults & kid's",
+          "Spacious yoga aerobics lawn",
+          "Community garden",
+          "Open air theatre",
+        ],
+      },
+    ],
   },
+  location: {
+    address: "Karmayogi Nagar, Nashik",
+    image: img(`${U}/location-map.webp`, 1600, 1614, "Location map of The Avenue Urbania, from the Urbania page"),
+    kind: "map",
+    connectivity: urbania.features.filter((f) => /minutes/i.test(f)),
+    source: "Map and connectivity from the Urbania page",
+  },
+  plans: {
+    primary: 0,
+    items: [
+      { title: "4 BHK Unit Plan · Tower A · Type 1", image: img(`${U}/plan-4bhk-tower-a-type-1.webp`, 1600, 2329, "Urbania — 4 BHK unit plan, Tower A, Type 1") },
+      { title: "4 BHK Unit Plan · Tower A · Type 2", image: img(`${U}/plan-4bhk-tower-a-type-2.webp`, 1600, 2400, "Urbania — 4 BHK unit plan, Tower A, Type 2") },
+      { title: "3 BHK Unit Plan · Tower B · Type 1", image: img(`${U}/plan-3bhk-tower-b-type-1.webp`, 1600, 2329, "Urbania — 3 BHK unit plan, Tower B, Type 1") },
+      { title: "3 BHK Unit Plan · Tower B · Type 2", image: img(`${U}/plan-3bhk-tower-b-type-2.webp`, 1600, 2383, "Urbania — 3 BHK unit plan, Tower B, Type 2") },
+      { title: "6 BHK Unit Plan · Tower A", image: img(`${U}/plan-6bhk-tower-a.webp`, 1600, 525, "Urbania — 6 BHK unit plan, Tower A") },
+      { title: "5 BHK Unit Plan · Tower B", image: img(`${U}/plan-5bhk-tower-b.webp`, 1600, 560, "Urbania — 5 BHK unit plan, Tower B") },
+    ],
+    source: "From the Urbania page",
+  },
+  // The Urbania page publishes no phone of its own.
   enquiry: { phone: company.phone, phoneHref: company.phoneHref },
 };
 
@@ -526,9 +618,264 @@ const blissDetail: ProjectDetail = {
 };
 
 /* -------------------------------------------------------------------------- */
+/*  AARYANA                                                                   */
+/* -------------------------------------------------------------------------- */
+
+const AA = "/projects/aaryana";
+const aaryanaPlan = (file: string, title: string, w = 1650, h = 2625) => ({
+  title,
+  image: img(`${AA}/plan-${file}.webp`, w, h, `Aaryana — ${title}`),
+});
+
+const aaryanaDetail: ProjectDetail = {
+  slug: "aaryana",
+  name: aaryana.name,
+  fullName: `The Avenue ${aaryana.name}`,
+  category: aaryana.category,
+  eyebrow: aaryana.locality ?? "Karmayogi Nagar, Nashik",
+  // Brochure cover: "Modern Luxury..." · "EXCLUSIVE 3 BHK APARTMENT".
+  tagline: aaryana.statement,
+  subline: "Exclusive 3 BHK apartments.",
+  hero: img(`${AA}/exterior.webp`, 1650, 2625, "The Avenue Aaryana at dusk"),
+  heroPosition: "50% 45%",
+  facts: [
+    { value: "3 BHK", label: "Exclusive apartments" },
+    { value: "6", label: "Floors of residences", note: "with a common terrace" },
+    { value: "3 tier", label: "Security & safety" },
+    { value: "Mumbai-Agra", label: "Highway", note: "Along it, near R.D. Circle" },
+  ],
+  // Brochure p3, verbatim.
+  story: {
+    heading: "A residence is the canvas for life's most cherished moments.",
+    paragraphs: [
+      "A residence serves as the canvas for life's most cherished moments, a sanctuary where memories blossom and endure. It evolves into a haven where you nurture invaluable recollections, cultivating a tapestry of experiences to be treasured for a lifetime. Over time, it transforms into a resplendent abode that encapsulates the essence of your dreams.",
+      "Introducing The Avenue AARYANA, an epitome of opulence, a Premium Edition 3 BHK Class home meticulously crafted with precision, employing cutting-edge technology, and featuring intelligently designed spaces. This residence is not just a dwelling; it's an embodiment of a refined lifestyle that transcends expectations.",
+      "Nestled conveniently along the Mumbai-Agra Highway, The Avenue AARYANA boasts seamless connectivity, offering accessibility that effortlessly intertwines with the rhythm of your daily life. Its proximity to the city's premier shopping destination ensures a vibrant and colorful lifestyle, enhancing your living experience within this grand estate.",
+      "Discover the extraordinary in every corner of The Avenue AARYANA, where your heart finds its truest home, and where each passing moment becomes a testament to a life well-lived.",
+    ],
+    source: "From the Aaryana brochure",
+  },
+  // The brochure's only other view of the home is its isometric drawing, which
+  // is shown with the plans, at its own shape.
+  gallery: [],
+  // Brochure p9: "Features", "Amenities" and "3 Tier Security & Safety".
+  amenities: {
+    heading: "Everything the building carries.",
+    source: "From the Aaryana brochure",
+    frame: "rect",
+    featured: [],
+    groups: [
+      {
+        title: "Features",
+        items: [
+          "Well designed, Luxurious entrance lobby and waiting area",
+          "High speed Branded Elevator with auto door and S.S. Cabin",
+          "Allotted parking with chequered tiles / trimix flooring / paver block",
+          "Post Box facility in entrance lobby for each apartment owner",
+          "Name Plate on main door",
+        ],
+      },
+      {
+        title: "Amenities",
+        items: [
+          "Seismic Resistant RCC Structure",
+          "Walls in Red Bricks Masonry in 6\" thick for Outer Walls & 4\" thick for Inner Walls",
+          "Plaster in Sand face Double Coat for outer surfaces and Gypsum with baking coat for internal surfaces",
+          "Paintworld in Asian Apex for external surfaces and Tractor Emulsion for internal surfaces",
+          "Municipal Water Facility",
+          "Light Arrester provision",
+        ],
+      },
+      {
+        title: "3 Tier Security & Safety",
+        items: [
+          "Power back-up for lift & common area",
+          "Security system 24x7, security cabin",
+          "C. C. T. V.",
+          "Video door phone",
+          "Compound Wall with secured Gates",
+        ],
+      },
+    ],
+  },
+  location: {
+    // Brochure p11: "Site : Karmayogi Nagar, Near R.D. Circle, Nasik."
+    address: "Karmayogi Nagar, Near R.D. Circle, Nashik.",
+    image: img(`${AA}/location-map.webp`, 1320, 1234, "Location map of The Avenue Aaryana, from the brochure"),
+    kind: "map",
+    connectivity: aaryana.features.filter((f) => !/^Exclusive|^Six floors/.test(f)),
+    source: "Map and site address from the Aaryana brochure",
+  },
+  // Brochure p4–p8; titles as printed.
+  plans: {
+    primary: 1,
+    items: [
+      aaryanaPlan("ground-floor", "Ground Floor Plan", 1650, 2624),
+      aaryanaPlan("first-second-fourth-fifth-floor", "1st, 2nd, 4th, 5th Floor Plan"),
+      aaryanaPlan("third-sixth-floor", "3rd & 6th Floor Plan"),
+      aaryanaPlan("terrace-floor", "Terrace Floor", 1687, 2625),
+      { title: "Isometric View", image: img(`${AA}/isometric.webp`, 990, 1208, "Aaryana — an isometric view of the 3 BHK home") },
+    ],
+    source: "From the Aaryana brochure",
+  },
+  // Brochure p9, the rest of the configuration page.
+  specifications: {
+    heading: "The configuration.",
+    groups: [
+      {
+        title: "Toilets",
+        items: [
+          "Ceramic tile dado up to lintel level in heights",
+          "Marble / Granite stone fascia for door openings",
+          "Wash basins with marble / granite counter or with pedestal",
+          "Grohe / Jaquar / Kohler or equivalent quality CP fittings",
+          "Concealed Flush Tank with Wall hung W.C.'s",
+        ],
+      },
+      {
+        title: "Flooring",
+        items: [
+          "Vitrified flooring with skirting [800mm x 800mm]",
+          "Ceramic Anti-skid Wooden Flooring for Terraces & Sun-decks",
+          "Ceramic Glazed tiles for cladding [300mm x 600mm]",
+          "Anti-skid tiles for bathrooms & Utility",
+        ],
+      },
+      {
+        title: "Kitchen",
+        items: [
+          "Kitchen platform with granite top and S. S. Sink",
+          "Ceramic tile dado up to lintel level in height above the platform",
+          "Provision for fixing of water purifier",
+        ],
+      },
+      {
+        title: "Electrification",
+        items: [
+          "Concealed fire resistant, high quality Polycab / Finolex copper wiring",
+          "Ample light points with 'Legrand' or equivalent modular switches",
+          "TV & Telephone point in living & master bed room",
+          "Geyser point will be provided in bathrooms",
+        ],
+      },
+      {
+        title: "Doors & Windows",
+        items: [
+          "Designer Main door with Europa Lock",
+          "Bedroom door frames and shutters in plywood with both side laminate",
+          "All bedrooms with Premium quality Cylindrical Locks",
+          "Three track Anodised Aluminium Sliding Windows with Insect Net and Safety Grill",
+        ],
+      },
+    ],
+  },
+  brochure: {
+    href: "/brochures/the-avenue-aaryana-brochure.pdf",
+    fileName: "The Avenue Aaryana — Brochure.pdf",
+    pages: 11,
+    sizeMb: 24.5,
+    edition: "E-Brochure",
+    cover: img(`${AA}/brochure-cover-page.webp`, 900, 1424, "The cover of the Aaryana brochure"),
+  },
+  enquiry: aaryana.contact
+    ? { phone: aaryana.contact, phoneHref: `tel:${aaryana.contact.replace(/\s+/g, "")}` }
+    : PROJECT_PHONE,
+  // Brochure p11, verbatim.
+  disclaimer:
+    "The contents of this brochure are purely conceptual and have no legal bindings on us. Developers reserve the right of amend the layout plans, number of floors & units, elevation, colour scheme, specifications and amenities etc. without notice.",
+};
+
+/* -------------------------------------------------------------------------- */
+/*  VIRAJ AVENUE                                                              */
+/* -------------------------------------------------------------------------- */
+
+const V = "/projects/viraj-avenue";
+
+const virajDetail: ProjectDetail = {
+  slug: "viraj-avenue",
+  name: viraj.name,
+  // Co-branded with Viraj Estates, so it carries its own name.
+  fullName: viraj.name,
+  category: viraj.category,
+  eyebrow: viraj.locality ?? "Panchavati Annex, Nashik",
+  // Brochure cover: "Discover a World of Opportunities...".
+  tagline: viraj.statement,
+  subline: "Office spaces · showroom · shops · banquette hall · hospital.",
+  hero: img(`${V}/exterior-sunset.webp`, 1292, 1726, "Viraj Avenue at sunset, from the street"),
+  heroPosition: "50% 50%",
+  facts: [
+    { value: "Shops", label: "Showrooms & offices" },
+    { value: "Banquet hall", label: "& hospital" },
+    { value: "Mumbai-Agra", label: "Highway", note: "Opp. Bali Mandir" },
+  ],
+  // Brochure p2, verbatim.
+  story: {
+    heading: "Welcome to Viraj Avenue.",
+    paragraphs: [
+      "Viraj Avenue is an upcoming landmark in Nashik, offering a blend of Modern Office Spaces, Showrooms, Shops, a Banquet Hall, and a Hospital.",
+      "Strategically located opposite Bali Mandir, Panchavati Annex. This project is designed to cater to a variety of commercial needs with state-of-the-art amenities and facilities.",
+    ],
+    source: "From the Viraj Avenue brochure",
+  },
+  gallery: [
+    img(`${V}/exterior.webp`, 2550, 1726, "Viraj Avenue — the shopfronts and offices along the highway", "The frontage"),
+  ],
+  amenities: {
+    heading: "Amenities.",
+    source: "From the Viraj Avenue brochure",
+    frame: "rect",
+    featured: [],
+    groups: [{ title: "At Viraj Avenue", items: viraj.amenities }],
+  },
+  location: {
+    // Brochure p7, "SITE".
+    address: "Viraj Avenue, Opp. Bali Mandir, Panchavati Annex, Nashik.",
+    image: img(`${V}/location-map.webp`, 3457, 1188, "Location map of Viraj Avenue, from the brochure"),
+    kind: "map",
+    connectivity: [
+      "On the Mumbai-Agra Highway",
+      "Opposite Bali Mandir, Panchavati Annex",
+      "Between Adgaon Naka and Dhatrak Phata",
+    ],
+    source: "Map and site address from the Viraj Avenue brochure",
+  },
+  // Brochure p3–p5; titles as printed.
+  plans: {
+    primary: 0,
+    items: [
+      { title: "Ground Floor Plan", image: img(`${V}/plan-ground-floor.webp`, 2550, 1725, "Viraj Avenue — Ground Floor Plan") },
+      { title: "First Floor Plan", image: img(`${V}/plan-first-floor.webp`, 2550, 1725, "Viraj Avenue — First Floor Plan") },
+      { title: "Typical 2nd to 3rd Floor Plan", image: img(`${V}/plan-second-to-third-floor.webp`, 2550, 1725, "Viraj Avenue — Typical 2nd to 3rd Floor Plan") },
+    ],
+    source: "From the Viraj Avenue brochure",
+  },
+  brochure: {
+    href: "/brochures/viraj-avenue-brochure.pdf",
+    fileName: "Viraj Avenue — Brochure.pdf",
+    pages: 7,
+    sizeMb: 14.2,
+    edition: "E-Brochure",
+    cover: img(`${V}/brochure-cover-page.webp`, 1200, 816, "The cover of the Viraj Avenue brochure"),
+  },
+  // Brochure p7: "For more information click : 72 77 99 55 66".
+  enquiry: PROJECT_PHONE,
+  // Brochure p7, verbatim.
+  disclaimer:
+    "The contents of this brochure are purely conceptual and have no legal bindings on us. Developers reserve the right of amend the layout plans, number of floors & units, elevation, colour scheme, specifications and amenities etc. without notice.",
+};
+
+/* -------------------------------------------------------------------------- */
 
 /** Flagship first, then the order of the homepage's Projects section. */
-export const projectDetails: ProjectDetail[] = [milestone, urbaniaDetail, floraDetail, auraDetail, blissDetail];
+export const projectDetails: ProjectDetail[] = [
+  milestone,
+  urbaniaDetail,
+  floraDetail,
+  auraDetail,
+  blissDetail,
+  aaryanaDetail,
+  virajDetail,
+];
 
 export const getProjectDetail = (slug: string) => projectDetails.find((p) => p.slug === slug) ?? null;
 

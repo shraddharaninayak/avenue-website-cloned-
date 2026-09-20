@@ -183,8 +183,6 @@ export default function AvenueCapabilities() {
         <div ref={headRef} className={`grid gap-y-6 lg:grid-cols-12 lg:items-end ${revealClass(headIn)}`}>
           <div className="lg:col-span-8">
             <div className="mb-8 flex items-center gap-4 md:mb-10">
-              <span className="font-grotesk text-[11px] tracking-[0.2em] text-brand-bronze">06</span>
-              <span className="h-px w-10 bg-black/35" />
               <span className="text-[10px] uppercase tracking-[0.28em] text-black/55">Capabilities</span>
             </div>
             <h2

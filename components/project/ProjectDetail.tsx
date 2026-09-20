@@ -83,21 +83,9 @@ function Wash({ media, position }: { media: Media; position?: string }) {
   );
 }
 
-function SectionLabel({
-  index,
-  label,
-  dark = true,
-}: {
-  index: number;
-  label: string;
-  dark?: boolean;
-}) {
+function SectionLabel({ label, dark = true }: { label: string; dark?: boolean }) {
   return (
     <div className="mb-8 flex items-center gap-4 md:mb-10">
-      <span className="font-grotesk text-[11px] tracking-[0.2em] text-brand-gold">
-        {pad(index)}
-      </span>
-      <span className={`h-px w-10 ${dark ? "bg-white/30" : "bg-black/30"}`} />
       <span
         className={`text-[10px] uppercase tracking-[0.28em] ${dark ? "text-white/50" : "text-black/55"}`}
       >
@@ -375,7 +363,7 @@ function Hero({ project }: { project: Detail }) {
  *  OVERVIEW — the story and the facts, on a panel rising over the hero
  * ========================================================================== */
 
-function Overview({ project, index }: { project: Detail; index: number }) {
+function Overview({ project }: { project: Detail }) {
   const [lead, ...rest] = project.story.paragraphs;
   return (
     <section
@@ -386,7 +374,7 @@ function Overview({ project, index }: { project: Detail; index: number }) {
       <div className="mx-auto max-w-[1450px] px-6 pb-24 pt-20 md:px-10 md:pb-28 md:pt-24 lg:px-12">
         <div className="grid gap-y-16 lg:grid-cols-12 lg:gap-x-12">
           <Reveal className="lg:col-span-6">
-            <SectionLabel index={index} label="Overview" />
+            <SectionLabel label="Overview" />
             <h2
               id="overview-title"
               className="font-serif text-[clamp(38px,4.6vw,72px)] font-light leading-[0.98] tracking-[-0.045em]"
@@ -455,11 +443,9 @@ function Overview({ project, index }: { project: Detail; index: number }) {
 
 function ImageStory({
   project,
-  index,
   onOpen,
 }: {
   project: Detail;
-  index: number;
   onOpen: (i: number) => void;
 }) {
   // full, pair, full, pair … in the order the data lists the images
@@ -493,7 +479,7 @@ function ImageStory({
       <div className="mx-auto max-w-[1450px] px-6 pb-24 pt-24 md:px-10 md:pb-32 md:pt-28 lg:px-12">
         <Reveal className="grid gap-y-6 lg:grid-cols-12 lg:items-end">
           <div className="lg:col-span-8">
-            <SectionLabel index={index} label="Images" />
+            <SectionLabel label="Images" />
             <h2
               id="gallery-title"
               className="font-serif text-[clamp(38px,4.6vw,72px)] font-light leading-[0.98] tracking-[-0.045em]"
@@ -552,7 +538,7 @@ function ImageStory({
  *  AMENITIES
  * ========================================================================== */
 
-function Amenities({ project, index }: { project: Detail; index: number }) {
+function Amenities({ project }: { project: Detail }) {
   const a = project.amenities!;
   const arch = a.frame === "arch";
   const single = a.featured.length === 1;
@@ -602,7 +588,7 @@ function Amenities({ project, index }: { project: Detail; index: number }) {
       <div className="mx-auto max-w-[1450px] px-6 pb-24 pt-24 md:px-10 md:pb-32 md:pt-28 lg:px-12">
         <Reveal className="grid gap-y-6 lg:grid-cols-12 lg:items-end">
           <div className="lg:col-span-7">
-            <SectionLabel index={index} label="Amenities" />
+            <SectionLabel label="Amenities" />
             <h2
               id="amenities-title"
               className="font-serif text-[clamp(38px,4.6vw,72px)] font-light leading-[0.98] tracking-[-0.045em]"
@@ -689,11 +675,9 @@ function Amenities({ project, index }: { project: Detail; index: number }) {
 
 function Location({
   project,
-  index,
   onOpen,
 }: {
   project: Detail;
-  index: number;
   onOpen: () => void;
 }) {
   const l = project.location!;
@@ -748,7 +732,7 @@ function Location({
             }
             delay="delay-150"
           >
-            <SectionLabel index={index} label="Location" />
+            <SectionLabel label="Location" />
             <h2
               id="location-title"
               className="font-serif text-[clamp(36px,4vw,60px)] font-light leading-[1] tracking-[-0.045em]"
@@ -808,11 +792,9 @@ function Location({
 
 function Plans({
   project,
-  index,
   onOpen,
 }: {
   project: Detail;
-  index: number;
   onOpen: (i: number) => void;
 }) {
   const plans = project.plans!;
@@ -828,7 +810,7 @@ function Plans({
       <div className="mx-auto max-w-[1450px] px-6 pb-24 pt-24 md:px-10 md:pb-32 md:pt-28 lg:px-12">
         <Reveal className="grid gap-y-6 lg:grid-cols-12 lg:items-end">
           <div className="lg:col-span-8">
-            <SectionLabel index={index} label="Floor plans" />
+            <SectionLabel label="Floor plans" />
             <h2
               id="plans-title"
               className="font-serif text-[clamp(38px,4.6vw,72px)] font-light leading-[0.98] tracking-[-0.045em]"
@@ -959,7 +941,7 @@ function Plans({
  *  BROCHURE
  * ========================================================================== */
 
-function Brochure({ project, index }: { project: Detail; index: number }) {
+function Brochure({ project }: { project: Detail }) {
   const b = project.brochure!;
   const portrait = b.cover.h > b.cover.w;
   return (
@@ -1006,7 +988,7 @@ function Brochure({ project, index }: { project: Detail; index: number }) {
             }
             delay="delay-150"
           >
-            <SectionLabel index={index} label="Brochure" />
+            <SectionLabel label="Brochure" />
             <h2
               id="brochure-title"
               className="font-serif text-[clamp(34px,3.8vw,58px)] font-light leading-[1] tracking-[-0.045em]"
@@ -1078,7 +1060,7 @@ function Brochure({ project, index }: { project: Detail; index: number }) {
 const inputClass =
   "w-full border-0 border-b border-white/20 bg-transparent px-0 py-3 text-[15px] text-white placeholder:text-white/30 transition-colors focus:border-brand-gold focus:outline-none focus:ring-0";
 
-function Enquire({ project, index }: { project: Detail; index: number }) {
+function Enquire({ project }: { project: Detail }) {
   const [form, setForm] = useState({
     name: "",
     phone: "",
@@ -1117,7 +1099,7 @@ function Enquire({ project, index }: { project: Detail; index: number }) {
       <div className="mx-auto max-w-[1450px] px-6 pb-24 pt-24 md:px-10 md:pb-32 md:pt-28 lg:px-12">
         <div className="grid gap-y-16 lg:grid-cols-12 lg:gap-x-12">
           <Reveal className="lg:col-span-5">
-            <SectionLabel index={index} label="Enquire" />
+            <SectionLabel label="Enquire" />
             <h2
               id="enquire-title"
               className="font-serif text-[clamp(38px,4.6vw,72px)] font-light leading-[0.98] tracking-[-0.045em]"
@@ -1305,18 +1287,12 @@ const cardImage = (p: Detail) => {
     : { media: p.hero, position: p.heroPosition ?? "50% 50%" };
 };
 
-function MoreProjects({
-  related,
-  index,
-}: {
-  related: Detail[];
-  index: number;
-}) {
+function MoreProjects({ related }: { related: Detail[] }) {
   return (
     <section aria-labelledby="more-title" className="bg-[#0c0a09] text-white">
       <div className="mx-auto max-w-[1450px] px-6 pb-24 pt-24 md:px-10 md:pb-28 md:pt-28 lg:px-12">
         <Reveal>
-          <SectionLabel index={index} label="Projects" />
+          <SectionLabel label="Projects" />
           <h2
             id="more-title"
             className="font-serif text-[clamp(38px,4.6vw,72px)] font-light leading-[0.98] tracking-[-0.045em]"
@@ -1408,41 +1384,34 @@ export default function ProjectDetail({
     location: project.location?.image ? [project.location.image] : [],
   };
 
-  // Number the sections that are actually shown.
-  let n = 0;
-  const next = () => ++n;
-
   return (
     <div className="bg-[#0c0a09]">
       <Hero project={project} />
-      <Overview project={project} index={next()} />
+      <Overview project={project} />
       {project.gallery.length ? (
         <ImageStory
           project={project}
-          index={next()}
           onOpen={(i) => setLightbox({ set: "gallery", index: i })}
         />
       ) : null}
       {project.amenities ? (
-        <Amenities project={project} index={next()} />
+        <Amenities project={project} />
       ) : null}
       {project.location ? (
         <Location
           project={project}
-          index={next()}
           onOpen={() => setLightbox({ set: "location", index: 0 })}
         />
       ) : null}
       {project.plans ? (
         <Plans
           project={project}
-          index={next()}
           onOpen={(i) => setLightbox({ set: "plans", index: i })}
         />
       ) : null}
-      {project.brochure ? <Brochure project={project} index={next()} /> : null}
-      <Enquire project={project} index={next()} />
-      <MoreProjects related={related} index={next()} />
+      {project.brochure ? <Brochure project={project} /> : null}
+      <Enquire project={project} />
+      <MoreProjects related={related} />
 
       <Lightbox
         items={lightbox ? sets[lightbox.set] : []}

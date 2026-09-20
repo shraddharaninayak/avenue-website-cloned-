@@ -97,8 +97,6 @@ function Heading({ labelled = false }: { labelled?: boolean }) {
   return (
     <div>
       <div className="mb-8 flex items-center gap-4 md:mb-10 lg:[@media(max-height:760px)]:mb-5">
-        <span className="font-grotesk text-[11px] tracking-[0.2em] text-brand-bronze">08</span>
-        <span className="h-px w-10 bg-black/35" />
         <span className="text-[10px] uppercase tracking-[0.28em] text-black/55">Process</span>
       </div>
       <h2
@@ -189,7 +187,7 @@ function PinnedProcess() {
                       i === active ? "text-[#171717]" : "text-[#8a867e]"
                     }`}
                   >
-                    {pad(i + 1)} {stage.title}
+                    {stage.title}
                   </span>
                 </li>
               ))}

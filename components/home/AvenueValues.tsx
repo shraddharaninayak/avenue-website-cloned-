@@ -127,14 +127,6 @@ function ValueRow({
 
       <div className={`transition-opacity duration-700 ${active ? "lg:opacity-100" : "lg:opacity-[0.32]"}`}>
         <div className={`flex items-center gap-4 ${revealClass(visible)}`}>
-          <span
-            className={`font-grotesk text-[11px] tracking-[0.2em] transition-colors duration-700 ${
-              active ? "text-brand-bronze" : "text-[#8a867e]"
-            }`}
-          >
-            {pad(index + 1)}
-          </span>
-          <span className="h-px w-8 bg-black/25" />
           <span className="text-[10px] uppercase tracking-[0.24em] text-[#8a867e]">Value</span>
         </div>
 
@@ -240,8 +232,6 @@ export default function AvenueValues() {
           <div className="lg:col-span-5 lg:col-start-8">
             <div ref={headRef} className={`pb-12 lg:pb-16 ${revealClass(headIn)}`}>
               <div className="mb-8 flex items-center gap-4 md:mb-10">
-                <span className="font-grotesk text-[11px] tracking-[0.2em] text-brand-bronze">03</span>
-                <span className="h-px w-10 bg-black/35" />
                 <span className="text-[10px] uppercase tracking-[0.28em] text-black/55">Values</span>
               </div>
               <h2
