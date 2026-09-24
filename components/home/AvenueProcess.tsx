@@ -97,7 +97,7 @@ function Heading({ labelled = false }: { labelled?: boolean }) {
   return (
     <div>
       <div className="mb-8 flex items-center gap-4 md:mb-10 lg:[@media(max-height:760px)]:mb-5">
-        <span className="text-[10px] uppercase tracking-[0.28em] text-black/55">Process</span>
+        <span className="text-[10px] uppercase tracking-[0.28em] text-[#2D3A1F]/55">Process</span>
       </div>
       <h2
         id={labelled ? "process-title" : undefined}
@@ -184,7 +184,7 @@ function PinnedProcess() {
                   </span>
                   <span
                     className={`mt-3 block truncate text-[10px] uppercase tracking-[0.22em] transition-colors duration-500 ${
-                      i === active ? "text-[#171717]" : "text-[#8a867e]"
+                      i === active ? "text-[#2D3A1F]" : "text-[#5F684F]"
                     }`}
                   >
                     {stage.title}
@@ -211,15 +211,12 @@ function PinnedProcess() {
                           : "pointer-events-none translate-y-6 opacity-0"
                     }`}
                   >
-                    <span className="block font-serif text-[clamp(88px,9vw,140px)] font-light leading-[0.8] tracking-[-0.05em] text-brand-bronze/25 [@media(max-height:760px)]:text-[72px]">
-                      {pad(i + 1)}
-                    </span>
-                    <h3 className="mt-6 font-serif text-[clamp(36px,3.6vw,56px)] font-light leading-[1] tracking-[-0.04em]">
+                    <h3 className="font-serif text-[clamp(36px,3.6vw,56px)] font-light leading-[1] tracking-[-0.04em]">
                       {stage.title}
                     </h3>
                     <blockquote className="mt-5 max-w-[440px]">
-                      <p className="text-[15px] leading-[1.75] text-[#555960] md:text-[16px]">&ldquo;{stage.text}&rdquo;</p>
-                      <footer className="mt-3 text-[10px] uppercase tracking-[0.22em] text-[#8a867e]">{stage.source}</footer>
+                      <p className="text-[15px] leading-[1.75] text-[#5F684F] md:text-[16px]">{stage.text}</p>
+                      <footer className="mt-3 text-[10px] uppercase tracking-[0.22em] text-[#5F684F]">{stage.source}</footer>
                     </blockquote>
                   </div>
                 );
@@ -228,7 +225,7 @@ function PinnedProcess() {
 
             {/* IMAGE — each stage wipes in from the left over the last */}
             <figure className="col-span-7">
-              <div className="relative aspect-[16/9] max-h-[50vh] w-full overflow-hidden bg-[#e6e2db] [@media(max-height:760px)]:max-h-[40vh]">
+              <div className="relative aspect-[16/9] max-h-[50vh] w-full overflow-hidden bg-[#F4F1E8] [@media(max-height:760px)]:max-h-[40vh]">
                 {STAGES.map((stage, i) => (
                   <div
                     key={stage.title}
@@ -250,10 +247,10 @@ function PinnedProcess() {
                   </div>
                 ))}
               </div>
-              <figcaption className="mt-4 flex items-center justify-between text-[10px] uppercase tracking-[0.22em] text-[#8a867e]">
+              <figcaption className="mt-4 flex items-center justify-between text-[10px] uppercase tracking-[0.22em] text-[#5F684F]">
                 <span>{STAGES[active]?.caption}</span>
                 <span>
-                  <span className="text-[#171717]">{pad(active + 1)}</span> / {pad(STAGES.length)}
+                  <span className="text-[#2D3A1F]">{pad(active + 1)}</span> / {pad(STAGES.length)}
                 </span>
               </figcaption>
             </figure>
@@ -268,7 +265,7 @@ function StackedStage({ stage, index }: { stage: Stage; index: number }) {
   const [ref, visible] = useReveal<HTMLLIElement>(0.2);
   return (
     <li ref={ref} className="border-t border-black/15 py-10 md:py-12">
-      <div className={`relative aspect-[16/9] w-full overflow-hidden bg-[#e6e2db] ${revealClass(visible)}`}>
+      <div className={`relative aspect-[16/9] w-full overflow-hidden bg-[#F4F1E8] ${revealClass(visible)}`}>
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
           src={stage.image}
@@ -279,15 +276,12 @@ function StackedStage({ stage, index }: { stage: Stage; index: number }) {
           style={{ objectPosition: stage.position }}
         />
       </div>
-      <div className={`mt-7 grid grid-cols-[64px_1fr] gap-x-4 md:grid-cols-[96px_1fr] ${revealClass(visible, "delay-150")}`}>
-        <span className="font-serif text-[48px] font-light leading-[0.9] tracking-[-0.05em] text-brand-bronze/35 md:text-[64px]">
-          {pad(index + 1)}
-        </span>
+      <div className={`mt-7 ${revealClass(visible, "delay-150")}`}>
         <div>
           <h3 className="font-serif text-[32px] font-light leading-[1] tracking-[-0.04em] md:text-[40px]">{stage.title}</h3>
           <blockquote className="mt-4">
-            <p className="text-[15px] leading-[1.75] text-[#555960] md:text-[16px]">&ldquo;{stage.text}&rdquo;</p>
-            <footer className="mt-3 text-[10px] uppercase tracking-[0.22em] text-[#8a867e]">{stage.source}</footer>
+            <p className="text-[15px] leading-[1.75] text-[#5F684F] md:text-[16px]">{stage.text}</p>
+            <footer className="mt-3 text-[10px] uppercase tracking-[0.22em] text-[#5F684F]">{stage.source}</footer>
           </blockquote>
         </div>
       </div>
@@ -299,7 +293,7 @@ export default function AvenueProcess() {
   const [headRef, headIn] = useReveal<HTMLDivElement>(0.3);
 
   return (
-    <section id="process" aria-labelledby="process-title" className="bg-[#f3f0eb] text-[#171717]">
+    <section id="process" aria-labelledby="process-title" className="bg-[#F4F1E8] text-[#2D3A1F]">
       {/* Desktop */}
       <div className="hidden lg:block">
         <PinnedProcess />

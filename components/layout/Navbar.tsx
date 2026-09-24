@@ -61,25 +61,25 @@ export default function Navbar() {
       <header
         ref={headerRef}
         className={`fixed inset-x-0 top-0 z-50 bg-transparent transition-[background-color,backdrop-filter] duration-500 ${
-          solid ? "max-lg:bg-[#0c0a09]/80 max-lg:backdrop-blur-md" : ""
+          solid ? "max-lg:bg-[#2D3A1F]/80 max-lg:backdrop-blur-md" : ""
         }`}
       >
         <div className="mx-auto flex h-[80px] w-full items-center justify-between px-6 md:px-10 lg:h-[92px] lg:px-12">
           <Link href="/" aria-label="The Avenue Builders & Developers — home" className="shrink-0">
             <Image
-              src="/logo-avenue-white.webp"
+              src="/logo-avenue.png"
               alt="The Avenue Builders & Developers — Reason to Smile!"
-              width={1400}
-              height={589}
+              width={1942}
+              height={810}
               priority
-              className="h-[50px] w-auto lg:h-[64px]"
+              className="h-[58px] w-auto lg:h-[75px]"
             />
           </Link>
 
           <div className="flex items-center gap-4 lg:gap-7">
             <Link
               href="/contact"
-              className="flex h-10 items-center justify-center rounded-full border border-white/80 px-6 font-grotesk text-[11px] font-semibold uppercase tracking-[0.16em] text-white transition-colors duration-300 hover:bg-white hover:text-[#8f7762] focus-visible:bg-white focus-visible:text-[#8f7762] focus-visible:outline-none lg:h-11 lg:px-7"
+              className="flex h-10 items-center justify-center rounded-full border border-white/80 px-6 font-grotesk text-[11px] font-semibold uppercase tracking-[0.16em] text-white transition-colors duration-300 hover:bg-white hover:text-[#B8A678] focus-visible:bg-white focus-visible:text-[#B8A678] focus-visible:outline-none lg:h-11 lg:px-7"
             >
               Contact
             </Link>

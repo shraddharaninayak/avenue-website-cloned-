@@ -31,7 +31,7 @@ export default function AvenueAbout() {
   return (
     <section
       ref={sectionRef}
-      className="relative overflow-hidden bg-[#f3f0eb] text-[#171717]"
+      className="relative overflow-hidden bg-[#F4F1E8] text-[#2D3A1F]"
     >
       <div className="mx-auto max-w-[1450px] px-6 py-20 md:px-10 md:py-28 lg:px-12 lg:py-32">
         {/* =========================================
@@ -45,7 +45,7 @@ export default function AvenueAbout() {
         >
           <span className="h-px w-12 bg-black/40" />
 
-          <span className="text-[11px] font-medium uppercase tracking-[0.28em] text-black/50">
+          <span className="text-[11px] font-medium uppercase tracking-[0.28em] text-[#2D3A1F]/50">
             About Avenue
           </span>
         </div>
@@ -92,7 +92,7 @@ export default function AvenueAbout() {
 
             {/* SMALL OVERLAPPING IMAGE */}
 
-            <div className="absolute -bottom-8 right-[-4%] w-[42%] border-[8px] border-[#f3f0eb] bg-[#f3f0eb] shadow-[0_20px_50px_rgba(0,0,0,0.12)] md:-bottom-10 md:right-[-5%]">
+            <div className="absolute -bottom-8 right-[-4%] w-[42%] border-[8px] border-[#F4F1E8] bg-[#F4F1E8] shadow-[0_20px_50px_rgba(0,0,0,0.12)] md:-bottom-10 md:right-[-5%]">
               <div className="aspect-[0.9] overflow-hidden">
                 <img
                   src="/avenue-about-secondary.jpg.webp"
@@ -135,7 +135,7 @@ export default function AvenueAbout() {
                   : "translate-y-10 opacity-0"
               }`}
             >
-              <p className="max-w-[720px] text-[16px] leading-[1.8] text-[#555960] md:text-[18px]">
+              <p className="max-w-[720px] text-[16px] leading-[1.8] text-[#5F684F] md:text-[18px]">
                 Welcome to The Avenue, your premier property development and
                 trading company in Nashik. Since our establishment in 2007, we
                 have built a reputation for excellence in delivering exceptional
@@ -167,7 +167,7 @@ export default function AvenueAbout() {
                 {/* ESTABLISHED */}
 
                 <div>
-                  <span className="text-[10px] uppercase tracking-[0.22em] text-[#8a867e]">
+                  <span className="text-[10px] uppercase tracking-[0.22em] text-[#5F684F]">
                     Established
                   </span>
 
@@ -179,7 +179,7 @@ export default function AvenueAbout() {
                 {/* BASED IN */}
 
                 <div>
-                  <span className="text-[10px] uppercase tracking-[0.22em] text-[#8a867e]">
+                  <span className="text-[10px] uppercase tracking-[0.22em] text-[#5F684F]">
                     Based in
                   </span>
 
@@ -191,11 +191,11 @@ export default function AvenueAbout() {
                 {/* DISCIPLINE */}
 
                 <div>
-                  <span className="text-[10px] uppercase tracking-[0.22em] text-[#8a867e]">
+                  <span className="text-[10px] uppercase tracking-[0.22em] text-[#5F684F]">
                     Discipline
                   </span>
 
-                  <p className="mt-4 max-w-[150px] text-[15px] leading-[1.55] text-[#555960]">
+                  <p className="mt-4 max-w-[150px] text-[15px] leading-[1.55] text-[#2D3A1F]">
                     Property
                     <br />
                     development
@@ -207,11 +207,11 @@ export default function AvenueAbout() {
                 {/* PORTFOLIO */}
 
                 <div>
-                  <span className="text-[10px] uppercase tracking-[0.22em] text-[#8a867e]">
+                  <span className="text-[10px] uppercase tracking-[0.22em] text-[#5F684F]">
                     Portfolio
                   </span>
 
-                  <p className="mt-4 max-w-[160px] text-[15px] leading-[1.55] text-[#555960]">
+                  <p className="mt-4 max-w-[160px] text-[15px] leading-[1.55] text-[#2D3A1F]">
                     Residential ·
                     <br />
                     Commercial ·
@@ -229,7 +229,7 @@ export default function AvenueAbout() {
         ========================================= */}
 
         <div className="mt-24 border-t border-black/15 pt-6 md:mt-32">
-          <div className="flex items-center justify-between text-[10px] uppercase tracking-[0.24em] text-[#8a867e]">
+          <div className="flex items-center justify-between text-[10px] uppercase tracking-[0.24em] text-[#5F684F]">
             <span>The Avenue Portfolio</span>
 
             <span>Nashik</span>

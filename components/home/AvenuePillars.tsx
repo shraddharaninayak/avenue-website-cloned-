@@ -183,13 +183,13 @@ export default function AvenuePillars() {
   return (
     // No overflow-hidden on the section: an overflow ancestor becomes the
     // scrollport for position:sticky and the stage below stops pinning.
-    <section ref={sectionRef} className="relative h-[300vh] bg-[#f3f0eb]">
+    <section ref={sectionRef} className="relative h-[300vh] bg-[#F4F1E8]">
       <div className="sticky top-0 h-screen w-full overflow-hidden">
         {/* SECTION TITLE — cleared below the fixed navbar */}
         <div className="absolute left-0 right-0 top-[100px] z-30 px-6 md:px-10 lg:top-[116px]">
           <div className="mx-auto flex max-w-[1450px] items-center gap-4">
             <span className="h-px w-10 bg-black/40" />
-            <h2 className="text-[10px] uppercase tracking-[0.28em] text-black/50">
+            <h2 className="text-[10px] uppercase tracking-[0.28em] text-[#2D3A1F]/50">
               Places We&apos;ve Shaped
             </h2>
           </div>
@@ -207,7 +207,7 @@ export default function AvenuePillars() {
               ref={(el) => {
                 panelRefs.current[i] = el;
               }}
-              className="absolute overflow-hidden bg-[#e6e2db]"
+              className="absolute overflow-hidden bg-[#F4F1E8]"
               style={{
                 left: `${HERO.left + (i * HERO.width) / COUNT}%`,
                 width: `${HERO.width / COUNT}%`,
@@ -261,10 +261,10 @@ export default function AvenuePillars() {
         {/* BOTTOM LABEL */}
         <div className="absolute bottom-8 left-0 right-0 z-30 px-6 md:px-10">
           <div className="mx-auto flex max-w-[1450px] items-center justify-between border-t border-black/15 pt-5">
-            <span className="text-[10px] uppercase tracking-[0.22em] text-black/45">
+            <span className="text-[10px] uppercase tracking-[0.22em] text-[#2D3A1F]/45">
               The Avenue
             </span>
-            <span className="text-[10px] uppercase tracking-[0.22em] text-black/45">
+            <span className="text-[10px] uppercase tracking-[0.22em] text-[#2D3A1F]/45">
               Nashik
             </span>
           </div>

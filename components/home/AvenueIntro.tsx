@@ -199,8 +199,7 @@ export default function AvenueIntro() {
                   fontSize={fontSize}
                   letterSpacing={-fontSize * 0.03}
                   style={{
-                    fontFamily:
-                      '"Helvetica Neue", Helvetica, Arial, sans-serif',
+                    fontFamily: '"Manrope", sans-serif',
                     fontWeight: 700,
                   }}
                 >

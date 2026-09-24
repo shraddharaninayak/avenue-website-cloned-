@@ -406,11 +406,11 @@ export default function AvenueHero() {
 
   return (
     // The cream behind the stage is what shows under its rounded corners.
-    <div ref={containerRef} className="relative h-[330vh] bg-[#f3f0eb]">
+    <div ref={containerRef} className="relative h-[330vh] bg-[#F4F1E8]">
       <div
         ref={stageRef}
         data-header="clear"
-        className="sticky top-0 h-screen w-full overflow-hidden bg-[#0c0a09] [transform:translateZ(0)]"
+        className="sticky top-0 h-screen w-full overflow-hidden bg-[#2D3A1F] [transform:translateZ(0)]"
       >
         {/* Upright screens only: a soft wash of the film around its band. */}
         <canvas
@@ -456,7 +456,7 @@ export default function AvenueHero() {
           className="pointer-events-none absolute inset-0 transition-opacity duration-700 ease-out"
           style={{
             background:
-              "radial-gradient(ellipse 65% 60% at 4% 6%, rgba(255,222,170,0.75), rgba(255,222,170,0) 70%), linear-gradient(to bottom right, #efcfa2 0%, #d9bba6 38%, #b3a5ab 70%, #8d8a9c 100%)",
+              "radial-gradient(ellipse 65% 60% at 4% 6%, rgba(197,167,106,0.5), rgba(197,167,106,0) 70%), linear-gradient(to bottom right, #F4F1E8 0%, #B8A678 38%, #5F684F 70%, #2D3A1F 100%)",
           }}
         />
         <canvas
@@ -476,7 +476,7 @@ export default function AvenueHero() {
         <div
           ref={veilRef}
           aria-hidden="true"
-          className="pointer-events-none absolute inset-0 bg-[linear-gradient(to_top,rgba(12,10,9,0.86)_0%,rgba(12,10,9,0.55)_34%,rgba(12,10,9,0.14)_64%,rgba(12,10,9,0)_100%)]"
+          className="pointer-events-none absolute inset-0 bg-[linear-gradient(to_top,rgba(31,41,51,0.86)_0%,rgba(31,41,51,0.55)_34%,rgba(31,41,51,0.14)_64%,rgba(31,41,51,0)_100%)]"
           style={{ opacity: 0 }}
         />
 
@@ -497,7 +497,7 @@ export default function AvenueHero() {
             <div className="mt-7 flex flex-wrap items-center justify-center gap-x-8 gap-y-4">
               <Link
                 href="/projects/milestone"
-                className="inline-flex items-center gap-3 bg-white px-7 py-3.5 font-grotesk text-[11px] font-semibold uppercase tracking-[0.2em] text-black transition-colors duration-300 hover:bg-brand-gold"
+                className="inline-flex items-center gap-3 bg-white px-7 py-3.5 font-grotesk text-[11px] font-semibold uppercase tracking-[0.2em] text-[#2D3A1F] transition-colors duration-300 hover:bg-[#B8A678] hover:text-white"
               >
                 <span>Explore Flagship</span>
                 <ArrowRight className="h-4 w-4" />
@@ -518,7 +518,7 @@ export default function AvenueHero() {
         <div
           ref={cueRef}
           aria-hidden="true"
-          className="pointer-events-none absolute inset-x-0 bottom-8 flex flex-col items-center gap-2 font-grotesk text-[10px] font-medium uppercase tracking-[0.3em] text-[#5a4a3c] supports-[height:100svh]:bottom-[calc(100lvh-100svh+2rem)] md:bottom-10 md:supports-[height:100svh]:bottom-10"
+          className="pointer-events-none absolute inset-x-0 bottom-8 flex flex-col items-center gap-2 font-grotesk text-[10px] font-medium uppercase tracking-[0.3em] text-[#F4F1E8] supports-[height:100svh]:bottom-[calc(100lvh-100svh+2rem)] md:bottom-10 md:supports-[height:100svh]:bottom-10"
         >
           <span>Scroll</span>
           <ChevronDown className="h-4 w-4 animate-bounce text-brand-gold" />

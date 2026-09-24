@@ -253,9 +253,9 @@ export default function IntroLoader() {
           >
             <defs>
               <linearGradient id="avi-ink-tone" gradientUnits="userSpaceOnUse" x1="0" y1="0" x2={VIEW_W} y2="0">
-                <stop offset="0" stopColor="#9a8373" />
-                <stop offset="0.55" stopColor="#b39a7e" />
-                <stop offset="1" stopColor="#c7a672" />
+                <stop offset="0" stopColor="#2D3A1F" />
+                <stop offset="0.55" stopColor="#B8A678" />
+                <stop offset="1" stopColor="#B8A678" />
               </linearGradient>
               {STROKES.map((s, i) =>
                 s.clip ? (

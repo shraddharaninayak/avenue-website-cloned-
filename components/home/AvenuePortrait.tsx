@@ -46,7 +46,7 @@ export default function AvenuePortrait() {
     <section
       id="portrait"
       aria-labelledby="portrait-title"
-      className="relative bg-[#f3f0eb] pb-20 pt-24 text-[#171717] md:pb-24 md:pt-32 lg:pb-28 lg:pt-36"
+      className="relative bg-[#F4F1E8] pb-20 pt-24 text-[#2D3A1F] md:pb-24 md:pt-32 lg:pb-28 lg:pt-36"
     >
       <div className="mx-auto max-w-[1450px] px-6 md:px-10 lg:px-12">
         <div className="grid gap-y-14 lg:grid-cols-12 lg:gap-x-12">
@@ -54,7 +54,7 @@ export default function AvenuePortrait() {
           <div className="lg:col-span-6">
             <div ref={headRef} className={revealClass(headIn)}>
               <div className="mb-8 flex items-center gap-4 md:mb-10">
-                <span className="text-[10px] uppercase tracking-[0.28em] text-black/55">Portrait</span>
+                <span className="text-[10px] uppercase tracking-[0.28em] text-[#2D3A1F]/55">Portrait</span>
               </div>
               <h2
                 id="portrait-title"
@@ -62,7 +62,7 @@ export default function AvenuePortrait() {
               >
                 A developer
                 <br />
-                <em className="italic text-brand-bronze">shaped by Nashik.</em>
+                <em className="italic">shaped by Nashik.</em>
               </h2>
             </div>
 
@@ -76,7 +76,7 @@ export default function AvenuePortrait() {
               {ABOUT_PARAGRAPHS.map((para, i) => (
                 <p
                   key={i}
-                  className={`mt-6 text-[15px] leading-[1.8] text-[#555960] md:text-[16px] ${revealClass(
+                  className={`mt-6 text-[15px] leading-[1.8] text-[#5F684F] md:text-[16px] ${revealClass(
                     textIn,
                     i === 0 ? "delay-150" : "delay-300",
                   )}`}
@@ -93,11 +93,11 @@ export default function AvenuePortrait() {
               >
                 {FACTS.map((fact) => (
                   <div key={fact.label} className={fact.label === "Portfolio" ? "col-span-2 sm:col-span-1" : ""}>
-                    <dt className="text-[10px] uppercase tracking-[0.22em] text-[#8a867e]">{fact.label}</dt>
+                    <dt className="text-[10px] uppercase tracking-[0.22em] text-[#5F684F]">{fact.label}</dt>
                     <dd
                       className={
                         fact.label === "Portfolio"
-                          ? "mt-3 text-[14px] leading-[1.55] text-[#555960]"
+                          ? "mt-3 text-[14px] leading-[1.55] text-[#2D3A1F]"
                           : "mt-3 font-serif text-[30px] font-light leading-none tracking-[-0.03em]"
                       }
                     >
@@ -112,7 +112,7 @@ export default function AvenuePortrait() {
           {/* ================= IMAGE ================= */}
           <figure ref={figureRef} className="lg:col-span-5 lg:col-start-8 lg:pt-10">
             <div
-              className={`relative aspect-[4/5] w-full overflow-hidden bg-[#e6e2db] transition-[clip-path] duration-[1400ms] ease-[cubic-bezier(0.65,0,0.35,1)] motion-reduce:transition-none ${
+              className={`relative aspect-[4/5] w-full overflow-hidden bg-[#F4F1E8] transition-[clip-path] duration-[1400ms] ease-[cubic-bezier(0.65,0,0.35,1)] motion-reduce:transition-none ${
                 figureIn ? "[clip-path:inset(0_0_0_0)]" : "motion-safe:[clip-path:inset(100%_0_0_0)]"
               }`}
             >
@@ -137,7 +137,7 @@ export default function AvenuePortrait() {
             </div>
             {aura ? (
               <figcaption
-                className={`mt-4 flex items-center justify-between gap-6 text-[10px] uppercase tracking-[0.22em] text-[#8a867e] ${revealClass(
+                className={`mt-4 flex items-center justify-between gap-6 text-[10px] uppercase tracking-[0.22em] text-[#5F684F] ${revealClass(
                   figureIn,
                   "delay-700",
                 )}`}

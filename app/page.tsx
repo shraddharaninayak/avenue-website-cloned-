@@ -30,7 +30,7 @@ import AvenueCTA from "@/components/home/AvenueCTA";
  */
 export default function HomePage() {
   return (
-    <div className="min-h-screen bg-[#f3f0eb]">
+    <div className="min-h-screen bg-[#F4F1E8]">
       <AvenueHero />
       <AvenuePortrait />
       <AvenueValues />

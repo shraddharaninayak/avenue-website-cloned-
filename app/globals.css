@@ -3,21 +3,42 @@
 @tailwind utilities;
 
 :root {
-  --background: #000000;
-  --foreground: #ffffff;
+  --background: #F4F1E8;
+  --foreground: #2D3A1F;
+}
+
+html,
+body,
+body * {
+  font-family:
+    -apple-system,
+    BlinkMacSystemFont,
+    "Segoe UI",
+    Roboto,
+    Oxygen-Sans,
+    Ubuntu,
+    Cantarell,
+    "Helvetica Neue",
+    sans-serif;
 }
 
 body {
   color: var(--foreground);
   background: var(--background);
-  font-family: var(--font-hanken), sans-serif;
   overflow-x: hidden;
-  /* selection styles are defined in ::selection below */
+}
+
+/* Heading children inherit the heading's color — accent classes on em/span cannot override */
+h1 em, h1 span,
+h2 em, h2 span,
+h3 em, h3 span,
+h4 em, h4 span {
+  color: inherit !important;
 }
 
 ::selection {
-  background-color: #b06a35;
-  color: #ffffff;
+  background-color: #B8A678;
+  color: #2D3A1F;
 }
 
 /* Smooth scrolling */
@@ -30,12 +51,12 @@ html {
   width: 6px;
 }
 ::-webkit-scrollbar-track {
-  background: #0c0a09;
+  background: #F4F1E8;
 }
 ::-webkit-scrollbar-thumb {
-  background: #292524;
+  background: #D5CFBC;
   border-radius: 3px;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: #e0a456;
+  background: #B8A678;
 }

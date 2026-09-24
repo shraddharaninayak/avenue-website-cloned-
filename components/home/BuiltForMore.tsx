@@ -116,8 +116,8 @@ const clipFor = (mode: Reveal, r: number, x: number) => {
 };
 
 const SHADE = {
-  left: "bg-gradient-to-r from-[#0c0a09]/70 via-[#0c0a09]/20 to-transparent",
-  right: "bg-gradient-to-l from-[#0c0a09]/70 via-[#0c0a09]/20 to-transparent",
+  left: "bg-gradient-to-r from-[#2D3A1F]/70 via-[#2D3A1F]/20 to-transparent",
+  right: "bg-gradient-to-l from-[#2D3A1F]/70 via-[#2D3A1F]/20 to-transparent",
   none: "",
 } as const;
 
@@ -145,7 +145,7 @@ function Panel({
       data-panel=""
       data-reveal={reveal}
       data-delay={delay}
-      className={`absolute overflow-hidden bg-[#14110c] ${className}`}
+      className={`absolute overflow-hidden bg-[#2D3A1F] ${className}`}
       style={{ clipPath: CLOSED[reveal] }}
     >
       {/* 110% tall so the parallax travel never reaches an edge. */}
@@ -468,7 +468,7 @@ export default function BuiltForMore() {
     <section
       ref={sectionRef}
       aria-labelledby="built-for-more-title"
-      className="relative h-[700vh] bg-[#0c0a09] text-white"
+      className="relative h-[700vh] bg-[#2D3A1F] text-white"
     >
       {/* The section as text. The stage below animates the same words and is
           hidden from assistive tech, where parts would otherwise come and go
@@ -491,7 +491,7 @@ export default function BuiltForMore() {
         </ul>
       </div>
 
-      <div className="sticky top-0 h-screen w-full overflow-hidden bg-[#f3f0eb]">
+      <div className="sticky top-0 h-screen w-full overflow-hidden bg-[#F4F1E8]">
         {/* The hairline the light ground ends on; the dark field opens from it. */}
         <div
           ref={seamRef}
@@ -503,7 +503,7 @@ export default function BuiltForMore() {
 
         <div
           ref={fieldRef}
-          className="absolute inset-0 bg-[#0c0a09]"
+          className="absolute inset-0 bg-[#2D3A1F]"
           style={{ clipPath: "inset(50% 0% 50% 0%)" }}
         >
           <div className="absolute inset-0 mx-auto max-w-[1450px] px-6 md:px-10 lg:px-12">

@@ -49,6 +49,21 @@ export type Fact = { value: string; label: string; note?: string };
 
 export type FeaturedAmenity = { title: string; line?: string; image: Media };
 
+export type ProjectSection =
+  | { type: "hero" }
+  | { type: "overview" }
+  | { type: "gallery" }
+  | { type: "amenities" }
+  | { type: "location" }
+  | { type: "plans" }
+  | { type: "specifications" }
+  | { type: "brochure" }
+  | { type: "enquire" }
+  | { type: "showcase"; heading: string; intro: string; image: Media; caption?: string; source?: string }
+  | { type: "featureBlock"; heading: string; intro?: string; items: string[]; source?: string }
+  | { type: "about"; heading: string; paragraphs: string[]; source?: string }
+  | { type: "spaceShowcase"; title: string; image: Media; description: string };
+
 export type ProjectDetail = {
   slug: string;
   /** Display name, e.g. "Milestone". */
@@ -96,6 +111,8 @@ export type ProjectDetail = {
   brochure?: { href: string; fileName: string; pages: number; sizeMb: number; edition: string; cover: Media };
   enquiry: { phone: string; phoneHref: string };
   disclaimer?: string;
+  /** Section order for projects that follow a specific official-page structure. */
+  sections?: ProjectSection[];
 };
 
 const img = (src: string, w: number, h: number, alt: string, caption?: string): Media => ({ src, w, h, alt, caption });
@@ -285,7 +302,7 @@ const urbaniaDetail: ProjectDetail = {
     heading: urbania.statement,
     paragraphs: [
       urbania.description,
-      "You can call it a revolution in high-end living and it's going to take your 'joy of living' quotient to a new height.",
+      "You can call it a revolution in high end living and it's going to take your joy of living quotient to a new height.",
       "Here is your truly a once in a lifestyle opportunity to own a home that has all the ingredients for a perfect life.",
     ],
     source: "From the Urbania page",
@@ -372,6 +389,44 @@ const urbaniaDetail: ProjectDetail = {
   },
   // The Urbania page publishes no phone of its own.
   enquiry: { phone: company.phone, phoneHref: company.phoneHref },
+  // The official Urbania page's section order: hero, overview,
+  // then showcase sections (Pool, Green Carpet, Reception), the
+  // four-tier amenities, gallery, connectivity, plans, brochure,
+  // and the enquiry form.
+  sections: [
+    { type: "hero" },
+    { type: "overview" },
+    {
+      type: "showcase",
+      heading: "The Pool",
+      intro: "Dive Into Luxury with splash of indulgence of our Pool",
+      image: img(`${U}/infinity-pool.webp`, 1600, 971, "The infinity swimming pool on the Urbania terrace, above the city"),
+      caption: "The Pool",
+      source: "From the Urbania page",
+    },
+    {
+      type: "showcase",
+      heading: "The Green Carpet",
+      intro: "WALK ON THE GREEN CARPET LAID ACROSS THE SKY",
+      image: img(`${U}/podium-garden.webp`, 1600, 1114, "The landscaped garden and pavilion on the Urbania podium, from above"),
+      caption: "The Green Carpet",
+      source: "From the Urbania page",
+    },
+    {
+      type: "showcase",
+      heading: "Reception Area",
+      intro: "WHERE EACH ELEMENT OOZES UNMATCHED ELEGANCE",
+      image: img(`${U}/entrance.webp`, 1360, 816, "The gated entrance to The Avenue Urbania at sunset"),
+      caption: "Reception Area",
+      source: "From the Urbania page",
+    },
+    { type: "amenities" },
+    { type: "gallery" },
+    { type: "location" },
+    { type: "plans" },
+    { type: "brochure" },
+    { type: "enquire" },
+  ],
 };
 
 /* -------------------------------------------------------------------------- */
@@ -445,6 +500,51 @@ const floraDetail: ProjectDetail = {
   enquiry: { phone: "+91 96990 06377", phoneHref: "tel:+919699006377" },
   disclaimer:
     "The contents of this brochure are purely conceptual and have no legal bindings on us. Developers reserve the right of amend the layout plans, number of floors & units, elevation, colour scheme, specifications and amenities etc. without notice.",
+  // The official Flora page's section order: hero, about, commercial
+  // spaces, office spaces, fitness center, showroom spaces, exclusive
+  // amenities, floor plans, and the enquiry form.
+  sections: [
+    { type: "hero" },
+    {
+      type: "about",
+      heading: "About Flora",
+      paragraphs: [
+        "Welcome to a world of elegance, opportunities and dreams that blossom. Here, amidst the vibrant life of Old Gangapur Naka, we invite you to join us on a journey where aspirations find their wings, and business meets prosperity. Experience The Avenue Flora — A New Era of Affordability.",
+        "The Avenue Flora is an iconic commercial destination, setting new standards in commercial and corporate lifestyle. The prestigious project offers elite options for Advocates, Professionals, Architects, Doctors, Interior Designers, and Chartered Accountants.",
+      ],
+      source: "From the Flora brochure and 2025 profile",
+    },
+    {
+      type: "showcase",
+      heading: "Commercial Spaces",
+      intro: "Feature · Specifications · Price Details",
+      image: img(`${F}/exterior.webp`, 2550, 1725, "The Avenue Flora — showrooms and offices"),
+      caption: "Commercial Spaces",
+      source: "From the Flora page",
+    },
+    {
+      type: "spaceShowcase",
+      title: "Office Spaces",
+      image: img(`${F}/plan-second-to-seventh-floor.webp`, 2550, 1733, "The Avenue Flora — office spaces"),
+      description: "Office spaces from 555 to 1790 Sq.ft., designed for professionals and businesses seeking a premium address in the heart of the city.",
+    },
+    {
+      type: "spaceShowcase",
+      title: "Fitness Center",
+      image: img(`${F}/plan-second-to-seventh-floor.webp`, 2550, 1733, "The Avenue Flora — fitness center"),
+      description: "A dedicated fitness center with modern equipment and a green gym for those who work out outdoors.",
+    },
+    {
+      type: "spaceShowcase",
+      title: "Showroom Spaces",
+      image: img(`${F}/exterior.webp`, 2550, 1725, "The Avenue Flora — showroom spaces"),
+      description: "Showroom spaces from 1297 to 3162 Sq.ft., built for brands that want visibility and footfall on Gangapur Road.",
+    },
+    { type: "amenities" },
+    { type: "plans" },
+    { type: "brochure" },
+    { type: "enquire" },
+  ],
 };
 
 /* -------------------------------------------------------------------------- */
@@ -548,6 +648,74 @@ const auraDetail: ProjectDetail = {
     cover: img(`${A}/brochure-cover-page.webp`, 900, 1432, "The cover of the Aura brochure"),
   },
   enquiry: aura.contact ? { phone: aura.contact, phoneHref: `tel:${aura.contact.replace(/\s+/g, "")}` } : PROJECT_PHONE,
+  // The official Aura page's section order: hero, overview, features,
+  // nearby locations, design/function blocks, amenities, floor plans,
+  // and the enquiry form.
+  sections: [
+    { type: "hero" },
+    { type: "overview" },
+    {
+      type: "featureBlock",
+      heading: "Features",
+      intro: "The Avenue Aura is located in the micro-level planned layout of Govind Nagar, Nashik.",
+      items: [
+        "Design and planned to meet the multinational standards.",
+        "Floor plates planned to give flexibility in interiors layout planning.",
+        "Specifications based on global requirements and environments, health and safety parameters.",
+        "Entrance lobby with lounge sitting and concierge.",
+        "Two level parking in one basement and ground floor.",
+        "Project designed to meet residential standards.",
+        "Design quality – speed – flexibility benefit due to selection of products from industry leaders.",
+        "Design expertise of interior designers, professional consultants & PDP architects team.",
+        "Micro-level specifications, work procedures & systems.",
+        "Quality checklist procedures & meticulous monitoring & audits.",
+        "Qualitative selection of durable & maintenance-free materials.",
+        "Economy of scale, procedures, expertise & systems passed on to the client.",
+      ],
+      source: "From the Aura page",
+    },
+    {
+      type: "featureBlock",
+      heading: "Near By Locations",
+      intro: "Close proximity to City Centre as well as other conveniences.",
+      items: [
+        "15 minutes' drive from the Ozar Airport",
+        "2 minutes' drive from Mahamarg Bus Stand and Mumbai Naka",
+        "Railway Station 20 mins",
+        "Easy and quick connectivity to City Infrastructure like Airport, Bus Stop, Shopping Malls, Hospitals, Schools, Libraries, Hotels, etc.",
+        "Walk to work concept — proximity to residential development",
+        "30 feet main access road",
+        "10 minutes' drive from Hotel Taj, Nashik",
+      ],
+      source: "From the Aura page",
+    },
+    {
+      type: "featureBlock",
+      heading: "Optimizing Function in Design",
+      intro: "Planned for privacy, light, and air ventilation to every apartment.",
+      items: [
+        "Orientation of tower & open spaces designed to achieve privacy, light & air ventilation to all apartments.",
+        "Building, basements, service installations, walkways & driveways integrated at the micro-level.",
+      ],
+      source: "From the Aura page",
+    },
+    {
+      type: "featureBlock",
+      heading: "Minimizing Cost in Design",
+      intro: "Clean line architecture with minimum redundancies.",
+      items: [
+        "Clean line architecture with minimum redundancies.",
+        "Micro-level & methodically planned locations of private & public spaces.",
+        "Optimum layout & network of services.",
+      ],
+      source: "From the Aura page",
+    },
+    { type: "amenities" },
+    { type: "location" },
+    { type: "plans" },
+    { type: "brochure" },
+    { type: "enquire" },
+  ],
 };
 
 /* -------------------------------------------------------------------------- */

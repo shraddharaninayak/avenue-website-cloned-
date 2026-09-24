@@ -1,23 +1,11 @@
+
 import type { Metadata } from "next";
 import Script from "next/script";
-import localFont from "next/font/local";
 import "./globals.css";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 import CookieBanner from "@/components/ui/CookieBanner";
 import IntroLoader from "@/components/IntroLoader";
-
-const grotesk = localFont({
-  src: "../public/fonts/91601dd83defba07-s.p.woff2",
-  variable: "--font-grotesk",
-  display: "swap",
-});
-
-const hanken = localFont({
-  src: "../public/fonts/313510e2713fb214-s.p.woff2",
-  variable: "--font-hanken",
-  display: "swap",
-});
 
 export const metadata: Metadata = {
   title: " The Avenue Builders And Developers",
@@ -31,11 +19,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html
-      lang="en"
-      className={`${grotesk.variable} ${hanken.variable} antialiased`}
-    >
-      <body className="bg-black text-white selection:bg-brand-gold selection:text-black">
+    <html lang="en" className="antialiased">
+      <body className="bg-[#F4F1E8] text-[#2D3A1F] selection:bg-[#B8A678] selection:text-[#2D3A1F]">
         {/* Google Tag Manager */}
         <Script id="google-tag-manager" strategy="beforeInteractive">
           {`

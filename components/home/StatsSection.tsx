@@ -9,7 +9,7 @@ const stats = [
 
 export default function StatsSection() {
   return (
-    <section className="bg-[#14110c] py-28 px-6 md:px-12 lg:px-20 text-white border-y border-white/10">
+    <section className="bg-[#2D3A1F] py-28 px-6 md:px-12 lg:px-20 text-white border-y border-white/10">
       <div className="max-w-7xl mx-auto">
         <div className="max-w-3xl mb-16">
           <div className="text-[11px] font-grotesk uppercase tracking-[0.3em] text-brand-gold font-semibold mb-3">

@@ -47,7 +47,7 @@ export default function MilestonesPage() {
   }, []);
 
   return (
-    <div className="bg-[#0c0a09] text-white">
+    <div className="bg-[#2D3A1F] text-white">
       {/* ===================== HEADER ===================== */}
       <section className="px-6 pb-16 pt-[136px] md:px-10 md:pb-20 md:pt-[168px] lg:px-12">
         <div className="mx-auto max-w-[1450px]">
@@ -108,7 +108,7 @@ export default function MilestonesPage() {
                 </div>
 
                 {/* The marks are artwork on white, so they sit on a light plate. */}
-                <div className="mt-5 flex aspect-[4/3] w-full items-center justify-center overflow-hidden bg-[#f3f0eb] p-8 md:p-10">
+                <div className="mt-5 flex aspect-[4/3] w-full items-center justify-center overflow-hidden bg-[#F4F1E8] p-8 md:p-10">
                   {/* eslint-disable-next-line @next/next/no-img-element */}
                   <img
                     src={m.image ?? ""}

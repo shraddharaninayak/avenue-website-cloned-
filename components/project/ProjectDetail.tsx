@@ -32,6 +32,7 @@ import {
   useViewportProgress,
 } from "@/components/home/motion";
 import Lightbox from "./Lightbox";
+import type { ProjectSection as SectionType } from "@/data/projectDetails";
 
 /**
  * The project page, shared by every Avenue project. Structure after the
@@ -42,6 +43,10 @@ import Lightbox from "./Lightbox";
  *
  * Each section renders only if the project has content for it, and the
  * section numbers follow what is actually shown.
+ *
+ * Background: premium warm cream (#f3f0eb / #ede9e2 alternating), dark ink
+ * text — matching the homepage editorial tone. The hero remains a full-bleed
+ * dark photo section (unchanged).
  */
 
 const pad = (n: number) => String(n).padStart(2, "0");
@@ -56,8 +61,7 @@ const coverage = (m: Media, frameAspect: number) => {
 
 /**
  * Below this coverage a render is shown whole instead — over a soft wash of
- * itself — rather than cut to fit: a landscape render in a phone's portrait
- * hero, say, would otherwise keep barely a quarter of its width.
+ * itself — rather than cut to fit.
  */
 const MIN_COVERAGE = 0.6;
 
@@ -83,12 +87,10 @@ function Wash({ media, position }: { media: Media; position?: string }) {
   );
 }
 
-function SectionLabel({ label, dark = true }: { label: string; dark?: boolean }) {
+function SectionLabel({ label }: { label: string }) {
   return (
     <div className="mb-8 flex items-center gap-4 md:mb-10">
-      <span
-        className={`text-[10px] uppercase tracking-[0.28em] ${dark ? "text-white/50" : "text-black/55"}`}
-      >
+      <span className="text-[10px] uppercase tracking-[0.28em] text-[#2D3A1F]/50">
         {label}
       </span>
     </div>
@@ -129,6 +131,7 @@ function RevealItem({
   );
 }
 
+
 /** An image that opens through a mask and drifts slightly within it. */
 function MaskedImage({
   media,
@@ -152,7 +155,7 @@ function MaskedImage({
 
   const inner = (
     <div
-      className={`group relative w-full overflow-hidden bg-[#1f1a14] transition-[clip-path] duration-[1300ms] ease-[cubic-bezier(0.65,0,0.35,1)] motion-reduce:transition-none ${
+      className={`group relative w-full overflow-hidden bg-[#2D3A1F]/60 transition-[clip-path] duration-[1300ms] ease-[cubic-bezier(0.65,0,0.35,1)] motion-reduce:transition-none ${
         visible
           ? "[clip-path:inset(0_0_0_0)]"
           : "motion-safe:[clip-path:inset(100%_0_0_0)]"
@@ -172,7 +175,7 @@ function MaskedImage({
         />
       </div>
       {onOpen ? (
-        <span className="pointer-events-none absolute bottom-3 right-3 flex h-9 w-9 items-center justify-center border border-white/30 bg-black/30 text-white opacity-0 transition-opacity duration-300 group-hover:opacity-100 group-focus-visible:opacity-100">
+        <span className="pointer-events-none absolute bottom-3 right-3 flex h-9 w-9 items-center justify-center border border-white/30 bg-black/50 text-white opacity-0 transition-opacity duration-300 group-hover:opacity-100 group-focus-visible:opacity-100">
           <Plus className="h-4 w-4" />
         </span>
       ) : null}
@@ -198,48 +201,24 @@ function MaskedImage({
 }
 
 /* ============================================================================
- *  01 — HERO
+ *  01 — HERO  (stays dark — full-bleed photo section)
  * ========================================================================== */
 
 function Hero({ project }: { project: Detail }) {
-  const sectionRef = useRef<HTMLElement>(null);
   const imgRef = useRef<HTMLImageElement>(null);
   const [loaded, setLoaded] = useState(false);
-  // The hero's own shape, once measured; until then the image covers it.
-  const [frame, setFrame] = useState<number | null>(null);
   useEffect(() => {
     if (imgRef.current?.complete) setLoaded(true);
-    const section = sectionRef.current;
-    if (!section) return;
-    const measure = () =>
-      setFrame(section.clientWidth / Math.max(section.clientHeight, 1));
-    measure();
-    const ro = new ResizeObserver(measure);
-    ro.observe(section);
-    return () => ro.disconnect();
   }, []);
   const heroFacts = project.facts.slice(0, 3);
   const hero = project.hero;
   const position = project.heroPosition ?? "50% 50%";
-  // On an upright screen the title covers the lower half, so the building
-  // must show whole above it: a stricter bar there.
-  const fit =
-    frame !== null && coverage(hero, frame) < (frame < 1 ? 0.8 : MIN_COVERAGE);
-  // Fitted, a wide render spans the width (a touch over, so its sides meet
-  // the edges) in the upper part of the screen; a tall one the full height,
-  // to the right of the title.
-  const wide = frame !== null && hero.w / hero.h > frame;
-  const fitClass = wide
-    ? "left-1/2 top-[38%] w-[112%] -translate-x-1/2 -translate-y-1/2"
-    : "right-[6%] top-0 h-full";
 
   return (
     <section
-      ref={sectionRef}
       data-header="clear"
-      className="relative h-[100svh] min-h-[640px] overflow-hidden bg-[#0c0a09] text-white"
+      className="relative h-[100svh] min-h-[640px] overflow-hidden bg-[#2D3A1F] text-white"
     >
-      {fit ? <Wash media={hero} position={position} /> : null}
       {/* eslint-disable-next-line @next/next/no-img-element */}
       <img
         ref={imgRef}
@@ -247,17 +226,10 @@ function Hero({ project }: { project: Detail }) {
         alt={hero.alt}
         fetchPriority="high"
         onLoad={() => setLoaded(true)}
-        className={`absolute max-w-none transition-[transform,opacity] duration-[1800ms] ease-[cubic-bezier(0.22,1,0.36,1)] motion-reduce:transition-none ${
-          fit ? fitClass : "inset-0 h-full w-full object-cover"
-        } ${loaded ? "scale-100 opacity-100" : "scale-[1.06] opacity-0"}`}
-        style={
-          fit
-            ? {
-                aspectRatio: `${hero.w} / ${hero.h}`,
-                ...edgeMask(wide ? "to bottom" : "to right", wide ? 14 : 10),
-              }
-            : { objectPosition: position }
-        }
+        className={`absolute inset-0 h-full w-full object-cover transition-[transform,opacity] duration-[1800ms] ease-[cubic-bezier(0.22,1,0.36,1)] motion-reduce:transition-none ${
+          loaded ? "scale-100 opacity-100" : "scale-[1.06] opacity-0"
+        }`}
+        style={{ objectPosition: position }}
       />
       <div
         aria-hidden="true"
@@ -265,54 +237,21 @@ function Hero({ project }: { project: Detail }) {
       />
       <div
         aria-hidden="true"
-        className="absolute inset-0 bg-[linear-gradient(to_top,rgba(12,10,9,0.92)_0%,rgba(12,10,9,0.6)_30%,rgba(12,10,9,0.1)_62%,rgba(12,10,9,0)_100%)]"
+        className="absolute inset-0 bg-[linear-gradient(to_top,rgba(31,41,51,0.92)_0%,rgba(31,41,51,0.6)_30%,rgba(31,41,51,0.1)_62%,rgba(31,41,51,0)_100%)]"
       />
 
-      {/* Where you are, and the way back. */}
-      <nav
-        aria-label="Breadcrumb"
-        className="absolute inset-x-0 top-[92px] mx-auto flex max-w-[1450px] items-center justify-between gap-4 px-6 text-[10px] uppercase tracking-[0.24em] text-white/70 md:top-[104px] md:px-10 lg:top-[116px] lg:px-12"
-      >
-        <ol className="flex items-center gap-3">
-          <li>
-            <Link href="/" className="transition-colors hover:text-brand-gold">
-              Home
-            </Link>
-          </li>
-          <li aria-hidden="true" className="h-px w-4 bg-white/40" />
-          <li>
-            <Link
-              href="/#projects"
-              className="transition-colors hover:text-brand-gold"
-            >
-              Projects
-            </Link>
-          </li>
-          <li aria-hidden="true" className="h-px w-4 bg-white/40" />
-          <li aria-current="page" className="text-white">
-            {project.name}
-          </li>
-        </ol>
-        {project.flagship ? (
-          <span className="hidden text-brand-gold sm:block">
-            The Avenue flagship
-          </span>
-        ) : null}
-      </nav>
 
-      <div className="absolute inset-x-0 bottom-0 mx-auto max-w-[1450px] px-6 pb-24 md:px-10 md:pb-28 lg:px-12">
+<div className="absolute inset-x-0 bottom-0 mx-auto max-w-[1450px] px-6 pb-24 md:px-10 md:pb-28 lg:px-12">
         <div className={revealClass(loaded)}>
           <p className="flex flex-wrap items-center gap-x-3 gap-y-1 text-[10px] uppercase tracking-[0.26em] text-white/70">
             <span className="text-brand-gold">The Avenue</span>
-            <span className="hidden h-px w-5 bg-white/40 sm:block" />
             <span className="hidden sm:inline">{project.category}</span>
-            <span className="h-px w-5 bg-white/40" />
             <span>{project.eyebrow}</span>
           </p>
           <h1 className="mt-5 font-serif text-[clamp(64px,11vw,176px)] font-light leading-[0.86] tracking-[-0.05em]">
             {project.name}
           </h1>
-          <p className="mt-5 font-serif text-[clamp(22px,2.4vw,34px)] font-light italic leading-[1.2] tracking-[-0.02em] text-[#f1d4a6]">
+          <p className="mt-5 font-serif text-[clamp(22px,2.4vw,34px)] font-light italic leading-[1.2] tracking-[-0.02em] text-[#B8A678]">
             {project.tagline}
           </p>
         </div>
@@ -336,7 +275,7 @@ function Hero({ project }: { project: Detail }) {
           <div className="flex flex-wrap gap-3 lg:col-span-4 lg:justify-end">
             <a
               href="#enquire"
-              className="inline-flex items-center gap-3 bg-brand-gold px-7 py-3.5 font-grotesk text-[11px] font-semibold uppercase tracking-[0.2em] text-black transition-colors duration-300 hover:bg-white"
+              className="inline-flex items-center gap-3 bg-[#2D3A1F] px-7 py-3.5 font-grotesk text-[11px] font-semibold uppercase tracking-[0.2em] text-white transition-colors duration-300 hover:bg-brand-bronze"
             >
               Enquire
               <ArrowDown className="h-4 w-4" />
@@ -360,7 +299,7 @@ function Hero({ project }: { project: Detail }) {
 }
 
 /* ============================================================================
- *  OVERVIEW — the story and the facts, on a panel rising over the hero
+ *  OVERVIEW — rises over the hero on rounded corners
  * ========================================================================== */
 
 function Overview({ project }: { project: Detail }) {
@@ -369,24 +308,24 @@ function Overview({ project }: { project: Detail }) {
     <section
       id="overview"
       aria-labelledby="overview-title"
-      className="relative z-10 -mt-10 scroll-mt-24 rounded-t-[24px] bg-[#14110c] text-white md:-mt-14 md:rounded-t-[44px]"
+      className="relative z-10 -mt-10 scroll-mt-24 overflow-hidden rounded-t-[24px] bg-[#F4F1E8] md:-mt-14 md:rounded-t-[44px]"
     >
-      <div className="mx-auto max-w-[1450px] px-6 pb-24 pt-20 md:px-10 md:pb-28 md:pt-24 lg:px-12">
+      <div className="relative mx-auto max-w-[1450px] px-6 pb-24 pt-20 md:px-10 md:pb-28 md:pt-24 lg:px-12">
         <div className="grid gap-y-16 lg:grid-cols-12 lg:gap-x-12">
           <Reveal className="lg:col-span-6">
             <SectionLabel label="Overview" />
             <h2
               id="overview-title"
-              className="font-serif text-[clamp(38px,4.6vw,72px)] font-light leading-[0.98] tracking-[-0.045em]"
+              className="font-serif text-[clamp(38px,4.6vw,72px)] font-light leading-[0.98] tracking-[-0.045em] text-[#2D3A1F]"
             >
               {project.story.heading}
             </h2>
             {project.subline ? (
-              <p className="mt-6 max-w-[560px] text-[12px] uppercase leading-[1.8] tracking-[0.2em] text-brand-gold/90">
+              <p className="mt-6 max-w-[560px] text-[12px] uppercase leading-[1.8] tracking-[0.2em] text-brand-gold">
                 {project.subline}
               </p>
             ) : null}
-            <p className="mt-10 max-w-[600px] font-serif text-[clamp(20px,1.8vw,26px)] font-light leading-[1.35] tracking-[-0.015em] text-white/90">
+            <p className="mt-10 max-w-[600px] font-serif text-[clamp(20px,1.8vw,26px)] font-light leading-[1.35] tracking-[-0.015em] text-[#2D3A1F]/75">
               {lead}
             </p>
             {rest.map((p, i) => (
@@ -394,14 +333,14 @@ function Overview({ project }: { project: Detail }) {
                 key={i}
                 className={`mt-5 max-w-[600px] text-[15px] leading-[1.8] md:text-[16px] ${
                   i === rest.length - 1 && rest.length > 2
-                    ? "text-white/85"
-                    : "text-white/60"
+                    ? "text-[#2D3A1F]/65"
+                    : "text-[#2D3A1F]/55"
                 }`}
               >
                 {p}
               </p>
             ))}
-            <p className="mt-8 text-[10px] uppercase tracking-[0.22em] text-white/35">
+            <p className="mt-8 text-[10px] uppercase tracking-[0.22em] text-[#2D3A1F]/35">
               {project.story.source}
             </p>
           </Reveal>
@@ -410,21 +349,21 @@ function Overview({ project }: { project: Detail }) {
             className="lg:col-span-5 lg:col-start-8 lg:pt-16"
             delay="delay-150"
           >
-            <dl className="border-b border-white/12">
+            <dl className="border-b border-[#2D3A1F]/10">
               {project.facts.map((f) => (
                 <div
                   key={f.label}
-                  className="grid grid-cols-[minmax(0,1fr)_minmax(0,1.1fr)] items-baseline gap-6 border-t border-white/12 py-6"
+                  className="grid grid-cols-[minmax(0,1fr)_minmax(0,1.1fr)] items-baseline gap-6 border-t border-[#2D3A1F]/10 py-6"
                 >
-                  <dt className="order-2 text-[11px] uppercase leading-[1.6] tracking-[0.2em] text-white/55">
+                  <dt className="order-2 text-[11px] uppercase leading-[1.6] tracking-[0.2em] text-[#2D3A1F]/50">
                     {f.label}
                     {f.note ? (
-                      <span className="mt-1 block normal-case tracking-[0.02em] text-white/35">
+                      <span className="mt-1 block normal-case tracking-[0.02em] text-[#2D3A1F]/35">
                         {f.note}
                       </span>
                     ) : null}
                   </dt>
-                  <dd className="order-1 font-serif text-[clamp(30px,3vw,46px)] font-light leading-none tracking-[-0.03em] text-[#f1d4a6]">
+                  <dd className="order-1 font-serif text-[clamp(30px,3vw,46px)] font-light leading-none tracking-[-0.03em] text-brand-gold">
                     {f.value}
                   </dd>
                 </div>
@@ -448,7 +387,6 @@ function ImageStory({
   project: Detail;
   onOpen: (i: number) => void;
 }) {
-  // full, pair, full, pair … in the order the data lists the images
   const blocks: { kind: "full" | "pair"; items: number[] }[] = [];
   let i = 0;
   while (i < project.gallery.length) {
@@ -461,10 +399,10 @@ function ImageStory({
     }
   }
   const caption = (n: number) => (
-    <figcaption className="mt-4 flex items-center justify-between gap-6 text-[10px] uppercase tracking-[0.22em] text-white/45">
+    <figcaption className="mt-4 flex items-center justify-between gap-6 text-[10px] uppercase tracking-[0.22em] text-[#2D3A1F]/50">
       <span>{project.gallery[n].caption}</span>
       <span>
-        <span className="text-white/80">{pad(n + 1)}</span> /{" "}
+        <span className="text-[#2D3A1F]/70">{pad(n + 1)}</span> /{" "}
         {pad(project.gallery.length)}
       </span>
     </figcaption>
@@ -474,21 +412,21 @@ function ImageStory({
     <section
       id="gallery"
       aria-labelledby="gallery-title"
-      className="scroll-mt-24 bg-[#0c0a09] text-white"
+      className="relative scroll-mt-24 overflow-hidden bg-[#F4F1E8]"
     >
-      <div className="mx-auto max-w-[1450px] px-6 pb-24 pt-24 md:px-10 md:pb-32 md:pt-28 lg:px-12">
+      <div className="relative mx-auto max-w-[1450px] px-6 pb-24 pt-24 md:px-10 md:pb-32 md:pt-28 lg:px-12">
         <Reveal className="grid gap-y-6 lg:grid-cols-12 lg:items-end">
           <div className="lg:col-span-8">
             <SectionLabel label="Images" />
             <h2
               id="gallery-title"
-              className="font-serif text-[clamp(38px,4.6vw,72px)] font-light leading-[0.98] tracking-[-0.045em]"
+              className="font-serif text-[clamp(38px,4.6vw,72px)] font-light leading-[0.98] tracking-[-0.045em] text-[#2D3A1F]"
             >
               {project.name},{" "}
-              <em className="italic text-[#f1d4a6]">in images.</em>
+              <em className="italic">in images.</em>
             </h2>
           </div>
-          <p className="text-[10px] uppercase tracking-[0.24em] text-white/40 lg:col-span-3 lg:col-start-10 lg:text-right">
+          <p className="text-[10px] uppercase tracking-[0.24em] text-[#2D3A1F]/45 lg:col-span-3 lg:col-start-10 lg:text-right">
             Select an image to view it larger
           </p>
         </Reveal>
@@ -541,129 +479,84 @@ function ImageStory({
 function Amenities({ project }: { project: Detail }) {
   const a = project.amenities!;
   const arch = a.frame === "arch";
-  const single = a.featured.length === 1;
-
-  const groups = (
-    <div
-      className={`grid gap-x-10 gap-y-12 ${
-        a.groups.length >= 3
-          ? "md:grid-cols-3"
-          : a.groups.length === 2 && !single
-            ? "md:grid-cols-2"
-            : ""
-      }`}
-    >
-      {a.groups.map((g) => (
-        <div key={g.title}>
-          <h3 className="border-b border-white/15 pb-4 text-[10px] uppercase tracking-[0.26em] text-brand-gold/90">
-            {g.title}
-          </h3>
-          <ul
-            className={
-              a.groups.length === 1 && g.items.length > 6
-                ? "sm:columns-2 sm:gap-x-10 lg:columns-3"
-                : ""
-            }
-          >
-            {g.items.map((item) => (
-              <li
-                key={item}
-                className="break-inside-avoid border-b border-white/[0.07] py-3.5 text-[15px] leading-[1.5] text-white/80 transition-colors duration-300 hover:text-white"
-              >
-                {item}
-              </li>
-            ))}
-          </ul>
-        </div>
-      ))}
-    </div>
-  );
 
   return (
     <section
       id="amenities"
       aria-labelledby="amenities-title"
-      className="scroll-mt-24 bg-[#14110c] text-white"
+      className="relative scroll-mt-24 overflow-hidden bg-[#F4F1E8]"
     >
-      <div className="mx-auto max-w-[1450px] px-6 pb-24 pt-24 md:px-10 md:pb-32 md:pt-28 lg:px-12">
+      <div className="relative mx-auto max-w-[1450px] px-6 pb-24 pt-24 md:px-10 md:pb-32 md:pt-28 lg:px-12">
         <Reveal className="grid gap-y-6 lg:grid-cols-12 lg:items-end">
           <div className="lg:col-span-7">
             <SectionLabel label="Amenities" />
             <h2
               id="amenities-title"
-              className="font-serif text-[clamp(38px,4.6vw,72px)] font-light leading-[0.98] tracking-[-0.045em]"
+              className="font-serif text-[clamp(38px,4.6vw,72px)] font-light leading-[0.98] tracking-[-0.045em] text-[#2D3A1F]"
             >
               {a.heading}
             </h2>
             {a.intro ? (
-              <p className="mt-6 max-w-[520px] font-serif text-[clamp(19px,1.6vw,24px)] font-light italic leading-[1.35] text-[#f1d4a6]">
+              <p className="mt-6 max-w-[520px] font-serif text-[clamp(19px,1.6vw,24px)] font-light italic leading-[1.35] text-brand-gold">
                 {a.intro}
               </p>
             ) : null}
           </div>
-          <p className="text-[10px] uppercase tracking-[0.24em] text-white/35 lg:col-span-4 lg:col-start-9 lg:text-right">
+          <p className="text-[10px] uppercase tracking-[0.24em] text-[#2D3A1F]/35 lg:col-span-4 lg:col-start-9 lg:text-right">
             {a.source}
           </p>
         </Reveal>
 
-        {single ? (
-          <div className="mt-14 grid gap-y-14 md:mt-20 lg:grid-cols-12 lg:gap-x-12">
-            <figure className="lg:col-span-7">
-              <MaskedImage
-                media={a.featured[0].image}
-                aspect={ratio(a.featured[0].image, 1.2, 1.7)}
-              />
-              <figcaption className="mt-4 text-[10px] uppercase tracking-[0.22em] text-white/45">
-                {a.featured[0].title}
-              </figcaption>
-            </figure>
-            <div className="lg:col-span-5">{groups}</div>
-          </div>
-        ) : (
-          <>
-            {a.featured.length ? (
-              <ul
-                className={`mt-14 grid gap-x-5 gap-y-12 md:mt-20 ${
-                  arch
-                    ? "grid-cols-2 md:gap-x-8 lg:grid-cols-4"
-                    : "sm:grid-cols-2 md:gap-x-8 lg:grid-cols-3"
-                }`}
+        {a.featured.length === 1 ? (
+          <figure className="mt-14 md:mt-20 lg:w-[58%]">
+            <MaskedImage
+              media={a.featured[0].image}
+              aspect={ratio(a.featured[0].image, 1.2, 1.7)}
+            />
+            <figcaption className="mt-4 text-[10px] uppercase tracking-[0.22em] text-[#2D3A1F]/50">
+              {a.featured[0].title}
+            </figcaption>
+          </figure>
+        ) : a.featured.length > 1 ? (
+          <ul
+            className={`mt-14 grid gap-x-5 gap-y-12 md:mt-20 ${
+              arch
+                ? "grid-cols-2 md:gap-x-8 lg:grid-cols-4"
+                : "sm:grid-cols-2 md:gap-x-8 lg:grid-cols-3"
+            }`}
+          >
+            {a.featured.map((f, i) => (
+              <RevealItem
+                key={f.title}
+                className="group"
+                delay={["", "delay-100", "delay-200", "delay-300"][i % 4]}
               >
-                {a.featured.map((f, i) => (
-                  <RevealItem
-                    key={f.title}
-                    className="group"
-                    delay={["", "delay-100", "delay-200", "delay-300"][i % 4]}
-                  >
-                    <div
-                      className={`relative w-full overflow-hidden bg-[#1f1a14] ${arch ? "aspect-[5/6] rounded-t-[999px]" : "aspect-[16/10]"}`}
-                    >
-                      {/* eslint-disable-next-line @next/next/no-img-element */}
-                      <img
-                        src={f.image.src}
-                        alt={f.image.alt}
-                        loading="lazy"
-                        decoding="async"
-                        className="absolute inset-0 h-full w-full scale-[1.02] object-cover transition-transform duration-[1200ms] ease-out group-hover:scale-[1.07]"
-                      />
-                    </div>
-                    <div className="mt-5">
-                      {f.line ? (
-                        <p className="font-serif text-[15px] font-light italic text-white/55 md:text-[17px]">
-                          {f.line}
-                        </p>
-                      ) : null}
-                      <h3 className="mt-1 text-[11px] uppercase tracking-[0.22em] text-white/90 transition-colors duration-300 group-hover:text-brand-gold md:text-[12px]">
-                        {f.title}
-                      </h3>
-                    </div>
-                  </RevealItem>
-                ))}
-              </ul>
-            ) : null}
-            <Reveal className="mt-16 md:mt-24">{groups}</Reveal>
-          </>
-        )}
+                <div
+                  className={`relative w-full overflow-hidden bg-[#2D3A1F]/60 ${arch ? "aspect-[5/6] rounded-t-[999px]" : "aspect-[16/10]"}`}
+                >
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img
+                    src={f.image.src}
+                    alt={f.image.alt}
+                    loading="lazy"
+                    decoding="async"
+                    className="absolute inset-0 h-full w-full scale-[1.02] object-cover transition-transform duration-[1200ms] ease-out group-hover:scale-[1.07]"
+                  />
+                </div>
+                <div className="mt-5">
+                  {f.line ? (
+                    <p className="font-serif text-[15px] font-light italic text-[#2D3A1F]/55 md:text-[17px]">
+                      {f.line}
+                    </p>
+                  ) : null}
+                  <h3 className="mt-1 text-[11px] uppercase tracking-[0.22em] text-[#2D3A1F]/80 transition-colors duration-300 group-hover:text-brand-gold md:text-[12px]">
+                    {f.title}
+                  </h3>
+                </div>
+              </RevealItem>
+            ))}
+          </ul>
+        ) : null}
       </div>
     </section>
   );
@@ -686,9 +579,9 @@ function Location({
     <section
       id="location"
       aria-labelledby="location-title"
-      className="scroll-mt-24 bg-[#0c0a09] text-white"
+      className="relative scroll-mt-24 overflow-hidden bg-[#F4F1E8]"
     >
-      <div className="mx-auto max-w-[1450px] px-6 pb-24 pt-24 md:px-10 md:pb-32 md:pt-28 lg:px-12">
+      <div className="relative mx-auto max-w-[1450px] px-6 pb-24 pt-24 md:px-10 md:pb-32 md:pt-28 lg:px-12">
         <div className="grid gap-y-14 lg:grid-cols-12 lg:gap-x-12">
           {l.image ? (
             <figure className="lg:col-span-7">
@@ -698,7 +591,7 @@ function Location({
                     type="button"
                     onClick={onOpen}
                     aria-label={`View larger: ${l.image.alt}`}
-                    className="group block w-full bg-[#f3f0eb] p-3 md:p-5"
+                    className="group block w-full bg-white p-3 shadow-[0_2px_24px_rgba(31,41,51,0.07)] md:p-5"
                   >
                     {/* eslint-disable-next-line @next/next/no-img-element */}
                     <img
@@ -718,7 +611,7 @@ function Location({
                   onOpen={onOpen}
                 />
               )}
-              <figcaption className="mt-4 text-[10px] uppercase tracking-[0.22em] text-white/45">
+              <figcaption className="mt-4 text-[10px] uppercase tracking-[0.22em] text-[#2D3A1F]/50">
                 {l.kind === "map"
                   ? "Location map, from the brochure"
                   : l.image.caption}
@@ -735,17 +628,17 @@ function Location({
             <SectionLabel label="Location" />
             <h2
               id="location-title"
-              className="font-serif text-[clamp(36px,4vw,60px)] font-light leading-[1] tracking-[-0.045em]"
+              className="font-serif text-[clamp(36px,4vw,60px)] font-light leading-[1] tracking-[-0.045em] text-[#2D3A1F]"
             >
               {project.eyebrow.replace(/, Nashik$/, "")}
-              <span className="block italic text-[#f1d4a6]">Nashik.</span>
+              <span className="block italic">Nashik.</span>
             </h2>
-            <address className="mt-10 flex gap-4 border-t border-white/12 pt-6 not-italic">
+            <address className="mt-10 flex gap-4 border-t border-[#2D3A1F]/10 pt-6 not-italic">
               <MapPin
                 aria-hidden="true"
                 className="mt-1 h-4 w-4 shrink-0 text-brand-gold"
               />
-              <span className="text-[15px] leading-[1.7] text-white/80">
+              <span className="text-[15px] leading-[1.7] text-[#2D3A1F]/75">
                 {l.address}
               </span>
             </address>
@@ -753,19 +646,19 @@ function Location({
               href={maps}
               target="_blank"
               rel="noopener"
-              className="group mt-6 inline-flex items-center gap-3 text-[11px] uppercase tracking-[0.22em] text-white/80 transition-colors hover:text-brand-gold"
+              className="group mt-6 inline-flex items-center gap-3 text-[11px] uppercase tracking-[0.22em] text-[#2D3A1F]/65 transition-colors hover:text-brand-gold"
             >
-              <span className="border-b border-white/30 pb-1 transition-colors group-hover:border-brand-gold">
+              <span className="border-b border-[#2D3A1F]/25 pb-1 transition-colors group-hover:border-brand-gold">
                 Search in Google Maps
               </span>
               <ArrowUpRight className="h-4 w-4" />
             </a>
             {l.connectivity?.length ? (
-              <ul className="mt-10 border-t border-white/12">
+              <ul className="mt-10 border-t border-[#2D3A1F]/10">
                 {l.connectivity.map((c) => (
                   <li
                     key={c}
-                    className="flex gap-4 border-b border-white/[0.07] py-3.5 text-[14px] leading-[1.55] text-white/70"
+                    className="flex gap-4 border-b border-[#2D3A1F]/10 py-3.5 text-[14px] leading-[1.55] text-[#2D3A1F]/65"
                   >
                     <span
                       aria-hidden="true"
@@ -776,7 +669,7 @@ function Location({
                 ))}
               </ul>
             ) : null}
-            <p className="mt-8 text-[10px] uppercase tracking-[0.22em] text-white/35">
+            <p className="mt-8 text-[10px] uppercase tracking-[0.22em] text-[#2D3A1F]/35">
               {l.source}
             </p>
           </Reveal>
@@ -805,21 +698,21 @@ function Plans({
     <section
       id="plans"
       aria-labelledby="plans-title"
-      className="scroll-mt-24 bg-[#14110c] text-white"
+      className="relative scroll-mt-24 overflow-hidden bg-[#F4F1E8]"
     >
-      <div className="mx-auto max-w-[1450px] px-6 pb-24 pt-24 md:px-10 md:pb-32 md:pt-28 lg:px-12">
+      <div className="relative mx-auto max-w-[1450px] px-6 pb-24 pt-24 md:px-10 md:pb-32 md:pt-28 lg:px-12">
         <Reveal className="grid gap-y-6 lg:grid-cols-12 lg:items-end">
           <div className="lg:col-span-8">
             <SectionLabel label="Floor plans" />
             <h2
               id="plans-title"
-              className="font-serif text-[clamp(38px,4.6vw,72px)] font-light leading-[0.98] tracking-[-0.045em]"
+              className="font-serif text-[clamp(38px,4.6vw,72px)] font-light leading-[0.98] tracking-[-0.045em] text-[#2D3A1F]"
             >
-              Floor <em className="italic text-[#f1d4a6]">plans.</em>
+              Floor <em className="italic">plans.</em>
             </h2>
           </div>
-          <p className="text-[10px] uppercase tracking-[0.24em] text-white/45 lg:col-span-3 lg:col-start-10 lg:text-right">
-            <span className="font-serif text-[28px] normal-case tracking-[-0.02em] text-white/85">
+          <p className="text-[10px] uppercase tracking-[0.24em] text-[#2D3A1F]/45 lg:col-span-3 lg:col-start-10 lg:text-right">
+            <span className="font-serif text-[28px] normal-case tracking-[-0.02em] text-[#2D3A1F]/75">
               {pad(plans.items.length)}
             </span>{" "}
             Plans
@@ -827,19 +720,17 @@ function Plans({
         </Reveal>
 
         <div className="mt-12 grid grid-cols-1 gap-y-8 md:mt-16 lg:grid-cols-12 lg:gap-x-12">
-          {/* The list: a column on desktop, a scrolling row on smaller screens. */}
-          {/* min-w-0: the scrolling row must not widen its column past the screen. */}
           <div className="min-w-0 lg:col-span-4">
             <ol
               aria-label="Plans"
-              className="-mx-6 flex gap-2 overflow-x-auto px-6 pb-2 [scrollbar-width:none] md:-mx-10 md:px-10 lg:mx-0 lg:block lg:overflow-visible lg:border-t lg:border-white/12 lg:px-0 lg:pb-0"
+              className="-mx-6 flex gap-2 overflow-x-auto px-6 pb-2 [scrollbar-width:none] md:-mx-10 md:px-10 lg:mx-0 lg:block lg:overflow-visible lg:border-t lg:border-[#2D3A1F]/10 lg:px-0 lg:pb-0"
             >
               {plans.items.map((p, i) => {
                 const on = i === active;
                 return (
                   <li
                     key={p.title}
-                    className="shrink-0 lg:border-b lg:border-white/[0.08]"
+                    className="shrink-0 lg:border-b lg:border-[#2D3A1F]/10"
                   >
                     <button
                       type="button"
@@ -848,17 +739,17 @@ function Plans({
                       className={`flex w-full items-center gap-4 whitespace-nowrap border px-4 py-2.5 text-left text-[11px] uppercase tracking-[0.16em] transition-colors duration-300 lg:whitespace-normal lg:border-0 lg:px-0 lg:py-4 lg:text-[12px] ${
                         on
                           ? "border-brand-gold/60 text-brand-gold"
-                          : "border-white/15 text-white/55 hover:text-white"
+                          : "border-[#2D3A1F]/15 text-[#2D3A1F]/50 hover:text-[#2D3A1F]"
                       }`}
                     >
                       <span
-                        className={`hidden w-6 shrink-0 text-[10px] lg:block ${on ? "text-brand-gold" : "text-white/30"}`}
+                        className={`hidden w-6 shrink-0 text-[10px] lg:block ${on ? "text-brand-gold" : "text-[#2D3A1F]/30"}`}
                       >
                         {pad(i + 1)}
                       </span>
                       <span className="min-w-0 flex-1">{p.title}</span>
                       <span
-                        className={`hidden h-px shrink-0 transition-all duration-500 lg:block ${on ? "w-10 bg-brand-gold" : "w-4 bg-white/20"}`}
+                        className={`hidden h-px shrink-0 transition-all duration-500 lg:block ${on ? "w-10 bg-brand-gold" : "w-4 bg-[#2D3A1F]/15"}`}
                       />
                     </button>
                   </li>
@@ -872,7 +763,7 @@ function Plans({
               type="button"
               onClick={() => onOpen(active)}
               aria-label={`View full size: ${current.title}`}
-              className="group relative block w-full overflow-hidden bg-[#f3f0eb]"
+              className="group relative block w-full overflow-hidden bg-white shadow-[0_2px_24px_rgba(31,41,51,0.07)]"
             >
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
@@ -885,53 +776,16 @@ function Plans({
                   aspectRatio: `${current.image.w} / ${current.image.h}`,
                 }}
               />
-              <span className="absolute bottom-3 right-3 inline-flex items-center gap-2 bg-[#0c0a09] px-3.5 py-2 text-[10px] uppercase tracking-[0.2em] text-white transition-colors group-hover:bg-brand-gold group-hover:text-black">
+              <span className="absolute bottom-3 right-3 inline-flex items-center gap-2 bg-[#2D3A1F] px-3.5 py-2 text-[10px] uppercase tracking-[0.2em] text-white transition-colors group-hover:bg-brand-gold group-hover:text-white">
                 <Plus className="h-3.5 w-3.5" /> Full size
               </span>
             </button>
-            <figcaption className="mt-4 flex flex-wrap items-center justify-between gap-4 text-[10px] uppercase tracking-[0.22em] text-white/45">
-              <span className="text-white/80">{current.title}</span>
+            <figcaption className="mt-4 flex flex-wrap items-center justify-between gap-4 text-[10px] uppercase tracking-[0.22em] text-[#2D3A1F]/50">
+              <span className="text-[#2D3A1F]/75">{current.title}</span>
               <span>{plans.source}</span>
             </figcaption>
           </figure>
         </div>
-
-        {project.specifications ? (
-          <details className="group mt-20 border-y border-white/12 md:mt-24">
-            <summary className="flex cursor-pointer list-none items-center justify-between gap-6 py-7 [&::-webkit-details-marker]:hidden">
-              <span>
-                <span className="block text-[10px] uppercase tracking-[0.26em] text-brand-gold/90">
-                  Specifications
-                </span>
-                <span className="mt-2 block font-serif text-[clamp(26px,2.6vw,38px)] font-light tracking-[-0.03em]">
-                  {project.specifications.heading}
-                </span>
-              </span>
-              <span className="flex h-11 w-11 shrink-0 items-center justify-center border border-white/20 transition-transform duration-500 group-open:rotate-45">
-                <Plus className="h-4 w-4" />
-              </span>
-            </summary>
-            <div className="grid gap-x-10 gap-y-10 pb-12 pt-4 sm:grid-cols-2 lg:grid-cols-3">
-              {project.specifications.groups.map((g) => (
-                <div key={g.title}>
-                  <h3 className="border-b border-white/12 pb-3 text-[10px] uppercase tracking-[0.24em] text-white/50">
-                    {g.title}
-                  </h3>
-                  <ul className="mt-3 space-y-2">
-                    {g.items.map((item) => (
-                      <li
-                        key={item}
-                        className="text-[14px] leading-[1.6] text-white/75"
-                      >
-                        {item}
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-              ))}
-            </div>
-          </details>
-        ) : null}
       </div>
     </section>
   );
@@ -948,10 +802,10 @@ function Brochure({ project }: { project: Detail }) {
     <section
       id="brochure"
       aria-labelledby="brochure-title"
-      className="scroll-mt-24 bg-[#0c0a09] text-white"
+      className="relative scroll-mt-24 overflow-hidden bg-[#F4F1E8]"
     >
-      <div className="mx-auto max-w-[1450px] px-6 pb-24 pt-24 md:px-10 md:pb-32 md:pt-28 lg:px-12">
-        <div className="grid gap-y-14 border-y border-white/12 py-14 md:py-16 lg:grid-cols-12 lg:items-center lg:gap-x-12">
+      <div className="relative mx-auto max-w-[1450px] px-6 pb-24 pt-24 md:px-10 md:pb-32 md:pt-28 lg:px-12">
+        <div className="grid gap-y-14 border-y border-[#2D3A1F]/10 py-14 md:py-16 lg:grid-cols-12 lg:items-center lg:gap-x-12">
           <Reveal
             className={
               portrait
@@ -966,7 +820,7 @@ function Brochure({ project }: { project: Detail }) {
               className="group block"
               aria-label={`View the ${project.fullName} brochure (opens in a new tab)`}
             >
-              <div className="relative overflow-hidden shadow-[0_30px_80px_rgba(0,0,0,0.55)] transition-transform duration-700 group-hover:-translate-y-1">
+              <div className="relative overflow-hidden shadow-[0_16px_56px_rgba(31,41,51,0.18)] transition-transform duration-700 group-hover:-translate-y-1">
                 {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img
                   src={b.cover.src}
@@ -991,27 +845,27 @@ function Brochure({ project }: { project: Detail }) {
             <SectionLabel label="Brochure" />
             <h2
               id="brochure-title"
-              className="font-serif text-[clamp(34px,3.8vw,58px)] font-light leading-[1] tracking-[-0.045em]"
+              className="font-serif text-[clamp(34px,3.8vw,58px)] font-light leading-[1] tracking-[-0.045em] text-[#2D3A1F]"
             >
               The complete{" "}
-              <em className="italic text-[#f1d4a6]">{project.name}</em>{" "}
+              <em className="italic">{project.name}</em>{" "}
               brochure.
             </h2>
-            <p className="mt-6 max-w-[480px] text-[15px] leading-[1.75] text-white/65 md:text-[16px]">
+            <p className="mt-6 max-w-[480px] text-[15px] leading-[1.75] text-[#2D3A1F]/60 md:text-[16px]">
               This page is a selection. The brochure is the whole of it, as The
               Avenue published it.
             </p>
-            <dl className="mt-8 flex flex-wrap gap-x-8 gap-y-3 text-[10px] uppercase tracking-[0.22em] text-white/45">
+            <dl className="mt-8 flex flex-wrap gap-x-8 gap-y-3 text-[10px] uppercase tracking-[0.22em] text-[#2D3A1F]/45">
               <div>
                 <dt className="sr-only">Pages</dt>
                 <dd>
-                  <span className="text-white/85">{b.pages}</span> pages
+                  <span className="text-[#2D3A1F]/75">{b.pages}</span> pages
                 </dd>
               </div>
               <div>
                 <dt className="sr-only">Format and size</dt>
                 <dd>
-                  PDF · <span className="text-white/85">{b.sizeMb} MB</span>
+                  PDF · <span className="text-[#2D3A1F]/75">{b.sizeMb} MB</span>
                 </dd>
               </div>
               <div>
@@ -1024,7 +878,7 @@ function Brochure({ project }: { project: Detail }) {
                 href={b.href}
                 target="_blank"
                 rel="noopener"
-                className="inline-flex items-center gap-3 bg-brand-gold px-7 py-3.5 font-grotesk text-[11px] font-semibold uppercase tracking-[0.2em] text-black transition-colors duration-300 hover:bg-white"
+                className="inline-flex items-center gap-3 bg-[#2D3A1F] px-7 py-3.5 font-grotesk text-[11px] font-semibold uppercase tracking-[0.2em] text-white transition-colors duration-300 hover:bg-brand-bronze"
               >
                 View brochure
                 <ExternalLink className="h-4 w-4" />
@@ -1032,15 +886,15 @@ function Brochure({ project }: { project: Detail }) {
               <a
                 href={b.href}
                 download={b.fileName}
-                className="inline-flex items-center gap-3 border border-white/35 px-7 py-3.5 font-grotesk text-[11px] font-semibold uppercase tracking-[0.2em] text-white transition-colors duration-300 hover:border-brand-gold hover:text-brand-gold"
+                className="inline-flex items-center gap-3 border border-[#2D3A1F]/30 px-7 py-3.5 font-grotesk text-[11px] font-semibold uppercase tracking-[0.2em] text-[#2D3A1F] transition-colors duration-300 hover:border-brand-gold hover:text-brand-gold"
               >
                 Download brochure
                 <Download className="h-4 w-4" />
               </a>
             </div>
             {project.disclaimer ? (
-              <p className="mt-10 max-w-[560px] text-[11px] leading-[1.7] text-white/35">
-                <span className="uppercase tracking-[0.2em] text-white/45">
+              <p className="mt-10 max-w-[560px] text-[11px] leading-[1.7] text-[#2D3A1F]/35">
+                <span className="uppercase tracking-[0.2em] text-[#2D3A1F]/45">
                   Brochure disclaimer ·{" "}
                 </span>
                 {project.disclaimer}
@@ -1058,7 +912,7 @@ function Brochure({ project }: { project: Detail }) {
  * ========================================================================== */
 
 const inputClass =
-  "w-full border-0 border-b border-white/20 bg-transparent px-0 py-3 text-[15px] text-white placeholder:text-white/30 transition-colors focus:border-brand-gold focus:outline-none focus:ring-0";
+  "w-full border-0 border-b border-[#2D3A1F]/20 bg-transparent px-0 py-3 text-[15px] text-[#2D3A1F] placeholder:text-[#2D3A1F]/30 transition-colors focus:border-brand-gold focus:outline-none focus:ring-0";
 
 function Enquire({ project }: { project: Detail }) {
   const [form, setForm] = useState({
@@ -1071,8 +925,6 @@ function Enquire({ project }: { project: Detail }) {
   const set = (k: keyof typeof form) => (e: { target: { value: string } }) =>
     setForm((f) => ({ ...f, [k]: e.target.value }));
 
-  // There is no form backend on this site, so the enquiry is composed as an
-  // email to The Avenue — with the project already in it — for the visitor to send.
   const submit = (e: FormEvent) => {
     e.preventDefault();
     const subject = `Enquiry — ${project.fullName}`;
@@ -1094,57 +946,57 @@ function Enquire({ project }: { project: Detail }) {
     <section
       id="enquire"
       aria-labelledby="enquire-title"
-      className="scroll-mt-24 bg-[#14110c] text-white"
+      className="relative scroll-mt-24 overflow-hidden bg-[#F4F1E8]"
     >
-      <div className="mx-auto max-w-[1450px] px-6 pb-24 pt-24 md:px-10 md:pb-32 md:pt-28 lg:px-12">
+      <div className="relative mx-auto max-w-[1450px] px-6 pb-24 pt-24 md:px-10 md:pb-32 md:pt-28 lg:px-12">
         <div className="grid gap-y-16 lg:grid-cols-12 lg:gap-x-12">
           <Reveal className="lg:col-span-5">
             <SectionLabel label="Enquire" />
             <h2
               id="enquire-title"
-              className="font-serif text-[clamp(38px,4.6vw,72px)] font-light leading-[0.98] tracking-[-0.045em]"
+              className="font-serif text-[clamp(38px,4.6vw,72px)] font-light leading-[0.98] tracking-[-0.045em] text-[#2D3A1F]"
             >
               Enquire about{" "}
-              <em className="block italic text-[#f1d4a6]">{project.name}.</em>
+              <em className="block italic">{project.name}.</em>
             </h2>
-            <p className="mt-6 max-w-[440px] text-[15px] leading-[1.75] text-white/65 md:text-[16px]">
+            <p className="mt-6 max-w-[440px] text-[15px] leading-[1.75] text-[#2D3A1F]/60 md:text-[16px]">
               Send your details and your enquiry opens in your email app,
               addressed to The Avenue with {project.fullName} already in it. Or
               call us directly.
             </p>
 
-            <ul className="mt-10 border-t border-white/12">
-              <li className="flex items-center gap-4 border-b border-white/[0.08] py-4">
+            <ul className="mt-10 border-t border-[#2D3A1F]/10">
+              <li className="flex items-center gap-4 border-b border-[#2D3A1F]/10 py-4">
                 <Phone
                   aria-hidden="true"
                   className="h-4 w-4 shrink-0 text-brand-gold"
                 />
                 <a
                   href={project.enquiry.phoneHref}
-                  className="text-[15px] text-white/85 transition-colors hover:text-brand-gold"
+                  className="text-[15px] text-[#2D3A1F]/75 transition-colors hover:text-brand-gold"
                 >
                   {project.enquiry.phone}
                 </a>
               </li>
-              <li className="flex items-center gap-4 border-b border-white/[0.08] py-4">
+              <li className="flex items-center gap-4 border-b border-[#2D3A1F]/10 py-4">
                 <Mail
                   aria-hidden="true"
                   className="h-4 w-4 shrink-0 text-brand-gold"
                 />
                 <a
                   href={company.emailHref}
-                  className="break-all text-[15px] text-white/85 transition-colors hover:text-brand-gold"
+                  className="break-all text-[15px] text-[#2D3A1F]/75 transition-colors hover:text-brand-gold"
                 >
                   {company.email}
                 </a>
               </li>
-              <li className="flex items-start gap-4 border-b border-white/[0.08] py-4">
+              <li className="flex items-start gap-4 border-b border-[#2D3A1F]/10 py-4">
                 <MapPin
                   aria-hidden="true"
                   className="mt-1 h-4 w-4 shrink-0 text-brand-gold"
                 />
-                <span className="text-[14px] leading-[1.6] text-white/65">
-                  <span className="block text-[10px] uppercase tracking-[0.22em] text-white/40">
+                <span className="text-[14px] leading-[1.6] text-[#2D3A1F]/60">
+                  <span className="block text-[10px] uppercase tracking-[0.22em] text-[#2D3A1F]/40">
                     Office
                   </span>
                   {company.address}
@@ -1156,11 +1008,11 @@ function Enquire({ project }: { project: Detail }) {
           <Reveal className="lg:col-span-6 lg:col-start-7" delay="delay-150">
             <form
               onSubmit={submit}
-              className="border border-white/12 bg-[#0c0a09]/60 p-6 md:p-10"
+              className="border border-[#2D3A1F]/10 bg-white/70 p-6 md:p-10"
               aria-describedby="enquire-note"
             >
-              <div className="flex flex-wrap items-center justify-between gap-3 border-b border-white/12 pb-5">
-                <span className="text-[10px] uppercase tracking-[0.24em] text-white/45">
+              <div className="flex flex-wrap items-center justify-between gap-3 border-b border-[#2D3A1F]/10 pb-5">
+                <span className="text-[10px] uppercase tracking-[0.24em] text-[#2D3A1F]/45">
                   Your enquiry is about
                 </span>
                 <span className="inline-flex items-center gap-2 border border-brand-gold/50 px-3 py-1.5 text-[11px] uppercase tracking-[0.18em] text-brand-gold">
@@ -1171,7 +1023,7 @@ function Enquire({ project }: { project: Detail }) {
 
               <div className="mt-6 grid gap-x-8 gap-y-6 sm:grid-cols-2">
                 <label className="block">
-                  <span className="text-[10px] uppercase tracking-[0.22em] text-white/50">
+                  <span className="text-[10px] uppercase tracking-[0.22em] text-[#2D3A1F]/50">
                     Name *
                   </span>
                   <input
@@ -1184,7 +1036,7 @@ function Enquire({ project }: { project: Detail }) {
                   />
                 </label>
                 <label className="block">
-                  <span className="text-[10px] uppercase tracking-[0.22em] text-white/50">
+                  <span className="text-[10px] uppercase tracking-[0.22em] text-[#2D3A1F]/50">
                     Phone *
                   </span>
                   <input
@@ -1198,7 +1050,7 @@ function Enquire({ project }: { project: Detail }) {
                   />
                 </label>
                 <label className="block sm:col-span-2">
-                  <span className="text-[10px] uppercase tracking-[0.22em] text-white/50">
+                  <span className="text-[10px] uppercase tracking-[0.22em] text-[#2D3A1F]/50">
                     Email
                   </span>
                   <input
@@ -1211,7 +1063,7 @@ function Enquire({ project }: { project: Detail }) {
                   />
                 </label>
                 <label className="block sm:col-span-2">
-                  <span className="text-[10px] uppercase tracking-[0.22em] text-white/50">
+                  <span className="text-[10px] uppercase tracking-[0.22em] text-[#2D3A1F]/50">
                     Message
                   </span>
                   <textarea
@@ -1227,7 +1079,7 @@ function Enquire({ project }: { project: Detail }) {
 
               <button
                 type="submit"
-                className="mt-9 inline-flex w-full items-center justify-center gap-3 bg-brand-gold px-7 py-4 font-grotesk text-[11px] font-semibold uppercase tracking-[0.2em] text-black transition-colors duration-300 hover:bg-white sm:w-auto"
+                className="mt-9 inline-flex w-full items-center justify-center gap-3 bg-[#2D3A1F] px-7 py-4 font-grotesk text-[11px] font-semibold uppercase tracking-[0.2em] text-white transition-colors duration-300 hover:bg-brand-bronze sm:w-auto"
               >
                 Send enquiry
                 <ArrowRight className="h-4 w-4" />
@@ -1235,7 +1087,7 @@ function Enquire({ project }: { project: Detail }) {
               <p
                 id="enquire-note"
                 role="status"
-                className="mt-5 text-[12px] leading-[1.6] text-white/45"
+                className="mt-5 text-[12px] leading-[1.6] text-[#2D3A1F]/45"
               >
                 {sent ? (
                   <>
@@ -1243,14 +1095,14 @@ function Enquire({ project }: { project: Detail }) {
                     didn&apos;t open, call{" "}
                     <a
                       href={project.enquiry.phoneHref}
-                      className="text-white/80 underline underline-offset-4"
+                      className="text-[#2D3A1F]/75 underline underline-offset-4"
                     >
                       {project.enquiry.phone}
                     </a>{" "}
                     or write to{" "}
                     <a
                       href={company.emailHref}
-                      className="text-white/80 underline underline-offset-4"
+                      className="text-[#2D3A1F]/75 underline underline-offset-4"
                     >
                       {company.email}
                     </a>
@@ -1272,14 +1124,8 @@ function Enquire({ project }: { project: Detail }) {
  *  MORE FROM THE AVENUE
  * ========================================================================== */
 
-/** The shape of a project card. */
 const CARD = 4 / 5;
 
-/**
- * A card's image: the hero, unless the gallery holds a view that fills the
- * card's upright shape far better (Milestone's towers above the trees,
- * rather than its wide hero cut down to a sliver).
- */
 const cardImage = (p: Detail) => {
   const best = [...p.gallery].sort((a, b) => coverage(b, CARD) - coverage(a, CARD))[0];
   return best && coverage(best, CARD) > coverage(p.hero, CARD) + 0.15
@@ -1287,17 +1133,17 @@ const cardImage = (p: Detail) => {
     : { media: p.hero, position: p.heroPosition ?? "50% 50%" };
 };
 
-function MoreProjects({ related }: { related: Detail[] }) {
+function MoreProjects({ related, project }: { related: Detail[]; project: Detail }) {
   return (
-    <section aria-labelledby="more-title" className="bg-[#0c0a09] text-white">
-      <div className="mx-auto max-w-[1450px] px-6 pb-24 pt-24 md:px-10 md:pb-28 md:pt-28 lg:px-12">
+    <section aria-labelledby="more-title" className="relative overflow-hidden bg-[#F4F1E8]">
+      <div className="relative mx-auto max-w-[1450px] px-6 pb-24 pt-24 md:px-10 md:pb-28 md:pt-28 lg:px-12">
         <Reveal>
           <SectionLabel label="Projects" />
           <h2
             id="more-title"
-            className="font-serif text-[clamp(38px,4.6vw,72px)] font-light leading-[0.98] tracking-[-0.045em]"
+            className="font-serif text-[clamp(38px,4.6vw,72px)] font-light leading-[0.98] tracking-[-0.045em] text-[#2D3A1F]"
           >
-            More from <em className="italic text-[#f1d4a6]">The Avenue.</em>
+            More from <em className="italic">The Avenue.</em>
           </h2>
         </Reveal>
         <ul className="mt-14 grid gap-x-6 gap-y-14 sm:grid-cols-2 md:mt-16 lg:grid-cols-4 lg:gap-x-8">
@@ -1310,7 +1156,7 @@ function MoreProjects({ related }: { related: Detail[] }) {
               delay={["", "delay-100", "delay-200", "delay-300"][i % 4]}
             >
               <Link href={projectHref(p.slug)} className="group block">
-                <div className="relative aspect-[4/5] overflow-hidden bg-[#1f1a14]">
+                <div className="relative aspect-[4/5] overflow-hidden bg-[#2D3A1F]">
                   {fit ? <Wash media={media} position={position} /> : null}
                   {/* eslint-disable-next-line @next/next/no-img-element */}
                   <img
@@ -1331,33 +1177,210 @@ function MoreProjects({ related }: { related: Detail[] }) {
                   />
                   <div
                     aria-hidden="true"
-                    className="absolute inset-x-0 bottom-0 h-1/2 bg-gradient-to-t from-black/60 to-transparent"
+                    className="absolute inset-x-0 bottom-0 h-1/2 bg-gradient-to-t from-black/50 to-transparent"
                   />
                   {p.flagship ? (
-                    <span className="absolute left-4 top-4 bg-brand-gold px-2.5 py-1 text-[9px] font-semibold uppercase tracking-[0.2em] text-black">
+                    <span className="absolute left-4 top-4 bg-brand-gold px-2.5 py-1 text-[9px] font-semibold uppercase tracking-[0.2em] text-white">
                       Flagship
                     </span>
                   ) : null}
-                  <span className="absolute bottom-4 left-4 text-[10px] uppercase tracking-[0.22em] text-white/80">
+                  <span className="absolute bottom-4 left-4 text-[10px] uppercase tracking-[0.22em] text-white/85">
                     {p.eyebrow}
                   </span>
                 </div>
                 <div className="mt-5 flex items-start justify-between gap-4">
                   <div>
-                    <h3 className="font-serif text-[30px] font-light leading-none tracking-[-0.03em] transition-colors group-hover:text-[#f1d4a6]">
+                    <h3 className="font-serif text-[30px] font-light leading-none tracking-[-0.03em] text-[#2D3A1F] transition-colors group-hover:text-brand-gold">
                       {p.name}
                     </h3>
-                    <p className="mt-2 font-serif text-[16px] font-light italic text-white/55">
+                    <p className="mt-2 font-serif text-[16px] font-light italic text-[#2D3A1F]/55">
                       {p.tagline}
                     </p>
                   </div>
-                  <ArrowUpRight className="mt-1 h-5 w-5 shrink-0 text-white/50 transition-all duration-500 group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-hover:text-brand-gold" />
+                  <ArrowUpRight className="mt-1 h-5 w-5 shrink-0 text-[#2D3A1F]/40 transition-all duration-500 group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-hover:text-brand-gold" />
                 </div>
               </Link>
             </RevealItem>
             );
           })}
         </ul>
+      </div>
+    </section>
+  );
+}
+
+/* ============================================================================
+ *  SHOWCASE — full-bleed image sections with an editorial heading
+ * ========================================================================== */
+
+function Showcase({
+  section,
+  onOpen,
+}: {
+  section: Extract<SectionType, { type: "showcase" }>;
+  onOpen?: () => void;
+}) {
+  return (
+    <section
+      aria-labelledby={`${section.heading.toLowerCase().replace(/\s+/g, "-")}-title`}
+      className="relative scroll-mt-24 overflow-hidden bg-[#F4F1E8]"
+    >
+      <div className="relative mx-auto max-w-[1450px] px-6 pb-24 pt-24 md:px-10 md:pb-32 md:pt-28 lg:px-12">
+        <div className="grid gap-y-14 lg:grid-cols-12 lg:gap-x-12">
+          <Reveal className="lg:col-span-5">
+            <SectionLabel label={section.source ?? "The Avenue"} />
+            <h2
+              className="font-serif text-[clamp(38px,4.6vw,72px)] font-light leading-[0.98] tracking-[-0.045em] text-[#2D3A1F]"
+            >
+              {section.heading}
+            </h2>
+            {section.intro && (
+              <p className="mt-6 max-w-[520px] font-serif text-[clamp(19px,1.6vw,24px)] font-light italic leading-[1.35] text-brand-gold">
+              {section.intro}
+            </p>
+            )}
+            <div className="mt-12">
+              <MaskedImage
+                media={section.image}
+                aspect={ratio(section.image, 1.2, 1.7)}
+                onOpen={onOpen}
+              />
+              {section.caption ? (
+                <figcaption className="mt-4 text-[10px] uppercase tracking-[0.22em] text-[#2D3A1F]/50">
+                  {section.caption}
+                </figcaption>
+              ) : null}
+            </div>
+          </Reveal>
+
+          <Reveal className="lg:col-span-6 lg:col-start-7 lg:pt-16" delay="delay-150">
+            <p className="font-serif text-[clamp(20px,1.8vw,26px)] font-light leading-[1.35] tracking-[-0.015em] text-[#2D3A1F]/75">
+              {section.intro}
+            </p>
+            <p className="mt-6 max-w-[600px] text-[15px] leading-[1.8] text-[#2D3A1F]/55 md:text-[16px]">
+              {section.source}
+            </p>
+          </Reveal>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+/* ============================================================================
+ *  FEATURE BLOCK — heading with a list of bullet points
+ * ========================================================================== */
+
+function FeatureBlock({ section }: { section: Extract<SectionType, { type: "featureBlock" }> }) {
+  return (
+    <section
+      aria-labelledby={`${section.heading.toLowerCase().replace(/\s+/g, "-")}-title`}
+      className="relative scroll-mt-24 overflow-hidden bg-[#F4F1E8]"
+    >
+      <div className="relative mx-auto max-w-[1450px] px-6 pb-24 pt-24 md:px-10 md:pb-32 md:pt-28 lg:px-12">
+        <Reveal className="grid gap-y-10 lg:grid-cols-12 lg:gap-x-12">
+          <div className="lg:col-span-5">
+            <SectionLabel label={section.source ?? "The Avenue"} />
+            <h2
+              id={`${section.heading.toLowerCase().replace(/\s+/g, "-")}-title`}
+              className="font-serif text-[clamp(38px,4.6vw,72px)] font-light leading-[0.98] tracking-[-0.045em] text-[#2D3A1F]"
+            >
+              {section.heading}
+            </h2>
+            {section.intro ? (
+              <p className="mt-6 max-w-[520px] font-serif text-[clamp(19px,1.6vw,24px)] font-light italic leading-[1.35] text-brand-gold">
+                {section.intro}
+              </p>
+            ) : null}
+          </div>
+          <Reveal className="lg:col-span-6 lg:col-start-7 lg:pt-16" delay="delay-150">
+            <ul className="space-y-5">
+              {section.items.map((item) => (
+                <li key={item} className="flex gap-4 border-b border-[#2D3A1F]/10 py-3.5 text-[14px] leading-[1.55] text-[#2D3A1F]/65">
+                  <span
+                    aria-hidden="true"
+                    className="mt-[10px] h-px w-3 shrink-0 bg-brand-gold/70"
+                  />
+                  {item}
+                </li>
+              ))}
+            </ul>
+          </Reveal>
+        </Reveal>
+      </div>
+    </section>
+  );
+}
+
+/* ============================================================================
+ *  ABOUT — heading with paragraphs
+ * ========================================================================== */
+
+function About({ section }: { section: Extract<SectionType, { type: "about" }> }) {
+  return (
+    <section
+      aria-labelledby={`${section.heading.toLowerCase().replace(/\s+/g, "-")}-title`}
+      className="relative scroll-mt-24 overflow-hidden bg-[#F4F1E8]"
+    >
+      <div className="relative mx-auto max-w-[1450px] px-6 pb-24 pt-24 md:px-10 md:pb-32 md:pt-28 lg:px-12">
+        <div className="grid gap-y-16 lg:grid-cols-12 lg:gap-x-12">
+          <Reveal className="lg:col-span-6">
+            <SectionLabel label={section.source ?? "The Avenue"} />
+            <h2
+              id={`${section.heading.toLowerCase().replace(/\s+/g, "-")}-title`}
+              className="font-serif text-[clamp(38px,4.6vw,72px)] font-light leading-[0.98] tracking-[-0.045em] text-[#2D3A1F]"
+            >
+              {section.heading}
+            </h2>
+            {section.paragraphs.map((p, i) => (
+              <p
+                key={i}
+                className={`mt-8 max-w-[600px] font-serif text-[clamp(20px,1.8vw,26px)] font-light leading-[1.35] tracking-[-0.015em] text-[#2D3A1F]/75`}
+              >
+                {p}
+              </p>
+            ))}
+          </Reveal>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+/* ============================================================================
+ *  SPACE SHOWCASE — image with a description
+ * ========================================================================== */
+
+function SpaceShowcase({ section }: { section: Extract<SectionType, { type: "spaceShowcase" }> }) {
+  return (
+    <section
+      aria-labelledby={`${section.title.toLowerCase().replace(/\s+/g, "-")}-title`}
+      className="relative scroll-mt-24 overflow-hidden bg-[#F4F1E8]"
+    >
+      <div className="relative mx-auto max-w-[1450px] px-6 pb-24 pt-24 md:px-10 md:pb-32 md:pt-28 lg:px-12">
+        <div className="grid gap-y-14 lg:grid-cols-12 lg:gap-x-12">
+          <Reveal className="lg:col-span-7">
+            <MaskedImage
+              media={section.image}
+              aspect={ratio(section.image, 1.2, 1.7)}
+            />
+            <figcaption className="mt-4 text-[10px] uppercase tracking-[0.22em] text-[#2D3A1F]/50">
+              {section.title}
+            </figcaption>
+          </Reveal>
+          <Reveal className="lg:col-span-4 lg:col-start-9 lg:pt-16" delay="delay-150">
+            <SectionLabel label="The Avenue" />
+            <h2
+              id={`${section.title.toLowerCase().replace(/\s+/g, "-")}-title`}
+              className="font-serif text-[clamp(38px,4.6vw,72px)] font-light leading-[0.98] tracking-[-0.045em] text-[#2D3A1F]"
+            >
+              {section.title}
+            </h2>
+            <p className="mt-8 max-w-[560px] font-serif text-[clamp(20px,1.8vw,26px)] font-light leading-[1.35] tracking-[-0.015em] text-[#2D3A1F]/75">
+              {section.description}
+            </p>
+          </Reveal>
+        </div>
       </div>
     </section>
   );
@@ -1385,7 +1408,7 @@ export default function ProjectDetail({
   };
 
   return (
-    <div className="bg-[#0c0a09]">
+    <div className="bg-[#2D3A1F]">
       <Hero project={project} />
       <Overview project={project} />
       {project.gallery.length ? (
@@ -1411,7 +1434,7 @@ export default function ProjectDetail({
       ) : null}
       {project.brochure ? <Brochure project={project} /> : null}
       <Enquire project={project} />
-      <MoreProjects related={related} />
+      <MoreProjects related={related} project={project} />
 
       <Lightbox
         items={lightbox ? sets[lightbox.set] : []}

@@ -138,7 +138,7 @@ export default function OurProjects() {
     <section
       ref={sectionRef}
       id="projects"
-      className="relative h-[400vh] scroll-mt-24 bg-[#f3f0eb] text-[#171717]"
+      className="relative h-[400vh] scroll-mt-24 bg-[#F4F1E8] text-[#2D3A1F]"
     >
       <div className="sticky top-0 flex h-screen w-full flex-col overflow-hidden">
         {/* HEADER */}
@@ -146,13 +146,13 @@ export default function OurProjects() {
           <div className="mx-auto flex max-w-[1450px] items-center justify-between gap-6">
             <div className="flex items-center gap-4">
               <span className="h-px w-10 bg-black/40" />
-              <h2 className="text-[10px] uppercase tracking-[0.28em] text-black/50">
+              <h2 className="text-[10px] uppercase tracking-[0.28em] text-[#2D3A1F]/50">
                 Our Projects
               </h2>
             </div>
 
             <div className="flex items-center gap-4">
-              <span className="text-[10px] tracking-[0.2em] text-black/40">
+              <span className="text-[10px] tracking-[0.2em] text-[#2D3A1F]/40">
                 {String(activeIndex + 1).padStart(2, "0")} /{" "}
                 {String(COUNT).padStart(2, "0")}
               </span>
@@ -182,8 +182,8 @@ export default function OurProjects() {
                 >
                   <div className="overflow-hidden">
                     <div data-line="" className="will-change-transform">
-                      <span className="text-[10px] uppercase tracking-[0.24em] text-black/45">
-                        {project.category} · {project.status}
+                      <span className="text-[10px] uppercase tracking-[0.24em] text-[#2D3A1F]/45">
+                        {project.category}
                       </span>
                     </div>
                   </div>
@@ -198,7 +198,7 @@ export default function OurProjects() {
 
                   <div className="mt-4 overflow-hidden md:mt-5">
                     <div data-line="" className="will-change-transform">
-                      <p className="max-w-[420px] font-serif text-[clamp(17px,1.7vw,24px)] font-light leading-[1.35] tracking-[-0.02em] text-black/70">
+                      <p className="max-w-[420px] font-serif text-[clamp(17px,1.7vw,24px)] font-light leading-[1.35] tracking-[-0.02em] text-[#2D3A1F]/70">
                         {project.statement}
                       </p>
                     </div>
@@ -206,7 +206,7 @@ export default function OurProjects() {
 
                   <div className="mt-6 overflow-hidden md:mt-7">
                     <div data-line="" className="will-change-transform">
-                      <div className="flex flex-wrap items-center gap-x-5 gap-y-2 text-[11px] uppercase tracking-[0.18em] text-black/55">
+                      <div className="flex flex-wrap items-center gap-x-5 gap-y-2 text-[11px] uppercase tracking-[0.18em] text-[#2D3A1F]/55">
                         <span>{project.configuration}</span>
                         {project.locality ? (
                           <>
@@ -222,7 +222,7 @@ export default function OurProjects() {
                     <div data-line="" className="will-change-transform">
                       <Link
                         href={ENQUIRE_HREF}
-                        className="group inline-flex items-center gap-3 text-[11px] uppercase tracking-[0.22em] text-black/60 transition-colors hover:text-black"
+                        className="group inline-flex items-center gap-3 text-[11px] uppercase tracking-[0.22em] text-[#2D3A1F]/60 transition-colors hover:text-[#2D3A1F]"
                       >
                         <span>Enquire about {project.name}</span>
                         <ArrowRight className="h-3.5 w-3.5 transition-transform duration-500 group-hover:translate-x-1.5" />
@@ -234,7 +234,7 @@ export default function OurProjects() {
             </div>
 
             {/* IMAGE STACK */}
-            <div className="relative order-1 aspect-[16/11] w-full overflow-hidden bg-[#e6e2db] lg:order-2 lg:col-span-7 lg:aspect-auto lg:h-[min(62vh,560px)]">
+            <div className="relative order-1 aspect-[16/11] w-full overflow-hidden bg-[#F4F1E8] lg:order-2 lg:col-span-7 lg:aspect-auto lg:h-[min(62vh,560px)]">
               {projects.map((project, i) => (
                 <div
                   key={project.slug}

@@ -66,17 +66,17 @@ export default function Lightbox({
       role="dialog"
       aria-modal="true"
       aria-label={label}
-      className={`fixed inset-0 z-[70] flex flex-col ${light ? "bg-[#f3f0eb]" : "bg-[#0c0a09]/[0.97]"}`}
+      className={`fixed inset-0 z-[70] flex flex-col ${light ? "bg-[#F4F1E8]" : "bg-[#2D3A1F]/[0.97]"}`}
       onClick={onClose}
     >
       <div
         className={`flex items-center justify-between gap-4 px-5 py-4 text-[10px] uppercase tracking-[0.24em] md:px-8 ${
-          light ? "text-black/55" : "text-white/55"
+          light ? "text-[#2D3A1F]/55" : "text-white/55"
         }`}
         onClick={(e) => e.stopPropagation()}
       >
         <span className="min-w-0 truncate">
-          <span className={light ? "text-black" : "text-white"}>{String(index + 1).padStart(2, "0")}</span> /{" "}
+          <span className={light ? "text-[#2D3A1F]" : "text-white"}>{String(index + 1).padStart(2, "0")}</span> /{" "}
           {String(count).padStart(2, "0")}
           {item.caption ? <span className="ml-4 normal-case tracking-[0.02em]">{item.caption}</span> : null}
         </span>
@@ -86,7 +86,7 @@ export default function Lightbox({
           onClick={onClose}
           aria-label="Close"
           className={`flex h-10 w-10 shrink-0 items-center justify-center border transition-colors ${
-            light ? "border-black/20 text-black hover:border-black" : "border-white/20 text-white hover:border-brand-gold hover:text-brand-gold"
+            light ? "border-[#2D3A1F]/20 text-[#2D3A1F] hover:border-[#2D3A1F]" : "border-white/20 text-white hover:border-brand-gold hover:text-brand-gold"
           }`}
         >
           <X className="h-4 w-4" />
@@ -112,7 +112,7 @@ export default function Lightbox({
                 step(-1);
               }}
               className={`absolute left-2 top-1/2 flex h-11 w-11 -translate-y-1/2 items-center justify-center border md:left-6 ${
-                light ? "border-black/15 bg-white/70 text-black" : "border-white/15 bg-black/40 text-white hover:border-brand-gold"
+                light ? "border-[#2D3A1F]/15 bg-white/70 text-[#2D3A1F]" : "border-white/15 bg-black/40 text-white hover:border-brand-gold"
               }`}
             >
               <ChevronLeft className="h-5 w-5" />
@@ -125,7 +125,7 @@ export default function Lightbox({
                 step(1);
               }}
               className={`absolute right-2 top-1/2 flex h-11 w-11 -translate-y-1/2 items-center justify-center border md:right-6 ${
-                light ? "border-black/15 bg-white/70 text-black" : "border-white/15 bg-black/40 text-white hover:border-brand-gold"
+                light ? "border-[#2D3A1F]/15 bg-white/70 text-[#2D3A1F]" : "border-white/15 bg-black/40 text-white hover:border-brand-gold"
               }`}
             >
               <ChevronRight className="h-5 w-5" />

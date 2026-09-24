@@ -68,7 +68,7 @@ type Shot = {
 
 type Opening = { cx: number; cy: number; rx: number; ry: number; solid: number };
 
-const BACKDROP = "#0a0908";
+const BACKDROP = "#2D3A1F";
 /** Screens narrower than this (width / height) use portrait camera paths. */
 const PORTRAIT_BELOW = 0.9;
 

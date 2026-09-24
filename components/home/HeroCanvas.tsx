@@ -190,7 +190,7 @@ export default function HeroCanvas() {
     <div ref={containerRef} className="relative h-[500vh] bg-black">
       <div
         ref={stageRef}
-        className="sticky top-0 h-screen w-full overflow-hidden bg-[#0a0908]"
+        className="sticky top-0 h-screen w-full overflow-hidden bg-[#2D3A1F]"
       >
         <canvas
           ref={canvasRef}
@@ -215,7 +215,7 @@ export default function HeroCanvas() {
         />
         <div
           aria-hidden="true"
-          className="pointer-events-none absolute inset-x-0 bottom-0 h-[45%] bg-gradient-to-t from-[#0c0a09]/75 via-[#0c0a09]/25 to-transparent"
+          className="pointer-events-none absolute inset-x-0 bottom-0 h-[45%] bg-gradient-to-t from-[#2D3A1F]/75 via-[#2D3A1F]/25 to-transparent"
         />
 
         {/* Arrival — the only message, once the visitor is at the door. */}
@@ -238,7 +238,7 @@ export default function HeroCanvas() {
           <div className="mt-8 flex flex-wrap items-center gap-4">
             <Link
               href="/milestones"
-              className="inline-flex items-center gap-3 bg-white px-8 py-4 font-grotesk text-xs font-semibold uppercase tracking-[0.2em] text-black hover:bg-brand-gold transition-colors duration-300 shadow-xl"
+              className="inline-flex items-center gap-3 bg-white px-8 py-4 font-grotesk text-xs font-semibold uppercase tracking-[0.2em] text-[#2D3A1F] hover:bg-brand-gold hover:text-white transition-colors duration-300 shadow-xl"
             >
               <span>Explore Flagship</span>
               <ArrowRight className="w-4 h-4" />

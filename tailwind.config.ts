@@ -1,5 +1,17 @@
 import type { Config } from "tailwindcss";
 
+const SYSTEM_FONTS = [
+  "-apple-system",
+  "BlinkMacSystemFont",
+  '"Segoe UI"',
+  "Roboto",
+  "Oxygen-Sans",
+  "Ubuntu",
+  "Cantarell",
+  '"Helvetica Neue"',
+  "sans-serif",
+];
+
 const config: Config = {
   content: [
     "./pages/**/*.{js,ts,jsx,tsx,mdx}",
@@ -9,22 +21,25 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        background: "#0c0a09",
-        foreground: "#ededed",
+        background: "#F4F1E8",
+        foreground: "#2D3A1F",
         brand: {
-          gold: "#e0a456",
-          bronze: "#b06a35",
-          dark: "#14110c",
-          surface: "#17140f",
-          card: "#1f1a14",
-          muted: "#57534d",
-          light: "#f5f4f2",
+          gold:    "#B8A678",
+          bronze:  "#B8A678",
+          dark:    "#2D3A1F",
+          surface: "#E8E2D0",
+          card:    "#FFFFFF",
+          muted:   "#5F684F",
+          light:   "#F4F1E8",
+          border:  "#D5CFBC",
         },
       },
       fontFamily: {
-        grotesk: ["var(--font-grotesk)", "Schibsted Grotesk", "sans-serif"],
-        hanken: ["var(--font-hanken)", "Hanken Grotesk", "sans-serif"],
-        cormorant: ["var(--font-cormorant)", "Cormorant Garamond", "serif"],
+        serif:     SYSTEM_FONTS,
+        sans:      SYSTEM_FONTS,
+        grotesk:   SYSTEM_FONTS,
+        cormorant: SYSTEM_FONTS,
+        hanken:    SYSTEM_FONTS,
       },
       keyframes: {
         // The track holds the cards twice. Travelling from -50% to 0 moves the

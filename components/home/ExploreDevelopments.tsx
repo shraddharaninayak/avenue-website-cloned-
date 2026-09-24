@@ -68,7 +68,7 @@ export default function ExploreDevelopments() {
     <section
       ref={sectionRef}
       id="developments"
-      className="scroll-mt-24 border-t border-white/10 bg-[#0c0a09] text-white"
+      className="scroll-mt-24 border-t border-white/10 bg-[#2D3A1F] text-white"
     >
       <div className="mx-auto max-w-[1450px] px-6 py-24 md:px-10 md:py-28 lg:px-12">
         <div className="grid gap-14 lg:grid-cols-[0.85fr_1.15fr] lg:gap-20">
@@ -182,7 +182,7 @@ export default function ExploreDevelopments() {
                 "opacity 1s ease 0.15s, transform 1.1s cubic-bezier(0.22,1,0.36,1) 0.15s",
             }}
           >
-            <div className="relative aspect-[4/5] w-full overflow-hidden border border-white/12 bg-[#100d0a] sm:aspect-[5/4] lg:aspect-[4/3]">
+            <div className="relative aspect-[4/5] w-full overflow-hidden border border-white/12 bg-[#2D3A1F] sm:aspect-[5/4] lg:aspect-[4/3]">
               <svg
                 viewBox="0 0 100 100"
                 preserveAspectRatio="xMidYMid slice"
@@ -210,7 +210,7 @@ export default function ExploreDevelopments() {
                 <path
                   d="M-4 74 C 18 66, 30 84, 48 76 S 78 58, 104 66"
                   fill="none"
-                  stroke="rgba(224,164,86,0.16)"
+                  stroke="rgba(75,85,96,0.16)"
                   strokeWidth="2.6"
                   strokeLinecap="round"
                 />

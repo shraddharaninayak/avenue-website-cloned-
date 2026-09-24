@@ -62,7 +62,7 @@ export default function ProjectShowcase() {
   return (
     <section
       id="projects"
-      className="scroll-mt-24 bg-[#110e0a] py-32 px-6 md:px-12 lg:px-20 text-white"
+      className="scroll-mt-24 bg-[#2D3A1F] py-32 px-6 md:px-12 lg:px-20 text-white"
     >
       <div className="max-w-7xl mx-auto">
         {/* Section Header */}
@@ -85,7 +85,7 @@ export default function ProjectShowcase() {
           {projects.map((project, idx) => (
             <div
               key={project.id}
-              className="group flex flex-col bg-[#17140f] border border-white/10 overflow-hidden hover:border-brand-gold/50 transition-colors duration-500"
+              className="group flex flex-col bg-[#2D3A1F] border border-white/10 overflow-hidden hover:border-brand-gold/50 transition-colors duration-500"
             >
               {/* Image Container */}
               <div className="relative aspect-[16/10] w-full overflow-hidden bg-black">
@@ -95,7 +95,7 @@ export default function ProjectShowcase() {
                   fill
                   className="object-cover transition-transform duration-700 group-hover:scale-105"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-[#17140f] via-transparent to-transparent opacity-80" />
+                <div className="absolute inset-0 bg-gradient-to-t from-[#2D3A1F] via-transparent to-transparent opacity-80" />
                 <div className="absolute top-5 left-5 bg-black/70 backdrop-blur-md px-3.5 py-1.5 border border-white/15 text-[10px] font-grotesk uppercase tracking-[0.2em] text-brand-gold font-semibold">
                   {project.category}
                 </div>

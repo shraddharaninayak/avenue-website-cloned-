@@ -30,7 +30,7 @@ const values = [
 
 export default function OurStoryPage() {
   return (
-    <div className="bg-[#0c0a09] text-white pt-28">
+    <div className="bg-[#2D3A1F] text-white pt-28">
       {/* Hero Header */}
       <section className="px-6 md:px-12 lg:px-20 py-20 max-w-7xl mx-auto">
         <div className="text-[11px] font-grotesk uppercase tracking-[0.3em] text-brand-gold font-semibold mb-4">
@@ -45,7 +45,7 @@ export default function OurStoryPage() {
       </section>
 
       {/* Narrative Section with Image */}
-      <section className="bg-[#14110c] py-24 px-6 md:px-12 lg:px-20 border-y border-white/10">
+      <section className="bg-[#2D3A1F] py-24 px-6 md:px-12 lg:px-20 border-y border-white/10">
         <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
           <div className="space-y-8">
             <div className="text-[11px] font-grotesk uppercase tracking-[0.3em] text-brand-gold font-semibold">
@@ -86,7 +86,7 @@ export default function OurStoryPage() {
           {values.map((v) => (
             <div
               key={v.num}
-              className="bg-[#14110c] border border-white/10 p-8 md:p-10 hover:border-brand-gold/50 transition-colors"
+              className="bg-[#2D3A1F] border border-white/10 p-8 md:p-10 hover:border-brand-gold/50 transition-colors"
             >
               <div className="font-grotesk text-3xl font-light text-brand-gold mb-4">
                 {v.num}
