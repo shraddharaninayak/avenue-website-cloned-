@@ -2,7 +2,6 @@ import React from "react";
 import Image from "next/image";
 import StatsSection from "@/components/home/StatsSection";
 import Leadership from "@/components/home/Leadership";
-import Awards from "@/components/home/Awards";
 import ContactCTA from "@/components/home/ContactCTA";
 
 const values = [
@@ -107,9 +106,6 @@ export default function OurStoryPage() {
 
       {/* Leadership */}
       <Leadership />
-
-      {/* Awards */}
-      <Awards />
 
       {/* CTA */}
       <ContactCTA />
