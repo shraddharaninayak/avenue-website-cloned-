@@ -142,8 +142,8 @@ export default function AvenuePortrait() {
                   "delay-700",
                 )}`}
               >
-                <span>The Avenue {aura.name}</span>
-                <span>{aura.locality}</span>
+                <span className="font-medium">The Avenue {aura.name}</span>
+                <span className="font-medium">{aura.locality}</span>
               </figcaption>
             ) : null}
           </figure>

@@ -259,7 +259,7 @@ export default function AvenueProjects() {
      *   → pinned for exactly `travel` px of vertical scroll after the entry
      *   → sticky releases exactly when p = 1 (last card fully in view)
      */
-    const ENTRY_RATIO = 0.15;
+    const ENTRY_RATIO = 0.05;
 
     const measure = () => {
       const travel = Math.max(0, track.scrollWidth - track.offsetWidth);
@@ -373,7 +373,7 @@ export default function AvenueProjects() {
           The sticky pane pins when this spacer scrolls off the top.
           MUST stay in sync with ENTRY_RATIO = 0.15 in the useEffect.
         */}
-        <div className="h-[15vh]" aria-hidden="true" />
+        <div className="h-[5vh]" aria-hidden="true" />
 
         {/* Sticky viewport — no overflow so sticky is relative to body scroll */}
         <div className="sticky top-0 h-screen flex flex-col bg-[#F1EADA]">

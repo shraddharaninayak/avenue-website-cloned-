@@ -174,7 +174,7 @@ export default function AvenueCapabilities() {
     <section
       id="capabilities"
       aria-labelledby="capabilities-title"
-      className="bg-[#F1EADA] pb-24 pt-24 text-[#584738] md:pb-28 md:pt-32"
+      className="bg-[#F1EADA] pb-24 pt-24 text-[#584738] md:pb-10 md:pt-32"
     >
       <div className="mx-auto max-w-[1450px] px-6 md:px-10 lg:px-12">
         {/* HEADING */}

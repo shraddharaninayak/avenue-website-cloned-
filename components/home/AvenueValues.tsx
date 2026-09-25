@@ -126,10 +126,6 @@ function ValueRow({
       </div>
 
       <div className={`transition-opacity duration-700 ${active ? "lg:opacity-100" : "lg:opacity-[0.32]"}`}>
-        <div className={`flex items-center gap-4 ${revealClass(visible)}`}>
-          <span className="text-[10px] uppercase tracking-[0.24em] text-[#AAA396]">Value</span>
-        </div>
-
         <h3
           className={`mt-5 font-serif text-[clamp(36px,4vw,60px)] lg:text-[clamp(28px,3vw,46px)] font-light leading-[1] tracking-[-0.04em] ${revealClass(
             visible,
@@ -231,9 +227,6 @@ export default function AvenueValues() {
           {/* ================= VALUES ================= */}
           <div className="lg:col-span-5 lg:col-start-8">
             <div ref={headRef} className={`pb-12 lg:pb-16 ${revealClass(headIn)}`}>
-              <div className="mb-8 flex items-center gap-4 md:mb-10">
-                <span className="text-[10px] uppercase tracking-[0.28em] text-[#584738]/55">Values</span>
-              </div>
               <h2
                 id="values-title"
                 className="font-serif text-[clamp(30px,3.4vw,52px)] font-light leading-[0.98] tracking-[-0.045em]"
