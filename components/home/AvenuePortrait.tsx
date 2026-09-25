@@ -58,7 +58,7 @@ export default function AvenuePortrait() {
               </div>
               <h2
                 id="portrait-title"
-                className="font-serif text-[clamp(44px,6.2vw,96px)] font-light leading-[0.94] tracking-[-0.05em]"
+                className="font-serif text-[clamp(32px,4vw,60px)] font-light leading-[0.94] tracking-[-0.05em]"
               >
                 A developer
                 <br />

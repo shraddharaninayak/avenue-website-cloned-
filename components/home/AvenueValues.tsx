@@ -131,7 +131,7 @@ function ValueRow({
         </div>
 
         <h3
-          className={`mt-5 font-serif text-[clamp(36px,4vw,60px)] font-light leading-[1] tracking-[-0.04em] ${revealClass(
+          className={`mt-5 font-serif text-[clamp(36px,4vw,60px)] lg:text-[clamp(28px,3vw,46px)] font-light leading-[1] tracking-[-0.04em] ${revealClass(
             visible,
             "delay-100",
           )}`}
@@ -236,7 +236,7 @@ export default function AvenueValues() {
               </div>
               <h2
                 id="values-title"
-                className="font-serif text-[clamp(40px,4.6vw,72px)] font-light leading-[0.98] tracking-[-0.045em]"
+                className="font-serif text-[clamp(30px,3.4vw,52px)] font-light leading-[0.98] tracking-[-0.045em]"
               >
                 What The Avenue
                 <br />

@@ -30,7 +30,11 @@ body * {
 body {
   color: var(--foreground);
   background: var(--background);
-  overflow-x: hidden;
+}
+
+/* Prevent the page from shifting horizontally without blocking child scroll containers */
+html {
+  overflow-x: clip;
 }
 
 /* Heading children inherit the heading's color — accent classes on em/span cannot override */

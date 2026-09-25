@@ -146,7 +146,7 @@ function Row({
           <span className="pt-3 font-grotesk text-[11px] tracking-[0.2em] text-brand-bronze md:pt-4">{pad(index + 1)}</span>
           <div>
             <h3
-              className={`font-serif text-[clamp(30px,3.2vw,48px)] font-light leading-[1.02] tracking-[-0.04em] transition-transform duration-500 ease-out ${
+              className={`font-serif text-[clamp(30px,3.2vw,48px)] lg:text-[clamp(24px,2.4vw,38px)] font-light leading-[1.02] tracking-[-0.04em] transition-transform duration-500 ease-out ${
                 active ? "lg:translate-x-2" : ""
               }`}
             >
@@ -185,7 +185,7 @@ export default function AvenueCapabilities() {
             </div>
             <h2
               id="capabilities-title"
-              className="font-serif text-[clamp(44px,6vw,92px)] font-light leading-[0.94] tracking-[-0.05em]"
+              className="font-serif text-[clamp(32px,4vw,60px)] font-light leading-[0.94] tracking-[-0.05em]"
             >
               Our <em className="italic">capabilities.</em>
             </h2>

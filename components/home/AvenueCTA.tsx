@@ -87,7 +87,7 @@ export default function AvenueCTA() {
           <div ref={textRef} className="max-w-[760px]">
             <h2
               id="cta-title"
-              className="font-grotesk text-[clamp(42px,6vw,96px)] font-normal uppercase leading-[0.95] tracking-[-0.02em]"
+              className="font-grotesk text-[clamp(32px,4.2vw,64px)] font-normal uppercase leading-[0.95] tracking-[-0.02em]"
             >
               {HEADING.map((line, k) => (
                 <span key={k} className="block overflow-hidden pb-[0.06em]">

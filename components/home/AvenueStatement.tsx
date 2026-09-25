@@ -76,7 +76,7 @@ export default function AvenueStatement() {
             </p>
             <h2
               id="statement-title"
-              className="font-grotesk text-[clamp(38px,6vw,96px)] font-normal uppercase leading-[0.98] tracking-[-0.02em]"
+              className="font-grotesk text-[clamp(30px,5vw,78px)] font-normal uppercase leading-[0.98] tracking-[-0.02em]"
             >
               <span className="block overflow-hidden pb-[0.05em]">
                 <span

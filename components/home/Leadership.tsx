@@ -66,7 +66,7 @@ function ClassicLeadership() {
             </span>
           </div>
 
-          <h2 className="max-w-[760px] font-serif text-[clamp(30px,3.6vw,52px)] font-light leading-[1.04] tracking-[-0.04em]">
+          <h2 className="max-w-[760px] font-serif text-[clamp(30px,2.8vw,44px)] font-light leading-[1.04] tracking-[-0.04em]">
             {directorsHeading}
           </h2>
         </div>
@@ -175,11 +175,11 @@ function EditorialLeadership() {
           <div ref={headRef} className={`lg:col-span-4 ${revealClass(headIn)}`}>
             <div>
               <div className="mb-8 flex items-center gap-4 md:mb-10">
-                <span className="text-[10px] uppercase tracking-[0.28em] text-[#584738]/40">Leadership</span>
+                <span className="text-[10px] uppercase tracking-[0.28em] text-[#584738]/55">Leadership</span>
               </div>
               <h2
                 id="leadership-title"
-                className="max-w-[820px] font-serif text-[clamp(38px,4.2vw,64px)] font-light leading-[1] tracking-[-0.045em] text-[#584738]"
+                className="max-w-[820px] font-serif text-[clamp(28px,3.2vw,48px)] font-light leading-[1] tracking-[-0.045em] text-[#584738]"
               >
                 {directorsHeading}
               </h2>

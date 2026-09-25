@@ -216,7 +216,7 @@ function ProjectCard({
               </div>
             </div>
             <div className="flex items-center gap-2.5">
-              <span className="hidden text-[10px] uppercase tracking-[0.1em] text-[#584738]/40 transition-colors duration-[1000ms] ease-[cubic-bezier(0.625,0.05,0,1)] group-hover:text-white/40 sm:block">
+              <span className="hidden text-[10px] uppercase tracking-[0.1em] text-[#584738]/55 transition-colors duration-[1000ms] ease-[cubic-bezier(0.625,0.05,0,1)] group-hover:text-white/55 sm:block">
                 {project.category}
               </span>
               <div className="flex h-6 w-6 items-center justify-center transition-transform duration-500 group-hover:translate-x-[1px] group-hover:-translate-y-[1px]">
@@ -307,10 +307,11 @@ export default function AvenueProjects() {
       className="scroll-mt-24 bg-[#F1EADA]"
     >
       {/* ══════════════════════════════════════════════════════════════
-          MOBILE — vertical single-column (hidden ≥ md)
+          MOBILE — horizontal touch carousel (hidden ≥ md)
       ══════════════════════════════════════════════════════════════ */}
-      <div className="md:hidden px-6 pb-28 pt-28">
-        <div ref={headMobRef} className={`mb-16 ${revealClass(headMobIn)}`}>
+      <div className="md:hidden pb-28 pt-28">
+        {/* Header — padded separately so the track bleeds edge-to-edge */}
+        <div ref={headMobRef} className={`mb-10 px-6 ${revealClass(headMobIn)}`}>
           <p className="mb-5 text-[10px] uppercase tracking-[0.28em] text-[#584738]/35">
             Projects
           </p>
@@ -326,24 +327,32 @@ export default function AvenueProjects() {
           </p>
         </div>
 
-        <div className="flex flex-col gap-y-10">
-          {projects.map((p) => {
-            const v = V[p.slug] ?? {
-              aspect: "aspect-[4/5]",
-              objPos: "50% 50%",
-              parallax: 4,
-            };
-            return (
+        {/* Horizontal carousel track */}
+        <div
+          className="flex flex-row flex-nowrap overflow-x-scroll snap-x snap-mandatory gap-4 pl-6
+                     [&::-webkit-scrollbar]:hidden [scrollbar-width:none]"
+          style={{
+            scrollPaddingLeft: "1.5rem",
+            WebkitOverflowScrolling: "touch",
+            touchAction: "pan-x",
+          } as CSSProperties}
+        >
+          {projects.map((p) => (
+            <div
+              key={p.slug}
+              className="shrink-0 w-[80vw] snap-start"
+            >
               <ProjectCard
-                key={p.slug}
                 project={p}
-                containerStyle={{}}
-                containerClass={v.aspect}
-                objectPosition={v.objPos}
-                parallax={v.parallax}
+                containerStyle={{ height: "54vh" }}
+                containerClass=""
+                objectPosition={CARD_OBJ_POS[p.slug] ?? "50% 50%"}
+                parallax={CARD_PARALLAX[p.slug] ?? 4}
               />
-            );
-          })}
+            </div>
+          ))}
+          {/* trailing spacer so last card can fully reach its snap point */}
+          <div className="shrink-0 w-6" aria-hidden="true" />
         </div>
       </div>
 
@@ -374,10 +383,10 @@ export default function AvenueProjects() {
             ref={headDeskRef}
             className={`shrink-0 border-b border-[#584738]/8 px-10 pb-7 pt-12 lg:px-[clamp(3rem,5vw,5rem)] lg:pt-16 ${revealClass(headDeskIn)}`}
           >
-            <p className="mb-4 text-[10px] uppercase tracking-[0.28em] text-[#584738]/35">
+            <p className="mb-4 text-[10px] uppercase tracking-[0.28em] text-[#584738]/55">
               Projects
             </p>
-            <h2 className="font-serif text-[clamp(32px,4vw,64px)] font-light leading-[1.02] tracking-[-0.04em] text-[#584738]">
+            <h2 className="font-serif text-[clamp(26px,2.8vw,44px)] font-light leading-[1.02] tracking-[-0.04em] text-[#584738]">
               Here are a few developments{" "}
               <em className="italic">we&apos;ve built.</em>
             </h2>

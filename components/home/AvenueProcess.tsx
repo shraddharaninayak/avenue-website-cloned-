@@ -65,7 +65,7 @@ function Heading({ labelled = false }: { labelled?: boolean }) {
       </div>
       <h2
         id={labelled ? "process-title" : undefined}
-        className="font-serif text-[clamp(40px,4.8vw,76px)] font-light leading-[0.96] tracking-[-0.05em] lg:[@media(max-height:760px)]:text-[44px]"
+        className="font-serif text-[40px] lg:text-[clamp(30px,3.6vw,56px)] font-light leading-[0.96] tracking-[-0.05em] lg:[@media(max-height:760px)]:text-[38px]"
       >
         How we <em className="italic text-brand-bronze">approach</em>
         <br />a development.
@@ -175,7 +175,7 @@ function PinnedProcess() {
                           : "pointer-events-none translate-y-6 opacity-0"
                     }`}
                   >
-                    <h3 className="font-serif text-[clamp(36px,3.6vw,56px)] font-light leading-[1] tracking-[-0.04em]">
+                    <h3 className="font-serif text-[clamp(26px,2.8vw,44px)] font-light leading-[1] tracking-[-0.04em]">
                       {stage.title}
                     </h3>
                     <blockquote className="mt-5 max-w-[440px]">

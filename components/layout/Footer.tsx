@@ -49,10 +49,10 @@ export default function Footer() {
 
       {/* ── "Get In Touch" banner ── */}
       <div className="border-b border-white/[0.08] px-6 py-14 text-center md:px-10 md:py-16 lg:px-12">
-        <span className="block text-[10px] uppercase tracking-[0.32em] text-white/35">
+        <span className="block text-[10px] uppercase tracking-[0.32em] text-white/50">
           The Avenue
         </span>
-        <h2 className="mt-3 font-serif text-[clamp(34px,4.2vw,64px)] font-light leading-[1.02] tracking-[-0.04em]">
+        <h2 className="mt-3 font-serif text-[clamp(34px,3vw,48px)] font-light leading-[1.02] tracking-[-0.04em]">
           Get In Touch
         </h2>
         <div className="mx-auto mt-5 h-px w-12 bg-[#B59E7D]/50" />

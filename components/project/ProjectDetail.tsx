@@ -89,8 +89,8 @@ function Wash({ media, position }: { media: Media; position?: string }) {
 
 function SectionLabel({ label }: { label: string }) {
   return (
-    <div className="mb-8 flex items-center gap-4 md:mb-10">
-      <span className="text-[10px] uppercase tracking-[0.28em] text-[#584738]/50">
+    <div className="mb-6 flex items-center gap-4 md:mb-8">
+      <span className="text-[10px] font-medium uppercase tracking-[0.28em] text-[#584738]/65">
         {label}
       </span>
     </div>
@@ -241,9 +241,9 @@ function Hero({ project }: { project: Detail }) {
       />
 
 
-<div className="absolute inset-x-0 bottom-0 mx-auto max-w-[1450px] px-6 pb-24 md:px-10 md:pb-28 lg:px-12">
+<div className="absolute inset-x-0 bottom-0 mx-auto max-w-[1450px] px-6 pb-16 md:px-10 md:pb-20 lg:px-12">
         <div className={revealClass(loaded)}>
-          <p className="flex flex-wrap items-center gap-x-3 gap-y-1 text-[10px] uppercase tracking-[0.26em] text-white/70">
+          <p className="flex flex-wrap items-center gap-x-3 gap-y-1 text-[10px] font-medium uppercase tracking-[0.26em] text-white/70">
             <span className="text-brand-gold">The Avenue</span>
             <span className="hidden sm:inline">{project.category}</span>
             <span>{project.eyebrow}</span>
@@ -259,7 +259,7 @@ function Hero({ project }: { project: Detail }) {
         <div
           className={`mt-8 grid gap-8 lg:grid-cols-12 lg:items-end ${revealClass(loaded, "delay-200")}`}
         >
-          <ul className="flex flex-wrap gap-x-7 gap-y-2 text-[12px] uppercase tracking-[0.18em] text-white/85 lg:col-span-8">
+          <ul className="flex flex-wrap gap-x-7 gap-y-2 text-[12px] font-medium uppercase tracking-[0.18em] text-white/85 lg:col-span-8">
             {heroFacts.map((f) => (
               <li key={f.label} className="flex items-center gap-2.5">
                 <ArrowRight
@@ -310,8 +310,8 @@ function Overview({ project }: { project: Detail }) {
       aria-labelledby="overview-title"
       className="relative z-10 -mt-10 scroll-mt-24 overflow-hidden rounded-t-[24px] bg-[#F1EADA] md:-mt-14 md:rounded-t-[44px]"
     >
-      <div className="relative mx-auto max-w-[1450px] px-6 pb-24 pt-20 md:px-10 md:pb-28 md:pt-24 lg:px-12">
-        <div className="grid gap-y-16 lg:grid-cols-12 lg:gap-x-12">
+      <div className="relative mx-auto max-w-[1450px] px-6 pb-16 pt-14 md:px-10 md:pb-20 md:pt-20 lg:px-12">
+        <div className="grid gap-y-10 lg:grid-cols-12 lg:gap-x-12">
           <Reveal className="lg:col-span-6">
             <SectionLabel label="Overview" />
             <h2
@@ -340,7 +340,7 @@ function Overview({ project }: { project: Detail }) {
                 {p}
               </p>
             ))}
-            <p className="mt-8 text-[10px] uppercase tracking-[0.22em] text-[#584738]/35">
+            <p className="mt-8 text-[10px] uppercase tracking-[0.22em] text-[#584738]/55">
               {project.story.source}
             </p>
           </Reveal>
@@ -355,10 +355,10 @@ function Overview({ project }: { project: Detail }) {
                   key={f.label}
                   className="grid grid-cols-[minmax(0,1fr)_minmax(0,1.1fr)] items-baseline gap-6 border-t border-[#584738]/10 py-6"
                 >
-                  <dt className="order-2 text-[11px] uppercase leading-[1.6] tracking-[0.2em] text-[#584738]/50">
+                  <dt className="order-2 text-[11px] font-medium uppercase leading-[1.6] tracking-[0.2em] text-[#584738]/65">
                     {f.label}
                     {f.note ? (
-                      <span className="mt-1 block normal-case tracking-[0.02em] text-[#584738]/35">
+                      <span className="mt-1 block normal-case tracking-[0.02em] text-[#584738]/55">
                         {f.note}
                       </span>
                     ) : null}
@@ -399,7 +399,7 @@ function ImageStory({
     }
   }
   const caption = (n: number) => (
-    <figcaption className="mt-4 flex items-center justify-between gap-6 text-[10px] uppercase tracking-[0.22em] text-[#584738]/50">
+    <figcaption className="mt-4 flex items-center justify-between gap-6 text-[10px] font-medium uppercase tracking-[0.22em] text-[#584738]/65">
       <span>{project.gallery[n].caption}</span>
       <span>
         <span className="text-[#584738]/70">{pad(n + 1)}</span> /{" "}
@@ -414,7 +414,7 @@ function ImageStory({
       aria-labelledby="gallery-title"
       className="relative scroll-mt-24 overflow-hidden bg-[#F1EADA]"
     >
-      <div className="relative mx-auto max-w-[1450px] px-6 pb-24 pt-24 md:px-10 md:pb-32 md:pt-28 lg:px-12">
+      <div className="relative mx-auto max-w-[1450px] px-6 pb-16 pt-16 md:px-10 md:pb-20 md:pt-20 lg:px-12">
         <Reveal className="grid gap-y-6 lg:grid-cols-12 lg:items-end">
           <div className="lg:col-span-8">
             <SectionLabel label="Images" />
@@ -426,12 +426,12 @@ function ImageStory({
               <em className="italic">in images.</em>
             </h2>
           </div>
-          <p className="text-[10px] uppercase tracking-[0.24em] text-[#584738]/45 lg:col-span-3 lg:col-start-10 lg:text-right">
+          <p className="text-[10px] font-medium uppercase tracking-[0.24em] text-[#584738]/60 lg:col-span-3 lg:col-start-10 lg:text-right">
             Select an image to view it larger
           </p>
         </Reveal>
 
-        <div className="mt-14 space-y-16 md:mt-20 md:space-y-24">
+        <div className="mt-10 space-y-12 md:mt-14 md:space-y-16">
           {blocks.map((block, b) =>
             block.kind === "full" ? (
               <figure key={b}>
@@ -486,7 +486,7 @@ function Amenities({ project }: { project: Detail }) {
       aria-labelledby="amenities-title"
       className="relative scroll-mt-24 overflow-hidden bg-[#F1EADA]"
     >
-      <div className="relative mx-auto max-w-[1450px] px-6 pb-24 pt-24 md:px-10 md:pb-32 md:pt-28 lg:px-12">
+      <div className="relative mx-auto max-w-[1450px] px-6 pb-16 pt-16 md:px-10 md:pb-20 md:pt-20 lg:px-12">
         <Reveal className="grid gap-y-6 lg:grid-cols-12 lg:items-end">
           <div className="lg:col-span-7">
             <SectionLabel label="Amenities" />
@@ -502,24 +502,24 @@ function Amenities({ project }: { project: Detail }) {
               </p>
             ) : null}
           </div>
-          <p className="text-[10px] uppercase tracking-[0.24em] text-[#584738]/35 lg:col-span-4 lg:col-start-9 lg:text-right">
+          <p className="text-[10px] font-medium uppercase tracking-[0.24em] text-[#584738]/55 lg:col-span-4 lg:col-start-9 lg:text-right">
             {a.source}
           </p>
         </Reveal>
 
         {a.featured.length === 1 ? (
-          <figure className="mt-14 md:mt-20 lg:w-[58%]">
+          <figure className="mt-10 md:mt-14 lg:w-[58%]">
             <MaskedImage
               media={a.featured[0].image}
               aspect={ratio(a.featured[0].image, 1.2, 1.7)}
             />
-            <figcaption className="mt-4 text-[10px] uppercase tracking-[0.22em] text-[#584738]/50">
+            <figcaption className="mt-4 text-[10px] font-medium uppercase tracking-[0.22em] text-[#584738]/65">
               {a.featured[0].title}
             </figcaption>
           </figure>
         ) : a.featured.length > 1 ? (
           <ul
-            className={`mt-14 grid gap-x-5 gap-y-12 md:mt-20 ${
+            className={`mt-10 grid gap-x-5 gap-y-10 md:mt-14 ${
               arch
                 ? "grid-cols-2 md:gap-x-8 lg:grid-cols-4"
                 : "sm:grid-cols-2 md:gap-x-8 lg:grid-cols-3"
@@ -560,7 +560,7 @@ function Amenities({ project }: { project: Detail }) {
 
         {a.groups.length > 0 ? (
           <div
-            className={`mt-16 grid gap-x-8 gap-y-12 border-t border-[#584738]/10 pt-14 md:mt-20 md:pt-16 ${
+            className={`mt-10 grid gap-x-8 gap-y-10 border-t border-[#584738]/10 pt-10 md:mt-14 md:pt-12 ${
               a.groups.length === 1
                 ? "max-w-2xl"
                 : a.groups.length === 2
@@ -576,7 +576,7 @@ function Amenities({ project }: { project: Detail }) {
                 className="space-y-4"
                 delay={["", "delay-100", "delay-200", "delay-300"][gi % 4]}
               >
-                <h3 className="text-[10px] uppercase tracking-[0.28em] text-brand-gold">
+                <h3 className="text-[10px] font-medium uppercase tracking-[0.28em] text-brand-gold">
                   {group.title}
                 </h3>
                 <ul className="space-y-0">
@@ -621,8 +621,8 @@ function Location({
       aria-labelledby="location-title"
       className="relative scroll-mt-24 overflow-hidden bg-[#F1EADA]"
     >
-      <div className="relative mx-auto max-w-[1450px] px-6 pb-24 pt-24 md:px-10 md:pb-32 md:pt-28 lg:px-12">
-        <div className="grid gap-y-14 lg:grid-cols-12 lg:gap-x-12">
+      <div className="relative mx-auto max-w-[1450px] px-6 pb-16 pt-16 md:px-10 md:pb-20 md:pt-20 lg:px-12">
+        <div className="grid gap-y-10 lg:grid-cols-12 lg:gap-x-12">
           {l.image ? (
             <figure className="lg:col-span-7">
               {l.kind === "map" ? (
@@ -651,7 +651,7 @@ function Location({
                   onOpen={onOpen}
                 />
               )}
-              <figcaption className="mt-4 text-[10px] uppercase tracking-[0.22em] text-[#584738]/50">
+              <figcaption className="mt-4 text-[10px] font-medium uppercase tracking-[0.22em] text-[#584738]/65">
                 {l.kind === "map"
                   ? "Location map, from the brochure"
                   : l.image.caption}
@@ -709,7 +709,7 @@ function Location({
                 ))}
               </ul>
             ) : null}
-            <p className="mt-8 text-[10px] uppercase tracking-[0.22em] text-[#584738]/35">
+            <p className="mt-8 text-[10px] uppercase tracking-[0.22em] text-[#584738]/55">
               {l.source}
             </p>
           </Reveal>
@@ -740,7 +740,7 @@ function Plans({
       aria-labelledby="plans-title"
       className="relative scroll-mt-24 overflow-hidden bg-[#F1EADA]"
     >
-      <div className="relative mx-auto max-w-[1450px] px-6 pb-24 pt-24 md:px-10 md:pb-32 md:pt-28 lg:px-12">
+      <div className="relative mx-auto max-w-[1450px] px-6 pb-16 pt-16 md:px-10 md:pb-20 md:pt-20 lg:px-12">
         <Reveal className="grid gap-y-6 lg:grid-cols-12 lg:items-end">
           <div className="lg:col-span-8">
             <SectionLabel label="Floor plans" />
@@ -751,7 +751,7 @@ function Plans({
               Floor <em className="italic">plans.</em>
             </h2>
           </div>
-          <p className="text-[10px] uppercase tracking-[0.24em] text-[#584738]/45 lg:col-span-3 lg:col-start-10 lg:text-right">
+          <p className="text-[10px] font-medium uppercase tracking-[0.24em] text-[#584738]/60 lg:col-span-3 lg:col-start-10 lg:text-right">
             <span className="font-serif text-[28px] normal-case tracking-[-0.02em] text-[#584738]/75">
               {pad(plans.items.length)}
             </span>{" "}
@@ -759,7 +759,7 @@ function Plans({
           </p>
         </Reveal>
 
-        <div className="mt-12 grid grid-cols-1 gap-y-8 md:mt-16 lg:grid-cols-12 lg:gap-x-12">
+        <div className="mt-10 grid grid-cols-1 gap-y-8 md:mt-12 lg:grid-cols-12 lg:gap-x-12">
           <div className="min-w-0 lg:col-span-4">
             <ol
               aria-label="Plans"
@@ -816,11 +816,11 @@ function Plans({
                   aspectRatio: `${current.image.w} / ${current.image.h}`,
                 }}
               />
-              <span className="absolute bottom-3 right-3 inline-flex items-center gap-2 bg-[#584738] px-3.5 py-2 text-[10px] uppercase tracking-[0.2em] text-white transition-colors group-hover:bg-brand-gold group-hover:text-white">
+              <span className="absolute bottom-3 right-3 inline-flex items-center gap-2 bg-[#584738] px-3.5 py-2 text-[10px] font-medium uppercase tracking-[0.2em] text-white transition-colors group-hover:bg-brand-gold group-hover:text-white">
                 <Plus className="h-3.5 w-3.5" /> Full size
               </span>
             </button>
-            <figcaption className="mt-4 flex flex-wrap items-center justify-between gap-4 text-[10px] uppercase tracking-[0.22em] text-[#584738]/50">
+            <figcaption className="mt-4 flex flex-wrap items-center justify-between gap-4 text-[10px] font-medium uppercase tracking-[0.22em] text-[#584738]/65">
               <span className="text-[#584738]/75">{current.title}</span>
               <span>{plans.source}</span>
             </figcaption>
@@ -844,8 +844,8 @@ function Brochure({ project }: { project: Detail }) {
       aria-labelledby="brochure-title"
       className="relative scroll-mt-24 overflow-hidden bg-[#F1EADA]"
     >
-      <div className="relative mx-auto max-w-[1450px] px-6 pb-24 pt-24 md:px-10 md:pb-32 md:pt-28 lg:px-12">
-        <div className="grid gap-y-14 border-y border-[#584738]/10 py-14 md:py-16 lg:grid-cols-12 lg:items-center lg:gap-x-12">
+      <div className="relative mx-auto max-w-[1450px] px-6 pb-16 pt-16 md:px-10 md:pb-20 md:pt-20 lg:px-12">
+        <div className="grid gap-y-10 border-y border-[#584738]/10 py-10 md:py-12 lg:grid-cols-12 lg:items-center lg:gap-x-12">
           <Reveal
             className={
               portrait
@@ -895,7 +895,7 @@ function Brochure({ project }: { project: Detail }) {
               This page is a selection. The brochure is the whole of it, as The
               Avenue published it.
             </p>
-            <dl className="mt-8 flex flex-wrap gap-x-8 gap-y-3 text-[10px] uppercase tracking-[0.22em] text-[#584738]/45">
+            <dl className="mt-8 flex flex-wrap gap-x-8 gap-y-3 text-[10px] font-medium uppercase tracking-[0.22em] text-[#584738]/60">
               <div>
                 <dt className="sr-only">Pages</dt>
                 <dd>
@@ -933,8 +933,8 @@ function Brochure({ project }: { project: Detail }) {
               </a>
             </div>
             {project.disclaimer ? (
-              <p className="mt-10 max-w-[560px] text-[11px] leading-[1.7] text-[#584738]/35">
-                <span className="uppercase tracking-[0.2em] text-[#584738]/45">
+              <p className="mt-10 max-w-[560px] text-[11px] leading-[1.7] text-[#584738]/55">
+                <span className="uppercase tracking-[0.2em] text-[#584738]/60">
                   Brochure disclaimer ·{" "}
                 </span>
                 {project.disclaimer}
@@ -988,8 +988,8 @@ function Enquire({ project }: { project: Detail }) {
       aria-labelledby="enquire-title"
       className="relative scroll-mt-24 overflow-hidden bg-[#F1EADA]"
     >
-      <div className="relative mx-auto max-w-[1450px] px-6 pb-24 pt-24 md:px-10 md:pb-32 md:pt-28 lg:px-12">
-        <div className="grid gap-y-16 lg:grid-cols-12 lg:gap-x-12">
+      <div className="relative mx-auto max-w-[1450px] px-6 pb-16 pt-16 md:px-10 md:pb-20 md:pt-20 lg:px-12">
+        <div className="grid gap-y-10 lg:grid-cols-12 lg:gap-x-12">
           <Reveal className="lg:col-span-5">
             <SectionLabel label="Enquire" />
             <h2
@@ -1036,7 +1036,7 @@ function Enquire({ project }: { project: Detail }) {
                   className="mt-1 h-4 w-4 shrink-0 text-brand-gold"
                 />
                 <span className="text-[14px] leading-[1.6] text-[#584738]/60">
-                  <span className="block text-[10px] uppercase tracking-[0.22em] text-[#584738]/40">
+                  <span className="block text-[10px] font-medium uppercase tracking-[0.22em] text-[#584738]/55">
                     Office
                   </span>
                   {company.address}
@@ -1052,7 +1052,7 @@ function Enquire({ project }: { project: Detail }) {
               aria-describedby="enquire-note"
             >
               <div className="flex flex-wrap items-center justify-between gap-3 border-b border-[#584738]/10 pb-5">
-                <span className="text-[10px] uppercase tracking-[0.24em] text-[#584738]/45">
+                <span className="text-[10px] font-medium uppercase tracking-[0.24em] text-[#584738]/60">
                   Your enquiry is about
                 </span>
                 <span className="inline-flex items-center gap-2 border border-brand-gold/50 px-3 py-1.5 text-[11px] uppercase tracking-[0.18em] text-brand-gold">
@@ -1063,7 +1063,7 @@ function Enquire({ project }: { project: Detail }) {
 
               <div className="mt-6 grid gap-x-8 gap-y-6 sm:grid-cols-2">
                 <label className="block">
-                  <span className="text-[10px] uppercase tracking-[0.22em] text-[#584738]/50">
+                  <span className="text-[10px] font-medium uppercase tracking-[0.22em] text-[#584738]/65">
                     Name *
                   </span>
                   <input
@@ -1076,7 +1076,7 @@ function Enquire({ project }: { project: Detail }) {
                   />
                 </label>
                 <label className="block">
-                  <span className="text-[10px] uppercase tracking-[0.22em] text-[#584738]/50">
+                  <span className="text-[10px] font-medium uppercase tracking-[0.22em] text-[#584738]/65">
                     Phone *
                   </span>
                   <input
@@ -1090,7 +1090,7 @@ function Enquire({ project }: { project: Detail }) {
                   />
                 </label>
                 <label className="block sm:col-span-2">
-                  <span className="text-[10px] uppercase tracking-[0.22em] text-[#584738]/50">
+                  <span className="text-[10px] font-medium uppercase tracking-[0.22em] text-[#584738]/65">
                     Email
                   </span>
                   <input
@@ -1103,7 +1103,7 @@ function Enquire({ project }: { project: Detail }) {
                   />
                 </label>
                 <label className="block sm:col-span-2">
-                  <span className="text-[10px] uppercase tracking-[0.22em] text-[#584738]/50">
+                  <span className="text-[10px] font-medium uppercase tracking-[0.22em] text-[#584738]/65">
                     Message
                   </span>
                   <textarea
@@ -1127,7 +1127,7 @@ function Enquire({ project }: { project: Detail }) {
               <p
                 id="enquire-note"
                 role="status"
-                className="mt-5 text-[12px] leading-[1.6] text-[#584738]/45"
+                className="mt-5 text-[12px] leading-[1.6] text-[#584738]/60"
               >
                 {sent ? (
                   <>
@@ -1176,7 +1176,7 @@ const cardImage = (p: Detail) => {
 function MoreProjects({ related, project }: { related: Detail[]; project: Detail }) {
   return (
     <section aria-labelledby="more-title" className="relative overflow-hidden bg-[#F1EADA]">
-      <div className="relative mx-auto max-w-[1450px] px-6 pb-24 pt-24 md:px-10 md:pb-28 md:pt-28 lg:px-12">
+      <div className="relative mx-auto max-w-[1450px] px-6 pb-16 pt-16 md:px-10 md:pb-20 md:pt-20 lg:px-12">
         <Reveal>
           <SectionLabel label="Projects" />
           <h2
@@ -1186,7 +1186,7 @@ function MoreProjects({ related, project }: { related: Detail[]; project: Detail
             More from <em className="italic">The Avenue.</em>
           </h2>
         </Reveal>
-        <ul className="mt-14 grid gap-x-6 gap-y-14 sm:grid-cols-2 md:mt-16 lg:grid-cols-4 lg:gap-x-8">
+        <ul className="mt-10 grid gap-x-6 gap-y-10 sm:grid-cols-2 md:mt-12 lg:grid-cols-4 lg:gap-x-8">
           {related.map((p, i) => {
             const { media, position } = cardImage(p);
             const fit = coverage(media, CARD) < MIN_COVERAGE;
@@ -1265,8 +1265,8 @@ function Showcase({
       aria-labelledby={`${section.heading.toLowerCase().replace(/\s+/g, "-")}-title`}
       className="relative scroll-mt-24 overflow-hidden bg-[#F1EADA]"
     >
-      <div className="relative mx-auto max-w-[1450px] px-6 pb-24 pt-24 md:px-10 md:pb-32 md:pt-28 lg:px-12">
-        <div className="grid gap-y-14 lg:grid-cols-12 lg:gap-x-12">
+      <div className="relative mx-auto max-w-[1450px] px-6 pb-16 pt-16 md:px-10 md:pb-20 md:pt-20 lg:px-12">
+        <div className="grid gap-y-10 lg:grid-cols-12 lg:gap-x-12">
           <Reveal className="lg:col-span-5">
             <SectionLabel label={section.source ?? "The Avenue"} />
             <h2
@@ -1286,7 +1286,7 @@ function Showcase({
                 onOpen={onOpen}
               />
               {section.caption ? (
-                <figcaption className="mt-4 text-[10px] uppercase tracking-[0.22em] text-[#584738]/50">
+                <figcaption className="mt-4 text-[10px] font-medium uppercase tracking-[0.22em] text-[#584738]/65">
                   {section.caption}
                 </figcaption>
               ) : null}
@@ -1317,7 +1317,7 @@ function FeatureBlock({ section }: { section: Extract<SectionType, { type: "feat
       aria-labelledby={`${section.heading.toLowerCase().replace(/\s+/g, "-")}-title`}
       className="relative scroll-mt-24 overflow-hidden bg-[#F1EADA]"
     >
-      <div className="relative mx-auto max-w-[1450px] px-6 pb-24 pt-24 md:px-10 md:pb-32 md:pt-28 lg:px-12">
+      <div className="relative mx-auto max-w-[1450px] px-6 pb-16 pt-16 md:px-10 md:pb-20 md:pt-20 lg:px-12">
         <Reveal className="grid gap-y-10 lg:grid-cols-12 lg:gap-x-12">
           <div className="lg:col-span-5">
             <SectionLabel label={section.source ?? "The Avenue"} />
@@ -1362,8 +1362,8 @@ function About({ section }: { section: Extract<SectionType, { type: "about" }> }
       aria-labelledby={`${section.heading.toLowerCase().replace(/\s+/g, "-")}-title`}
       className="relative scroll-mt-24 overflow-hidden bg-[#F1EADA]"
     >
-      <div className="relative mx-auto max-w-[1450px] px-6 pb-24 pt-24 md:px-10 md:pb-32 md:pt-28 lg:px-12">
-        <div className="grid gap-y-16 lg:grid-cols-12 lg:gap-x-12">
+      <div className="relative mx-auto max-w-[1450px] px-6 pb-16 pt-16 md:px-10 md:pb-20 md:pt-20 lg:px-12">
+        <div className="grid gap-y-10 lg:grid-cols-12 lg:gap-x-12">
           <Reveal className="lg:col-span-6">
             <SectionLabel label={section.source ?? "The Avenue"} />
             <h2
@@ -1397,14 +1397,14 @@ function SpaceShowcase({ section }: { section: Extract<SectionType, { type: "spa
       aria-labelledby={`${section.title.toLowerCase().replace(/\s+/g, "-")}-title`}
       className="relative scroll-mt-24 overflow-hidden bg-[#F1EADA]"
     >
-      <div className="relative mx-auto max-w-[1450px] px-6 pb-24 pt-24 md:px-10 md:pb-32 md:pt-28 lg:px-12">
-        <div className="grid gap-y-14 lg:grid-cols-12 lg:gap-x-12">
+      <div className="relative mx-auto max-w-[1450px] px-6 pb-16 pt-16 md:px-10 md:pb-20 md:pt-20 lg:px-12">
+        <div className="grid gap-y-10 lg:grid-cols-12 lg:gap-x-12">
           <Reveal className="lg:col-span-7">
             <MaskedImage
               media={section.image}
               aspect={ratio(section.image, 1.2, 1.7)}
             />
-            <figcaption className="mt-4 text-[10px] uppercase tracking-[0.22em] text-[#584738]/50">
+            <figcaption className="mt-4 text-[10px] font-medium uppercase tracking-[0.22em] text-[#584738]/65">
               {section.title}
             </figcaption>
           </Reveal>
@@ -1438,7 +1438,7 @@ function Specifications({ project }: { project: Detail }) {
       aria-labelledby="specifications-title"
       className="relative scroll-mt-24 overflow-hidden bg-[#F1EADA]"
     >
-      <div className="relative mx-auto max-w-[1450px] px-6 pb-24 pt-24 md:px-10 md:pb-32 md:pt-28 lg:px-12">
+      <div className="relative mx-auto max-w-[1450px] px-6 pb-16 pt-16 md:px-10 md:pb-20 md:pt-20 lg:px-12">
         <Reveal className="grid gap-y-10 lg:grid-cols-12 lg:gap-x-12">
           <div className="lg:col-span-5">
             <SectionLabel label="Specifications" />
@@ -1452,7 +1452,7 @@ function Specifications({ project }: { project: Detail }) {
           <div className="lg:col-span-7 lg:col-start-6 lg:pt-4">
             {s.groups.map((group) => (
               <div key={group.title} className="mb-8 border-t border-[#584738]/10 pt-6">
-                <h3 className="mb-4 text-[10px] uppercase tracking-[0.28em] text-brand-gold">
+                <h3 className="mb-4 text-[10px] font-medium uppercase tracking-[0.28em] text-brand-gold">
                   {group.title}
                 </h3>
                 <ul className="space-y-0">

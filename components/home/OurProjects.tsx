@@ -1,6 +1,6 @@
 "use client";
 
-import { useCallback, useEffect, useRef, useState } from "react";
+import React, { useCallback, useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 import { ENQUIRE_HREF, projects } from "@/data/avenue";
@@ -147,15 +147,17 @@ export default function OurProjects() {
           </div>
         </div>
 
-        {/* Slide track — each project is one full-width slide */}
+        {/* Slide track — cards with peek of next */}
         <div
-          className="flex overflow-x-auto snap-x snap-mandatory
+          className="flex overflow-x-auto snap-x snap-mandatory gap-4 pl-5
+                     scroll-pl-5
                      [&::-webkit-scrollbar]:hidden [scrollbar-width:none]"
+          style={{ WebkitOverflowScrolling: "touch" } as React.CSSProperties}
         >
           {projects.map((project, i) => (
             <article
               key={project.slug}
-              className="shrink-0 w-screen snap-start"
+              className="shrink-0 w-[88vw] snap-start"
             >
               {/* Image — tall, fills most of the slide */}
               <Link href={`/projects/${project.slug}`} className="block">
