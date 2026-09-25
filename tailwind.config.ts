@@ -21,17 +21,22 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        background: "#F4F1E8",
-        foreground: "#2D3A1F",
+        background: "#F1EADA",
+        foreground: "#584738",
+        tobacco: "#B59E7D",
+        vanilla: "#F1EADA",
+        mahogany: "#584738",
+        mountain: "#AAA396",
+        sand: "#CEC1A8",
         brand: {
-          gold:    "#B8A678",
-          bronze:  "#B8A678",
-          dark:    "#2D3A1F",
-          surface: "#E8E2D0",
-          card:    "#FFFFFF",
-          muted:   "#5F684F",
-          light:   "#F4F1E8",
-          border:  "#D5CFBC",
+          gold:    "#B59E7D",
+          bronze:  "#B59E7D",
+          dark:    "#584738",
+          surface: "#CEC1A8",
+          card:    "#F1EADA",
+          muted:   "#AAA396",
+          light:   "#F1EADA",
+          border:  "#CEC1A8",
         },
       },
       fontFamily: {

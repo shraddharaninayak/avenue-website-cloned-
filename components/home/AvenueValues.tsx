@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import { useEffect, useRef, useState, type MutableRefObject } from "react";
 import { company, milestoneHeadings } from "@/data/avenue";
@@ -49,8 +49,8 @@ const VALUES: Value[] = [
     position: "50% 40%",
   },
   {
-    title: "Timely execution",
-    text: quote(statement, "giving before-time delivery of units"),
+    title: "Timely Project Delivery",
+    text: quote(statement, "timely project delivery"),
     source: "From our journey",
     image: "/home-values/milestone-night.webp",
     alt: "The Avenue Milestone towers lit at night",
@@ -67,8 +67,8 @@ const VALUES: Value[] = [
     position: "58% 50%",
   },
   {
-    title: "Unique innovation",
-    text: quote(about, "Our dedicated team stays informed about the latest trends and products in the international market, allowing us to meet the high demands of the local market with innovative solutions."),
+    title: "Thoughtful Innovation",
+    text: quote(about, "allowing us to meet the needs of our buyers with thoughtful solutions."),
     source: "From our story",
     image: "/hero-lobby.jpg",
     alt: "The entrance lobby of The Avenue Milestone",
@@ -105,14 +105,14 @@ function ValueRow({
     >
       <span
         aria-hidden="true"
-        className={`absolute inset-x-0 top-0 h-px origin-left bg-black/15 transition-transform duration-[1200ms] ease-[cubic-bezier(0.22,1,0.36,1)] motion-reduce:transition-none ${
+        className={`absolute inset-x-0 top-0 h-px origin-left bg-[#584738]/15 transition-transform duration-[1200ms] ease-[cubic-bezier(0.22,1,0.36,1)] motion-reduce:transition-none ${
           visible ? "scale-x-100" : "motion-safe:scale-x-0"
         }`}
       />
 
       {/* Smaller screens: the value's image travels with it. */}
       <div
-        className={`relative mb-8 aspect-[4/3] w-full overflow-hidden bg-[#F4F1E8] lg:hidden ${revealClass(visible)}`}
+        className={`relative mb-8 aspect-[4/3] w-full overflow-hidden bg-[#F1EADA] lg:hidden ${revealClass(visible)}`}
       >
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
@@ -127,7 +127,7 @@ function ValueRow({
 
       <div className={`transition-opacity duration-700 ${active ? "lg:opacity-100" : "lg:opacity-[0.32]"}`}>
         <div className={`flex items-center gap-4 ${revealClass(visible)}`}>
-          <span className="text-[10px] uppercase tracking-[0.24em] text-[#5F684F]">Value</span>
+          <span className="text-[10px] uppercase tracking-[0.24em] text-[#AAA396]">Value</span>
         </div>
 
         <h3
@@ -141,12 +141,12 @@ function ValueRow({
 
         {value.text ? (
           <blockquote className={`mt-6 max-w-[460px] ${revealClass(visible, "delay-200")}`}>
-            <p className="text-[15px] leading-[1.75] text-[#5F684F] md:text-[16px]">
+            <p className="text-[15px] leading-[1.75] text-[#AAA396] md:text-[16px]">
               {fragment ? "…" : ""}
               {value.text}
               {fragment && !/[.!?]$/.test(value.text) ? "…" : ""}
             </p>
-            <footer className="mt-3 text-[10px] uppercase tracking-[0.22em] text-[#5F684F]">
+            <footer className="mt-3 text-[10px] uppercase tracking-[0.22em] text-[#AAA396]">
               {value.source}
             </footer>
           </blockquote>
@@ -181,7 +181,7 @@ export default function AvenueValues() {
     <section
       id="values"
       aria-labelledby="values-title"
-      className="relative bg-[#F4F1E8] pb-24 text-[#2D3A1F] md:pb-28 lg:pb-32"
+      className="relative bg-[#F1EADA] pb-24 text-[#584738] md:pb-28 lg:pb-32"
     >
       <div className="mx-auto max-w-[1450px] px-6 md:px-10 lg:px-12">
         <div className="lg:grid lg:grid-cols-12 lg:gap-x-12">
@@ -190,7 +190,7 @@ export default function AvenueValues() {
             {/* Observed here, not on the clipped frame inside it. */}
             <div ref={frameRef} className="sticky top-[17vh]">
               <div
-                className={`relative h-[62vh] max-h-[720px] w-full overflow-hidden bg-[#F4F1E8] transition-[clip-path] duration-[1400ms] ease-[cubic-bezier(0.65,0,0.35,1)] motion-reduce:transition-none ${
+                className={`relative h-[62vh] max-h-[720px] w-full overflow-hidden bg-[#F1EADA] transition-[clip-path] duration-[1400ms] ease-[cubic-bezier(0.65,0,0.35,1)] motion-reduce:transition-none ${
                   frameIn ? "[clip-path:inset(0_0_0_0)]" : "motion-safe:[clip-path:inset(100%_0_0_0)]"
                 }`}
               >
@@ -219,10 +219,10 @@ export default function AvenueValues() {
                 ))}
               </div>
 
-              <div className="mt-4 flex items-center justify-between gap-6 text-[10px] uppercase tracking-[0.22em] text-[#5F684F]">
+              <div className="mt-4 flex items-center justify-between gap-6 text-[10px] uppercase tracking-[0.22em] text-[#AAA396]">
                 <span>{VALUES[active].caption}</span>
                 <span>
-                  <span className="text-[#2D3A1F]">{pad(active + 1)}</span> / {pad(VALUES.length)}
+                  <span className="text-[#584738]">{pad(active + 1)}</span> / {pad(VALUES.length)}
                 </span>
               </div>
             </div>
@@ -232,7 +232,7 @@ export default function AvenueValues() {
           <div className="lg:col-span-5 lg:col-start-8">
             <div ref={headRef} className={`pb-12 lg:pb-16 ${revealClass(headIn)}`}>
               <div className="mb-8 flex items-center gap-4 md:mb-10">
-                <span className="text-[10px] uppercase tracking-[0.28em] text-[#2D3A1F]/55">Values</span>
+                <span className="text-[10px] uppercase tracking-[0.28em] text-[#584738]/55">Values</span>
               </div>
               <h2
                 id="values-title"
@@ -240,9 +240,9 @@ export default function AvenueValues() {
               >
                 What The Avenue
                 <br />
-                <em className="italic text-brand-bronze">stands for.</em>
+                <em className="italic text-brand-bronze">Stands For</em>
               </h2>
-              <p className="mt-8 max-w-[500px] text-[15px] leading-[1.8] text-[#5F684F] md:text-[16px]">
+              <p className="mt-8 max-w-[500px] text-[15px] leading-[1.8] text-[#AAA396] md:text-[16px]">
                 {statement}
               </p>
             </div>

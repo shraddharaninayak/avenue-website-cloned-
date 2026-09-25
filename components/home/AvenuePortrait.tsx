@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import { useRef } from "react";
 import { company, getProject } from "@/data/avenue";
@@ -16,8 +16,8 @@ import { lerp, revealClass, useReveal, useViewportProgress } from "./motion";
 
 /** The official "about" text, verbatim, in the two paragraphs it divides into. */
 export const ABOUT_PARAGRAPHS = [
-  "Welcome to The Avenue, your premier property development and trading company in Nashik. Since our establishment in 2007, we have built a reputation for excellence in delivering exceptional projects. With a diverse portfolio of residential, commercial, and industrial developments, we are recognized as a top-tier developer in the industry.",
-  "At The Avenue, we understand the evolving needs of our clients. Our dedicated team stays informed about the latest trends and products in the international market, allowing us to meet the high demands of the local market with innovative solutions. With over a century of combined experience in property development and investment, our principals and executive team bring a wealth of expertise to the table.",
+  "The Avenue Builders & Developers is a Nashik-based real estate development company established in 2007. Since then, we have delivered residential, commercial and industrial projects across Nashik, including more than 1 million sq. ft. of developed space.",
+  "At The Avenue, we understand the evolving needs of our clients. Our dedicated team stays informed about the latest trends and products in the market, allowing us to meet the needs of our buyers with thoughtful solutions. With 50+ years of combined leadership experience, our principals and executive team bring a wealth of expertise to every development.",
 ] as const;
 
 const FACTS = [
@@ -46,7 +46,7 @@ export default function AvenuePortrait() {
     <section
       id="portrait"
       aria-labelledby="portrait-title"
-      className="relative bg-[#F4F1E8] pb-20 pt-24 text-[#2D3A1F] md:pb-24 md:pt-32 lg:pb-28 lg:pt-36"
+      className="relative bg-[#F1EADA] pb-20 pt-24 text-[#584738] md:pb-24 md:pt-32 lg:pb-28 lg:pt-36"
     >
       <div className="mx-auto max-w-[1450px] px-6 md:px-10 lg:px-12">
         <div className="grid gap-y-14 lg:grid-cols-12 lg:gap-x-12">
@@ -54,7 +54,7 @@ export default function AvenuePortrait() {
           <div className="lg:col-span-6">
             <div ref={headRef} className={revealClass(headIn)}>
               <div className="mb-8 flex items-center gap-4 md:mb-10">
-                <span className="text-[10px] uppercase tracking-[0.28em] text-[#2D3A1F]/55">Portrait</span>
+                <span className="text-[10px] uppercase tracking-[0.28em] text-[#584738]/55">Portrait</span>
               </div>
               <h2
                 id="portrait-title"
@@ -76,7 +76,7 @@ export default function AvenuePortrait() {
               {ABOUT_PARAGRAPHS.map((para, i) => (
                 <p
                   key={i}
-                  className={`mt-6 text-[15px] leading-[1.8] text-[#5F684F] md:text-[16px] ${revealClass(
+                  className={`mt-6 text-[15px] leading-[1.8] text-[#AAA396] md:text-[16px] ${revealClass(
                     textIn,
                     i === 0 ? "delay-150" : "delay-300",
                   )}`}
@@ -86,18 +86,18 @@ export default function AvenuePortrait() {
               ))}
 
               <dl
-                className={`mt-12 grid grid-cols-2 gap-x-8 gap-y-8 border-t border-black/15 pt-8 sm:grid-cols-3 ${revealClass(
+                className={`mt-12 grid grid-cols-2 gap-x-8 gap-y-8 border-t border-[#584738]/15 pt-8 sm:grid-cols-3 ${revealClass(
                   textIn,
                   "delay-500",
                 )}`}
               >
                 {FACTS.map((fact) => (
                   <div key={fact.label} className={fact.label === "Portfolio" ? "col-span-2 sm:col-span-1" : ""}>
-                    <dt className="text-[10px] uppercase tracking-[0.22em] text-[#5F684F]">{fact.label}</dt>
+                    <dt className="text-[10px] uppercase tracking-[0.22em] text-[#AAA396]">{fact.label}</dt>
                     <dd
                       className={
                         fact.label === "Portfolio"
-                          ? "mt-3 text-[14px] leading-[1.55] text-[#2D3A1F]"
+                          ? "mt-3 text-[14px] leading-[1.55] text-[#584738]"
                           : "mt-3 font-serif text-[30px] font-light leading-none tracking-[-0.03em]"
                       }
                     >
@@ -112,7 +112,7 @@ export default function AvenuePortrait() {
           {/* ================= IMAGE ================= */}
           <figure ref={figureRef} className="lg:col-span-5 lg:col-start-8 lg:pt-10">
             <div
-              className={`relative aspect-[4/5] w-full overflow-hidden bg-[#F4F1E8] transition-[clip-path] duration-[1400ms] ease-[cubic-bezier(0.65,0,0.35,1)] motion-reduce:transition-none ${
+              className={`relative aspect-[4/5] w-full overflow-hidden bg-[#F1EADA] transition-[clip-path] duration-[1400ms] ease-[cubic-bezier(0.65,0,0.35,1)] motion-reduce:transition-none ${
                 figureIn ? "[clip-path:inset(0_0_0_0)]" : "motion-safe:[clip-path:inset(100%_0_0_0)]"
               }`}
             >
@@ -137,7 +137,7 @@ export default function AvenuePortrait() {
             </div>
             {aura ? (
               <figcaption
-                className={`mt-4 flex items-center justify-between gap-6 text-[10px] uppercase tracking-[0.22em] text-[#5F684F] ${revealClass(
+                className={`mt-4 flex items-center justify-between gap-6 text-[10px] uppercase tracking-[0.22em] text-[#AAA396] ${revealClass(
                   figureIn,
                   "delay-700",
                 )}`}

@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import { useEffect, useRef, useState } from "react";
 import { testimonials } from "@/data/avenue";
@@ -55,7 +55,7 @@ export default function Testimonials() {
     <section
       ref={sectionRef}
       id="testimonials"
-      className="scroll-mt-24 overflow-hidden border-t border-white/10 bg-[#2D3A1F] py-16 text-white md:py-20"
+      className="scroll-mt-24 overflow-hidden border-t border-white/10 bg-[#584738] py-16 text-white md:py-20"
     >
       <div className={`mx-auto max-w-[1450px] px-6 md:px-10 lg:px-12 ${reveal("")}`}>
         <div className="flex items-center gap-4">
@@ -73,8 +73,8 @@ export default function Testimonials() {
       {/* MARQUEE */}
       <div className={`group relative mt-12 w-full overflow-hidden md:mt-14 ${reveal("delay-150")}`}>
         {/* Edge fades so cards enter and leave rather than being chopped off. */}
-        <div className="pointer-events-none absolute inset-y-0 left-0 z-10 w-16 bg-gradient-to-r from-[#2D3A1F] to-transparent md:w-32" />
-        <div className="pointer-events-none absolute inset-y-0 right-0 z-10 w-16 bg-gradient-to-l from-[#2D3A1F] to-transparent md:w-32" />
+        <div className="pointer-events-none absolute inset-y-0 left-0 z-10 w-16 bg-gradient-to-r from-[#584738] to-transparent md:w-32" />
+        <div className="pointer-events-none absolute inset-y-0 right-0 z-10 w-16 bg-gradient-to-l from-[#584738] to-transparent md:w-32" />
 
         <ul
           className="flex w-max animate-avenue-marquee gap-5 will-change-transform group-hover:[animation-play-state:paused] motion-reduce:animate-none md:gap-7"
@@ -85,7 +85,7 @@ export default function Testimonials() {
               key={`${item.name}-${i}`}
               // The second copy is decorative; screen readers read the list once.
               aria-hidden={i >= testimonials.length}
-              className="w-[300px] shrink-0 border border-white/12 bg-[#2D3A1F] p-7 transition-colors duration-500 hover:border-white/25 sm:w-[380px] md:w-[440px] md:p-9"
+              className="w-[300px] shrink-0 border border-white/12 bg-[#584738] p-7 transition-colors duration-500 hover:border-white/25 sm:w-[380px] md:w-[440px] md:p-9"
             >
               <span className="block font-serif text-[40px] leading-none text-brand-gold/50">
                 &ldquo;

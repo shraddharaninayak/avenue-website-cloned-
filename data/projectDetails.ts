@@ -1,4 +1,4 @@
-/**
+﻿/**
  * ============================================================================
  *  PROJECT DETAIL PAGES — /projects/[slug]
  * ============================================================================
@@ -63,6 +63,8 @@ export type ProjectSection =
   | { type: "featureBlock"; heading: string; intro?: string; items: string[]; source?: string }
   | { type: "about"; heading: string; paragraphs: string[]; source?: string }
   | { type: "spaceShowcase"; title: string; image: Media; description: string };
+
+// Note: 'specifications' above refers to { type: "specifications" } — renders project.specifications when present.
 
 export type ProjectDetail = {
   slug: string;
@@ -148,7 +150,7 @@ const milestone: ProjectDetail = {
   // Brochure p3: "The Avenue Builders & Developers marks a new Milestone."
   tagline: "Marks a new milestone.",
   // Brochure p3, verbatim.
-  subline: "Nashik's first-ever 4.5 BHK prestigious homes, offering world-class amenities with 12.5 ft ceiling height.",
+  subline: "Nashik's first-ever 4.5 BHK prestigious homes, offering curated amenities with 12.5 ft ceiling height.",
   hero: img(`${M}/hero.webp`, 2428, 1366, "The Avenue Milestone — the two towers at dusk"),
   heroPosition: "48% 50%",
   // Brochure p3, p7, p8, p9 and p11.
@@ -201,11 +203,11 @@ const milestone: ProjectDetail = {
         title: "Lifestyle experiences",
         items: [
           "Outdoor Fitness Zone",
-          "Indoor Game Zone",
+          "Indoor Games Zone",
           "Multifunctional Space for Aerobics, Zumba, Dance, Yoga & more",
           "Toddlers' Creative Studio",
           "Card Room",
-          "World-Class Luxury Spa",
+          "Luxury Spa",
         ],
       },
       { title: "Therapeutic experiences", items: ["Aroma Garden", "Reflexology Path", "Rooftop Observatory", "Sky Walkway"] },
@@ -295,6 +297,7 @@ const urbaniaDetail: ProjectDetail = {
     { value: "72", label: "Luxurious residences" },
     { value: "2", label: "Towers", note: "20 floors each" },
     { value: "2", label: "Apartments per floor" },
+    // TODO: verify whether this is floor-to-floor or floor-to-ceiling height before updating label.
     { value: "10 ft 6 in", label: "Floor height", note: "Approximately" },
   ],
   // The Urbania page, verbatim.
@@ -302,7 +305,7 @@ const urbaniaDetail: ProjectDetail = {
     heading: urbania.statement,
     paragraphs: [
       urbania.description,
-      "You can call it a revolution in high end living and it's going to take your joy of living quotient to a new height.",
+      "You can call it a revolution in high-end living and it's going to take your joy of living quotient to a new height.",
       "Here is your truly a once in a lifestyle opportunity to own a home that has all the ingredients for a perfect life.",
     ],
     source: "From the Urbania page",
@@ -316,23 +319,23 @@ const urbaniaDetail: ProjectDetail = {
   ],
   // The Urbania page's four tiers, in its own words.
   amenities: {
-    heading: "Four tiers of celebrity-like lifestyle.",
+    heading: "Four tiers of lifestyle amenities.",
     intro: "The delights of rejuvenation, calling to you.",
     source: "From the Urbania page",
     frame: "rect",
     featured: [
       { title: "Indoor Gym", image: img(`${U}/gym.webp`, 1600, 974, "The gym at Urbania, looking out over the city") },
-      { title: "Multi Purpose Hall", image: img(`${U}/banquet-hall.webp`, 1472, 906, "The multi purpose hall at Urbania, laid out for a gathering") },
-      { title: "Indoor Game", image: img(`${U}/games-room.webp`, 1478, 753, "The indoor games room at Urbania, with pool and darts") },
+      { title: "Multipurpose Hall", image: img(`${U}/banquet-hall.webp`, 1472, 906, "The multi purpose hall at Urbania, laid out for a gathering") },
+      { title: "Indoor Games", image: img(`${U}/games-room.webp`, 1478, 753, "The indoor games room at Urbania, with pool and darts") },
       { title: "Yoga Aerobics Lawn", image: img(`${U}/yoga-lawn.webp`, 1600, 971, "The yoga and aerobics lawn on the Urbania terrace") },
     ],
     groups: [
       {
         title: "Tier I — Residences (Living)",
         items: [
-          "3 & 4 BHK sky lifestyle with world-class embellishments",
+          "3 & 4 BHK sky lifestyle with premium finishes",
           "72 luxurious residences",
-          "Per floor 2 apartment",
+          "2 residences per floor",
           "2 sky-scaling towers of 20",
           "Around 10'6\" floor height",
         ],
@@ -352,8 +355,8 @@ const urbaniaDetail: ProjectDetail = {
           "Indoor gym",
           "Jogging track",
           "Seating arrangement",
-          "Multi purpose hall",
-          "Indoor game",
+          "Multipurpose hall",
+          "Indoor Games",
           "Outdoor game",
         ],
       },
@@ -382,6 +385,7 @@ const urbaniaDetail: ProjectDetail = {
       { title: "4 BHK Unit Plan · Tower A · Type 2", image: img(`${U}/plan-4bhk-tower-a-type-2.webp`, 1600, 2400, "Urbania — 4 BHK unit plan, Tower A, Type 2") },
       { title: "3 BHK Unit Plan · Tower B · Type 1", image: img(`${U}/plan-3bhk-tower-b-type-1.webp`, 1600, 2329, "Urbania — 3 BHK unit plan, Tower B, Type 1") },
       { title: "3 BHK Unit Plan · Tower B · Type 2", image: img(`${U}/plan-3bhk-tower-b-type-2.webp`, 1600, 2383, "Urbania — 3 BHK unit plan, Tower B, Type 2") },
+      // TODO: verify — the project configuration states "3 & 4 BHK" but these plan files show 5 and 6 BHK. Do not remove either until confirmed.
       { title: "6 BHK Unit Plan · Tower A", image: img(`${U}/plan-6bhk-tower-a.webp`, 1600, 525, "Urbania — 6 BHK unit plan, Tower A") },
       { title: "5 BHK Unit Plan · Tower B", image: img(`${U}/plan-5bhk-tower-b.webp`, 1600, 560, "Urbania — 5 BHK unit plan, Tower B") },
     ],
@@ -440,8 +444,7 @@ const floraDetail: ProjectDetail = {
   fullName: `The Avenue ${flora.name}`,
   category: flora.category,
   eyebrow: "Old Gangapur Naka, Gangapur Road, Nashik",
-  // Brochure cover.
-  tagline: "A new era of affordability.",
+  tagline: "Offices and showrooms at Old Gangapur Naka, Nashik.",
   subline: "Showrooms & offices.",
   // The brochure's render (p2), uncropped.
   hero: img(`${F}/exterior.webp`, 2550, 1725, "The Avenue Flora — showrooms and offices"),
@@ -449,15 +452,14 @@ const floraDetail: ProjectDetail = {
   facts: [
     { value: "555–1790", label: "Sq.ft. Offices" },
     { value: "1297–3162", label: "Sq.ft. Showrooms" },
-    { value: "Gangapur Naka", label: "Heart of the city" },
+    { value: "Old Gangapur Naka", label: "Nashik" },
     { value: "CBS & College Rd", label: "Minutes away" },
   ],
-  // Brochure p2, verbatim.
   story: {
-    heading: "Welcome to a world of elegance.",
+    heading: "About The Avenue Flora.",
     paragraphs: [
-      "Welcome to a world of elegance, opportunities and dreams that blossom. Here, amidst the vibrant life of Old Gangapur Naka, we invite you to join us on a journey where aspirations find their wings, and business meets prosperity. Experience The Avenue Flora - A New Era of Affordability.",
-      "The Avenue Flora is an iconic commercial destination, setting new standards in commercial and corporate lifestyle. The prestigious project offers elite options for Advocates, Professionals, Architects, Doctors, Interior Designers, and Chartered Accountants.",
+      "Flora is a commercial development at Old Gangapur Naka, Nashik, offering offices and showrooms with convenient access to key areas of Nashik.",
+      "The Avenue Flora offers space for Advocates, Professionals, Architects, Doctors, Interior Designers and Chartered Accountants, as well as businesses looking for a well-connected commercial address on Gangapur Road.",
     ],
     source: "From the Flora brochure and 2025 profile",
   },
@@ -500,47 +502,19 @@ const floraDetail: ProjectDetail = {
   enquiry: { phone: "+91 96990 06377", phoneHref: "tel:+919699006377" },
   disclaimer:
     "The contents of this brochure are purely conceptual and have no legal bindings on us. Developers reserve the right of amend the layout plans, number of floors & units, elevation, colour scheme, specifications and amenities etc. without notice.",
-  // The official Flora page's section order: hero, about, commercial
-  // spaces, office spaces, fitness center, showroom spaces, exclusive
-  // amenities, floor plans, and the enquiry form.
   sections: [
     { type: "hero" },
-    {
-      type: "about",
-      heading: "About Flora",
-      paragraphs: [
-        "Welcome to a world of elegance, opportunities and dreams that blossom. Here, amidst the vibrant life of Old Gangapur Naka, we invite you to join us on a journey where aspirations find their wings, and business meets prosperity. Experience The Avenue Flora — A New Era of Affordability.",
-        "The Avenue Flora is an iconic commercial destination, setting new standards in commercial and corporate lifestyle. The prestigious project offers elite options for Advocates, Professionals, Architects, Doctors, Interior Designers, and Chartered Accountants.",
-      ],
-      source: "From the Flora brochure and 2025 profile",
-    },
+    { type: "overview" },
     {
       type: "showcase",
       heading: "Commercial Spaces",
-      intro: "Feature · Specifications · Price Details",
+      intro: "Offices and showrooms across ground to seventh floor, at Old Gangapur Naka.",
       image: img(`${F}/exterior.webp`, 2550, 1725, "The Avenue Flora — showrooms and offices"),
-      caption: "Commercial Spaces",
-      source: "From the Flora page",
-    },
-    {
-      type: "spaceShowcase",
-      title: "Office Spaces",
-      image: img(`${F}/plan-second-to-seventh-floor.webp`, 2550, 1733, "The Avenue Flora — office spaces"),
-      description: "Office spaces from 555 to 1790 Sq.ft., designed for professionals and businesses seeking a premium address in the heart of the city.",
-    },
-    {
-      type: "spaceShowcase",
-      title: "Fitness Center",
-      image: img(`${F}/plan-second-to-seventh-floor.webp`, 2550, 1733, "The Avenue Flora — fitness center"),
-      description: "A dedicated fitness center with modern equipment and a green gym for those who work out outdoors.",
-    },
-    {
-      type: "spaceShowcase",
-      title: "Showroom Spaces",
-      image: img(`${F}/exterior.webp`, 2550, 1725, "The Avenue Flora — showroom spaces"),
-      description: "Showroom spaces from 1297 to 3162 Sq.ft., built for brands that want visibility and footfall on Gangapur Road.",
+      caption: "The Avenue Flora",
+      source: "From the Flora brochure",
     },
     { type: "amenities" },
+    { type: "location" },
     { type: "plans" },
     { type: "brochure" },
     { type: "enquire" },
@@ -578,7 +552,7 @@ const auraDetail: ProjectDetail = {
     heading: "Step into a world of elegance.",
     paragraphs: [
       auraDescription,
-      "The outside ambience is as important as the one inside, so at The Aura the external amenities do reflect a well-planned layout and much more...",
+      "Thoughtfully designed outdoor spaces complement the interiors, creating a more complete residential experience.",
     ],
     source: "From the Aura page and brochure",
   },
@@ -657,11 +631,11 @@ const auraDetail: ProjectDetail = {
     {
       type: "featureBlock",
       heading: "Features",
-      intro: "The Avenue Aura is located in the micro-level planned layout of Govind Nagar, Nashik.",
+      intro: "The Avenue Aura is a residential development in Govind Nagar, Nashik.",
       items: [
-        "Design and planned to meet the multinational standards.",
+        "Designed and planned to meet contemporary residential needs.",
         "Floor plates planned to give flexibility in interiors layout planning.",
-        "Specifications based on global requirements and environments, health and safety parameters.",
+        "Specifications based on industry-standard health and safety parameters.",
         "Entrance lobby with lounge sitting and concierge.",
         "Two level parking in one basement and ground floor.",
         "Project designed to meet residential standards.",
@@ -730,7 +704,7 @@ const blissDetail: ProjectDetail = {
   category: bliss.category,
   eyebrow: bliss.locality ?? "Govind Nagar, Nashik",
   // Brochure cover: "Perfect Happiness..." · "Limited Edition 2 & 3 BHK Homes".
-  tagline: "Perfect happiness.",
+  tagline: "A home worth living in.",
   subline: "Limited edition 2 & 3 BHK homes, penthouse & shops.",
   // The brochure's elevation (p2), uncropped.
   hero: img(`${B}/elevation.webp`, 2750, 2037, "The Avenue Bliss at dusk"),
@@ -738,12 +712,12 @@ const blissDetail: ProjectDetail = {
   heroPosition: "50% 15%",
   facts: [
     { value: "2 & 3 BHK", label: "Homes & penthouse" },
-    { value: "1078–1877", label: "Sq.ft. built-up" },
-    { value: "250–350", label: "Sq.ft. shops" },
+    { value: "1078–1877", label: "sq. ft. built-up" },
+    { value: "250–350", label: "sq. ft. shops" },
     { value: "Ready", label: "Possession" },
     { value: "Govind Nagar", label: "Centrally located" },
   ],
-  story: { heading: "Perfect happiness.", paragraphs: [bliss.description], source: "From the Bliss page" },
+  story: { heading: "A home worth living in.", paragraphs: [bliss.description], source: "From the Bliss page" },
   gallery: [],
   amenities: {
     heading: "Rooftop living & curated amenities.",
@@ -754,7 +728,7 @@ const blissDetail: ProjectDetail = {
     featured: [{ title: "The rooftop", image: img(`${B}/rooftop.webp`, 1749, 1189, "The Bliss rooftop from above, with its terrace amenities") }],
     groups: [
       { title: "Rooftop & Wellness", items: ["Roof Top Green Gym", "Yoga Deck", "Jogging Track", "Party Lawn", "Senior Citizen Sitting", "Sit Out Area"] },
-      { title: "Facilities & Security", items: ["Indoor Game Play Area", "E Vehicle Charging Point", "Commercial Shops (250–350 Sq.ft.)", "24x7 Security Systems", "Power Backup"] },
+      { title: "Facilities & Security", items: ["Indoor Games Play Area", "E Vehicle Charging Point", "Commercial Shops (250–350 Sq.ft.)", "24x7 Security Systems", "Power Backup"] },
     ],
   },
   location: {
@@ -806,23 +780,21 @@ const aaryanaDetail: ProjectDetail = {
   eyebrow: aaryana.locality ?? "Karmayogi Nagar, Nashik",
   // Brochure cover: "Modern Luxury..." · "EXCLUSIVE 3 BHK APARTMENT".
   tagline: aaryana.statement,
-  subline: "Premium 3 BHK & 4 BHK Penthouse · One Floor Two Flat.",
+  subline: "Premium 3 BHK & 4 BHK Penthouse · Two Residences Per Floor.",
   hero: img(`${AA}/exterior.webp`, 1650, 2625, "The Avenue Aaryana at dusk"),
   heroPosition: "50% 45%",
   facts: [
+    // TODO: verify — configuration says "3 BHK & Penthouse" but features/brochure say "4 BHK Penthouse". Do not change until confirmed.
     { value: "3 BHK & Penthouse", label: "Exclusive residences" },
-    { value: "1947 & 2912", label: "Sq.ft. Area" },
-    { value: "1 Floor 2 Flat", label: "Total privacy" },
+    { value: "1947 & 2912", label: "sq. ft. area" },
+    { value: "2 Per Floor", label: "Designed for Greater Privacy" },
     { value: "Mumbai-Agra", label: "Highway", note: "Near R.D. Circle" },
   ],
-  // Brochure p3, verbatim.
   story: {
-    heading: "A residence is the canvas for life's most cherished moments.",
+    heading: "About The Avenue Aaryana.",
     paragraphs: [
-      "A residence serves as the canvas for life's most cherished moments, a sanctuary where memories blossom and endure. It evolves into a haven where you nurture invaluable recollections, cultivating a tapestry of experiences to be treasured for a lifetime. Over time, it transforms into a resplendent abode that encapsulates the essence of your dreams.",
-      "Introducing The Avenue AARYANA, an epitome of opulence, a Premium Edition 3 BHK Class home meticulously crafted with precision, employing cutting-edge technology, and featuring intelligently designed spaces. This residence is not just a dwelling; it's an embodiment of a refined lifestyle that transcends expectations.",
-      "Nestled conveniently along the Mumbai-Agra Highway, The Avenue AARYANA boasts seamless connectivity, offering accessibility that effortlessly intertwines with the rhythm of your daily life. Its proximity to the city's premier shopping destination ensures a vibrant and colorful lifestyle, enhancing your living experience within this grand estate.",
-      "Discover the extraordinary in every corner of The Avenue AARYANA, where your heart finds its truest home, and where each passing moment becomes a testament to a life well-lived.",
+      "Aaryana is a premium residential development in Karmayogi Nagar, Nashik, offering spacious 3 BHK residences and a penthouse. Designed around privacy, generous proportions and modern living, the project offers two residences per floor.",
+      "Nestled conveniently along the Mumbai-Agra Highway, The Avenue Aaryana offers seamless connectivity and convenient access to key city destinations.",
     ],
     source: "From the Aaryana brochure",
   },
@@ -948,6 +920,24 @@ const aaryanaDetail: ProjectDetail = {
     edition: "E-Brochure",
     cover: img(`${AA}/brochure-cover-page.webp`, 900, 1424, "The cover of the Aaryana brochure"),
   },
+  sections: [
+    { type: "hero" },
+    { type: "overview" },
+    {
+      type: "showcase",
+      heading: "Two Residences Per Floor",
+      intro: "A premium residential development in Karmayogi Nagar, designed for privacy and generous proportions.",
+      image: img(`${AA}/exterior.webp`, 1650, 2625, "The Avenue Aaryana at dusk"),
+      caption: "The Avenue Aaryana",
+      source: "From the Aaryana brochure",
+    },
+    { type: "amenities" },
+    { type: "location" },
+    { type: "plans" },
+    { type: "specifications" },
+    { type: "brochure" },
+    { type: "enquire" },
+  ],
   enquiry: aaryana.contact
     ? { phone: aaryana.contact, phoneHref: `tel:${aaryana.contact.replace(/\s+/g, "")}` }
     : PROJECT_PHONE,
@@ -980,12 +970,11 @@ const virajDetail: ProjectDetail = {
     { value: "Banquet & Hospital", label: "Facilities" },
     { value: "Mumbai-Agra", label: "Highway", note: "Opp. Bali Mandir" },
   ],
-  // Brochure p2, verbatim.
   story: {
-    heading: "Welcome to Viraj Avenue.",
+    heading: "About Viraj Avenue.",
     paragraphs: [
-      "Viraj Avenue is an upcoming landmark in Nashik, offering a blend of Modern Office Spaces, Showrooms, Shops, a Banquet Hall, and a Hospital.",
-      "Strategically located opposite Bali Mandir, Panchavati Annex. This project is designed to cater to a variety of commercial needs with state-of-the-art amenities and facilities.",
+      "Viraj Avenue is an upcoming mixed-use commercial development in Panchavati Annex, Nashik, offering showrooms, offices, retail spaces, a banquet hall and a hospital.",
+      "Strategically located opposite Bali Mandir, Panchavati Annex, the project is designed to cater to a variety of commercial needs.",
     ],
     source: "From the Viraj Avenue brochure",
   },
@@ -1029,6 +1018,24 @@ const virajDetail: ProjectDetail = {
     edition: "E-Brochure",
     cover: img(`${V}/brochure-cover-page.webp`, 1200, 816, "The cover of the Viraj Avenue brochure"),
   },
+  sections: [
+    { type: "hero" },
+    { type: "overview" },
+    {
+      type: "showcase",
+      heading: "The Frontage",
+      intro: "An upcoming mixed-use commercial development in Panchavati Annex, on the Mumbai-Agra Highway.",
+      image: img(`${V}/exterior.webp`, 2550, 1726, "Viraj Avenue — the shopfronts and offices along the highway"),
+      caption: "Viraj Avenue",
+      source: "From the Viraj Avenue brochure",
+    },
+    { type: "amenities" },
+    { type: "gallery" },
+    { type: "location" },
+    { type: "plans" },
+    { type: "brochure" },
+    { type: "enquire" },
+  ],
   // Brochure p7: "For more information click : 72 77 99 55 66".
   enquiry: PROJECT_PHONE,
   // Brochure p7, verbatim.

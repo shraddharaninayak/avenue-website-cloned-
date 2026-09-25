@@ -1,22 +1,22 @@
-import React from "react";
+﻿import React from "react";
 
 const stats = [
-  { value: "2007", label: "Established", detail: "Leading developer in Nashik" },
-  { value: "1M+", label: "Sq.Ft Delivered", detail: "Residential, commercial & industrial" },
-  { value: "10+", label: "Years Combined", detail: "Decade of industry expertise" },
-  { value: "45+", label: "Curated Amenities", detail: "Elevated lifestyle experiences" },
+  { value: "2007", label: "Established", detail: "Nashik, Maharashtra" },
+  { value: "1M+", label: "Sq. ft. delivered", detail: "Across all developments" },
+  { value: "50+", label: "Years of leadership", detail: "Combined across our directors" },
+  { value: "3", label: "Asset classes", detail: "Residential · Commercial · Industrial" },
 ];
 
 export default function StatsSection() {
   return (
-    <section className="bg-[#2D3A1F] py-28 px-6 md:px-12 lg:px-20 text-white border-y border-white/10">
+    <section className="bg-[#584738] py-28 px-6 md:px-12 lg:px-20 text-white border-y border-white/10">
       <div className="max-w-7xl mx-auto">
         <div className="max-w-3xl mb-16">
           <div className="text-[11px] font-grotesk uppercase tracking-[0.3em] text-brand-gold font-semibold mb-3">
             Legacy & Milestones
           </div>
           <h2 className="text-3xl sm:text-5xl font-grotesk font-normal uppercase leading-[1.1] tracking-tight">
-            Built on a decade of expertise, and over 1 Million Sq.Ft delivered.
+            Since 2007, delivering residential, commercial and industrial developments across Nashik.
           </h2>
         </div>
 

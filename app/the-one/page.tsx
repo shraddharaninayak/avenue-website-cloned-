@@ -1,11 +1,11 @@
-import React from "react";
+﻿import React from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { MapPin, ArrowRight, ShieldCheck, Sparkles, Building2, Compass } from "lucide-react";
 
 export default function TheOnePage() {
   return (
-    <div className="bg-[#2D3A1F] text-white pt-28">
+    <div className="bg-[#584738] text-white pt-28">
       {/* Hero Header */}
       <section className="relative h-[85vh] w-full flex items-end pb-16 px-6 md:px-12 lg:px-20 overflow-hidden">
         <Image
@@ -15,10 +15,10 @@ export default function TheOnePage() {
           className="object-cover"
           priority
         />
-        <div className="absolute inset-0 bg-gradient-to-t from-[#2D3A1F] via-black/40 to-black/30" />
+        <div className="absolute inset-0 bg-gradient-to-t from-[#584738] via-[#584738]/40 to-[#584738]/30" />
 
         <div className="relative z-10 max-w-4xl">
-          <div className="inline-flex items-center gap-2 bg-black/70 backdrop-blur-md px-3.5 py-1.5 border border-white/15 text-[10px] font-grotesk uppercase tracking-[0.2em] text-brand-gold font-semibold mb-4">
+          <div className="inline-flex items-center gap-2 bg-[#584738]/70 backdrop-blur-md px-3.5 py-1.5 border border-white/15 text-[10px] font-grotesk uppercase tracking-[0.2em] text-brand-gold font-semibold mb-4">
             <MapPin className="w-3.5 h-3.5" />
             <span>Civil Lines, Nagpur</span>
           </div>
@@ -83,7 +83,7 @@ export default function TheOnePage() {
             <div className="pt-4">
               <Link
                 href="/contact"
-                className="inline-flex items-center gap-3 bg-[#2D3A1F] text-white px-8 py-4 font-grotesk text-xs uppercase tracking-[0.2em] font-semibold hover:bg-brand-bronze transition-colors duration-300"
+                className="inline-flex items-center gap-3 bg-[#584738] text-white px-8 py-4 font-grotesk text-xs uppercase tracking-[0.2em] font-semibold hover:bg-brand-bronze transition-colors duration-300"
               >
                 <span>Request Detailed Brochure</span>
                 <ArrowRight className="w-4 h-4" />
@@ -92,7 +92,7 @@ export default function TheOnePage() {
           </div>
 
           <div className="space-y-6">
-            <div className="bg-[#2D3A1F] border border-white/10 p-8 flex items-start gap-5">
+            <div className="bg-[#584738] border border-white/10 p-8 flex items-start gap-5">
               <ShieldCheck className="w-8 h-8 text-brand-gold shrink-0 mt-1" />
               <div>
                 <h3 className="font-grotesk text-xl uppercase tracking-tight text-white mb-1">
@@ -104,7 +104,7 @@ export default function TheOnePage() {
               </div>
             </div>
 
-            <div className="bg-[#2D3A1F] border border-white/10 p-8 flex items-start gap-5">
+            <div className="bg-[#584738] border border-white/10 p-8 flex items-start gap-5">
               <Sparkles className="w-8 h-8 text-brand-gold shrink-0 mt-1" />
               <div>
                 <h3 className="font-grotesk text-xl uppercase tracking-tight text-white mb-1">
@@ -116,7 +116,7 @@ export default function TheOnePage() {
               </div>
             </div>
 
-            <div className="bg-[#2D3A1F] border border-white/10 p-8 flex items-start gap-5">
+            <div className="bg-[#584738] border border-white/10 p-8 flex items-start gap-5">
               <Compass className="w-8 h-8 text-brand-gold shrink-0 mt-1" />
               <div>
                 <h3 className="font-grotesk text-xl uppercase tracking-tight text-white mb-1">

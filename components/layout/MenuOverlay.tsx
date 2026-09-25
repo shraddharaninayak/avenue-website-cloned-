@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import React, { useEffect, useRef } from "react";
 import Link from "next/link";
@@ -19,7 +19,7 @@ import { socials } from "@/data/avenue";
  */
 
 /** The cream shared with the intro screen. */
-export const MENU_CREAM = "#F4F1E8";
+export const MENU_CREAM = "#F1EADA";
 
 const socialIcons = {
   Instagram,
@@ -67,7 +67,7 @@ export default function MenuOverlay({ open, onClose }: MenuOverlayProps) {
       <div
         onClick={onClose}
         aria-hidden="true"
-        className={`absolute inset-0 bg-[#2D3A1F]/25 transition-opacity duration-500 ${open ? "opacity-100" : "opacity-0"}`}
+        className={`absolute inset-0 bg-[#584738]/25 transition-opacity duration-500 ${open ? "opacity-100" : "opacity-0"}`}
       />
 
       <aside
@@ -75,7 +75,7 @@ export default function MenuOverlay({ open, onClose }: MenuOverlayProps) {
         aria-modal="true"
         aria-label="Site menu"
         {...(!open ? { inert: "" as unknown as boolean } : {})}
-        className={`absolute right-0 top-0 flex h-[100dvh] w-full flex-col overflow-hidden border-l border-[#B8A678] shadow-[-24px_0_80px_rgba(0,0,0,0.12)] transition-[transform,opacity] duration-[700ms] ease-[cubic-bezier(0.22,1,0.36,1)] motion-reduce:transition-none md:w-[480px] lg:w-[540px] xl:w-[560px] ${
+        className={`absolute right-0 top-0 flex h-[100dvh] w-full flex-col overflow-hidden border-l border-[#B59E7D] shadow-[-24px_0_80px_rgba(0,0,0,0.12)] transition-[transform,opacity] duration-[700ms] ease-[cubic-bezier(0.22,1,0.36,1)] motion-reduce:transition-none md:w-[480px] lg:w-[540px] xl:w-[560px] ${
           open ? "translate-x-0 opacity-100" : "translate-x-full opacity-0"
         }`}
         style={{ backgroundColor: MENU_CREAM }}
@@ -97,7 +97,7 @@ export default function MenuOverlay({ open, onClose }: MenuOverlayProps) {
             type="button"
             onClick={onClose}
             aria-label="Close menu"
-            className="group flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-[#F4F1E8] text-[#5F684F] transition-colors duration-300 hover:bg-[#2D3A1F] hover:text-white focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-[#B8A678] focus-visible:ring-offset-2 focus-visible:ring-offset-[#F4F1E8] lg:h-14 lg:w-14"
+            className="group flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-[#F1EADA] text-[#AAA396] transition-colors duration-300 hover:bg-[#584738] hover:text-white focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-[#B59E7D] focus-visible:ring-offset-2 focus-visible:ring-offset-[#F1EADA] lg:h-14 lg:w-14"
           >
             <X className="h-5 w-5 transition-transform duration-300 group-hover:rotate-90" strokeWidth={1.3} />
           </button>
@@ -106,7 +106,7 @@ export default function MenuOverlay({ open, onClose }: MenuOverlayProps) {
         {/* Rule */}
         <div
           aria-hidden="true"
-          className={`mx-7 h-px shrink-0 origin-left bg-[#B8A678] transition-transform delay-150 duration-[900ms] ease-[cubic-bezier(0.22,1,0.36,1)] md:mx-10 lg:mx-14 ${
+          className={`mx-7 h-px shrink-0 origin-left bg-[#B59E7D] transition-transform delay-150 duration-[900ms] ease-[cubic-bezier(0.22,1,0.36,1)] md:mx-10 lg:mx-14 ${
             open ? "scale-x-100" : "scale-x-0"
           }`}
         />
@@ -124,7 +124,7 @@ export default function MenuOverlay({ open, onClose }: MenuOverlayProps) {
                     open ? "translate-x-0 opacity-100" : "translate-x-8 opacity-0"
                   }`}
                 >
-                  <span className="block font-serif text-[28px] font-light italic leading-[1.1] tracking-[-0.02em] text-[#2D3A1F] transition-[color,transform] duration-300 group-hover:translate-x-1.5 group-hover:text-[#B8A678] group-focus-visible:translate-x-1.5 group-focus-visible:text-[#B8A678] md:text-[34px] lg:text-[42px]">
+                  <span className="block font-serif text-[28px] font-light italic leading-[1.1] tracking-[-0.02em] text-[#584738] transition-[color,transform] duration-300 group-hover:translate-x-1.5 group-hover:text-[#B59E7D] group-focus-visible:translate-x-1.5 group-focus-visible:text-[#B59E7D] md:text-[34px] lg:text-[42px]">
                     {item.label}
                   </span>
                 </Link>
@@ -136,11 +136,11 @@ export default function MenuOverlay({ open, onClose }: MenuOverlayProps) {
         {/* Social profiles */}
         <div
           style={stagger(overlayLinks.length)}
-          className={`mx-7 flex shrink-0 items-center justify-between border-t border-[#B8A678] pb-7 pt-6 transition-[transform,opacity] duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] md:mx-10 md:pb-9 lg:mx-14 lg:pb-10 ${
+          className={`mx-7 flex shrink-0 items-center justify-between border-t border-[#B59E7D] pb-7 pt-6 transition-[transform,opacity] duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] md:mx-10 md:pb-9 lg:mx-14 lg:pb-10 ${
             open ? "translate-y-0 opacity-100" : "translate-y-4 opacity-0"
           }`}
         >
-          <span className="font-grotesk text-[10px] font-medium uppercase tracking-[0.22em] text-[#5F684F]">Follow us</span>
+          <span className="font-grotesk text-[10px] font-medium uppercase tracking-[0.22em] text-[#AAA396]">Follow us</span>
           <ul className="flex items-center gap-2.5">
             {socials.map((social) => {
               const Icon = socialIcons[social.label];
@@ -151,7 +151,7 @@ export default function MenuOverlay({ open, onClose }: MenuOverlayProps) {
                     target="_blank"
                     rel="noopener noreferrer"
                     aria-label={`The Avenue on ${social.label}`}
-                    className="flex h-10 w-10 items-center justify-center rounded-full bg-[#2D3A1F] text-white transition-[background-color,transform] duration-300 hover:-translate-y-0.5 hover:bg-[#B8A678] focus-visible:bg-[#B8A678] focus-visible:outline-none"
+                    className="flex h-10 w-10 items-center justify-center rounded-full bg-[#584738] text-white transition-[background-color,transform] duration-300 hover:-translate-y-0.5 hover:bg-[#B59E7D] focus-visible:bg-[#B59E7D] focus-visible:outline-none"
                   >
                     <Icon className="h-4 w-4" strokeWidth={1.7} />
                   </a>

@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import { useEffect, useMemo, useRef, useState } from "react";
 import Link from "next/link";
@@ -68,7 +68,7 @@ export default function ExploreDevelopments() {
     <section
       ref={sectionRef}
       id="developments"
-      className="scroll-mt-24 border-t border-white/10 bg-[#2D3A1F] text-white"
+      className="scroll-mt-24 border-t border-white/10 bg-[#584738] text-white"
     >
       <div className="mx-auto max-w-[1450px] px-6 py-24 md:px-10 md:py-28 lg:px-12">
         <div className="grid gap-14 lg:grid-cols-[0.85fr_1.15fr] lg:gap-20">
@@ -182,7 +182,7 @@ export default function ExploreDevelopments() {
                 "opacity 1s ease 0.15s, transform 1.1s cubic-bezier(0.22,1,0.36,1) 0.15s",
             }}
           >
-            <div className="relative aspect-[4/5] w-full overflow-hidden border border-white/12 bg-[#2D3A1F] sm:aspect-[5/4] lg:aspect-[4/3]">
+            <div className="relative aspect-[4/5] w-full overflow-hidden border border-white/12 bg-[#584738] sm:aspect-[5/4] lg:aspect-[4/3]">
               <svg
                 viewBox="0 0 100 100"
                 preserveAspectRatio="xMidYMid slice"
@@ -282,7 +282,7 @@ export default function ExploreDevelopments() {
 
               {/* ACTIVE PROJECT */}
               <div className="pointer-events-none absolute bottom-4 left-4 right-4 flex items-end justify-between gap-4 md:bottom-6 md:left-6 md:right-6">
-                <div className="relative h-24 w-20 shrink-0 overflow-hidden border border-white/15 bg-black md:h-32 md:w-24">
+                <div className="relative h-24 w-20 shrink-0 overflow-hidden border border-white/15 bg-[#584738] md:h-32 md:w-24">
                   {projects.map((project) => (
                     // eslint-disable-next-line @next/next/no-img-element
                     <img

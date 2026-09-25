@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import { useRef } from "react";
 import Link from "next/link";
@@ -46,10 +46,10 @@ export default function AvenueCTA() {
 
   return (
     // The cream above is the breathing space after Process.
-    <section aria-labelledby="cta-title" className="bg-[#F4F1E8] pt-24 md:pt-32">
+    <section aria-labelledby="cta-title" className="bg-[#F1EADA] pt-24 md:pt-32">
       <div
         ref={panelRef}
-        className="relative isolate overflow-hidden bg-[#2D3A1F] text-white"
+        className="relative isolate overflow-hidden bg-[#584738] text-white"
         style={{ clipPath: "inset(0% 3% 0% 3% round 44px 44px 0px 0px)" }}
       >
         {/* eslint-disable-next-line @next/next/no-img-element */}
@@ -64,15 +64,15 @@ export default function AvenueCTA() {
         {/* Text side, and a fade into the footer below. */}
         <div
           aria-hidden="true"
-          className="absolute inset-0 -z-10 bg-[linear-gradient(to_right,rgba(31,41,51,0.82)_0%,rgba(31,41,51,0.55)_32%,rgba(31,41,51,0.08)_62%,rgba(31,41,51,0)_100%)]"
+          className="absolute inset-0 -z-10 bg-[linear-gradient(to_right,rgba(88,71,56,0.82)_0%,rgba(88,71,56,0.55)_32%,rgba(88,71,56,0.08)_62%,rgba(88,71,56,0)_100%)]"
         />
         <div
           aria-hidden="true"
-          className="absolute inset-0 -z-10 bg-[linear-gradient(to_bottom,rgba(31,41,51,0.35)_0%,rgba(31,41,51,0)_30%,rgba(31,41,51,0)_70%,rgba(31,41,51,1)_100%)]"
+          className="absolute inset-0 -z-10 bg-[linear-gradient(to_bottom,rgba(88,71,56,0.35)_0%,rgba(88,71,56,0)_30%,rgba(88,71,56,0)_70%,rgba(88,71,56,1)_100%)]"
         />
         <div
           aria-hidden="true"
-          className="absolute inset-0 -z-10 bg-[linear-gradient(to_bottom,rgba(31,41,51,0)_25%,rgba(31,41,51,0.62)_55%,rgba(31,41,51,0.8)_100%)] lg:hidden"
+          className="absolute inset-0 -z-10 bg-[linear-gradient(to_bottom,rgba(88,71,56,0)_25%,rgba(88,71,56,0.62)_55%,rgba(88,71,56,0.8)_100%)] lg:hidden"
         />
 
         <div className="mx-auto flex min-h-[clamp(600px,92vh,880px)] max-w-[1450px] flex-col justify-between px-6 pb-16 pt-16 md:px-10 md:pb-20 md:pt-20 lg:px-12">
@@ -99,7 +99,7 @@ export default function AvenueCTA() {
                   >
                     {line.map((part, j) =>
                       part.em ? (
-                        <em key={j} className="font-serif font-light normal-case italic tracking-[-0.035em] text-[#B8A678]">
+                        <em key={j} className="font-serif font-light normal-case italic tracking-[-0.035em] text-[#B59E7D]">
                           {part.text}
                         </em>
                       ) : (
@@ -119,7 +119,7 @@ export default function AvenueCTA() {
               </p>
               <Link
                 href={ENQUIRE_HREF}
-                className="group mt-8 inline-flex items-center gap-3 bg-[#2D3A1F] px-8 py-4 font-grotesk text-[11px] font-semibold uppercase tracking-[0.2em] text-white transition-colors duration-300 hover:bg-brand-bronze"
+                className="group mt-8 inline-flex items-center gap-3 bg-[#584738] px-8 py-4 font-grotesk text-[11px] font-semibold uppercase tracking-[0.2em] text-white transition-colors duration-300 hover:bg-brand-bronze"
               >
                 <span>Schedule Private Tour</span>
                 <ArrowRight className="h-4 w-4 transition-transform duration-500 group-hover:translate-x-1" />

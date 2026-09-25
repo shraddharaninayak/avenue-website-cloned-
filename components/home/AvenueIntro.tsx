@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import { useCallback, useEffect, useId, useRef, useState } from "react";
 
@@ -138,8 +138,8 @@ export default function AvenueIntro() {
   }, []);
 
   return (
-    <section ref={sectionRef} className="relative h-[300vh] bg-black">
-      <div className="sticky top-0 h-screen w-full overflow-hidden bg-black">
+    <section ref={sectionRef} className="relative h-[300vh] bg-[#584738]">
+      <div className="sticky top-0 h-screen w-full overflow-hidden bg-[#584738]">
         {/* The only video on the page. */}
         <div
           ref={videoWrapRef}

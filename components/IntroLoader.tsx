@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import { useEffect, useState } from "react";
 import type { CSSProperties } from "react";
@@ -253,9 +253,9 @@ export default function IntroLoader() {
           >
             <defs>
               <linearGradient id="avi-ink-tone" gradientUnits="userSpaceOnUse" x1="0" y1="0" x2={VIEW_W} y2="0">
-                <stop offset="0" stopColor="#2D3A1F" />
-                <stop offset="0.55" stopColor="#B8A678" />
-                <stop offset="1" stopColor="#B8A678" />
+                <stop offset="0" stopColor="#584738" />
+                <stop offset="0.55" stopColor="#B59E7D" />
+                <stop offset="1" stopColor="#B59E7D" />
               </linearGradient>
               {STROKES.map((s, i) =>
                 s.clip ? (

@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import { useCallback, useEffect, useRef, type ReactNode } from "react";
 import { company, milestoneHeadings, milestones } from "@/data/avenue";
@@ -116,8 +116,8 @@ const clipFor = (mode: Reveal, r: number, x: number) => {
 };
 
 const SHADE = {
-  left: "bg-gradient-to-r from-[#2D3A1F]/70 via-[#2D3A1F]/20 to-transparent",
-  right: "bg-gradient-to-l from-[#2D3A1F]/70 via-[#2D3A1F]/20 to-transparent",
+  left: "bg-gradient-to-r from-[#584738]/70 via-[#584738]/20 to-transparent",
+  right: "bg-gradient-to-l from-[#584738]/70 via-[#584738]/20 to-transparent",
   none: "",
 } as const;
 
@@ -145,7 +145,7 @@ function Panel({
       data-panel=""
       data-reveal={reveal}
       data-delay={delay}
-      className={`absolute overflow-hidden bg-[#2D3A1F] ${className}`}
+      className={`absolute overflow-hidden bg-[#584738] ${className}`}
       style={{ clipPath: CLOSED[reveal] }}
     >
       {/* 110% tall so the parallax travel never reaches an edge. */}
@@ -163,7 +163,7 @@ function Panel({
       ) : null}
       {caption ? (
         <>
-          <div aria-hidden="true" className="pointer-events-none absolute inset-x-0 bottom-0 h-1/3 bg-gradient-to-t from-black/50 to-transparent" />
+          <div aria-hidden="true" className="pointer-events-none absolute inset-x-0 bottom-0 h-1/3 bg-gradient-to-t from-[#584738]/50 to-transparent" />
           <span
             aria-hidden="true"
             className="absolute bottom-4 left-4 flex items-center gap-3 text-[9px] uppercase tracking-[0.24em] text-white/75 md:bottom-5 md:left-5 md:text-[10px]"
@@ -468,7 +468,7 @@ export default function BuiltForMore() {
     <section
       ref={sectionRef}
       aria-labelledby="built-for-more-title"
-      className="relative h-[700vh] bg-[#2D3A1F] text-white"
+      className="relative h-[700vh] bg-[#584738] text-white"
     >
       {/* The section as text. The stage below animates the same words and is
           hidden from assistive tech, where parts would otherwise come and go
@@ -491,19 +491,19 @@ export default function BuiltForMore() {
         </ul>
       </div>
 
-      <div className="sticky top-0 h-screen w-full overflow-hidden bg-[#F4F1E8]">
+      <div className="sticky top-0 h-screen w-full overflow-hidden bg-[#F1EADA]">
         {/* The hairline the light ground ends on; the dark field opens from it. */}
         <div
           ref={seamRef}
           aria-hidden="true"
           className="absolute inset-x-0 top-1/2 px-6 md:px-10 lg:px-12"
         >
-          <div className="mx-auto h-px max-w-[1450px] bg-black/15" />
+          <div className="mx-auto h-px max-w-[1450px] bg-[#584738]/15" />
         </div>
 
         <div
           ref={fieldRef}
-          className="absolute inset-0 bg-[#2D3A1F]"
+          className="absolute inset-0 bg-[#584738]"
           style={{ clipPath: "inset(50% 0% 50% 0%)" }}
         >
           <div className="absolute inset-0 mx-auto max-w-[1450px] px-6 md:px-10 lg:px-12">

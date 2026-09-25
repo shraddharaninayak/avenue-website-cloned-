@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import React, { useEffect, useRef } from "react";
 import Link from "next/link";
@@ -187,10 +187,10 @@ export default function HeroCanvas() {
   }, []);
 
   return (
-    <div ref={containerRef} className="relative h-[500vh] bg-black">
+    <div ref={containerRef} className="relative h-[500vh] bg-[#584738]">
       <div
         ref={stageRef}
-        className="sticky top-0 h-screen w-full overflow-hidden bg-[#2D3A1F]"
+        className="sticky top-0 h-screen w-full overflow-hidden bg-[#584738]"
       >
         <canvas
           ref={canvasRef}
@@ -211,11 +211,11 @@ export default function HeroCanvas() {
         {/* Soft grade so type and header stay legible over any shot. */}
         <div
           aria-hidden="true"
-          className="pointer-events-none absolute inset-x-0 top-0 h-32 bg-gradient-to-b from-black/35 to-transparent"
+          className="pointer-events-none absolute inset-x-0 top-0 h-32 bg-gradient-to-b from-[#584738]/35 to-transparent"
         />
         <div
           aria-hidden="true"
-          className="pointer-events-none absolute inset-x-0 bottom-0 h-[45%] bg-gradient-to-t from-[#2D3A1F]/75 via-[#2D3A1F]/25 to-transparent"
+          className="pointer-events-none absolute inset-x-0 bottom-0 h-[45%] bg-gradient-to-t from-[#584738]/75 via-[#584738]/25 to-transparent"
         />
 
         {/* Arrival — the only message, once the visitor is at the door. */}
@@ -238,7 +238,7 @@ export default function HeroCanvas() {
           <div className="mt-8 flex flex-wrap items-center gap-4">
             <Link
               href="/milestones"
-              className="inline-flex items-center gap-3 bg-white px-8 py-4 font-grotesk text-xs font-semibold uppercase tracking-[0.2em] text-[#2D3A1F] hover:bg-brand-gold hover:text-white transition-colors duration-300 shadow-xl"
+              className="inline-flex items-center gap-3 bg-white px-8 py-4 font-grotesk text-xs font-semibold uppercase tracking-[0.2em] text-[#584738] hover:bg-brand-gold hover:text-white transition-colors duration-300 shadow-xl"
             >
               <span>Explore Flagship</span>
               <ArrowRight className="w-4 h-4" />

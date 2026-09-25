@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import { useEffect, useRef, useState } from "react";
 import { directors, directorsHeading } from "@/data/avenue";
@@ -49,7 +49,7 @@ function ClassicLeadership() {
     <section
       ref={sectionRef}
       id="leadership"
-      className="scroll-mt-24 border-t border-white/10 bg-[#2D3A1F] px-6 py-24 text-white md:px-10 md:py-32 lg:px-12"
+      className="scroll-mt-24 border-t border-white/10 bg-[#584738] px-6 py-24 text-white md:px-10 md:py-32 lg:px-12"
     >
       <div className="mx-auto max-w-[1450px]">
         {/* HEADING */}
@@ -85,7 +85,7 @@ function ClassicLeadership() {
               }}
             >
               {/* PORTRAIT FRAME */}
-              <div className="group relative aspect-[4/5] max-h-[420px] w-full overflow-hidden bg-[#2D3A1F]">
+              <div className="group relative aspect-[4/5] max-h-[420px] w-full overflow-hidden bg-[#584738]">
                 {director.image ? (
                   // eslint-disable-next-line @next/next/no-img-element
                   <img
@@ -162,10 +162,10 @@ function EditorialLeadership() {
   });
 
   return (
-    <section id="leadership" aria-labelledby="leadership-title" className="scroll-mt-24 bg-[#F4F1E8]">
+    <section id="leadership" aria-labelledby="leadership-title" className="scroll-mt-24 bg-[#F1EADA]">
       <div
         ref={panelRef}
-        className="bg-[#F4F1E8]"
+        className="bg-[#F1EADA]"
         style={{ clipPath: "inset(0% 3% 0% 3% round 44px 44px 0px 0px)" }}
       >
         <div className="mx-auto max-w-[1450px] px-6 pb-24 pt-24 md:px-10 md:pb-28 md:pt-32 lg:px-12">
@@ -175,11 +175,11 @@ function EditorialLeadership() {
           <div ref={headRef} className={`lg:col-span-4 ${revealClass(headIn)}`}>
             <div>
               <div className="mb-8 flex items-center gap-4 md:mb-10">
-                <span className="text-[10px] uppercase tracking-[0.28em] text-[#2D3A1F]/40">Leadership</span>
+                <span className="text-[10px] uppercase tracking-[0.28em] text-[#584738]/40">Leadership</span>
               </div>
               <h2
                 id="leadership-title"
-                className="max-w-[820px] font-serif text-[clamp(38px,4.2vw,64px)] font-light leading-[1] tracking-[-0.045em] text-[#2D3A1F]"
+                className="max-w-[820px] font-serif text-[clamp(38px,4.2vw,64px)] font-light leading-[1] tracking-[-0.045em] text-[#584738]"
               >
                 {directorsHeading}
               </h2>
@@ -191,7 +191,7 @@ function EditorialLeadership() {
             {directors.map((director, i) => (
               <article key={director.name} className="group grid grid-cols-[104px_1fr] items-start gap-5 sm:block">
                 <div
-                  className="relative aspect-[5/6] w-full overflow-hidden bg-[#F4F1E8] transition-[clip-path] duration-[1300ms] ease-[cubic-bezier(0.65,0,0.35,1)] motion-reduce:transition-none"
+                  className="relative aspect-[5/6] w-full overflow-hidden bg-[#F1EADA] transition-[clip-path] duration-[1300ms] ease-[cubic-bezier(0.65,0,0.35,1)] motion-reduce:transition-none"
                   style={{
                     clipPath: gridIn ? "inset(0% 0% 0% 0%)" : "inset(100% 0% 0% 0%)",
                     transitionDelay: `${i * 140}ms`,
@@ -211,24 +211,24 @@ function EditorialLeadership() {
                         className="absolute inset-0 opacity-[0.35] transition-opacity duration-700 group-hover:opacity-60"
                         style={{
                           backgroundImage:
-                            "repeating-linear-gradient(135deg, rgba(31,41,51,0.04) 0px, rgba(31,41,51,0.04) 1px, transparent 1px, transparent 9px)",
+                            "repeating-linear-gradient(135deg, rgba(88,71,56,0.04) 0px, rgba(88,71,56,0.04) 1px, transparent 1px, transparent 9px)",
                         }}
                       />
                       <span
                         ref={(el) => {
                           monoRefs.current[i] = el;
                         }}
-                        className="relative font-serif text-[34px] font-light sm:text-[clamp(48px,6vw,96px)] tracking-[-0.04em] text-[#2D3A1F]/25 transition-colors duration-700 will-change-transform group-hover:text-[#2D3A1F]/40"
+                        className="relative font-serif text-[34px] font-light sm:text-[clamp(48px,6vw,96px)] tracking-[-0.04em] text-[#584738]/25 transition-colors duration-700 will-change-transform group-hover:text-[#584738]/40"
                       >
                         {initials(director.name)}
                       </span>
-                      <span className="absolute bottom-5 left-0 right-0 hidden text-center text-[9px] uppercase tracking-[0.24em] text-[#2D3A1F]/35 sm:block">
+                      <span className="absolute bottom-5 left-0 right-0 hidden text-center text-[9px] uppercase tracking-[0.24em] text-[#584738]/35 sm:block">
                         Portrait to follow
                       </span>
                     </div>
                   )}
 
-                  <div className="pointer-events-none absolute inset-0 border border-[#2D3A1F]/8" />
+                  <div className="pointer-events-none absolute inset-0 border border-[#584738]/8" />
                   <span className="pointer-events-none absolute inset-x-0 bottom-0 h-[2px] origin-left scale-x-0 bg-brand-gold transition-transform duration-700 ease-out group-hover:scale-x-100" />
                 </div>
 
@@ -237,13 +237,13 @@ function EditorialLeadership() {
                   style={{ transitionDelay: `${300 + i * 140}ms` }}
                 >
                   <div>
-                    <h3 className="font-serif text-[22px] font-light leading-[1.15] tracking-[-0.025em] text-[#2D3A1F] xl:text-[25px]">
+                    <h3 className="font-serif text-[22px] font-light leading-[1.15] tracking-[-0.025em] text-[#584738] xl:text-[25px]">
                       {director.name}
                     </h3>
-                    <p className="mt-2 text-[11px] uppercase tracking-[0.22em] text-[#2D3A1F]/50">
+                    <p className="mt-2 text-[11px] uppercase tracking-[0.22em] text-[#584738]/50">
                       {director.qualification}
                     </p>
-                    <p className="mt-3 max-w-[300px] text-[14px] leading-[1.65] text-[#2D3A1F]/60 sm:mt-4">{director.role}</p>
+                    <p className="mt-3 max-w-[300px] text-[14px] leading-[1.65] text-[#584738]/60 sm:mt-4">{director.role}</p>
                   </div>
                 </div>
               </article>

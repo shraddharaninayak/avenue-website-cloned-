@@ -1,4 +1,4 @@
-import React from "react";
+﻿import React from "react";
 
 import AvenueHero from "@/components/home/AvenueHero";
 import AvenuePortrait from "@/components/home/AvenuePortrait";
@@ -30,7 +30,7 @@ import AvenueCTA from "@/components/home/AvenueCTA";
  */
 export default function HomePage() {
   return (
-    <div className="min-h-screen bg-[#F4F1E8]">
+    <div className="min-h-screen bg-[#F1EADA]">
       <AvenueHero />
       <AvenuePortrait />
       <AvenueValues />

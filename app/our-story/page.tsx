@@ -1,4 +1,4 @@
-import React from "react";
+﻿import React from "react";
 import Image from "next/image";
 import StatsSection from "@/components/home/StatsSection";
 import Leadership from "@/components/home/Leadership";
@@ -29,7 +29,7 @@ const values = [
 
 export default function OurStoryPage() {
   return (
-    <div className="bg-[#2D3A1F] text-white pt-28">
+    <div className="bg-[#584738] text-white pt-28">
       {/* Hero Header */}
       <section className="px-6 md:px-12 lg:px-20 py-20 max-w-7xl mx-auto">
         <div className="text-[11px] font-grotesk uppercase tracking-[0.3em] text-brand-gold font-semibold mb-4">
@@ -39,12 +39,12 @@ export default function OurStoryPage() {
           Vision That Leads Growth
         </h1>
         <p className="font-hanken text-white/70 max-w-2xl text-lg md:text-xl mt-8 leading-relaxed">
-          The Avenue Builders & Developers was established with a singular ambition: to fulfill the aspirations of moving into homes and workplaces engineered to world-class standards.
+          The Avenue Builders & Developers was established with a singular ambition: to fulfill the aspirations of those seeking quality homes and workplaces built to high standards.
         </p>
       </section>
 
       {/* Narrative Section with Image */}
-      <section className="bg-[#2D3A1F] py-24 px-6 md:px-12 lg:px-20 border-y border-white/10">
+      <section className="bg-[#584738] py-24 px-6 md:px-12 lg:px-20 border-y border-white/10">
         <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
           <div className="space-y-8">
             <div className="text-[11px] font-grotesk uppercase tracking-[0.3em] text-brand-gold font-semibold">
@@ -54,14 +54,14 @@ export default function OurStoryPage() {
               Aligning Values with Vision
             </h2>
             <p className="font-hanken text-white/70 text-base md:text-lg leading-relaxed">
-              As a prestigious and trusted brand in Nashik, The Avenue goes beyond exceptional square footage to create communities rich in beauty, wellbeing, and fulfillment. It is why we remain a preferred developer in the region.
+              As a well-established and trusted brand in Nashik, The Avenue goes beyond square footage to create communities rich in beauty, wellbeing, and fulfillment. It is why we remain a trusted developer in the region.
             </p>
             <blockquote className="border-l-2 border-brand-gold pl-6 font-cormorant italic text-2xl text-white/90 leading-snug">
               "We believe your home is much more than just walls—it is the foundation of your family's future."
             </blockquote>
           </div>
 
-          <div className="relative aspect-[4/3] w-full overflow-hidden border border-white/10 bg-black">
+          <div className="relative aspect-[4/3] w-full overflow-hidden border border-white/10 bg-[#584738]">
             <Image
               src="/about/pillars-front.webp"
               alt="The Avenue Pillars of Excellence"
@@ -85,7 +85,7 @@ export default function OurStoryPage() {
           {values.map((v) => (
             <div
               key={v.num}
-              className="bg-[#2D3A1F] border border-white/10 p-8 md:p-10 hover:border-brand-gold/50 transition-colors"
+              className="bg-[#584738] border border-white/10 p-8 md:p-10 hover:border-brand-gold/50 transition-colors"
             >
               <div className="font-grotesk text-3xl font-light text-brand-gold mb-4">
                 {v.num}

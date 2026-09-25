@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import { useRef } from "react";
 import { company } from "@/data/avenue";
@@ -16,7 +16,7 @@ import { lerp, revealClass, useReveal, useViewportProgress } from "./motion";
  * then lifts away from the cream page on rounded corners, as the hero does.
  */
 
-const STATEMENT = "We deliver beyond residential properties.";
+const STATEMENT = "Building across residential, commercial and industrial spaces.";
 const statement = (company.values ?? "").includes(STATEMENT) ? STATEMENT : null;
 
 export default function AvenueStatement() {
@@ -39,10 +39,10 @@ export default function AvenueStatement() {
   if (!statement) return null;
 
   return (
-    <section aria-labelledby="statement-title" className="bg-[#F4F1E8]">
+    <section aria-labelledby="statement-title" className="bg-[#F1EADA]">
       <div
         ref={bandRef}
-        className="relative isolate h-[clamp(480px,86vh,840px)] overflow-hidden rounded-b-[24px] bg-[#2D3A1F] text-white md:rounded-b-[44px]"
+        className="relative isolate h-[clamp(480px,86vh,840px)] overflow-hidden rounded-b-[24px] bg-[#584738] text-white md:rounded-b-[44px]"
       >
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
@@ -54,10 +54,10 @@ export default function AvenueStatement() {
           className="absolute inset-x-0 -top-[6%] -z-10 h-[112%] w-full max-w-none object-cover object-[45%_50%] will-change-transform"
         />
         {/* Rises out of Leadership's panel above, and settles the type below. */}
-        <div aria-hidden="true" className="absolute inset-x-0 top-0 -z-10 h-40 bg-gradient-to-b from-[#2D3A1F] to-transparent" />
+        <div aria-hidden="true" className="absolute inset-x-0 top-0 -z-10 h-40 bg-gradient-to-b from-[#584738] to-transparent" />
         <div
           aria-hidden="true"
-          className="absolute inset-0 -z-10 bg-[linear-gradient(to_top,rgba(31,41,51,0.78)_0%,rgba(31,41,51,0.28)_42%,rgba(31,41,51,0)_70%)]"
+          className="absolute inset-0 -z-10 bg-[linear-gradient(to_top,rgba(88,71,56,0.78)_0%,rgba(88,71,56,0.28)_42%,rgba(88,71,56,0)_70%)]"
         />
 
         <div className="mx-auto flex h-full max-w-[1450px] flex-col justify-between px-6 pb-12 pt-16 md:px-10 md:pb-16 md:pt-20 lg:px-12">
@@ -90,7 +90,7 @@ export default function AvenueStatement() {
                     }}
                     className="block will-change-transform"
                   >
-                    We deliver
+                    Building across
                   </span>
                 </span>
               </span>
@@ -106,7 +106,7 @@ export default function AvenueStatement() {
                     }}
                     className="block font-serif font-light normal-case italic tracking-[-0.035em] will-change-transform"
                   >
-                    beyond residential properties.
+                    residential, commercial and industrial spaces.
                   </span>
                 </span>
               </span>

@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import { useEffect, useRef } from "react";
 import type { CSSProperties } from "react";
@@ -135,7 +135,7 @@ function ProjectCard({
       >
         {/* ── Image container ───────────────────────────────────────── */}
         <div
-          className={`relative w-full overflow-hidden bg-[#F4F1E8] transition-[clip-path] duration-[1400ms] ease-[cubic-bezier(0.19,1,0.22,1)] motion-reduce:transition-none ${containerClass} ${
+          className={`relative w-full overflow-hidden bg-[#F1EADA] transition-[clip-path] duration-[1400ms] ease-[cubic-bezier(0.19,1,0.22,1)] motion-reduce:transition-none ${containerClass} ${
             visible
               ? "[clip-path:inset(0_0_0_0)]"
               : "motion-safe:[clip-path:inset(100%_0_0_0)]"
@@ -159,7 +159,7 @@ function ProjectCard({
           {/* Dark overlay */}
           <div
             aria-hidden="true"
-            className="pointer-events-none absolute inset-0 bg-black/0 transition-[background-color] duration-[600ms] ease-out group-hover:bg-black/40"
+            className="pointer-events-none absolute inset-0 bg-[#584738]/0 transition-[background-color] duration-[600ms] ease-out group-hover:bg-[#584738]/40"
           />
 
           {/* Hover text — slides up from bottom */}
@@ -193,17 +193,17 @@ function ProjectCard({
         </div>
 
         {/* ── Bottom bar ────────────────────────────────────────────── */}
-        <div className="relative mt-0 overflow-hidden border-b border-[#2D3A1F]/10">
+        <div className="relative mt-0 overflow-hidden border-b border-[#584738]/10">
           <div
             aria-hidden="true"
-            className="absolute inset-0 origin-bottom scale-y-0 bg-[#2D3A1F] transition-transform duration-[1000ms] ease-[cubic-bezier(0.625,0.05,0,1)] group-hover:scale-y-100"
+            className="absolute inset-0 origin-bottom scale-y-0 bg-[#584738] transition-transform duration-[1000ms] ease-[cubic-bezier(0.625,0.05,0,1)] group-hover:scale-y-100"
           />
           <div className="relative flex items-center justify-between px-1 py-3.5 md:py-4">
             <div className="flex items-center overflow-hidden">
               <div className="relative overflow-hidden">
                 <h3
                   id={`proj-${project.slug}`}
-                  className="text-[clamp(13px,1.2vw,18px)] font-medium tracking-[-0.015em] text-[#2D3A1F] transition-all duration-[1000ms] ease-[cubic-bezier(0.625,0.05,0,1)] group-hover:-translate-y-full group-hover:text-white"
+                  className="text-[clamp(13px,1.2vw,18px)] font-medium tracking-[-0.015em] text-[#584738] transition-all duration-[1000ms] ease-[cubic-bezier(0.625,0.05,0,1)] group-hover:-translate-y-full group-hover:text-white"
                 >
                   {project.name}
                 </h3>
@@ -216,12 +216,12 @@ function ProjectCard({
               </div>
             </div>
             <div className="flex items-center gap-2.5">
-              <span className="hidden text-[10px] uppercase tracking-[0.1em] text-[#2D3A1F]/40 transition-colors duration-[1000ms] ease-[cubic-bezier(0.625,0.05,0,1)] group-hover:text-white/40 sm:block">
+              <span className="hidden text-[10px] uppercase tracking-[0.1em] text-[#584738]/40 transition-colors duration-[1000ms] ease-[cubic-bezier(0.625,0.05,0,1)] group-hover:text-white/40 sm:block">
                 {project.category}
               </span>
               <div className="flex h-6 w-6 items-center justify-center transition-transform duration-500 group-hover:translate-x-[1px] group-hover:-translate-y-[1px]">
                 <ArrowUpRight
-                  className="h-3.5 w-3.5 text-[#2D3A1F]/40 transition-colors duration-[1000ms] group-hover:text-brand-gold"
+                  className="h-3.5 w-3.5 text-[#584738]/40 transition-colors duration-[1000ms] group-hover:text-brand-gold"
                   strokeWidth={1.5}
                 />
               </div>
@@ -304,22 +304,22 @@ export default function AvenueProjects() {
     <section
       id="projects"
       aria-label="Avenue projects"
-      className="scroll-mt-24 bg-[#F4F1E8]"
+      className="scroll-mt-24 bg-[#F1EADA]"
     >
       {/* ══════════════════════════════════════════════════════════════
           MOBILE — vertical single-column (hidden ≥ md)
       ══════════════════════════════════════════════════════════════ */}
       <div className="md:hidden px-6 pb-28 pt-28">
         <div ref={headMobRef} className={`mb-16 ${revealClass(headMobIn)}`}>
-          <p className="mb-5 text-[10px] uppercase tracking-[0.28em] text-[#2D3A1F]/35">
+          <p className="mb-5 text-[10px] uppercase tracking-[0.28em] text-[#584738]/35">
             Projects
           </p>
-          <h2 className="max-w-[600px] font-serif text-[clamp(38px,10vw,64px)] font-light leading-[1.02] tracking-[-0.04em] text-[#2D3A1F]">
+          <h2 className="max-w-[600px] font-serif text-[clamp(38px,10vw,64px)] font-light leading-[1.02] tracking-[-0.04em] text-[#584738]">
             Here are a few developments{" "}
             <em className="italic">we&apos;ve built.</em>
           </h2>
-          <p className="mt-5 text-[13px] uppercase tracking-[0.16em] text-[#2D3A1F]/30">
-            <span className="font-serif text-[22px] normal-case tracking-[-0.02em] text-[#2D3A1F]/60">
+          <p className="mt-5 text-[13px] uppercase tracking-[0.16em] text-[#584738]/30">
+            <span className="font-serif text-[22px] normal-case tracking-[-0.02em] text-[#584738]/60">
               {pad(projects.length)}
             </span>{" "}
             Developments across Nashik
@@ -367,17 +367,17 @@ export default function AvenueProjects() {
         <div className="h-[15vh]" aria-hidden="true" />
 
         {/* Sticky viewport — no overflow so sticky is relative to body scroll */}
-        <div className="sticky top-0 h-screen flex flex-col bg-[#F4F1E8]">
+        <div className="sticky top-0 h-screen flex flex-col bg-[#F1EADA]">
 
           {/* Heading — shrink-0, physically above gallery, never overlaps */}
           <div
             ref={headDeskRef}
-            className={`shrink-0 border-b border-[#2D3A1F]/8 px-10 pb-7 pt-12 lg:px-[clamp(3rem,5vw,5rem)] lg:pt-16 ${revealClass(headDeskIn)}`}
+            className={`shrink-0 border-b border-[#584738]/8 px-10 pb-7 pt-12 lg:px-[clamp(3rem,5vw,5rem)] lg:pt-16 ${revealClass(headDeskIn)}`}
           >
-            <p className="mb-4 text-[10px] uppercase tracking-[0.28em] text-[#2D3A1F]/35">
+            <p className="mb-4 text-[10px] uppercase tracking-[0.28em] text-[#584738]/35">
               Projects
             </p>
-            <h2 className="font-serif text-[clamp(32px,4vw,64px)] font-light leading-[1.02] tracking-[-0.04em] text-[#2D3A1F]">
+            <h2 className="font-serif text-[clamp(32px,4vw,64px)] font-light leading-[1.02] tracking-[-0.04em] text-[#584738]">
               Here are a few developments{" "}
               <em className="italic">we&apos;ve built.</em>
             </h2>
@@ -423,7 +423,7 @@ export default function AvenueProjects() {
           </div>
 
           {/* Progress bar */}
-          <div aria-hidden="true" className="shrink-0 h-px bg-[#2D3A1F]/8">
+          <div aria-hidden="true" className="shrink-0 h-px bg-[#584738]/8">
             <div
               ref={barRef}
               className="h-full w-full origin-left bg-brand-gold will-change-transform"

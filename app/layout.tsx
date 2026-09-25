@@ -5,12 +5,13 @@ import "./globals.css";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 import CookieBanner from "@/components/ui/CookieBanner";
+import WhatsAppButton from "@/components/ui/WhatsAppButton";
 import IntroLoader from "@/components/IntroLoader";
 
 export const metadata: Metadata = {
-  title: " The Avenue Builders And Developers",
+  title: "The Avenue Builders & Developers",
   description:
-    "Leading real estate developers in Central India with a 15 year legacy of creating premium residential, commercial spaces and innovative townships in Nashik.",
+    "Nashik-based real estate development company established in 2007. Residential, commercial and industrial developments across Nashik with more than 1 million sq. ft. delivered.",
 };
 
 export default function RootLayout({
@@ -20,7 +21,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" className="antialiased">
-      <body className="bg-[#F4F1E8] text-[#2D3A1F] selection:bg-[#B8A678] selection:text-[#2D3A1F]">
+      <body className="bg-[#F1EADA] text-[#584738] selection:bg-[#B59E7D] selection:text-[#F1EADA]">
         {/* Google Tag Manager */}
         <Script id="google-tag-manager" strategy="beforeInteractive">
           {`
@@ -49,6 +50,7 @@ export default function RootLayout({
         <main>{children}</main>
         <Footer />
         <CookieBanner />
+        <WhatsAppButton />
       </body>
     </html>
   );

@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import { useCallback, useEffect, useRef } from "react";
 import { projects as developments } from "@/data/avenue";
@@ -183,13 +183,13 @@ export default function AvenuePillars() {
   return (
     // No overflow-hidden on the section: an overflow ancestor becomes the
     // scrollport for position:sticky and the stage below stops pinning.
-    <section ref={sectionRef} className="relative h-[300vh] bg-[#F4F1E8]">
+    <section ref={sectionRef} className="relative h-[300vh] bg-[#F1EADA]">
       <div className="sticky top-0 h-screen w-full overflow-hidden">
         {/* SECTION TITLE — cleared below the fixed navbar */}
         <div className="absolute left-0 right-0 top-[100px] z-30 px-6 md:px-10 lg:top-[116px]">
           <div className="mx-auto flex max-w-[1450px] items-center gap-4">
-            <span className="h-px w-10 bg-black/40" />
-            <h2 className="text-[10px] uppercase tracking-[0.28em] text-[#2D3A1F]/50">
+            <span className="h-px w-10 bg-[#584738]/40" />
+            <h2 className="text-[10px] uppercase tracking-[0.28em] text-[#584738]/50">
               Places We&apos;ve Shaped
             </h2>
           </div>
@@ -207,7 +207,7 @@ export default function AvenuePillars() {
               ref={(el) => {
                 panelRefs.current[i] = el;
               }}
-              className="absolute overflow-hidden bg-[#F4F1E8]"
+              className="absolute overflow-hidden bg-[#F1EADA]"
               style={{
                 left: `${HERO.left + (i * HERO.width) / COUNT}%`,
                 width: `${HERO.width / COUNT}%`,
@@ -240,7 +240,7 @@ export default function AvenuePillars() {
                 style={{ opacity: 0 }}
               />
 
-              <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/55 via-black/5 to-transparent" />
+              <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-[#584738]/55 via-[#584738]/5 to-transparent" />
 
               <div
                 data-content=""
@@ -260,11 +260,11 @@ export default function AvenuePillars() {
 
         {/* BOTTOM LABEL */}
         <div className="absolute bottom-8 left-0 right-0 z-30 px-6 md:px-10">
-          <div className="mx-auto flex max-w-[1450px] items-center justify-between border-t border-black/15 pt-5">
-            <span className="text-[10px] uppercase tracking-[0.22em] text-[#2D3A1F]/45">
+          <div className="mx-auto flex max-w-[1450px] items-center justify-between border-t border-[#584738]/15 pt-5">
+            <span className="text-[10px] uppercase tracking-[0.22em] text-[#584738]/45">
               The Avenue
             </span>
-            <span className="text-[10px] uppercase tracking-[0.22em] text-[#2D3A1F]/45">
+            <span className="text-[10px] uppercase tracking-[0.22em] text-[#584738]/45">
               Nashik
             </span>
           </div>

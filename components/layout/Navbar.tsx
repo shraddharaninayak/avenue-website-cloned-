@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import React, { useCallback, useEffect, useRef, useState } from "react";
 import Link from "next/link";
@@ -61,7 +61,7 @@ export default function Navbar() {
       <header
         ref={headerRef}
         className={`fixed inset-x-0 top-0 z-50 bg-transparent transition-[background-color,backdrop-filter] duration-500 ${
-          solid ? "max-lg:bg-[#2D3A1F]/80 max-lg:backdrop-blur-md" : ""
+          solid ? "max-lg:bg-[#584738]/80 max-lg:backdrop-blur-md" : ""
         }`}
       >
         <div className="mx-auto flex h-[80px] w-full items-center justify-between px-6 md:px-10 lg:h-[92px] lg:px-12">
@@ -79,7 +79,7 @@ export default function Navbar() {
           <div className="flex items-center gap-4 lg:gap-7">
             <Link
               href="/contact"
-              className="flex h-10 items-center justify-center rounded-full border border-white/80 px-6 font-grotesk text-[11px] font-semibold uppercase tracking-[0.16em] text-white transition-colors duration-300 hover:bg-white hover:text-[#B8A678] focus-visible:bg-white focus-visible:text-[#B8A678] focus-visible:outline-none lg:h-11 lg:px-7"
+              className="flex h-10 items-center justify-center rounded-full border border-white/80 px-6 font-grotesk text-[11px] font-semibold uppercase tracking-[0.16em] text-white transition-colors duration-300 hover:bg-white hover:text-[#B59E7D] focus-visible:bg-white focus-visible:text-[#B59E7D] focus-visible:outline-none lg:h-11 lg:px-7"
             >
               Contact
             </Link>

@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import { useEffect, useRef, useState } from "react";
 
@@ -31,7 +31,7 @@ export default function AvenueAbout() {
   return (
     <section
       ref={sectionRef}
-      className="relative overflow-hidden bg-[#F4F1E8] text-[#2D3A1F]"
+      className="relative overflow-hidden bg-[#F1EADA] text-[#584738]"
     >
       <div className="mx-auto max-w-[1450px] px-6 py-20 md:px-10 md:py-28 lg:px-12 lg:py-32">
         {/* =========================================
@@ -43,9 +43,9 @@ export default function AvenueAbout() {
             visible ? "translate-y-0 opacity-100" : "translate-y-8 opacity-0"
           }`}
         >
-          <span className="h-px w-12 bg-black/40" />
+          <span className="h-px w-12 bg-[#584738]/40" />
 
-          <span className="text-[11px] font-medium uppercase tracking-[0.28em] text-[#2D3A1F]/50">
+          <span className="text-[11px] font-medium uppercase tracking-[0.28em] text-[#584738]/50">
             About Avenue
           </span>
         </div>
@@ -92,7 +92,7 @@ export default function AvenueAbout() {
 
             {/* SMALL OVERLAPPING IMAGE */}
 
-            <div className="absolute -bottom-8 right-[-4%] w-[42%] border-[8px] border-[#F4F1E8] bg-[#F4F1E8] shadow-[0_20px_50px_rgba(0,0,0,0.12)] md:-bottom-10 md:right-[-5%]">
+            <div className="absolute -bottom-8 right-[-4%] w-[42%] border-[8px] border-[#F1EADA] bg-[#F1EADA] shadow-[0_20px_50px_rgba(0,0,0,0.12)] md:-bottom-10 md:right-[-5%]">
               <div className="aspect-[0.9] overflow-hidden">
                 <img
                   src="/avenue-about-secondary.jpg.webp"
@@ -135,20 +135,18 @@ export default function AvenueAbout() {
                   : "translate-y-10 opacity-0"
               }`}
             >
-              <p className="max-w-[720px] text-[16px] leading-[1.8] text-[#5F684F] md:text-[18px]">
-                Welcome to The Avenue, your premier property development and
-                trading company in Nashik. Since our establishment in 2007, we
-                have built a reputation for excellence in delivering exceptional
-                projects. With a diverse portfolio of residential, commercial,
-                and industrial developments, we are recognized as a top-tier
-                developer in the industry. At The Avenue, we understand the
-                evolving needs of our clients. Our dedicated team stays informed
-                about the latest trends and products in the international
-                market, allowing us to meet the high demands of the local market
-                with innovative solutions. With over a century of combined
-                experience in property development and investment, our
-                principals and executive team bring a wealth of expertise to the
-                table.
+              <p className="max-w-[720px] text-[16px] leading-[1.8] text-[#AAA396] md:text-[18px]">
+                The Avenue Builders & Developers is a Nashik-based real estate
+                development company established in 2007. Since then, we have
+                delivered residential, commercial and industrial projects across
+                Nashik, including more than 1 million sq. ft. of developed
+                space. At The Avenue, we understand the evolving needs of our
+                clients. Our dedicated team stays informed about the latest
+                trends and products in the international market, allowing us to
+                meet the high demands of the local market with innovative
+                solutions. With 50+ years of combined leadership experience,
+                our principals and executive team bring a wealth of expertise
+                to every development.
               </p>
             </div>
 
@@ -157,7 +155,7 @@ export default function AvenueAbout() {
             ===================================== */}
 
             <div
-              className={`mt-14 border-t border-black/15 pt-10 transition-all delay-500 duration-1000 ${
+              className={`mt-14 border-t border-[#584738]/15 pt-10 transition-all delay-500 duration-1000 ${
                 visible
                   ? "translate-y-0 opacity-100"
                   : "translate-y-10 opacity-0"
@@ -167,7 +165,7 @@ export default function AvenueAbout() {
                 {/* ESTABLISHED */}
 
                 <div>
-                  <span className="text-[10px] uppercase tracking-[0.22em] text-[#5F684F]">
+                  <span className="text-[10px] uppercase tracking-[0.22em] text-[#AAA396]">
                     Established
                   </span>
 
@@ -179,7 +177,7 @@ export default function AvenueAbout() {
                 {/* BASED IN */}
 
                 <div>
-                  <span className="text-[10px] uppercase tracking-[0.22em] text-[#5F684F]">
+                  <span className="text-[10px] uppercase tracking-[0.22em] text-[#AAA396]">
                     Based in
                   </span>
 
@@ -191,27 +189,25 @@ export default function AvenueAbout() {
                 {/* DISCIPLINE */}
 
                 <div>
-                  <span className="text-[10px] uppercase tracking-[0.22em] text-[#5F684F]">
+                  <span className="text-[10px] uppercase tracking-[0.22em] text-[#AAA396]">
                     Discipline
                   </span>
 
-                  <p className="mt-4 max-w-[150px] text-[15px] leading-[1.55] text-[#2D3A1F]">
-                    Property
+                  <p className="mt-4 max-w-[150px] text-[15px] leading-[1.55] text-[#584738]">
+                    Real estate
                     <br />
                     development
-                    <br />
-                    and trading
                   </p>
                 </div>
 
                 {/* PORTFOLIO */}
 
                 <div>
-                  <span className="text-[10px] uppercase tracking-[0.22em] text-[#5F684F]">
+                  <span className="text-[10px] uppercase tracking-[0.22em] text-[#AAA396]">
                     Portfolio
                   </span>
 
-                  <p className="mt-4 max-w-[160px] text-[15px] leading-[1.55] text-[#2D3A1F]">
+                  <p className="mt-4 max-w-[160px] text-[15px] leading-[1.55] text-[#584738]">
                     Residential ·
                     <br />
                     Commercial ·
@@ -228,8 +224,8 @@ export default function AvenueAbout() {
             BOTTOM LINE
         ========================================= */}
 
-        <div className="mt-24 border-t border-black/15 pt-6 md:mt-32">
-          <div className="flex items-center justify-between text-[10px] uppercase tracking-[0.24em] text-[#5F684F]">
+        <div className="mt-24 border-t border-[#584738]/15 pt-6 md:mt-32">
+          <div className="flex items-center justify-between text-[10px] uppercase tracking-[0.24em] text-[#AAA396]">
             <span>The Avenue Portfolio</span>
 
             <span>Nashik</span>

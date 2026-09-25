@@ -1,11 +1,11 @@
-import React from "react";
+﻿import React from "react";
 import Link from "next/link";
 import { ArrowRight, Phone } from "lucide-react";
 import { company } from "@/data/avenue";
 
 export default function ContactCTA() {
   return (
-    <section className="bg-[#2D3A1F] py-28 px-6 md:px-12 lg:px-20 text-white text-center border-t border-white/10">
+    <section className="bg-[#584738] py-28 px-6 md:px-12 lg:px-20 text-white text-center border-t border-white/10">
       <div className="max-w-4xl mx-auto space-y-8">
         <div className="text-[11px] font-grotesk uppercase tracking-[0.3em] text-brand-gold font-semibold">
           Begin Your Journey
@@ -20,7 +20,7 @@ export default function ContactCTA() {
         <div className="pt-4 flex flex-wrap items-center justify-center gap-4">
           <Link
             href="/contact"
-            className="inline-flex items-center gap-3 bg-[#2D3A1F] text-white px-9 py-4 font-grotesk text-xs uppercase tracking-[0.2em] font-semibold hover:bg-brand-bronze transition-colors duration-300"
+            className="inline-flex items-center gap-3 bg-[#584738] text-white px-9 py-4 font-grotesk text-xs uppercase tracking-[0.2em] font-semibold hover:bg-brand-bronze transition-colors duration-300"
           >
             <span>Schedule Private Tour</span>
             <ArrowRight className="w-4 h-4" />

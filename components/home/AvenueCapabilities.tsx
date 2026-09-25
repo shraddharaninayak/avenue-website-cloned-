@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import { useState } from "react";
 import { company, projects } from "@/data/avenue";
@@ -49,7 +49,7 @@ const CAPABILITIES: Capability[] = [
     title: "Residential development",
     text:
       residential.length && bhk.length && residential.every((p) => p.amenities.length)
-        ? `Homes of ${bhkList} BHK, each development planned with its own shared amenities.`
+        ? "Residential developments featuring thoughtfully planned 2, 3 and 4 BHK homes with well-designed amenities and shared spaces."
         : null,
     source: "From our portfolio",
     image: "/home-sections/capability-residential.webp",
@@ -60,10 +60,8 @@ const CAPABILITIES: Capability[] = [
     title: "Commercial development",
     text:
       has(commercialFeatures, "Office spaces") &&
-      has(commercialFeatures, "Showroom spaces") &&
-      has(commercialFeatures, "Fitness centre") &&
-      has(commercialFeatures, "in the heart of the city")
-        ? "Office and showroom spaces, with a fitness centre, in the heart of the city."
+      has(commercialFeatures, "Showroom spaces")
+        ? "Office and showroom spaces across Nashik, built for businesses, professionals and retailers."
         : null,
     source: "From our portfolio",
     image: "/home-sections/capability-commercial.webp",
@@ -71,11 +69,11 @@ const CAPABILITIES: Capability[] = [
     caption: "Milestone · Street frontage",
   },
   {
-    title: "Development & trading",
+    title: "Real estate development",
     text:
-      company.description.includes("property development and trading company") &&
-      about.includes("over a century of combined experience in property development and investment")
-        ? "Property development, trading and investment — with over a century of combined experience among our principals and executive team."
+      company.description.includes("Nashik-based real estate development company") &&
+      about.includes("50+ years of combined leadership experience")
+        ? "Real estate development across residential, commercial and industrial projects, with 50+ years of combined leadership experience."
         : null,
     source: "From our story",
     image: "/home-sections/capability-development.webp",
@@ -125,13 +123,13 @@ function Row({
     >
       <span
         aria-hidden="true"
-        className={`absolute inset-x-0 top-0 h-px origin-left bg-black/15 transition-transform duration-[1200ms] ease-[cubic-bezier(0.22,1,0.36,1)] motion-reduce:transition-none ${
+        className={`absolute inset-x-0 top-0 h-px origin-left bg-[#584738]/15 transition-transform duration-[1200ms] ease-[cubic-bezier(0.22,1,0.36,1)] motion-reduce:transition-none ${
           visible ? "scale-x-100" : "motion-safe:scale-x-0"
         }`}
       />
 
       {/* Smaller screens: each capability shows its own image. */}
-      <div className={`relative mb-7 aspect-[16/9] w-full overflow-hidden bg-[#F4F1E8] lg:hidden ${revealClass(visible)}`}>
+      <div className={`relative mb-7 aspect-[16/9] w-full overflow-hidden bg-[#F1EADA] lg:hidden ${revealClass(visible)}`}>
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
           src={capability.image}
@@ -143,7 +141,7 @@ function Row({
       </div>
 
       {/* Focusable so keyboard users can bring each image forward too. */}
-      <div tabIndex={0} className="outline-none focus-visible:ring-1 focus-visible:ring-brand-bronze/60 focus-visible:ring-offset-8 focus-visible:ring-offset-[#F4F1E8]">
+      <div tabIndex={0} className="outline-none focus-visible:ring-1 focus-visible:ring-brand-bronze/60 focus-visible:ring-offset-8 focus-visible:ring-offset-[#F1EADA]">
         <div className={`grid grid-cols-[48px_1fr] gap-x-4 md:grid-cols-[64px_1fr] ${revealClass(visible)}`}>
           <span className="pt-3 font-grotesk text-[11px] tracking-[0.2em] text-brand-bronze md:pt-4">{pad(index + 1)}</span>
           <div>
@@ -155,11 +153,11 @@ function Row({
               {capability.title}
             </h3>
             {capability.text ? (
-              <p className="mt-4 max-w-[520px] text-[15px] leading-[1.75] text-[#5F684F] md:text-[16px]">
+              <p className="mt-4 max-w-[520px] text-[15px] leading-[1.75] text-[#AAA396] md:text-[16px]">
                 {capability.text}
               </p>
             ) : null}
-            <p className="mt-3 text-[10px] uppercase tracking-[0.22em] text-[#5F684F]">{capability.source}</p>
+            <p className="mt-3 text-[10px] uppercase tracking-[0.22em] text-[#AAA396]">{capability.source}</p>
           </div>
         </div>
       </div>
@@ -176,14 +174,14 @@ export default function AvenueCapabilities() {
     <section
       id="capabilities"
       aria-labelledby="capabilities-title"
-      className="bg-[#F4F1E8] pb-24 pt-24 text-[#2D3A1F] md:pb-28 md:pt-32"
+      className="bg-[#F1EADA] pb-24 pt-24 text-[#584738] md:pb-28 md:pt-32"
     >
       <div className="mx-auto max-w-[1450px] px-6 md:px-10 lg:px-12">
         {/* HEADING */}
         <div ref={headRef} className={`grid gap-y-6 lg:grid-cols-12 lg:items-end ${revealClass(headIn)}`}>
           <div className="lg:col-span-8">
             <div className="mb-8 flex items-center gap-4 md:mb-10">
-              <span className="text-[10px] uppercase tracking-[0.28em] text-[#2D3A1F]/55">Capabilities</span>
+              <span className="text-[10px] uppercase tracking-[0.28em] text-[#584738]/55">Capabilities</span>
             </div>
             <h2
               id="capabilities-title"
@@ -191,12 +189,15 @@ export default function AvenueCapabilities() {
             >
               Our <em className="italic">capabilities.</em>
             </h2>
+            <p className="mt-6 max-w-[480px] text-[15px] leading-[1.8] text-[#AAA396] md:text-[16px]">
+              Building across residential, commercial and industrial spaces.
+            </p>
           </div>
         </div>
 
         {/* LIST + IMAGE */}
         <div className="mt-14 md:mt-20 lg:grid lg:grid-cols-12 lg:gap-x-12">
-          <ol className="border-b border-black/15 lg:col-span-7">
+          <ol className="border-b border-[#584738]/15 lg:col-span-7">
             {CAPABILITIES.map((capability, i) => (
               <Row
                 key={capability.title}
@@ -211,7 +212,7 @@ export default function AvenueCapabilities() {
           <div className="hidden lg:col-span-5 lg:block">
             <div ref={frameRef} className="sticky top-28">
               <div
-                className={`relative aspect-[4/3] w-full overflow-hidden bg-[#F4F1E8] transition-[clip-path] duration-[1400ms] ease-[cubic-bezier(0.65,0,0.35,1)] motion-reduce:transition-none ${
+                className={`relative aspect-[4/3] w-full overflow-hidden bg-[#F1EADA] transition-[clip-path] duration-[1400ms] ease-[cubic-bezier(0.65,0,0.35,1)] motion-reduce:transition-none ${
                   frameIn ? "[clip-path:inset(0_0_0_0)]" : "motion-safe:[clip-path:inset(100%_0_0_0)]"
                 }`}
               >
@@ -230,10 +231,10 @@ export default function AvenueCapabilities() {
                   />
                 ))}
               </div>
-              <div className="mt-4 flex items-center justify-between gap-6 text-[10px] uppercase tracking-[0.22em] text-[#5F684F]">
+              <div className="mt-4 flex items-center justify-between gap-6 text-[10px] uppercase tracking-[0.22em] text-[#AAA396]">
                 <span>{CAPABILITIES[active].caption}</span>
                 <span>
-                  <span className="text-[#2D3A1F]">{pad(active + 1)}</span> / {pad(CAPABILITIES.length)}
+                  <span className="text-[#584738]">{pad(active + 1)}</span> / {pad(CAPABILITIES.length)}
                 </span>
               </div>
             </div>

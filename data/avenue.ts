@@ -39,11 +39,11 @@ export const company: Company = {
   name: "The Avenue Builders & Developers",
   shortName: "The Avenue",
   description:
-    "Avenue Builders & Developers, established in 2007, is a leading property Development and Construction company in Nashik with more than a decade's combined experience and over 1 Million Sq.Ft delivered till date.",
+    "Established in 2007, The Avenue Builders & Developers is a Nashik-based real estate development company with a portfolio spanning residential, commercial and industrial projects. The company has delivered more than 1 million sq. ft. to date.",
   established: 2007,
   location: "Nashik",
   tagline:
-    "Introducing you to a life you've aspired for, and world-class designs you've always yearned for.",
+    "Introducing you to a life you've aspired for.",
   // The opening clause of the mission statement was cut off when the page was
   // read, so only the part that could be quoted verbatim is stored. Worth
   // re-checking against /about-us before this is ever put on screen.
@@ -52,7 +52,7 @@ export const company: Company = {
   vision:
     "Being a progressive property developer that prides itself on its proven track records, passion and commitment to deliver superior value in design, quality and service in our developments to our customers.",
   values:
-    "We deliver beyond residential properties. We deliver to our customers the joy of living, the serenity of space and the place to interact with their family.",
+    "Building across residential, commercial and industrial spaces. We deliver to our customers the joy of living, the serenity of space and the place to interact with their family.",
   phone: "+91 9373632323",
   phoneHref: "tel:+919373632323",
   email: "theavenuensk@gmail.com",
@@ -113,7 +113,7 @@ export const projects: Project[] = [
   {
     slug: "urbania",
     name: "Urbania",
-    statement: "An elite abode that reflects the best of you.",
+    statement: "A residence that reflects the best of you.",
     configuration: "3 & 4 BHK",
     category: "Residential",
     // The Urbania page itself states no address; its location map and the
@@ -122,7 +122,7 @@ export const projects: Project[] = [
     address: null,
     status: "Ongoing",
     description:
-      "Fortune Urbania 3 & 4 BHK residences are created for those who never compromise.",
+      "Urbania brings spacious 3 and 4 BHK residences to Karmayogi Nagar, Nashik, combining generous layouts, curated amenities and convenient access to key city destinations.",
     // No Urbania brochure was supplied, so the official site's render stays.
     image: "/urbania.jpg",
     // The four tiers the Urbania page sets out, in its own words.
@@ -130,8 +130,8 @@ export const projects: Project[] = [
       "Spectacular infinity swimming pool for adults & kids",
       "Indoor gym",
       "Jogging track",
-      "Multi purpose hall",
-      "Indoor game",
+      "Multipurpose hall",
+      "Indoor Games",
       "Outdoor game",
       "Seating arrangement",
       "Designer landscaped garden",
@@ -146,7 +146,7 @@ export const projects: Project[] = [
     features: [
       "72 luxurious residences",
       "2 sky-scaling towers of 20",
-      "Per floor 2 apartment",
+      "2 residences per floor",
       "Around 10'6\" floor height",
       "Mumbai Naka 5 minutes",
       "City Centre Mall 5 minutes",
@@ -161,7 +161,7 @@ export const projects: Project[] = [
   {
     slug: "flora",
     name: "Flora",
-    statement: "A new era of affordability.",
+    statement: "Offices and showrooms at Old Gangapur Naka, Nashik.",
     configuration: "Showrooms & Offices",
     category: "Commercial",
     locality: "Old Gangapur Naka, Gangapur Road, Nashik",
@@ -169,7 +169,7 @@ export const projects: Project[] = [
       "Old Gangapur Naka, Behind Vihar Misal, Gangapur Road, Nashik 422013",
     status: "Possession Soon",
     description:
-      "An iconic commercial destination featuring modern architecture, located in landmark Old Gangapur Naka, minutes from CBS and College Road.",
+      "A commercial destination featuring modern architecture, located in Old Gangapur Naka, minutes from CBS and College Road.",
     // The Flora brochure's own render (p2), at its full resolution.
     image: "/projects/flora/exterior.webp",
     amenities: [
@@ -183,9 +183,9 @@ export const projects: Project[] = [
       "Senior citizen seating areas",
     ],
     features: [
-      "Office spaces (555 to 1790 Sq.ft.)",
-      "Showroom spaces (1297 to 3162 Sq.ft.)",
-      "Elite options for Advocates, Doctors, CAs & Professionals",
+      "Office spaces (555–1,790 sq. ft.)",
+      "Showroom spaces (1,297–3,162 sq. ft.)",
+      "Options for Advocates, Doctors, CAs & Professionals",
       "Old Gangapur Naka, in the heart of the city",
       "Minutes from CBS & College Road",
     ],
@@ -203,7 +203,7 @@ export const projects: Project[] = [
       "S. No. 803, Plot No. 25/26, Chowk No. 1, Behind Prakash Petrol Pump, Govind Nagar, Nashik",
     status: "Ready Possession",
     description:
-      "Step into a world of elegance. A micro-level planned layout designed to meet multinational standards, with flexible floor plates for interior planning and specifications based on global health and safety requirements.",
+      "Thoughtfully planned layouts with flexible spaces designed around contemporary residential needs.",
     // The Aura brochure's dusk elevation (p17). Its daylight elevation (p2)
     // is the homepage Portrait image, so the two never repeat.
     image: "/projects/aura/hero.webp",
@@ -226,7 +226,7 @@ export const projects: Project[] = [
       "EV Charging Point",
     ],
     features: [
-      "3 BHK 1484 Sq.ft. | 4 BHK 2263 & 2467 Sq.ft.",
+      "3 BHK 1,484 sq. ft. | 4 BHK 2,263 & 2,467 sq. ft.",
       "45+ curated lifestyle amenities",
       "Close proximity to City Centre as well as other conveniences",
       "2 minutes drive from Mahamarg Bus Stand and Mumbai Naka",
@@ -239,7 +239,7 @@ export const projects: Project[] = [
   {
     slug: "bliss",
     name: "Bliss",
-    statement: "Perfect happiness.",
+    statement: "A home worth living in.",
     configuration: "Limited Edition 2 & 3 BHK Homes, Penthouse & Shops",
     category: "Residential",
     locality: "Govind Nagar, Nashik",
@@ -247,13 +247,13 @@ export const projects: Project[] = [
       "S. No. 788, Chowk No. 4, Behind Prakash Petrol Pump, Govind Nagar, Nashik",
     status: "Ready Possession",
     description:
-      "Thoughtfully designed luxurious 2 and 3 BHK apartments, with distinctive specifications and entertainment hubs, lush green corners. Centrally located in the heart of Nashik.",
+      "Bliss offers thoughtfully designed 2 and 3 BHK homes, a penthouse and shops in Govind Nagar, Nashik, with carefully planned amenities and shared spaces.",
     // The Bliss brochure's elevation (p2), at its full resolution — the only
     // high-resolution view of the building the brochure carries.
     image: "/projects/bliss/elevation.webp",
     amenities: [
       "Roof Top Green Gym",
-      "Indoor Game Play Area",
+      "Indoor Games Play Area",
       "Party lawn",
       "Senior Citizen Sitting",
       "E Vehicle Charging Point",
@@ -262,9 +262,9 @@ export const projects: Project[] = [
       "24x7 Security Systems & Power Backup",
     ],
     features: [
-      "2 BHK (1078, 1114, 1184 Sq.ft. | Carpet 670–745 Sq.ft.)",
-      "3 BHK (1396, 1434 Sq.ft.) & 3 BHK Penthouse (1877 Sq.ft.)",
-      "Commercial Shops (250–350 Sq.ft.)",
+      "2 BHK (1,078 / 1,114 / 1,184 sq. ft. | Carpet 670–745 sq. ft.)",
+      "3 BHK (1,396 / 1,434 sq. ft.) & 3 BHK Penthouse (1,877 sq. ft.)",
+      "Commercial Shops (250–350 sq. ft.)",
       "Centrally located in Govind Nagar, Nashik",
     ],
     contact: "+91 7277995566",
@@ -274,7 +274,7 @@ export const projects: Project[] = [
     slug: "aaryana",
     name: "Aaryana",
     // Brochure cover: "Modern Luxury…".
-    statement: "Modern luxury.",
+    statement: "Premium 3 BHK residences in Karmayogi Nagar, Nashik.",
     configuration: "Premium 3 BHK & Penthouse",
     category: "Residential",
     locality: "Karmayogi Nagar, Nashik",
@@ -282,7 +282,7 @@ export const projects: Project[] = [
     address: "Karmayogi Nagar, Near R.D. Circle, Nashik",
     status: "Ongoing",
     description:
-      "An epitome of opulence, a Premium Edition 3 BHK Class home meticulously crafted with precision, employing cutting-edge technology, and featuring intelligently designed spaces.",
+      "A Premium Edition 3 BHK home, meticulously crafted with precision, employing cutting-edge technology, and featuring intelligently designed spaces.",
     image: "/projects/aaryana/exterior.webp",
     // Brochure p9, "Features", "Amenities" and "3 Tier Security & Safety".
     amenities: [
@@ -300,11 +300,11 @@ export const projects: Project[] = [
       "Compound wall with secured gates",
     ],
     features: [
-      "3 BHK 1947 Sq.ft. & 4 BHK Penthouse 2912 Sq.ft.",
-      "One Floor Two Flat layout for optimal privacy",
+      "3 BHK 1,947 sq. ft. & 4 BHK Penthouse 2,912 sq. ft.",
+      "Two residences per floor for optimal privacy",
       "Six floors of residences, with a common terrace",
       "Nestled conveniently along the Mumbai-Agra Highway",
-      "Near R.D. Circle, close to premier city destinations",
+      "Near R.D. Circle, close to key city destinations",
     ],
     // Brochure p11: "For more information : 9373632323, 7277995566".
     contact: "+91 9373632323",
@@ -321,12 +321,12 @@ export const projects: Project[] = [
     address: "Viraj Avenue, Opp. Bali Mandir, Panchavati Annex, Nashik",
     status: "Ongoing",
     description:
-      "An upcoming landmark in Nashik, offering a blend of Modern Office Spaces, Showrooms, Shops, a Banquet Hall, and a Hospital. Strategically located opposite Bali Mandir, Panchavati Annex.",
+      "An upcoming mixed-use commercial development in Panchavati Annex, Nashik, offering showrooms, offices, retail spaces, a banquet hall and a hospital.",
     image: "/projects/viraj-avenue/exterior.webp",
     // Brochure p6, "Amenities".
     amenities: [
-      "Modern Office Spaces (407–750 Sq.ft.)",
-      "Spacious Showrooms (1600 & 2750 Sq.ft.)",
+      "Modern Office Spaces (407–750 sq. ft.)",
+      "Spacious Showrooms (1,600 & 2,750 sq. ft.)",
       "Versatile Shops with Mezzanine",
       "Elegant Banquet Hall",
       "Advanced Hospital Facilities",
@@ -334,8 +334,8 @@ export const projects: Project[] = [
       "24/7 Security Surveillance",
     ],
     features: [
-      "Office spaces (407–750 Sq.ft.)",
-      "Showroom spaces (1600 & 2750 Sq.ft.)",
+      "Office spaces (407–750 sq. ft.)",
+      "Showroom spaces (1,600 & 2,750 sq. ft.)",
       "Shops with a mezzanine above each",
       "Banquet Hall & Hospital facilities",
       "Stack parking",
@@ -383,7 +383,7 @@ export const directors: Director[] = [
   {
     name: "Mr. Yogesh Bedmutha",
     qualification: "BE E&TC",
-    role: "20 years of diverse expertise. Heads marketing & design, creating distinctive aesthetics with out-of-the-box strategy.",
+    role: "20 years of diverse expertise. Heads marketing & design, developing distinctive brand and property aesthetics.",
     image: "/team/yogesh-bedmutha.webp.png",
   },
 ];
@@ -423,7 +423,7 @@ export const milestoneHeadings = {
   eyebrow: "The Journey Of Avenue Developers",
   title: "Company Milestones",
   statement:
-    "The Avenue Group has become synonymous with quality, timely executions, customer satisfaction, giving before-time delivery of units, and most importantly unique innovations.",
+    "The Avenue Group has become synonymous with quality, timely project delivery, customer satisfaction, and thoughtful innovation.",
 } as const;
 
 export const milestones: Milestone[] = [

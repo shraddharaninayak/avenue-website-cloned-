@@ -1,35 +1,7 @@
-"use client";
+﻿"use client";
 
 import { useEffect, useRef, useState } from "react";
-import { directors, getProject } from "@/data/avenue";
-import { ABOUT_PARAGRAPHS } from "./AvenuePortrait";
 import { clamp01, prefersReducedMotion, revealClass, useReveal } from "./motion";
-
-/**
- * 08 — Process. How The Avenue approaches a development.
- *
- * The company has not published a formal process, so this is assembled only
- * from what it has published about how it works, and each stage shows the
- * words it rests on and where they come from:
- *
- *   Understand  "we understand the evolving needs of our clients" (About)
- *   Plan        a director's stated responsibility: financial planning
- *   Design      Aura's published description of its planned layout
- *   Deliver     a founding director's stated responsibility: execution
- *
- * A stage whose source text is missing is dropped rather than paraphrased.
- *
- * Desktop pins the section and steps through the stages with the scroll;
- * smaller screens list them.
- */
-
-const about = ABOUT_PARAGRAPHS.join(" ");
-const quote = (source: string | undefined, fragment: string) =>
-  source && source.includes(fragment) ? fragment : null;
-
-const finance = directors.find((d) => /financ/i.test(d.role));
-const execution = directors.find((d) => /execution/i.test(d.role));
-const aura = getProject("aura");
 
 type Stage = {
   title: string;
@@ -46,9 +18,8 @@ type Stage = {
 const STAGES: Stage[] = [
   {
     title: "Understand",
-    text: quote(about, "At The Avenue, we understand the evolving needs of our clients.") ?? "",
-    source: "From our story",
-    // Film, 136.7s.
+    text: "We understand the needs of the people and communities we build for.",
+    source: "Our approach",
     image: "/home-sections/process-cafe.webp",
     alt: "The Milestone café at sunset: a long work table, the counter, and glass walls open to the city",
     caption: "Milestone · Café",
@@ -56,9 +27,8 @@ const STAGES: Stage[] = [
   },
   {
     title: "Plan",
-    text: finance?.role ?? "",
-    source: finance ? `${finance.name} · ${finance.qualification}` : "",
-    // Film, 70.9s.
+    text: "We plan each development around location, functionality, quality and long-term value.",
+    source: "Our approach",
     image: "/home-sections/process-podium.webp",
     alt: "Looking down a Milestone tower to the pool, lawn and pavilions laid out on its podium",
     caption: "Milestone · The podium, from above",
@@ -66,13 +36,8 @@ const STAGES: Stage[] = [
   },
   {
     title: "Design",
-    text:
-      quote(
-        aura?.description,
-        "A micro-level planned layout designed to meet multinational standards, with flexible floor plates for interior planning and specifications based on global health and safety requirements.",
-      ) ?? "",
-    source: aura ? `The Avenue ${aura.name}` : "",
-    // Film, 124.5s.
+    text: "We bring together architecture, amenities and thoughtful spatial planning.",
+    source: "Our approach",
     image: "/home-sections/process-yoga-studio.webp",
     alt: "The Milestone yoga studio: rows of mats before a lotus screen, within glass walls over the city",
     caption: "Milestone · Yoga studio",
@@ -80,9 +45,8 @@ const STAGES: Stage[] = [
   },
   {
     title: "Deliver",
-    text: execution?.role ?? "",
-    source: execution ? `${execution.name} · ${execution.qualification}` : "",
-    // Film, 113.8s. Weighted up, so the rooftop gardens stay in view.
+    text: "We focus on quality construction, transparent execution and timely project delivery.",
+    source: "Our approach",
     image: "/home-sections/process-towers.webp",
     alt: "The two Milestone towers with their rooftop gardens, at golden hour",
     caption: "Milestone · The towers",
@@ -97,7 +61,7 @@ function Heading({ labelled = false }: { labelled?: boolean }) {
   return (
     <div>
       <div className="mb-8 flex items-center gap-4 md:mb-10 lg:[@media(max-height:760px)]:mb-5">
-        <span className="text-[10px] uppercase tracking-[0.28em] text-[#2D3A1F]/55">Process</span>
+        <span className="text-[10px] uppercase tracking-[0.28em] text-[#584738]/55">Process</span>
       </div>
       <h2
         id={labelled ? "process-title" : undefined}
@@ -173,7 +137,7 @@ function PinnedProcess() {
             <ol className="col-span-5 grid grid-flow-col gap-x-6 pb-2" aria-label="Stages">
               {STAGES.map((stage, i) => (
                 <li key={stage.title} className="min-w-0">
-                  <span className="relative block h-px overflow-hidden bg-black/15">
+                  <span className="relative block h-px overflow-hidden bg-[#584738]/15">
                     <span
                       ref={(el) => {
                         railRefs.current[i] = el;
@@ -184,7 +148,7 @@ function PinnedProcess() {
                   </span>
                   <span
                     className={`mt-3 block truncate text-[10px] uppercase tracking-[0.22em] transition-colors duration-500 ${
-                      i === active ? "text-[#2D3A1F]" : "text-[#5F684F]"
+                      i === active ? "text-[#584738]" : "text-[#AAA396]"
                     }`}
                   >
                     {stage.title}
@@ -215,8 +179,8 @@ function PinnedProcess() {
                       {stage.title}
                     </h3>
                     <blockquote className="mt-5 max-w-[440px]">
-                      <p className="text-[15px] leading-[1.75] text-[#5F684F] md:text-[16px]">{stage.text}</p>
-                      <footer className="mt-3 text-[10px] uppercase tracking-[0.22em] text-[#5F684F]">{stage.source}</footer>
+                      <p className="text-[15px] leading-[1.75] text-[#AAA396] md:text-[16px]">{stage.text}</p>
+                      <footer className="mt-3 text-[10px] uppercase tracking-[0.22em] text-[#AAA396]">{stage.source}</footer>
                     </blockquote>
                   </div>
                 );
@@ -225,7 +189,7 @@ function PinnedProcess() {
 
             {/* IMAGE — each stage wipes in from the left over the last */}
             <figure className="col-span-7">
-              <div className="relative aspect-[16/9] max-h-[50vh] w-full overflow-hidden bg-[#F4F1E8] [@media(max-height:760px)]:max-h-[40vh]">
+              <div className="relative aspect-[16/9] max-h-[50vh] w-full overflow-hidden bg-[#F1EADA] [@media(max-height:760px)]:max-h-[40vh]">
                 {STAGES.map((stage, i) => (
                   <div
                     key={stage.title}
@@ -247,10 +211,10 @@ function PinnedProcess() {
                   </div>
                 ))}
               </div>
-              <figcaption className="mt-4 flex items-center justify-between text-[10px] uppercase tracking-[0.22em] text-[#5F684F]">
+              <figcaption className="mt-4 flex items-center justify-between text-[10px] uppercase tracking-[0.22em] text-[#AAA396]">
                 <span>{STAGES[active]?.caption}</span>
                 <span>
-                  <span className="text-[#2D3A1F]">{pad(active + 1)}</span> / {pad(STAGES.length)}
+                  <span className="text-[#584738]">{pad(active + 1)}</span> / {pad(STAGES.length)}
                 </span>
               </figcaption>
             </figure>
@@ -264,8 +228,8 @@ function PinnedProcess() {
 function StackedStage({ stage, index }: { stage: Stage; index: number }) {
   const [ref, visible] = useReveal<HTMLLIElement>(0.2);
   return (
-    <li ref={ref} className="border-t border-black/15 py-10 md:py-12">
-      <div className={`relative aspect-[16/9] w-full overflow-hidden bg-[#F4F1E8] ${revealClass(visible)}`}>
+    <li ref={ref} className="border-t border-[#584738]/15 py-10 md:py-12">
+      <div className={`relative aspect-[16/9] w-full overflow-hidden bg-[#F1EADA] ${revealClass(visible)}`}>
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
           src={stage.image}
@@ -280,8 +244,8 @@ function StackedStage({ stage, index }: { stage: Stage; index: number }) {
         <div>
           <h3 className="font-serif text-[32px] font-light leading-[1] tracking-[-0.04em] md:text-[40px]">{stage.title}</h3>
           <blockquote className="mt-4">
-            <p className="text-[15px] leading-[1.75] text-[#5F684F] md:text-[16px]">{stage.text}</p>
-            <footer className="mt-3 text-[10px] uppercase tracking-[0.22em] text-[#5F684F]">{stage.source}</footer>
+            <p className="text-[15px] leading-[1.75] text-[#AAA396] md:text-[16px]">{stage.text}</p>
+            <footer className="mt-3 text-[10px] uppercase tracking-[0.22em] text-[#AAA396]">{stage.source}</footer>
           </blockquote>
         </div>
       </div>
@@ -293,7 +257,7 @@ export default function AvenueProcess() {
   const [headRef, headIn] = useReveal<HTMLDivElement>(0.3);
 
   return (
-    <section id="process" aria-labelledby="process-title" className="bg-[#F4F1E8] text-[#2D3A1F]">
+    <section id="process" aria-labelledby="process-title" className="bg-[#F1EADA] text-[#584738]">
       {/* Desktop */}
       <div className="hidden lg:block">
         <PinnedProcess />
@@ -304,7 +268,7 @@ export default function AvenueProcess() {
         <div ref={headRef} className={revealClass(headIn)}>
           <Heading />
         </div>
-        <ol className="mt-12 border-b border-black/15">
+        <ol className="mt-12 border-b border-[#584738]/15">
           {STAGES.map((stage, i) => (
             <StackedStage key={stage.title} stage={stage} index={i} />
           ))}

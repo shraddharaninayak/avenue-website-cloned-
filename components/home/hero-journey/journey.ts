@@ -1,4 +1,4 @@
-import { createCameraTrack, type CameraKey, type CameraPose } from "./camera";
+﻿import { createCameraTrack, type CameraKey, type CameraPose } from "./camera";
 import {
   FrameSequenceScene,
   type FrameSequenceDef,
@@ -68,7 +68,7 @@ type Shot = {
 
 type Opening = { cx: number; cy: number; rx: number; ry: number; solid: number };
 
-const BACKDROP = "#2D3A1F";
+const BACKDROP = "#584738";
 /** Screens narrower than this (width / height) use portrait camera paths. */
 const PORTRAIT_BELOW = 0.9;
 
