@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
 
 import React, { useCallback, useEffect, useRef, useState } from "react";
 import Link from "next/link";
@@ -22,20 +22,36 @@ import MenuOverlay from "./MenuOverlay";
 export default function Navbar() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [solid, setSolid] = useState(false);
+  const [visible, setVisible] = useState(true);
   const headerRef = useRef<HTMLElement>(null);
   const menuButtonRef = useRef<HTMLButtonElement>(null);
+  const lastScrollY = useRef(0);
 
-  // Whether the header is over the page's content, or over its hero.
+  // Whether the header is over the page's content, or over its hero + scroll direction hide/show
   useEffect(() => {
     let raf: number | null = null;
     const probe = () => {
       raf = null;
       const header = headerRef.current;
+      const currentScrollY = Math.max(0, window.scrollY);
+      const prevScrollY = lastScrollY.current;
+
+      // Show/hide based on scroll direction
+      if (currentScrollY <= 10) {
+        setVisible(true);
+      } else if (currentScrollY > prevScrollY && currentScrollY > 80) {
+        setVisible(false);
+      } else if (currentScrollY < prevScrollY) {
+        setVisible(true);
+      }
+
+      lastScrollY.current = currentScrollY;
+
       if (!header) return;
       const underHero = document
         .elementsFromPoint(window.innerWidth / 2, header.offsetHeight / 2)
         .some((el) => !header.contains(el) && el.closest('[data-header="clear"]'));
-      setSolid(!underHero && window.scrollY > 8);
+      setSolid(!underHero && currentScrollY > 8);
     };
     const onScroll = () => {
       if (raf === null) raf = requestAnimationFrame(probe);
@@ -60,7 +76,9 @@ export default function Navbar() {
     <>
       <header
         ref={headerRef}
-        className={`fixed inset-x-0 top-0 z-50 bg-transparent transition-[background-color,backdrop-filter] duration-500 ${
+        className={`fixed inset-x-0 top-0 z-50 bg-transparent transition-[transform,background-color,backdrop-filter] duration-500 ease-in-out ${
+          visible ? "translate-y-0" : "-translate-y-full"
+        } ${
           solid ? "max-lg:bg-[#584738]/80 max-lg:backdrop-blur-md" : ""
         }`}
       >

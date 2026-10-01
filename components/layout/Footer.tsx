@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
 
 import React, { useState } from "react";
 import Link from "next/link";
@@ -216,19 +216,51 @@ export default function Footer() {
 
       {/* ── Bottom bar ── */}
       <div className="border-t border-white/[0.08] px-6 py-5 md:px-10 lg:px-12">
-        <div className="mx-auto flex max-w-[1450px] flex-col items-center justify-between gap-3 text-[10px] font-medium uppercase tracking-[0.18em] text-white/55 sm:flex-row">
-          <p>
-            © {new Date().getFullYear()} {company.name}. All rights reserved.
-          </p>
-          <nav aria-label="Legal" className="flex items-center gap-4">
-            <Link href="/contact" className="transition-colors duration-300 hover:text-white/80">
-              Privacy Policy
-            </Link>
-            <span aria-hidden="true" className="text-white/35">/</span>
-            <Link href="/contact" className="transition-colors duration-300 hover:text-white/80">
-              Terms &amp; Conditions
-            </Link>
-          </nav>
+        <div className="mx-auto max-w-[1450px] text-[10px] font-medium uppercase tracking-[0.18em] text-white/55">
+          {/* Mobile bottom bar (< md) */}
+          <div className="flex flex-col items-center justify-center gap-3 text-center md:hidden">
+            <p>
+              © {new Date().getFullYear()} {company.name}. All rights reserved.
+            </p>
+            <nav aria-label="Legal" className="flex items-center gap-4">
+              <Link href="/contact" className="transition-colors duration-300 hover:text-white/80">
+                Privacy Policy
+              </Link>
+              <span aria-hidden="true" className="text-white/35">/</span>
+              <Link href="/contact" className="transition-colors duration-300 hover:text-white/80">
+                Terms &amp; Conditions
+              </Link>
+            </nav>
+          </div>
+
+          {/* Desktop bottom bar (md+) */}
+          <div className="relative hidden w-full items-center justify-between md:flex">
+            {/* LEFT: THE AVENUE BUILDERS & DEVELOPERS */}
+            <p className="whitespace-nowrap">
+              {company.name}
+            </p>
+
+            {/* CENTER: © 2026 */}
+            <span className="pointer-events-none absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 whitespace-nowrap">
+              © {new Date().getFullYear()}
+            </span>
+
+            {/* RIGHT OF CENTER: ALL RIGHTS RESERVED. */}
+            <span className="pointer-events-none absolute left-[calc(50%+2.25rem)] top-1/2 -translate-y-1/2 whitespace-nowrap">
+              All rights reserved.
+            </span>
+
+            {/* FAR RIGHT: PRIVACY POLICY / TERMS & CONDITIONS */}
+            <nav aria-label="Legal" className="flex items-center gap-4">
+              <Link href="/contact" className="transition-colors duration-300 hover:text-white/80">
+                Privacy Policy
+              </Link>
+              <span aria-hidden="true" className="text-white/35">/</span>
+              <Link href="/contact" className="transition-colors duration-300 hover:text-white/80">
+                Terms &amp; Conditions
+              </Link>
+            </nav>
+          </div>
         </div>
       </div>
     </footer>
